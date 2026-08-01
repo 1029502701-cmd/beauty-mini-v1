@@ -1,0 +1,92 @@
+﻿/**
+ * Unified API Request Wrapper
+ *
+ * Provides request() supporting GET/POST with automatic API_BASE prefix,
+ * JSON handling, error catching, and session header injection.
+ * Also supports file upload via wx.uploadFile.
+ */
+
+import { apiClient, getAPIBase, injectSessionHeader } from "@/services/api-client";
+
+export interface ApiResponse<T = unknown> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
+
+/**
+ * Unified request function supporting GET, POST, and file upload.
+ * @param method "GET" | "POST"
+ * @param path API path (without base URL)
+ * @param body POST body (optional)
+ * @returns { success, data, error, message }
+ */
+export async function request<T = unknown>(
+  method: "GET" | "POST",
+  path: string,
+  body?: unknown
+): Promise<ApiResponse<T>> {
+  const sessionHeaders: Record<string, string> = {};
+  injectSessionHeader(sessionHeaders);
+
+  if (method === "GET") {
+    return apiClient.get<T>(path);
+  }
+
+  return apiClient.post<T>(path, body);
+}
+
+/**
+ * WeChat mini-program file upload helper.
+ * @param filePath Local file path from wx.chooseImage
+ * @param serverPath Path relative to API_BASE (e.g. "/api/beauty/upload")
+ * @param formData Additional form fields
+ * @returns { success, data, error, message }
+ */
+export function uploadFile<T = unknown>(
+  filePath: string,
+  serverPath: string,
+  formData?: Record<string, string>
+): Promise<ApiResponse<T>> {
+  return new Promise((resolve) => {
+    if (typeof wx === "undefined" || !wx.uploadFile) {
+      resolve({ success: false, error: "wx.uploadFile not available" });
+      return;
+    }
+    const url = getAPIBase() + serverPath;
+    const sessionHeaders: Record<string, string> = {};
+    injectSessionHeader(sessionHeaders);
+
+    wx.uploadFile({
+      url,
+      filePath,
+      name: "image",
+      formData: formData || {},
+      header: { "Content-Type": "multipart/form-data", ...sessionHeaders },
+      timeout: 30000,
+      success: (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          try {
+            const data = JSON.parse(res.data);
+            resolve({ success: true, data: data as T });
+          } catch {
+            resolve({ success: false, error: "响应格式错误" });
+          }
+        } else {
+          resolve({ success: false, error: "上传失败，状态码: " + res.statusCode });
+        }
+      },
+      fail: (err) => {
+        resolve({ success: false, error: err.errMsg || "上传失败" });
+      }
+    });
+  });
+}
+
+export const api = {
+  get: <T = unknown>(path: string) => apiClient.get<T>(path),
+  post: <T = unknown>(path: string, body?: unknown) => apiClient.post<T>(path, body),
+  request,
+  uploadFile
+};

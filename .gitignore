@@ -1,0 +1,19 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.*
+
+# Log files
+*.log
+
+# Build/tmp/cache
+.taro/
+.wrangler/
+*.js
+fix*.js
+add_header.js
