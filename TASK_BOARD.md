@@ -95,3 +95,9 @@
 状态：Completed
 日期：2026-08-02
 说明：V1简化方案——移除对不存在的 task 系统依赖，改为同步分析流程。核心变更：1) analyzing/index.tsx 已使用 reportService.createAndQueryReport() 实现同步分析（analyze API -> report API -> query report），无 task 轮询；2) api.ts 无 createAnalysisTask/getAnalysisTask 函数，无 /api/beauty/analysis/task 接口调用；3) analysisTask.ts 为非引用存根文件，不影响运行。数据流：upload(uploadId+imageUrl) -> analyzing -> reportService.createAndQueryReport() -> reportId -> result 页面。验证：无新增 task API 调用，分析链路完整。禁止修改：ReportGenerator/Token/推荐/支付/UI。
+---
+
+## Task-BeautyMini-064 人脸存在性检测
+状态：Completed
+日期：2026-08-02
+说明：增加上传前人脸存在性检测，防止任意图片进入AI分析流程。核心变更：1) beauty-validation.ts 新增 FACE_NOT_DETECTED 校验码；2) ImageValidator.ts 新增 detectFace() 方法，基于 wx.createImageBitmap + Canvas 像素级肤色检测（HSV 空间，中心区域肤色像素占比≥8%判定为有人脸），无 canvas 环境降级为通过；3) upload/index.tsx 在 validateImage 通过后新增 detectFace 步骤，hasFace=false 时阻止上传并显示"未检测到人脸，请上传正面清晰人像照片"。数据流：chooseImage -> ImageValidator.validateImage -> ImageValidator.detectFace -> (hasFace=true) -> upload -> analyze。禁止修改：FaceAnalysisEngine/ReportGenerator/推荐/Token/支付/cloudflare-worker。

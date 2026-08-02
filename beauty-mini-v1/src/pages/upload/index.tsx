@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { navigate } from "@taro/router";
 import { uploadService } from "@/services/upload";
 import { imageValidator } from "@/services/image-validation/ImageValidator";
@@ -32,28 +32,38 @@ const UploadPage = () => {
         setImageInfo({ filename, size: file.size });
         setPhase("preview");
       } else {
-        setError("æœªé€‰æ‹©å›¾ç‰‡");
+        setError("Î´Ñ¡ÔñÍ¼Æ¬");
       }
     } catch (err) {
       console.error("[Upload] pickImage error:", err);
-      setError(sourceType === "camera" ? "æ‹ç…§å¤±è´¥ï¼Œè¯·é‡è¯•" : "ç›¸å†Œé€‰æ‹©å¤±è´¥ï¼Œè¯·é‡è¯•");
+      setError(sourceType === "camera" ? "ÅÄÕÕÊ§°Ü£¬ÇëÖØÊÔ" : "Ïà²áÑ¡ÔñÊ§°Ü£¬ÇëÖØÊÔ");
     }
   }, []);
 
   const handleConfirmUpload = useCallback(async () => {
     if (!selectedImage || !imageInfo) {
-      setError("è¯·é€‰æ‹©ä¸€å¼ å›¾ç‰‡");
+      setError("ÇëÑ¡ÔñÒ»ÕÅÍ¼Æ¬");
       return;
     }
 
     setPhase("uploading");
     setError(null);
 
+    // Step 1: Image format/size validation
     const validation = await imageValidator.validateImage(selectedImage);
     if (!validation.valid) {
       console.error("[Upload] validation failed:", validation.message);
       setPhase("failed");
-      setError(validation.message || "å›¾ç‰‡éªŒè¯å¤±è´¥ï¼Œè¯·é‡æ–°é€‰æ‹©");
+      setError(validation.message || "Í¼Æ¬ÑéÖ¤Ê§°Ü£¬ÇëÖØÐÂÑ¡Ôñ");
+      return;
+    }
+
+    // Step 2: Face presence detection
+    const faceResult = await imageValidator.detectFace(selectedImage);
+    if (!faceResult.hasFace) {
+      console.warn("[Upload] No face detected, blocking upload");
+      setPhase("failed");
+      setError("Î´¼ì²âµ½ÈËÁ³£¬ÇëÉÏ´«ÕýÃæÇåÎúÈËÏñÕÕÆ¬");
       return;
     }
 
@@ -66,17 +76,16 @@ const UploadPage = () => {
 
       if (result.success && result.uploadId) {
         setUploadId(result.uploadId);
-        // Fix: pass imageUrl from result or fall back to imageKey/selectedImage
         setImageUrl(result.imageUrl || result.uploadId || selectedImage);
         setPhase("analyzing");
       } else {
         setPhase("failed");
-        setError(result.message || "ä¸Šä¼ å¤±è´¥ï¼Œè¯·é‡è¯•");
+        setError(result.message || "ÉÏ´«Ê§°Ü£¬ÇëÖØÊÔ");
       }
     } catch (err) {
       console.error("[Upload] confirm error:", err);
       setPhase("failed");
-      setError("ä¸Šä¼ è¿‡ç¨‹ä¸­å‘ç”Ÿé”™è¯¯ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿žæŽ¥åŽé‡è¯•");
+      setError("ÉÏ´«¹ý³ÌÖÐ·¢Éú´íÎó£¬Çë¼ì²éÍøÂçÁ¬½ÓºóÖØÊÔ");
     }
   }, [selectedImage, imageInfo]);
 
@@ -113,18 +122,18 @@ const UploadPage = () => {
     return (
       <div className="upload-page">
         <div className="upload-header">
-          <h1 className="upload-title">å¼€å§‹ä½ çš„ç¾Žå­¦åˆ†æž</h1>
+          <h1 className="upload-title">¿ªÊ¼ÄãµÄÃÀÑ§·ÖÎö</h1>
           <p className="upload-subtitle">
-            ä¸Šä¼ ä¸€å¼ æ¸…æ™°æ­£è„¸ç…§<br />
-            AIå°†ç”Ÿæˆä½ çš„ä¸“å±žæŠ¥å‘Š
+            ÉÏ´«Ò»ÕÅÇåÎúÕýÁ³ÕÕ<br />
+            AI½«Éú³ÉÄãµÄ×¨Êô±¨¸æ
           </p>
         </div>
 
         {phase === "preview" && previewUrl ? (
           <>
             <div className="preview-card">
-              <img src={previewUrl} alt="é¢„è§ˆ" className="preview-image" />
-              <button className="btn-reselect" onClick={handleReselect}>é‡æ–°é€‰æ‹©</button>
+              <img src={previewUrl} alt="Ô¤ÀÀ" className="preview-image" />
+              <button className="btn-reselect" onClick={handleReselect}>ÖØÐÂÑ¡Ôñ</button>
             </div>
             {imageInfo && (
               <div className="image-meta">
@@ -132,13 +141,13 @@ const UploadPage = () => {
               </div>
             )}
             <div className="upload-actions">
-              <button className="btn btn-ghost" onClick={handleCancel}>å–æ¶ˆ</button>
+              <button className="btn btn-ghost" onClick={handleCancel}>È¡Ïû</button>
               <button
                 className="btn btn-primary"
                 onClick={handleConfirmUpload}
                 disabled={phase === "uploading"}
               >
-                {phase === "uploading" ? "ä¸Šä¼ ä¸­.." : "å¼€å§‹AIåˆ†æž"}
+                {phase === "uploading" ? "ÉÏ´«ÖÐ.." : "¿ªÊ¼AI·ÖÎö"}
               </button>
             </div>
           </>
@@ -147,26 +156,26 @@ const UploadPage = () => {
             <div className="upload-area" onClick={() => pickImage("album")}>
               <div className="upload-area-inner">
                 <div className="upload-avatar-icon">&#x1F574;</div>
-                <p className="upload-area-text">ç‚¹å‡»ä¸Šä¼ ç…§ç‰‡</p>
-                <p className="upload-area-hint">æˆ–æ‹æ‘„ç…§ç‰‡</p>
+                <p className="upload-area-text">µã»÷ÉÏ´«ÕÕÆ¬</p>
+                <p className="upload-area-hint">»òÅÄÉãÕÕÆ¬</p>
               </div>
             </div>
 
             <div className="photo-spec">
               <div className="spec-group spec-group--good">
-                <span className="spec-label">æœ€ä½³ç…§ç‰‡</span>
+                <span className="spec-label">×î¼ÑÕÕÆ¬</span>
                 <div className="spec-items">
-                  <span className="spec-item">&#x2714; æ­£è„¸</span>
-                  <span className="spec-item">&#x2714; è‡ªç„¶å…‰</span>
-                  <span className="spec-item">&#x2714; äº”å®˜æ— é®æŒ¡</span>
+                  <span className="spec-item">&#x2714; ÕýÁ³</span>
+                  <span className="spec-item">&#x2714; ×ÔÈ»¹â</span>
+                  <span className="spec-item">&#x2714; Îå¹ÙÎÞÕÚµ²</span>
                 </div>
               </div>
               <div className="spec-group spec-group--bad">
-                <span className="spec-label">é¿å…</span>
+                <span className="spec-label">±ÜÃâ</span>
                 <div className="spec-items">
-                  <span className="spec-item">&#x2718; ä¾§è„¸</span>
-                  <span className="spec-item">&#x2718; å¤šäºº</span>
-                  <span className="spec-item">&#x2718; å¼ºå…‰æ»¤é•œ</span>
+                  <span className="spec-item">&#x2718; ²àÁ³</span>
+                  <span className="spec-item">&#x2718; ¶àÈË</span>
+                  <span className="spec-item">&#x2718; Ç¿¹âÂË¾µ</span>
                 </div>
               </div>
             </div>
@@ -174,24 +183,24 @@ const UploadPage = () => {
             <div className="privacy-note">
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>ä»…ç”¨äºŽAIåˆ†æž</span>
+                <span>½öÓÃÓÚAI·ÖÎö</span>
               </div>
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>ä¸å…¬å¼€å±•ç¤º</span>
+                <span>²»¹«¿ªÕ¹Ê¾</span>
               </div>
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>å¯éšæ—¶åˆ é™¤</span>
+                <span>¿ÉËæÊ±É¾³ý</span>
               </div>
             </div>
 
             <div className="upload-actions">
               <button className="btn btn-secondary" onClick={() => pickImage("album")}>
-                {String.fromCharCode(0x1F574)} ä»Žç›¸å†Œé€‰æ‹©
+                {String.fromCharCode(0x1F574)} ´ÓÏà²áÑ¡Ôñ
               </button>
               <button className="btn btn-secondary" onClick={() => pickImage("camera")}>
-                {String.fromCharCode(0x1F4F7)} æ‹æ‘„ç…§ç‰‡
+                {String.fromCharCode(0x1F4F7)} ÅÄÉãÕÕÆ¬
               </button>
             </div>
           </>
@@ -211,8 +220,8 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check uploading-check">&#x2B61;</div>
-          <h2>ä¸Šä¼ å›¾ç‰‡ä¸­</h2>
-          <p>æ­£åœ¨å°†ç…§ç‰‡ä¸Šä¼ è‡³æœåŠ¡å™¨..</p>
+          <h2>ÉÏ´«Í¼Æ¬ÖÐ</h2>
+          <p>ÕýÔÚ½«ÕÕÆ¬ÉÏ´«ÖÁ·þÎñÆ÷..</p>
           <div className="loading-dots">
             <span></span><span></span><span></span>
           </div>
@@ -226,8 +235,8 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check">&#x2714;</div>
-          <h2>ç…§ç‰‡å·²ç¡®è®¤</h2>
-          <p>æ­£åœ¨å¯åŠ¨ AI ç¾Žå­¦åˆ†æž...</p>
+          <h2>ÕÕÆ¬ÒÑÈ·ÈÏ</h2>
+          <p>ÕýÔÚÆô¶¯ AI ÃÀÑ§·ÖÎö...</p>
           <div className="loading-dots">
             <span></span><span></span><span></span>
           </div>
@@ -241,11 +250,11 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check failed-check">&#x2718;</div>
-          <h2>ä¸Šä¼ å¤±è´¥</h2>
-          <p>{error || "è¯·é‡è¯•"}</p>
+          <h2>ÉÏ´«Ê§°Ü</h2>
+          <p>{error || "ÇëÖØÊÔ"}</p>
           <div className="upload-actions" style={{ marginTop: 24 }}>
-            <button className="btn btn-primary" onClick={handleRetry}>é‡æ–°ä¸Šä¼ </button>
-            <button className="btn btn-ghost" onClick={handleCancel}>è¿”å›žé¦–é¡µ</button>
+            <button className="btn btn-primary" onClick={handleRetry}>ÖØÐÂÉÏ´«</button>
+            <button className="btn btn-ghost" onClick={handleCancel}>·µ»ØÊ×Ò³</button>
           </div>
         </div>
       </div>
