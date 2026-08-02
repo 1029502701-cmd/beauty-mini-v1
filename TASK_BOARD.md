@@ -89,3 +89,9 @@
 日期：2026-08-02
 说明：修复发布前 P0 安全问题。核心变更：1) upload.ts 移除 userId='anonymous' 硬编码，通过 extractSessionId 获取 sessionId，从 USER_CACHE KV 中验证 session 并提取真实 userId，无有效 session 返回 401；2) report/query.ts 增加 session 验证（无效 session 返回 401）和 report owner 校验（row.user_id !== resolvedUserId 时返回 403）；3) upload/index.tsx 修复 imageUrl 未传递问题，上传成功后从 result.imageUrl 或 uploadId 设置 imageUrl，确保 analyzing 页面同时收到 uploadId 和 imageUrl。验证：修改文件已核对，未修改 AI 分析逻辑/推荐系统/支付/UI。
 ---
+---
+
+## Task-BeautyMini-062 分析流程收口
+状态：Completed
+日期：2026-08-02
+说明：V1简化方案——移除对不存在的 task 系统依赖，改为同步分析流程。核心变更：1) analyzing/index.tsx 已使用 reportService.createAndQueryReport() 实现同步分析（analyze API -> report API -> query report），无 task 轮询；2) api.ts 无 createAnalysisTask/getAnalysisTask 函数，无 /api/beauty/analysis/task 接口调用；3) analysisTask.ts 为非引用存根文件，不影响运行。数据流：upload(uploadId+imageUrl) -> analyzing -> reportService.createAndQueryReport() -> reportId -> result 页面。验证：无新增 task API 调用，分析链路完整。禁止修改：ReportGenerator/Token/推荐/支付/UI。
