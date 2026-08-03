@@ -16,6 +16,7 @@ export async function onRequestPost(context: {
 }): Promise<Response> {
   const { env, request } = context;
 
+  console.log("[beauty/upload] request headers:", Object.fromEntries(request.headers.entries()));
   const formData = await parseFormData(request);
   if (!formData) {
     return new Response(
@@ -34,6 +35,7 @@ export async function onRequestPost(context: {
 
   // Resolve userId from valid session; reject unauthenticated requests
   const sessionId = extractSessionId(request);
+  console.log('[beauty/upload] sessionId from header:', sessionId, 'length:', sessionId.length);
   if (!sessionId) {
     return new Response(
       JSON.stringify({ error: 'Authentication required' }),
@@ -41,6 +43,7 @@ export async function onRequestPost(context: {
     );
   }
   const sessionRaw = await env.USER_CACHE.get('session:' + sessionId);
+  console.log('[beauty/upload] KV lookup:', sessionRaw ? 'found(' + sessionRaw.length + ')' : 'null');
   if (!sessionRaw) {
     return new Response(
       JSON.stringify({ error: 'Invalid session' }),

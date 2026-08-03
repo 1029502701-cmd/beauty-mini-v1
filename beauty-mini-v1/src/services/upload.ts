@@ -75,6 +75,7 @@ export class UploadService {
       return new Promise((resolve) => {
         const sessionHeaders: Record<string, string> = {};
         injectSessionHeader(sessionHeaders);
+        console.log("[upload] sessionHeaders:", JSON.stringify(sessionHeaders));
         _logUploadEvent("upload_start", { url: getAPIBase() + "/api/beauty/upload", filePath, fileName, fileSize });
         wx.uploadFile({
           url: getAPIBase() + "/api/beauty/upload",

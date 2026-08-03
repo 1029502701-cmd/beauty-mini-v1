@@ -1,85 +1,79 @@
-ï»¿/**
+/**
  * Report Service
- * Uses the beauty-api-pages backend:
- *   POST /api/beauty/report        - generate report
- *   GET  /api/beauty/report/query?id=<reportId> - query report
- *   GET  /api/beauty/recommend     - get product/creator recommendations
+ * Uses the beauty-api-pages backend for analysis and report generation.
  */
-import type { BeautyReport } from "@/types/beauty";
-import type { ReportLevel } from "@/types/report-level";
-import userService from "./user-service";
+import type { BeautyReport, ReportLevel } from "@/types";
 import { request } from "@/services/api";
 
 class ReportService {
-  /**
-   * Full analysis flow: upload -> analyze -> generate report -> query report
-   * Returns the reportId for navigation to result page.
-   */
   async createAndQueryReport(
     uploadId: string,
     imageKey: string,
     reportLevel: ReportLevel = "first-look"
-  ): Promise<{ success: boolean; reportId?: string; report?: any; error?: string }> {
+  ): Promise<{ success: boolean; reportId?: string; report?: BeautyReport; error?: string }> {
     try {
-      // Step 1: Analyze image (returns face metrics + uploadId)
-      const analyzeRes = await request<any>("/api/beauty/analyze", "POST", { uploadId, imageKey });
+      const analyzeRes = await request<Record<string, unknown>>(
+        "/api/beauty/analyze",
+        "POST",
+        { uploadId, imageKey }
+      );
       if (!analyzeRes.success || !analyzeRes.data) {
-        return { success: false, error: analyzeRes.error || "åˆ†æå¤±è´¥" };
+        return { success: false, error: analyzeRes.error || "·ÖÎöÊ§°Ü" };
       }
-      const { metrics, imageKey: resolvedKey } = analyzeRes.data;
+      const { metrics, imageKey: resolvedKey } = analyzeRes.data as { metrics?: unknown; imageKey?: string };
 
-      // Step 2: Generate report
-      const reportRes = await request<any>("/api/beauty/report", "POST", {
-        analysisId: uploadId,
-        reportLevel,
-        faceMetrics: metrics
-      });
+      const reportRes = await request<{ report?: Record<string, unknown>; reportId?: string }>(
+        "/api/beauty/report",
+        "POST",
+        { analysisId: uploadId, reportLevel, faceMetrics: metrics }
+      );
       if (!reportRes.success || !reportRes.data) {
-        return { success: false, error: reportRes.error || "æŠ¥å‘Šç”Ÿæˆå¤±è´¥" };
+        return { success: false, error: reportRes.error || "±¨¸æÉú³ÉÊ§°Ü" };
       }
 
-      // Step 3: The report is auto-saved by the backend; query it by reportId
-      const reportId = reportRes.data.report?.analysisId || uploadId;
+      const reportId = (reportRes.data.report as Record<string, unknown>)?.analysisId as string || uploadId;
       const queryRes = await this.queryReport(reportId);
       if (queryRes.success) {
-        return { success: true, reportId, report: queryRes.report };
+        return { success: true, reportId, report: queryRes.report as BeautyReport };
       }
-      return { success: true, reportId, report: reportRes.data.report };
+      return { success: true, reportId, report: reportRes.data.report as unknown as BeautyReport };
     } catch (err) {
       console.error("[ReportService] createAndQueryReport error:", err);
-      return { success: false, error: "æŠ¥å‘Šç”Ÿæˆå¤±è´¥ï¼Œè¯·é‡è¯•" };
+      return { success: false, error: "±¨¸æÉú³ÉÊ§°Ü£¬ÇëÖØÊÔ" };
     }
   }
 
-  /**
-   * Query a previously generated report via GET /api/beauty/report/query?id=xxx
-   */
-  async queryReport(reportId: string): Promise<{ success: boolean; report?: any; error?: string }> {
+  async queryReport(reportId: string): Promise<{ success: boolean; report?: BeautyReport; error?: string }> {
     try {
-      const response = await request<{ report: any; balance: number }>(
+      const response = await request<{ report: unknown; balance: number }>(
         "/api/beauty/report/query?id=" + encodeURIComponent(reportId),
         "GET"
       );
       if (response.success && response.data) {
-        return { success: true, report: response.data.report };
+        const raw = response.data.report as Record<string, unknown>;
+        const reportLevel = (raw.level as ReportLevel) || "first-look";
+        const { level: _ignored, ...rest } = raw as Record<string, unknown>;
+        const report: BeautyReport = {
+          level: reportLevel,
+          ...(_ignored as unknown as Partial<BeautyReport>),
+          ...(rest as Partial<BeautyReport>)
+        } as BeautyReport;
+        return { success: true, report };
       }
-      return { success: false, error: response.error || "æŠ¥å‘ŠæŸ¥è¯¢å¤±è´¥" };
+      return { success: false, error: response.error || "±¨¸æ²éÑ¯Ê§°Ü" };
     } catch {
-      return { success: false, error: "æŠ¥å‘ŠæŸ¥è¯¢å¤±è´¥" };
+      return { success: false, error: "±¨¸æ²éÑ¯Ê§°Ü" };
     }
   }
 
-  /**
-   * Get beauty recommendations via GET /api/beauty/recommend
-   */
   async getRecommendations(params: {
     faceType: string;
     skinType: string;
     makeupStyle: string;
     userPreference?: string;
-  }): Promise<{ success: boolean; products?: any[]; creators?: any[]; error?: string }> {
+  }): Promise<{ success: boolean; products?: Array<Record<string, unknown>>; creators?: Array<Record<string, unknown>>; error?: string }> {
     try {
-      const response = await request<{ products: any[]; creators: any[] }>(
+      const response = await request<{ products: unknown[]; creators: unknown[] }>(
         "/api/beauty/recommend?faceType=" + encodeURIComponent(params.faceType)
           + "&skinType=" + encodeURIComponent(params.skinType)
           + "&makeupStyle=" + encodeURIComponent(params.makeupStyle)
@@ -87,11 +81,11 @@ class ReportService {
         "GET"
       );
       if (response.success && response.data) {
-        return { success: true, products: response.data.products, creators: response.data.creators };
+        return { success: true, products: response.data.products as Array<Record<string, unknown>>, creators: response.data.creators as Array<Record<string, unknown>> };
       }
-      return { success: false, error: response.error || "æ¨èæŸ¥è¯¢å¤±è´¥" };
+      return { success: false, error: response.error || "ÍÆ¼ö²éÑ¯Ê§°Ü" };
     } catch {
-      return { success: false, error: "æ¨èæŸ¥è¯¢å¤±è´¥" };
+      return { success: false, error: "ÍÆ¼ö²éÑ¯Ê§°Ü" };
     }
   }
 }

@@ -1,3 +1,21 @@
 ﻿name = "beauty-api-pages"
 compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "D1_DB"
+database_name = "beauty-db"
+database_id = "6d132245-24fc-463d-afb5-7ddb4619ec18"
+
+[[kv_namespaces]]
+binding = "USER_CACHE"
+id = "3370d3a1db49404aa2615c706a5e15eb"
+
+[[r2_buckets]]
+binding = "IMAGE_BUCKET"
+bucket_name = "beauty-images"
+
+# 微信登录配置（必需，通过 wrangler secret 设置）
+# wrangler pages secret put WECHAT_APP_ID
+# wrangler pages secret put WECHAT_APP_SECRET

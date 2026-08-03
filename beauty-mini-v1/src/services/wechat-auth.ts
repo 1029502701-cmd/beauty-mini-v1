@@ -70,12 +70,15 @@ class WechatAuthService {
    * Full login flow: get wx.login code -> POST /api/wechat-login -> store sessionId
    */
   async performServerLogin(guestUserId?: string, guestId?: string): Promise<ServerLoginResult> {
+    console.log("[WechatAuth] performServerLogin START, guestUserId:", guestUserId, "guestId:", guestId);
     const codeResult = await this.getValidLoginCode();
+    console.log("[WechatAuth] login code result:", codeResult.success, codeResult.code ? "code=" + codeResult.code.slice(0,8) + "..." : "no code", codeResult.error);
     if (!codeResult.success || !codeResult.code) {
       return { success: false, isGuest: true, error: codeResult.error };
     }
 
     try {
+      console.log("[WechatAuth] posting to /api/wechat-login with guestUserId:", guestUserId);
       const response = await api.post("/api/wechat-login", {
         code: codeResult.code,
         guestUserId,
@@ -91,6 +94,7 @@ class WechatAuthService {
           message?: string;
         };
         this.serverSessionId = data.sessionId || null;
+        console.log("[WechatAuth] serverSessionId:", this.serverSessionId ? this.serverSessionId.slice(0,8) + "..." : "null");
 
         if (this.serverSessionId) {
           setStorage(SESSION_STORAGE_KEY, this.serverSessionId);

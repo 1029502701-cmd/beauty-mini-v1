@@ -16,19 +16,24 @@ class UserService {
    * 4. Guest users can use the app without logging in
    */
   async initializeGuestUser(): Promise<BeautyUserProfile> {
+    console.log("[UserService] initializeGuestUser START");
     const stored = this.getStoredSession();
+    console.log("[UserService] stored session:", !!stored, stored ? "guestId=" + stored.guestId : "null");
     if (stored) {
       await this.updateLastActive(stored.guestId);
       // Ensure server session exists (create if missing)
+      console.log("[UserService] calling tryRestoreServerSession");
       await this.tryRestoreServerSession(stored);
       return this.mapToUserProfile(stored);
     }
     // No session exists — create guest user
     const session = this.createGuestUser();
+    console.log("[UserService] created guest:", session.guestId, session.userId);
     // Create server session so uploads and API calls are authenticated
     if (isWeChatMiniProgram()) {
       try {
-        await wechatAuthService.performServerLogin(session.userId, session.guestId);
+        const loginResult = await wechatAuthService.performServerLogin(session.userId, session.guestId);
+        console.log("[UserService] performServerLogin result:", loginResult.success, loginResult.sessionId ? "sid=" + loginResult.sessionId.slice(0,8) + "..." : "none", loginResult.error);
       } catch (e) {
         console.warn("[UserService] Server session creation failed (non-fatal):", e);
       }
@@ -38,6 +43,7 @@ class UserService {
 
   async getCurrentUser(): Promise<BeautyUserProfile> {
     const stored = this.getStoredSession();
+    console.log("[UserService] stored session:", !!stored, stored ? "guestId=" + stored.guestId : "null");
     if (stored) {
       await this.updateLastActive(stored.guestId);
       return this.mapToUserProfile(stored);
@@ -49,11 +55,14 @@ class UserService {
    * Ensure a server-side session exists. Creates one if missing.
    */
   private async tryRestoreServerSession(session: GuestSession): Promise<void> {
+    const existingSid = getStorage<string>(SESSION_ID_KEY, null);
+    console.log("[UserService] tryRestoreServerSession START, sessionId in storage:", existingSid ? "exists(" + existingSid.length + ")" : "null");
     const sessionId = getStorage<string>(SESSION_ID_KEY, null);
     if (sessionId) return;
     if (!isWeChatMiniProgram()) return;
     try {
-      await wechatAuthService.performServerLogin(session.userId, session.guestId);
+      const loginResult = await wechatAuthService.performServerLogin(session.userId, session.guestId);
+        console.log("[UserService] performServerLogin result:", loginResult.success, loginResult.sessionId ? "sid=" + loginResult.sessionId.slice(0,8) + "..." : "none", loginResult.error);
     } catch (e) {
       console.warn("[UserService] Server session restoration failed (non-fatal):", e);
     }

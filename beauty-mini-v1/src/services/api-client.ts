@@ -280,14 +280,16 @@ export const api = {
 };
 
 apiClient.baseUrl = getAPIBase();
-console.log("[API Client] Environment:", ENV.current, "| Endpoint:", apiClient.baseUrl);
-
-
+// debug removed
 // ==================== Session Header Injection ====================
 export function injectSessionHeader(headers: Record<string, string>): void {
   try {
     const sid = require("./user-service").default.getServerSessionId();
+    console.log("[api-client] injectSessionHeader: sid=", sid ? sid.slice(0,8) + "..." : "NULL");
     if (sid) headers["X-Session-Id"] = sid;
-  } catch {}
+  } catch (e) {
+    console.error("[api-client] injectSessionHeader error:", e);
+  }
 }
+
 
