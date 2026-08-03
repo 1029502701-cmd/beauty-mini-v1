@@ -1,15 +1,13 @@
-﻿/**
+/**
  * Permission Service - Handles report access via beauty-api-pages backend.
- *
- * Uses:
- *   GET /api/beauty/access?reportLevel=<level>  - check if user can access report level
- *   Local token management for free-tier grants
+ * Uses server API for balance checks (source of truth).
  */
 import type { BeautyReport, ReportAccess, ReportLevel } from "@/types";
 import { REPORT_LEVELS } from "@/types/report-level";
 import { getStorage, setStorage } from "@/utils/storage";
 import userService from "./user-service";
 import { request } from "@/services/api";
+import { fetchServerBalance } from "@/services/token";
 
 class ReportPermissionService {
   private readonly STORAGE_KEY = "report_access_records";
@@ -31,13 +29,8 @@ class ReportPermissionService {
     }
   }
 
-  /**
-   * Check access via backend: GET /api/beauty/access?reportLevel=<level>
-   * Falls back to local check if backend unavailable.
-   */
   async hasAccess(reportId: string, userId?: string, level: ReportLevel = "first-look"): Promise<boolean> {
     const user = userId || await this.getCurrentUserId();
-
     try {
       const response = await request<{ success: boolean; allowed: boolean; tokenRequired: number; balance: number }>(
         "/api/beauty/access?reportLevel=" + encodeURIComponent(level),
@@ -49,8 +42,6 @@ class ReportPermissionService {
     } catch {
       console.warn("[PermissionService] Backend access check failed, using local fallback");
     }
-
-    // Local fallback
     const accessRecords = this.getStoredAccess();
     return accessRecords.some(r => r.reportId === reportId && r.unlocked && r.userId === user);
   }
@@ -61,8 +52,21 @@ class ReportPermissionService {
     return records.some(r => r.reportId === reportId && r.unlocked && r.userId === user);
   }
 
-  getAvailableLevel(userId: string): ReportLevel {
-    const quotas = require("./token").default.getAvailableCredits(userId);
+  async getAvailableLevel(userId?: string): Promise<ReportLevel> {
+    const user = userId || await this.getCurrentUserId();
+    try {
+      const balanceResult = await fetchServerBalance(user);
+      if (balanceResult.success && balanceResult.balance !== undefined) {
+        const balance = balanceResult.balance;
+        if (balance >= 3) return "beauty-pro";
+        if (balance >= 1) return "style-upgrade";
+        return "first-look";
+      }
+    } catch {
+      // fall through
+    }
+    const { getAvailableCredits } = require("@/services/token");
+    const quotas = getAvailableCredits(user);
     if (quotas.tokenCount >= 3) return "beauty-pro";
     if (quotas.tokenCount >= 1 || quotas.freeCount > 0) return "style-upgrade";
     return "first-look";
@@ -74,15 +78,10 @@ class ReportPermissionService {
     if (!config || !config.enabled) {
       return { success: false, message: "报告等级不存在或已停用" };
     }
-
     if (config.isFree) {
       const access: ReportAccess = {
-        reportId,
-        userId: user,
-        level,
-        unlocked: true,
-        unlockType: "free",
-        tokenCost: 0,
+        reportId, userId: user, level, unlocked: true,
+        unlockType: "free", tokenCost: 0,
         createdAt: new Date().toISOString(),
         expireAt: new Date(Date.now() + config.expireDays * 24 * 60 * 60 * 1000).toISOString()
       };
@@ -91,21 +90,14 @@ class ReportPermissionService {
       this.setStoredAccess(records);
       return { success: true, message: level + " 等级已解锁" };
     }
-
-    // beauty-pro requires token consumption — check via backend
     try {
       const accessRes = await request<{ success: boolean; allowed: boolean; tokenRequired: number; balance: number }>(
-        "/api/beauty/access?reportLevel=beauty-pro",
-        "GET"
+        "/api/beauty/access?reportLevel=beauty-pro", "GET"
       );
       if (accessRes.success && accessRes.data && accessRes.data.allowed) {
         const access: ReportAccess = {
-          reportId,
-          userId: user,
-          level,
-          unlocked: true,
-          unlockType: "token",
-          tokenCost: config.tokenCost,
+          reportId, userId: user, level, unlocked: true,
+          unlockType: "token", tokenCost: config.tokenCost,
           createdAt: new Date().toISOString(),
           expireAt: new Date(Date.now() + config.expireDays * 24 * 60 * 60 * 1000).toISOString()
         };
@@ -114,10 +106,7 @@ class ReportPermissionService {
         this.setStoredAccess(records);
         return { success: true, message: "beauty-pro 等级已解锁" };
       }
-    } catch {
-      // fall through to local
-    }
-
+    } catch { /* fall through */ }
     return { success: false, message: "Token不足：需要" + config.tokenCost + "个Token，当前余额不足" };
   }
 
