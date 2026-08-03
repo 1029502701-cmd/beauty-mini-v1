@@ -58,8 +58,11 @@ class ReportPermissionService {
       const balanceResult = await fetchServerBalance(user);
       if (balanceResult.success && balanceResult.balance !== undefined) {
         const balance = balanceResult.balance;
-        if (balance >= 3) return "beauty-pro";
-        if (balance >= 1) return "style-upgrade";
+        const levels: ReportLevel[] = ["first-look", "style-upgrade", "beauty-pro"];
+        for (let j = levels.length - 1; j >= 0; j--) {
+          const cost = REPORT_LEVELS[levels[j]].tokenCost;
+          if (cost === 0 || balance >= cost) return levels[j];
+        }
         return "first-look";
       }
     } catch {
@@ -67,8 +70,11 @@ class ReportPermissionService {
     }
     const { getAvailableCredits } = require("@/services/token");
     const quotas = getAvailableCredits(user);
-    if (quotas.tokenCount >= 3) return "beauty-pro";
-    if (quotas.tokenCount >= 1 || quotas.freeCount > 0) return "style-upgrade";
+    const levels: ReportLevel[] = ["first-look", "style-upgrade", "beauty-pro"];
+    for (let j = levels.length - 1; j >= 0; j--) {
+      const cost = REPORT_LEVELS[levels[j]].tokenCost;
+      if (cost === 0 || quotas.tokenCount >= cost) return levels[j];
+    }
     return "first-look";
   }
 
@@ -92,7 +98,7 @@ class ReportPermissionService {
     }
     try {
       const accessRes = await request<{ success: boolean; allowed: boolean; tokenRequired: number; balance: number }>(
-        "/api/beauty/access?reportLevel=beauty-pro", "GET"
+        "/api/beauty/access?reportLevel=" + encodeURIComponent(level), "GET"
       );
       if (accessRes.success && accessRes.data && accessRes.data.allowed) {
         const access: ReportAccess = {
@@ -104,10 +110,10 @@ class ReportPermissionService {
         const records = this.getStoredAccess();
         records.push(access);
         this.setStoredAccess(records);
-        return { success: true, message: "beauty-pro 等级已解锁" };
+        return { success: true, message: level + " 等级已解锁" };
       }
     } catch { /* fall through */ }
-    return { success: false, message: "Token不足：需要" + config.tokenCost + "个Token，当前余额不足" };
+    return { success: false, message: "Token不足：需要 " + config.tokenCost + " 个Token，当前余额不足" };
   }
 
   async getReportContent(report: BeautyReport, userId?: string): Promise<BeautyReport> {
