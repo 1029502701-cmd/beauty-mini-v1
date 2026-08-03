@@ -1,0 +1,163 @@
+﻿.token-page {
+  min-height: 100vh;
+  background: #FFFAF7;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.token-container {
+  max-width: 400px;
+  margin: 60px auto 0;
+  background: white;
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: 0 4px 20px rgba(200, 160, 170, 0.1);
+  border: 1px solid rgba(248, 220, 225, 0.6);
+}
+
+.page-title {
+  text-align: center;
+  color: #2D2D2D;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 24px;
+}
+
+.balance-card {
+  background: linear-gradient(135deg, #FFF5F0 0%, #FFF0F5 100%);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.balance-label {
+  font-size: 14px;
+  color: #A09090;
+  margin: 0 0 8px;
+}
+
+.balance-value {
+  font-size: 40px;
+  font-weight: 800;
+  color: #E8899E;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #8B7B8B;
+  font-size: 13px;
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.exchange-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244,160,184,0.3);
+  transition: all 0.2s ease;
+}
+
+.exchange-btn:active {
+  transform: scale(0.97);
+}
+
+.hint {
+  text-align: center;
+  color: #B09090;
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+.error-state {
+  max-width: 400px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #D8BFD8, #C8A2C8);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f0e0e8;
+  border-top-color: #D8BFD8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* ─── 按钮居中修复 ─────────────────────────────────── */
+.exchange-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244,160,184,0.3);
+  transition: all 0.2s ease;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.exchange-btn:active {
+  transform: scale(0.97);
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #D8BFD8, #C8A2C8);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}

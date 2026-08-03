@@ -1,0 +1,207 @@
+﻿.purchase-page {
+  min-height: 100vh;
+  background: #FFFAF7;
+  padding-bottom: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.purchase-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: white;
+  border-bottom: 1px solid #FAF0EE;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #D8BFD8;
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2D2D2D;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.header-spacer { width: 44px; }
+
+.page-desc {
+  font-size: 14px;
+  color: #A09090;
+  text-align: center;
+  margin: 20px 20px 24px;
+  line-height: 1.6;
+}
+
+.level-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+.level-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(248, 220, 225, 0.6);
+  box-shadow: 0 2px 10px rgba(200, 160, 170, 0.08);
+  position: relative;
+}
+
+.level-card.recommended {
+  border-color: #F4A0B8;
+  box-shadow: 0 4px 16px rgba(244,160,184,0.15);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: -1px;
+  right: 16px;
+  background: linear-gradient(135deg, #F4A0B8, #E07A90);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.level-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.level-card-icon {
+  font-size: 28px;
+}
+
+.level-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.level-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2D2D2D;
+}
+
+.level-card-tag {
+  font-size: 12px;
+  color: #D8BFD8;
+  font-weight: 600;
+}
+
+.level-card-desc {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.level-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.level-features li {
+  font-size: 13px;
+  color: #666;
+}
+
+.level-card-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #E8899E;
+  margin-bottom: 12px;
+}
+
+.buy-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(244,160,184,0.3);
+}
+
+.buy-btn:active { transform: scale(0.97); }
+
+.buy-btn:disabled {
+  background: #e0e0e0;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.purchase-note {
+  margin: 24px 20px 0;
+  padding: 12px 16px;
+  background: #FFF9F6;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #A09090;
+  line-height: 1.6;
+}
+/* ─── 按钮居中修复 ─────────────────────────────────── */
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #D8BFD8;
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 修复：buy-btn 居中 */
+.buy-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(244,160,184,0.3);
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.buy-btn:active { transform: scale(0.97); }
+
+.buy-btn:disabled {
+  background: #e0e0e0;
+  box-shadow: none;
+  cursor: not-allowed;
+}

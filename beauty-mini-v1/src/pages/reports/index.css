@@ -1,0 +1,417 @@
+﻿/* ═══════════════════════════════════════════
+   报告列表页 - My Reports
+   风格与 home / profile 一致
+   ═══════════════════════════════════════════ */
+
+.reports-page {
+  min-height: 100vh;
+  background: #FFFAF7;
+  padding-bottom: 80px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+}
+
+/* ─── Header ────────────────────────────── */
+.reports-header {
+  padding: 48px 20px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #FFF5F0 0%, #FFFAF7 100%);
+}
+
+.reports-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #2D2D2D;
+  margin: 0 0 6px;
+  letter-spacing: -0.3px;
+}
+
+.reports-subtitle {
+  font-size: 13px;
+  color: #A09090;
+  margin: 0;
+}
+
+/* ─── Loading State ─────────────────────── */
+.reports-page.reports-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.reports-page.reports-loading .loading-content {
+  text-align: center;
+}
+
+.reports-page.reports-loading .loading-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.reports-page.reports-loading h2 {
+  font-size: 17px;
+  color: #5a4a5a;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.loading-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D8BFD8;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.loading-dots .dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.4; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+
+/* ─── Body ──────────────────────────────── */
+.reports-body {
+  padding: 0 16px;
+}
+
+/* ─── Empty State ───────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.empty-state h2 {
+  font-size: 20px;
+  color: #5a4a5a;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #999;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.empty-state .error-text {
+  color: #c0392b;
+  margin-bottom: 20px;
+}
+
+.empty-state .start-btn {
+  background: linear-gradient(135deg, #F4A0B8 0%, #E8899E 100%);
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(232, 137, 158, 0.3);
+  transition: all 0.25s ease;
+}
+
+.empty-state .start-btn:active {
+  transform: scale(0.97);
+}
+
+.empty-state .retry-btn {
+  background: linear-gradient(135deg, #D8BFD8, #C8A2C8);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 6px 12px;
+  transition: all 0.25s ease;
+}
+
+.empty-state .back-btn {
+  background: transparent;
+  color: #D8BFD8;
+  border: 2px solid #D8BFD8;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: all 0.25s ease;
+}
+
+/* ─── Report List ───────────────────────── */
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.report-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid rgba(248, 220, 225, 0.6);
+  box-shadow: 0 2px 10px rgba(200, 160, 170, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.report-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 6px rgba(200, 160, 170, 0.12);
+}
+
+.report-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.report-code {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.report-time {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.report-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.report-level {
+  font-size: 13px;
+  color: #8B7B8B;
+  font-weight: 500;
+}
+
+.report-style {
+  font-size: 12px;
+  color: #B09090;
+  background: #FFF5F0;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* ─── Footer Nav ────────────────────────── */
+.reports-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: white;
+  padding: 8px 16px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  box-shadow: 0 -2px 16px rgba(200, 160, 170, 0.12);
+  z-index: 100;
+  border-top: 1px solid #FAF0EE;
+}
+
+.reports-footer .nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  color: #B0A0A0;
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.reports-footer .nav-btn--active {
+  color: #E8899E;
+}
+
+.reports-footer .nav-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* ─── Animation ─────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ────────────────────────── */
+@media (max-width: 360px) {
+  .reports-title { font-size: 22px; }
+  .report-card { padding: 14px 14px; }
+}
+/* ─── Level Filter Bar (Task 5) ─────────────────────────────── */
+.level-filter-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #FAF0EE;
+  overflow-x: auto;
+}
+
+.level-filter-btn {
+  flex-shrink: 0;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #f0e0e8;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8B7B8B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.level-filter-btn.active {
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(244,160,184,0.3);
+}
+
+.level-filter-btn:active {
+  transform: scale(0.95);
+}
+/* ─── 按钮居中修复 ─────────────────────────────────── */
+/* 修复：level-filter-btn 居中 */
+.level-filter-btn {
+  flex-shrink: 0;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #f0e0e8;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8B7B8B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.level-filter-btn.active {
+  background: linear-gradient(135deg, #F4A0B8, #E8899E);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(244,160,184,0.3);
+}
+
+.level-filter-btn:active {
+  transform: scale(0.95);
+}
+
+/* 修复：start-btn 居中 */
+.empty-state .start-btn {
+  background: linear-gradient(135deg, #F4A0B8 0%, #E8899E 100%);
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(232, 137, 158, 0.3);
+  transition: all 0.25s ease;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+.empty-state .start-btn:active {
+  transform: scale(0.97);
+}
+
+/* 修复：retry-btn 居中 */
+.empty-state .retry-btn {
+  background: linear-gradient(135deg, #D8BFD8, #C8A2C8);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 6px 12px;
+  transition: all 0.25s ease;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+/* 修复：back-btn 居中 */
+.empty-state .back-btn {
+  background: transparent;
+  color: #D8BFD8;
+  border: 2px solid #D8BFD8;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: all 0.25s ease;
+  /* 修复：flex 居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+}
+
+/* 修复：nav-btn 居中 */
+.reports-footer .nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  flex-direction: column;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  cursor: pointer;
+  color: #B0A0A0;
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.2s;
+  line-height: normal;
+}

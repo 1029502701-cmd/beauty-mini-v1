@@ -1,0 +1,133 @@
+﻿/* ═══════════════════════════════════════════
+   统一按钮居中样式
+   解决微信按钮 icon/文字未居中的问题
+ ═══════════════════════════════════════════ */
+
+/* ─── 全局按钮基础重置 ─────────────────── */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 0;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ─── 通用居中按钮基类 ──────────────── */
+.btn-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  line-height: normal;
+  text-align: center;
+}
+
+/* ─── 图标尺寸统一 ───────────────────── */
+.btn-center .icon-sm {
+  font-size: 32rpx;
+  flex-shrink: 0;
+}
+
+.btn-center .icon-md {
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.btn-center .icon-lg {
+  font-size: 48rpx;
+  flex-shrink: 0;
+}
+
+/* ─── emoji 图标按钮 ─────────────────── */
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  line-height: normal;
+  font-size: inherit;
+}
+
+/* ─── 按钮图标对齐 ───────────────────── */
+button .emoji-icon,
+.btn-center .emoji-icon {
+  font-size: inherit;
+  line-height: 1;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ─── 上传页按钮 ─────────────────────── */
+.upload-page .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.upload-page .btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-page .btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-page .btn-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-page .btn-reselect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── 通用错误状态按钮 ─────────────── */
+.error-actions button,
+.profile-error .retry-btn,
+.profile-error .back-btn,
+.analyzing-error .retry-btn,
+.analyzing-error .back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  line-height: normal;
+}
+
+/* ─── 解锁按钮 ─────────────────────── */
+.unlock-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  line-height: normal;
+}
+
+/* ─── 底部导航按钮 ─────────────────── */
+.bottom-nav button,
+.reports-footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  line-height: normal;
+}
+
+/* ─── 关闭按钮 ─────────────────────── */
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
