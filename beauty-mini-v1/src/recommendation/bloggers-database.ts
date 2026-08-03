@@ -1,0 +1,80 @@
+﻿import type { Blogger, FaceShapeType, EyeShapeType, LipShapeType, MakeupStyleType, ColorType, SkinToneType, Platform, FaceMetricsRange } from "./types";
+
+/** Sample KOL database with full tagging and face metrics ranges (V2) */
+export const SAMPLE_BLOGGERS: Blogger[] = [
+  {
+    id: "blogger_001",
+    name: "美妆达人小林",
+    avatar: "/avatars/blogger1.jpg",
+    platform: "xiaohongshu",
+    description: "专注自然妆容分享，日常通勤妆必备",
+    styleTags: ["清透自然型", "日系清新型"],
+    faceShapeSupports: ["鹅蛋脸", "圆脸", "心形脸"],
+    eyeShapeSupports: ["杏眼", "单眼皮"],
+    lipShapeSupports: ["薄唇", "饱满唇"],
+    colorSupports: ["奶茶色", "豆沙色", "裸粉色"],
+    skinToneSupports: ["暖皮", "中性皮"],
+    targetAudience: "日常通勤",
+    faceMetricsRange: { faceRatioRange: [0.75, 0.85], jawWidthRange: [140, 170], eyeDistanceRange: [60, 75], lipWidthRange: [35, 55], chinLengthRange: [30, 45], noseWidthRange: [25, 35] }
+  },
+  {
+    id: "blogger_002",
+    name: "化妆师阿杰",
+    avatar: "/avatars/blogger2.jpg",
+    platform: "douyin",
+    description: "专业彩妆教学，欧美浓妆专家",
+    styleTags: ["欧美浓妆型", "成熟御姐型"],
+    faceShapeSupports: ["方脸", "长脸", "鹅蛋脸"],
+    eyeShapeSupports: ["欧式眼", "丹凤眼"],
+    lipShapeSupports: ["饱满唇"],
+    colorSupports: ["橘棕色", "玫瑰色", "珊瑚红"],
+    skinToneSupports: ["冷皮", "中性皮"],
+    targetAudience: "派对晚宴",
+    faceMetricsRange: { faceRatioRange: [0.65, 0.80], jawWidthRange: [160, 190], eyeDistanceRange: [65, 80], lipWidthRange: [45, 65], chinLengthRange: [40, 60], noseWidthRange: [35, 45] }
+  },
+  {
+    id: "blogger_003",
+    name: "甜美酱酱",
+    avatar: "/avatars/blogger3.jpg",
+    platform: "xiaohongshu",
+    description: "韩系甜妹风，嘟嘟唇必备",
+    styleTags: ["韩系甜妹型", "清透自然型"],
+    faceShapeSupports: ["圆脸", "鹅蛋脸", "心形脸"],
+    eyeShapeSupports: ["圆眼", "杏眼"],
+    lipShapeSupports: ["嘟嘟唇", "饱满唇"],
+    colorSupports: ["奶茶色", "珊瑚红", "裸粉色"],
+    skinToneSupports: ["暖皮", "中性皮"],
+    targetAudience: "甜美约会",
+    faceMetricsRange: { faceRatioRange: [0.80, 0.90], jawWidthRange: [130, 160], eyeDistanceRange: [55, 70], lipWidthRange: [40, 55], chinLengthRange: [25, 40], noseWidthRange: [20, 30] }
+  },
+  {
+    id: "blogger_004",
+    name: "优雅Jane",
+    avatar: "/avatars/blogger4.jpg",
+    platform: "weibo",
+    description: "成熟御姐风，职场妆容",
+    styleTags: ["成熟御姐型", "欧美浓妆型"],
+    faceShapeSupports: ["方脸", "长脸", "鹅蛋脸"],
+    eyeShapeSupports: ["欧式眼", "丹凤眼"],
+    lipShapeSupports: ["饱满唇"],
+    colorSupports: ["橘棕色", "玫瑰色", "豆沙色"],
+    skinToneSupports: ["冷皮", "中性皮"],
+    targetAudience: "商务职场",
+    faceMetricsRange: { faceRatioRange: [0.70, 0.82], jawWidthRange: [150, 180], eyeDistanceRange: [62, 78], lipWidthRange: [42, 58], chinLengthRange: [35, 55], noseWidthRange: [28, 40] }
+  },
+  {
+    id: "blogger_005",
+    name: "清水妹妹",
+    avatar: "/avatars/blogger5.jpg",
+    platform: "bilibili",
+    description: "日系清新校园风",
+    styleTags: ["清透自然型", "日系清新型"],
+    faceShapeSupports: ["圆脸", "鹅蛋脸", "心形脸"],
+    eyeShapeSupports: ["杏眼", "单眼皮", "圆眼"],
+    lipShapeSupports: ["薄唇", "嘟嘟唇"],
+    colorSupports: ["奶茶色", "裸粉色", "香槟金"],
+    skinToneSupports: ["暖皮", "中性皮"],
+    targetAudience: "清新校园",
+    faceMetricsRange: { faceRatioRange: [0.78, 0.88], jawWidthRange: [135, 165], eyeDistanceRange: [58, 72], lipWidthRange: [38, 52], chinLengthRange: [28, 42], noseWidthRange: [22, 32] }
+  },
+];

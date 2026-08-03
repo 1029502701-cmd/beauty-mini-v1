@@ -1,0 +1,2 @@
+﻿-- MIGRATION 004: sessions table (OPTIONAL - current implementation uses KV)
+-- Kept for reference. beauty-api-pages uses KV USER_CACHE for sessions.

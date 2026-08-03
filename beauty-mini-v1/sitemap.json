@@ -1,0 +1,12 @@
+﻿{
+  "rules": [
+    { "action": "allow", "pagePath": "pages/home/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/upload/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/analyzing/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/result/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/profile/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/token/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/privacy/index", "allowExternalSenderReferrer": true, "limit": 500 },
+    { "action": "allow", "pagePath": "pages/agreement/index", "allowExternalSenderReferrer": true, "limit": 500 }
+  ]
+}

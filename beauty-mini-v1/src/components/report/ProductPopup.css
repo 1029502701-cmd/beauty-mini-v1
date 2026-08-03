@@ -1,0 +1,167 @@
+﻿// Product Popup CSS
+.product-popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.product-popup-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  color: #888;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.popup-close-btn:hover {
+  color: #333;
+  background: #f0f0f0;
+}
+
+.popup-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.popup-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.popup-body {
+  padding: 24px;
+}
+
+.product-detail {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid #e8e8e8;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.product-brand {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 12px 0;
+}
+
+.product-match {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.match-label {
+  color: #888;
+  margin-right: 8px;
+}
+
+.match-score {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.product-reason {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 0;
+}
+
+.reason-label {
+  color: #888;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.reason-value {
+  color: #555;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buy-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buy-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+}
+
+.buy-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -1,0 +1,110 @@
+﻿[
+  {
+    "id": "creator_001",
+    "name": "林夏浅",
+    "styleTags": ["清透自然型", "日系清新型"],
+    "faceShapeTags": ["鹅蛋脸", "圆脸", "心形脸"],
+    "colorTags": ["奶茶色", "豆沙色", "裸粉色", "暖皮", "中性皮"],
+    "makeupTags": ["底妆", "唇妆", "腮红"],
+    "suitableScenes": ["日常通勤", "清新校园", "甜美约会"]
+  },
+  {
+    "id": "creator_002",
+    "name": "苏梦璃",
+    "styleTags": ["欧美浓妆型", "成熟御姐型"],
+    "faceShapeTags": ["方脸", "长脸", "鹅蛋脸"],
+    "colorTags": ["橘棕色", "玫瑰色", "珊瑚红", "冷皮", "中性皮"],
+    "makeupTags": ["眼妆", "修容", "全妆"],
+    "suitableScenes": ["派对晚宴", "商务职场", "特殊场合"]
+  },
+  {
+    "id": "creator_003",
+    "name": "桃桃酱",
+    "styleTags": ["韩系甜妹型", "清透自然型"],
+    "faceShapeTags": ["圆脸", "鹅蛋脸", "心形脸"],
+    "colorTags": ["奶茶色", "珊瑚红", "裸粉色", "暖皮"],
+    "makeupTags": ["眼妆", "腮红", "唇妆"],
+    "suitableScenes": ["甜美约会", "日常通勤", "清新校园"]
+  },
+  {
+    "id": "creator_004",
+    "name": "赵雅琪",
+    "styleTags": ["成熟御姐型", "欧美浓妆型"],
+    "faceShapeTags": ["方脸", "长脸", "鹅蛋脸"],
+    "colorTags": ["橘棕色", "玫瑰色", "豆沙色", "冷皮", "中性皮"],
+    "makeupTags": ["修容", "眼妆", "全妆"],
+    "suitableScenes": ["商务职场", "派对晚宴"]
+  },
+  {
+    "id": "creator_005",
+    "name": "清水妹妹",
+    "styleTags": ["清透自然型", "日系清新型"],
+    "faceShapeTags": ["圆脸", "鹅蛋脸", "心形脸"],
+    "colorTags": ["奶茶色", "裸粉色", "香槟金", "暖皮", "中性皮"],
+    "makeupTags": ["底妆", "腮红"],
+    "suitableScenes": ["清新校园", "日常通勤"]
+  },
+  {
+    "id": "creator_006",
+    "name": "韩允真",
+    "styleTags": ["韩系甜妹型"],
+    "faceShapeTags": ["鹅蛋脸", "圆脸", "心形脸", "所有脸型"],
+    "colorTags": ["奶茶色", "豆沙色", "玫瑰色", "暖皮", "中性皮", "冷皮"],
+    "makeupTags": ["全妆", "眼妆", "唇妆", "腮红"],
+    "suitableScenes": ["甜美约会", "日常通勤", "特殊场合"]
+  },
+  {
+    "id": "creator_007",
+    "name": "沈夜雪",
+    "styleTags": ["欧美浓妆型"],
+    "faceShapeTags": ["方脸", "长脸"],
+    "colorTags": ["橘棕色", "珊瑚红", "香槟金", "冷皮"],
+    "makeupTags": ["眼妆", "修容", "全妆"],
+    "suitableScenes": ["派对晚宴", "特殊场合"]
+  },
+  {
+    "id": "creator_008",
+    "name": "白浅",
+    "styleTags": ["日系清新型", "清透自然型"],
+    "faceShapeTags": ["鹅蛋脸", "心形脸", "圆脸"],
+    "colorTags": ["奶茶色", "裸粉色", "香槟金", "暖皮"],
+    "makeupTags": ["底妆", "眼妆"],
+    "suitableScenes": ["清新校园", "日常通勤", "甜美约会"]
+  },
+  {
+    "id": "creator_009",
+    "name": "周梦华",
+    "styleTags": ["成熟御姐型"],
+    "faceShapeTags": ["方脸", "长脸", "鹅蛋脸"],
+    "colorTags": ["豆沙色", "玫瑰色", "橘棕色", "中性皮", "冷皮"],
+    "makeupTags": ["全妆", "修容", "唇妆"],
+    "suitableScenes": ["商务职场", "派对晚宴", "特殊场合"]
+  },
+  {
+    "id": "creator_010",
+    "name": "暖暖",
+    "styleTags": ["韩系甜妹型", "清透自然型"],
+    "faceShapeTags": ["圆脸", "鹅蛋脸", "心形脸"],
+    "colorTags": ["奶茶色", "珊瑚红", "裸粉色", "暖皮", "中性皮"],
+    "makeupTags": ["腮红", "唇妆", "眼妆"],
+    "suitableScenes": ["甜美约会", "清新校园", "日常通勤"]
+  },
+  {
+    "id": "creator_011",
+    "name": "冰美人CC",
+    "styleTags": ["欧美浓妆型", "成熟御姐型"],
+    "faceShapeTags": ["方脸", "长脸", "心形脸"],
+    "colorTags": ["橘棕色", "玫瑰色", "冷皮"],
+    "makeupTags": ["眼妆", "修容", "全妆"],
+    "suitableScenes": ["派对晚宴", "商务职场"]
+  },
+  {
+    "id": "creator_012",
+    "name": "小森唯",
+    "styleTags": ["日系清新型"],
+    "faceShapeTags": ["鹅蛋脸", "圆脸", "心形脸", "所有脸型"],
+    "colorTags": ["奶茶色", "裸粉色", "暖皮", "中性皮"],
+    "makeupTags": ["底妆", "腮红", "唇妆"],
+    "suitableScenes": ["清新校园", "日常通勤", "甜美约会"]
+  }
+]

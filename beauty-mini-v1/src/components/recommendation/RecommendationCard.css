@@ -1,0 +1,101 @@
+﻿.recommendation-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.recommendation-card .card-header {
+  margin-bottom: 16px;
+}
+
+.recommendation-card .card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-left: 8px;
+  position: relative;
+}
+
+.recommendation-card .card-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(180deg, #D8BFD8, C8A2C8);
+  border-radius: 2px;
+}
+
+.match-score-card {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-left: 4px solid #667eea;
+}
+
+.match-score-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.match-score-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.tags-section {
+  margin-bottom: 16px;
+}
+
+.tags-title {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #f0f0f0;
+}
+
+.reason-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.reason-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.reason-value {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

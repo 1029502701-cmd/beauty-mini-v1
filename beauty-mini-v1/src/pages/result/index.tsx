@@ -102,13 +102,7 @@ const Index = () => {
       const balance = await reportAccessService.getBalance();
       setTokenBalance(balance);
     } catch {
-      setTokenBalance({
-        userId: 'unknown',
-        balance: 0,
-        freeBalance: 0,
-        purchasedBalance: 0,
-        updatedAt: new Date().toISOString(),
-      });
+      // balance query failed, leave tokenBalance as null
     }
   }, []);
 

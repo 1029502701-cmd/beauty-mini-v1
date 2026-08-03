@@ -1,0 +1,15 @@
+﻿{
+    "description": "AI Beauty Mini Program",
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "newFeature": true
+    },
+    "compileType": "miniprogram",
+    "appid": "wxb11f679ad6bc945a",
+    "projectname": "beauty-mini-v1",
+    "condition": {},
+    "uploadPage": "pages/upload/index"
+}

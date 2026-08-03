@@ -1,0 +1,19 @@
+﻿.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid;
+  transition: all 0.2s ease;
+}
+
+.level-icon {
+  font-size: 14px;
+}
+
+.level-name {
+  letter-spacing: 0.5px;
+}

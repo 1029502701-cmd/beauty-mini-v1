@@ -1,0 +1,31 @@
+{
+  "name": "beauty-mini-v1",
+  "version": "1.0.0",
+  "description": "AI Beauty Mini Program V1",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "taro build --type weapp",
+    "dev": "taro start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tarojs/runtime": "^3.6.40",
+    "@tarojs/shared": "^3.6.40",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.24.0",
+    "@tarojs/cli": "^3.6.34",
+    "@tarojs/plugin-framework-react": "^3.6.34",
+    "@tarojs/plugin-platform-weapp": "^3.6.34",
+    "@tarojs/react": "^3.6.40",
+    "@tarojs/router": "^3.6.40",
+    "@tarojs/webpack5-runner": "^3.6.40",
+    "@types/react": "^18.0.0",
+    "babel-preset-taro": "^3.6.40",
+    "typescript": "^5.0.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

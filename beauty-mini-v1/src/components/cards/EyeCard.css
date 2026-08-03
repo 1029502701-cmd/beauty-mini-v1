@@ -1,0 +1,77 @@
+﻿.eye-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+.eye-card .card-header {
+  margin-bottom: 16px;
+}
+
+.eye-card .card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-left: 8px;
+  position: relative;
+}
+
+.eye-card .card-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(180deg, #D8BFD8, C8A2C8);
+  border-radius: 2px;
+}
+
+.eye-card .card-content {
+  margin-bottom: 16px;
+}
+
+.eye-card .info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.eye-card .info-item:last-child {
+  border-bottom: none;
+}
+
+.eye-card .info-label {
+  color: #888;
+  min-width: 100px;
+}
+
+.eye-card .info-value {
+  color: #333;
+  flex: 1;
+  text-align: right;
+}
+
+.eye-card .action-btn {
+  width: 100%;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #D8BFD8, C8A2C8);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.eye-card .action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(216, 191, 216, 0.3);
+}

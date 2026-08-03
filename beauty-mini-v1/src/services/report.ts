@@ -9,7 +9,12 @@ class ReportService {
   async createAndQueryReport(
     uploadId: string,
     imageKey: string,
-    reportLevel: ReportLevel = "first-look"
+    reportLevel: ReportLevel = "first-look",
+    decisions?: {
+      style?: "natural" | "refined" | "charismatic" | "individual";
+      occasion?: "daily" | "date" | "workplace" | "photo";
+      tolerance?: "conservative" | "normal" | "bold";
+    }
   ): Promise<{ success: boolean; reportId?: string; report?: BeautyReport; error?: string }> {
     try {
       const analyzeRes = await request<Record<string, unknown>>(
@@ -18,17 +23,21 @@ class ReportService {
         { uploadId, imageKey }
       );
       if (!analyzeRes.success || !analyzeRes.data) {
-        return { success: false, error: analyzeRes.error || "·ÖÎöÊ§°Ü" };
+        return { success: false, error: analyzeRes.error || "åˆ†æå¤±è´¥" };
       }
-      const { metrics, imageKey: resolvedKey } = analyzeRes.data as { metrics?: unknown; imageKey?: string };
+      const { metrics } = analyzeRes.data as { metrics?: unknown };
 
+      const reportBody: Record<string, unknown> = { analysisId: uploadId, reportLevel, faceMetrics: metrics };
+      if (decisions) {
+        reportBody.decisions = decisions;
+      }
       const reportRes = await request<{ report?: Record<string, unknown>; reportId?: string }>(
         "/api/beauty/report",
         "POST",
-        { analysisId: uploadId, reportLevel, faceMetrics: metrics }
+        reportBody
       );
       if (!reportRes.success || !reportRes.data) {
-        return { success: false, error: reportRes.error || "±¨¸æÉú³ÉÊ§°Ü" };
+        return { success: false, error: reportRes.error || "æŠ¥å‘Šç”Ÿæˆå¤±è´¥" };
       }
 
       const reportId = (reportRes.data.report as Record<string, unknown>)?.analysisId as string || uploadId;
@@ -39,7 +48,7 @@ class ReportService {
       return { success: true, reportId, report: reportRes.data.report as unknown as BeautyReport };
     } catch (err) {
       console.error("[ReportService] createAndQueryReport error:", err);
-      return { success: false, error: "±¨¸æÉú³ÉÊ§°Ü£¬ÇëÖØÊÔ" };
+      return { success: false, error: "æŠ¥å‘Šç”Ÿæˆå¤±è´¥ï¼Œè¯·é‡è¯•" };
     }
   }
 
@@ -60,9 +69,9 @@ class ReportService {
         } as BeautyReport;
         return { success: true, report };
       }
-      return { success: false, error: response.error || "±¨¸æ²éÑ¯Ê§°Ü" };
+      return { success: false, error: response.error || "æŠ¥å‘ŠæŸ¥è¯¢å¤±è´¥" };
     } catch {
-      return { success: false, error: "±¨¸æ²éÑ¯Ê§°Ü" };
+      return { success: false, error: "æŠ¥å‘ŠæŸ¥è¯¢å¤±è´¥" };
     }
   }
 
@@ -83,9 +92,9 @@ class ReportService {
       if (response.success && response.data) {
         return { success: true, products: response.data.products as Array<Record<string, unknown>>, creators: response.data.creators as Array<Record<string, unknown>> };
       }
-      return { success: false, error: response.error || "ÍÆ¼ö²éÑ¯Ê§°Ü" };
+      return { success: false, error: response.error || "æ¨èæŸ¥è¯¢å¤±è´¥" };
     } catch {
-      return { success: false, error: "ÍÆ¼ö²éÑ¯Ê§°Ü" };
+      return { success: false, error: "æ¨èæŸ¥è¯¢å¤±è´¥" };
     }
   }
 }

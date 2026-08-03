@@ -1,0 +1,3 @@
+﻿-- MIGRATION 003: beauty_tasks table (DEPRECATED - V1 removed async task system)
+-- Kept for reference only. Do NOT execute in production.
+-- See: cloudflare-worker/migrations/003_create_beauty_tasks_table.sql

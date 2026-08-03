@@ -1,0 +1,38 @@
+﻿.makeup-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.makeup-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.makeup-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.makeup-content {
+  text-align: center;
+}
+
+.makeup-style {
+  color: #667eea;
+  font-size: 20px;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.makeup-description {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}

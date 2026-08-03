@@ -1,0 +1,101 @@
+.face-analysis-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(216, 191, 216, 0.1);
+  animation: slideDown 0.5s ease-out 0.1s both;
+}
+
+.face-main-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.face-stat-item {
+  background: linear-gradient(135deg, #FFF9F6 0%, #FFEFE9 100%);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.face-stat-label {
+  font-size: 11px;
+  color: #aaa;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.face-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #5a4a5a;
+}
+
+.face-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+  margin: 12px 0;
+}
+
+.face-skin-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.skin-tag {
+  background: #f5f0f5;
+  border: 1px solid rgba(216, 191, 216, 0.3);
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #888;
+}
+
+.oil-tag {
+  background: #fff3e0;
+  border-color: rgba(255, 152, 0, 0.3);
+  color: #e65100;
+}
+
+.hydrate-tag {
+  background: #e8f5e9;
+  border-color: rgba(76, 175, 80, 0.3);
+  color: #2e7d32;
+}
+
+.face-highlights {
+  margin-top: 12px;
+}
+
+.highlights-label {
+  font-size: 12px;
+  color: #aaa;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.highlights-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.highlight-tag {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+  border: 1px solid rgba(216, 191, 216, 0.25);
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: #6a5a6a;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
