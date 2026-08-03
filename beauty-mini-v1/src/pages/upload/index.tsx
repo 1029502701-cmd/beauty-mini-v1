@@ -32,17 +32,17 @@ const UploadPage = () => {
         setImageInfo({ filename, size: file.size });
         setPhase("preview");
       } else {
-        setError("Î´Ñ¡ÔñÍ¼Æ¬");
+        setError("æœªé€‰æ‹©å›¾ç‰‡");
       }
     } catch (err) {
       console.error("[Upload] pickImage error:", err);
-      setError(sourceType === "camera" ? "ÅÄÕÕÊ§°Ü£¬ÇëÖØÊÔ" : "Ïà²áÑ¡ÔñÊ§°Ü£¬ÇëÖØÊÔ");
+      setError(sourceType === "camera" ? "æ‹ç…§å¤±è´¥ï¼Œè¯·é‡è¯•" : "ç›¸å†Œé€‰æ‹©å¤±è´¥ï¼Œè¯·é‡è¯•");
     }
   }, []);
 
   const handleConfirmUpload = useCallback(async () => {
     if (!selectedImage || !imageInfo) {
-      setError("ÇëÑ¡ÔñÒ»ÕÅÍ¼Æ¬");
+      setError("è¯·é€‰æ‹©ä¸€å¼ å›¾ç‰‡");
       return;
     }
 
@@ -54,7 +54,7 @@ const UploadPage = () => {
     if (!validation.valid) {
       console.error("[Upload] validation failed:", validation.message);
       setPhase("failed");
-      setError(validation.message || "Í¼Æ¬ÑéÖ¤Ê§°Ü£¬ÇëÖØÐÂÑ¡Ôñ");
+      setError(validation.message || "å›¾ç‰‡éªŒè¯å¤±è´¥ï¼Œè¯·é‡æ–°é€‰æ‹©");
       return;
     }
 
@@ -63,7 +63,7 @@ const UploadPage = () => {
     if (!faceResult.hasFace) {
       console.warn("[Upload] No face detected, blocking upload");
       setPhase("failed");
-      setError("Î´¼ì²âµ½ÈËÁ³£¬ÇëÉÏ´«ÕýÃæÇåÎúÈËÏñÕÕÆ¬");
+      setError("æœªæ£€æµ‹åˆ°äººè„¸ï¼Œè¯·ä¸Šä¼ æ­£é¢æ¸…æ™°äººåƒç…§ç‰‡");
       return;
     }
 
@@ -80,12 +80,12 @@ const UploadPage = () => {
         setPhase("analyzing");
       } else {
         setPhase("failed");
-        setError(result.message || "ÉÏ´«Ê§°Ü£¬ÇëÖØÊÔ");
+        setError(result.message || "ä¸Šä¼ å¤±è´¥ï¼Œè¯·é‡è¯•");
       }
     } catch (err) {
       console.error("[Upload] confirm error:", err);
       setPhase("failed");
-      setError("ÉÏ´«¹ý³ÌÖÐ·¢Éú´íÎó£¬Çë¼ì²éÍøÂçÁ¬½ÓºóÖØÊÔ");
+      setError("ä¸Šä¼ è¿‡ç¨‹ä¸­å‘ç”Ÿé”™è¯¯ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿žæŽ¥åŽé‡è¯•");
     }
   }, [selectedImage, imageInfo]);
 
@@ -111,7 +111,8 @@ const UploadPage = () => {
   React.useEffect(() => {
     if (phase === "analyzing" && uploadId) {
       const timer = setTimeout(() => {
-        const params = "uploadId=" + encodeURIComponent(uploadId) + "imageUrl=" + encodeURIComponent(imageUrl);
+        // Fixed: added "&" separator between uploadId and imageUrl params
+        const params = "uploadId=" + encodeURIComponent(uploadId) + "&imageUrl=" + encodeURIComponent(imageUrl);
         navigate({ url: "/pages/analyzing?" + params });
       }, 800);
       return () => clearTimeout(timer);
@@ -122,18 +123,18 @@ const UploadPage = () => {
     return (
       <div className="upload-page">
         <div className="upload-header">
-          <h1 className="upload-title">¿ªÊ¼ÄãµÄÃÀÑ§·ÖÎö</h1>
+          <h1 className="upload-title">å¼€å§‹ä½ çš„ç¾Žå­¦åˆ†æž</h1>
           <p className="upload-subtitle">
-            ÉÏ´«Ò»ÕÅÇåÎúÕýÁ³ÕÕ<br />
-            AI½«Éú³ÉÄãµÄ×¨Êô±¨¸æ
+            ä¸Šä¼ ä¸€å¼ æ¸…æ™°æ­£è„¸ç…§<br />
+            AIå°†ç”Ÿæˆä½ çš„ä¸“å±žæŠ¥å‘Š
           </p>
         </div>
 
         {phase === "preview" && previewUrl ? (
           <>
             <div className="preview-card">
-              <img src={previewUrl} alt="Ô¤ÀÀ" className="preview-image" />
-              <button className="btn-reselect" onClick={handleReselect}>ÖØÐÂÑ¡Ôñ</button>
+              <img src={previewUrl} alt="é¢„è§ˆ" className="preview-image" />
+              <button className="btn-reselect" onClick={handleReselect}>é‡æ–°é€‰æ‹©</button>
             </div>
             {imageInfo && (
               <div className="image-meta">
@@ -141,13 +142,13 @@ const UploadPage = () => {
               </div>
             )}
             <div className="upload-actions">
-              <button className="btn btn-ghost" onClick={handleCancel}>È¡Ïû</button>
+              <button className="btn btn-ghost" onClick={handleCancel}>å–æ¶ˆ</button>
               <button
                 className="btn btn-primary"
                 onClick={handleConfirmUpload}
                 disabled={phase === "uploading"}
               >
-                {phase === "uploading" ? "ÉÏ´«ÖÐ.." : "¿ªÊ¼AI·ÖÎö"}
+                {phase === "uploading" ? "ä¸Šä¼ ä¸­.." : "å¼€å§‹AIåˆ†æž"}
               </button>
             </div>
           </>
@@ -156,26 +157,26 @@ const UploadPage = () => {
             <div className="upload-area" onClick={() => pickImage("album")}>
               <div className="upload-area-inner">
                 <div className="upload-avatar-icon">&#x1F574;</div>
-                <p className="upload-area-text">µã»÷ÉÏ´«ÕÕÆ¬</p>
-                <p className="upload-area-hint">»òÅÄÉãÕÕÆ¬</p>
+                <p className="upload-area-text">ç‚¹å‡»ä¸Šä¼ ç…§ç‰‡</p>
+                <p className="upload-area-hint">æˆ–æ‹æ‘„ç…§ç‰‡</p>
               </div>
             </div>
 
             <div className="photo-spec">
               <div className="spec-group spec-group--good">
-                <span className="spec-label">×î¼ÑÕÕÆ¬</span>
+                <span className="spec-label">æœ€ä½³ç…§ç‰‡</span>
                 <div className="spec-items">
-                  <span className="spec-item">&#x2714; ÕýÁ³</span>
-                  <span className="spec-item">&#x2714; ×ÔÈ»¹â</span>
-                  <span className="spec-item">&#x2714; Îå¹ÙÎÞÕÚµ²</span>
+                  <span className="spec-item">&#x2714; æ­£è„¸</span>
+                  <span className="spec-item">&#x2714; è‡ªç„¶å…‰</span>
+                  <span className="spec-item">&#x2714; äº”å®˜æ— é®æŒ¡</span>
                 </div>
               </div>
               <div className="spec-group spec-group--bad">
-                <span className="spec-label">±ÜÃâ</span>
+                <span className="spec-label">é¿å…</span>
                 <div className="spec-items">
-                  <span className="spec-item">&#x2718; ²àÁ³</span>
-                  <span className="spec-item">&#x2718; ¶àÈË</span>
-                  <span className="spec-item">&#x2718; Ç¿¹âÂË¾µ</span>
+                  <span className="spec-item">&#x2718; ä¾§è„¸</span>
+                  <span className="spec-item">&#x2718; å¤šäºº</span>
+                  <span className="spec-item">&#x2718; å¼ºå…‰æ»¤é•œ</span>
                 </div>
               </div>
             </div>
@@ -183,24 +184,24 @@ const UploadPage = () => {
             <div className="privacy-note">
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>½öÓÃÓÚAI·ÖÎö</span>
+                <span>ä»…ç”¨äºŽAIåˆ†æž</span>
               </div>
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>²»¹«¿ªÕ¹Ê¾</span>
+                <span>ä¸å…¬å¼€å±•ç¤º</span>
               </div>
               <div className="privacy-row">
                 <span className="privacy-check">&#x2714;</span>
-                <span>¿ÉËæÊ±É¾³ý</span>
+                <span>å¯éšæ—¶åˆ é™¤</span>
               </div>
             </div>
 
             <div className="upload-actions">
-              <button className="btn btn-secondary" onClick={() => pickImage("album")}>
-                {String.fromCharCode(0x1F574)} ´ÓÏà²áÑ¡Ôñ
+              <button className="btn btn-secondary btn-center" onClick={() => pickImage("album")}>
+                {String.fromCharCode(0x1F574)} ä»Žç›¸å†Œé€‰æ‹©
               </button>
-              <button className="btn btn-secondary" onClick={() => pickImage("camera")}>
-                {String.fromCharCode(0x1F4F7)} ÅÄÉãÕÕÆ¬
+              <button className="btn btn-secondary btn-center" onClick={() => pickImage("camera")}>
+                {String.fromCharCode(0x1F4F7)} æ‹æ‘„ç…§ç‰‡
               </button>
             </div>
           </>
@@ -220,8 +221,8 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check uploading-check">&#x2B61;</div>
-          <h2>ÉÏ´«Í¼Æ¬ÖÐ</h2>
-          <p>ÕýÔÚ½«ÕÕÆ¬ÉÏ´«ÖÁ·þÎñÆ÷..</p>
+          <h2>ä¸Šä¼ å›¾ç‰‡ä¸­</h2>
+          <p>æ­£åœ¨å°†ç…§ç‰‡ä¸Šä¼ è‡³æœåŠ¡å™¨..</p>
           <div className="loading-dots">
             <span></span><span></span><span></span>
           </div>
@@ -235,8 +236,8 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check">&#x2714;</div>
-          <h2>ÕÕÆ¬ÒÑÈ·ÈÏ</h2>
-          <p>ÕýÔÚÆô¶¯ AI ÃÀÑ§·ÖÎö...</p>
+          <h2>ç…§ç‰‡å·²ç¡®è®¤</h2>
+          <p>æ­£åœ¨å¯åŠ¨ AI ç¾Žå­¦åˆ†æž...</p>
           <div className="loading-dots">
             <span></span><span></span><span></span>
           </div>
@@ -250,11 +251,11 @@ const UploadPage = () => {
       <div className="upload-page">
         <div className="confirm-card">
           <div className="confirm-check failed-check">&#x2718;</div>
-          <h2>ÉÏ´«Ê§°Ü</h2>
-          <p>{error || "ÇëÖØÊÔ"}</p>
+          <h2>ä¸Šä¼ å¤±è´¥</h2>
+          <p>{error || "è¯·é‡è¯•"}</p>
           <div className="upload-actions" style={{ marginTop: 24 }}>
-            <button className="btn btn-primary" onClick={handleRetry}>ÖØÐÂÉÏ´«</button>
-            <button className="btn btn-ghost" onClick={handleCancel}>·µ»ØÊ×Ò³</button>
+            <button className="btn btn-primary" onClick={handleRetry}>é‡æ–°ä¸Šä¼ </button>
+            <button className="btn btn-ghost" onClick={handleCancel}>è¿”å›žé¦–é¡µ</button>
           </div>
         </div>
       </div>

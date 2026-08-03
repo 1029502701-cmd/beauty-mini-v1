@@ -1,4 +1,4 @@
-﻿import type { Env } from '../../../types';
+import type { Env } from '../../../types';
 
 export async function onRequestGet(context: {
   env: Env;
@@ -54,10 +54,10 @@ export async function onRequestGet(context: {
     }
     const resolvedUserId = JSON.parse(sessionRaw).userId;
 
-    // Get token balance
+    // Get token balance — use resolvedUserId (not sessionId)
     const balanceRow = await env.D1_DB.prepare(
       "SELECT balance FROM user_tokens WHERE user_id = ? LIMIT 1"
-    ).first<{ balance: number }>(userId);
+    ).first<{ balance: number }>(resolvedUserId);
     const balance = balanceRow ? balanceRow.balance : 0;
 
     // Report owner validation: current session user can only query their own reports

@@ -101,3 +101,11 @@
 状态：Completed
 日期：2026-08-02
 说明：增加上传前人脸存在性检测，防止任意图片进入AI分析流程。核心变更：1) beauty-validation.ts 新增 FACE_NOT_DETECTED 校验码；2) ImageValidator.ts 新增 detectFace() 方法，基于 wx.createImageBitmap + Canvas 像素级肤色检测（HSV 空间，中心区域肤色像素占比≥8%判定为有人脸），无 canvas 环境降级为通过；3) upload/index.tsx 在 validateImage 通过后新增 detectFace 步骤，hasFace=false 时阻止上传并显示"未检测到人脸，请上传正面清晰人像照片"。数据流：chooseImage -> ImageValidator.validateImage -> ImageValidator.detectFace -> (hasFace=true) -> upload -> analyze。禁止修改：FaceAnalysisEngine/ReportGenerator/推荐/Token/支付/cloudflare-worker。
+---
+
+## Task-BeautyMini-048 结果页报告查询 404 修复
+状态：Completed
+日期：2026-08-03
+说明：修复微信小程序真机测试中「结果页获取报告 404」问题。核心变更：1) api.ts 新增 getReport/getReports 导出函数，修复 result/reports 页面因缺少导出导致的运行时 TypeError；2) report/query.ts 修复余额查询使用 sessionId（userId变量实为session ID）改为 resolvedUserId，确保余额校验正确；3) upload/index.tsx 修复导航 URL 中 uploadId 和 imageUrl 参数缺少 & 连接符，导致 analyzing 页面 imageUrl 参数解析失败。数据流验证：upload(uploadId+imageUrl) -> analyzing(reportService.createAndQueryReport) -> D1 beauty_reports -> result页面(getReport查询)。验证：npx tsc --noEmit 无新增错误（预存 2651 行错误为 node_modules 缺失/Taro/wx 类型问题）。禁止修改：ReportGenerator/Token/推荐/支付/三个报告等级逻辑。
+---
+

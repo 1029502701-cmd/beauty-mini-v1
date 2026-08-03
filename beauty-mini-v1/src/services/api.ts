@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Unified API Request Wrapper
  *
  * Provides request() supporting GET/POST with automatic API_BASE prefix,
@@ -82,6 +82,49 @@ export function uploadFile<T = unknown>(
       }
     });
   });
+}
+
+/**
+ * Get a single report by reportId
+ * @param reportId - The report ID to fetch
+ */
+export async function getReport(reportId: string): Promise<{ success: boolean; report?: Record<string, unknown>; error?: string }> {
+  try {
+    const response = await apiClient.get<{ report: Record<string, unknown>; balance: number }>(
+      "/api/beauty/report/query?id=" + encodeURIComponent(reportId)
+    );
+    if (response.success && response.data) {
+      const raw = response.data.report;
+      const reportLevel = (raw.level as string) || "first-look";
+      const { level: _ignored, ...rest } = raw;
+      const report = {
+        level: reportLevel,
+        ...(_ignored as unknown as Record<string, unknown>),
+        ...(rest as Record<string, unknown>),
+      };
+      return { success: true, report };
+    }
+    return { success: false, error: response.error || "报告查询失败" };
+  } catch {
+    return { success: false, error: "报告查询失败" };
+  }
+}
+
+/**
+ * Get list of reports for the current user
+ */
+export async function getReports(): Promise<{ success: boolean; reports?: Array<{ reportId: string; reportCode: string; createdAt: string; styleName: string }>; error?: string }> {
+  try {
+    const response = await apiClient.get<{ reports: Array<{ reportId: string; reportCode: string; createdAt: string; styleName: string }> }>(
+      "/api/profile"
+    );
+    if (response.success && response.data && response.data.reports) {
+      return { success: true, reports: response.data.reports };
+    }
+    return { success: false, error: response.error || "报告列表查询失败" };
+  } catch {
+    return { success: false, error: "报告列表查询失败" };
+  }
 }
 
 export const api = {
