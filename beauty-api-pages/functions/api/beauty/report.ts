@@ -1,4 +1,4 @@
-ï»¿import type { Env } from '../../functions/types';
+import type { Env } from '../../types';
 import { ReportGenerator } from '../../../modules/beauty-ai/report-engine/generator';
 import { BeautyReportRepository } from '../../../modules/beauty-ai/report-repository/repository';
 import { ReportAccessService } from '../../../modules/beauty-ai/permission/report-access-service';
@@ -51,7 +51,7 @@ export async function onRequestPost(context: {
 
   if (!faceMetrics) {
     return new Response(
-      JSON.stringify({ error: 'faceMetrics is required â€” run /api/beauty/analyze first' }),
+      JSON.stringify({ error: 'faceMetrics is required ¡ª run /api/beauty/analyze first' }),
       { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }

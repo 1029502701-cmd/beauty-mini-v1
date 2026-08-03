@@ -1,5 +1,5 @@
-﻿import type { Env } from '../../../functions/types';
-import { ReportAccessService } from '../../../modules/beauty-ai/permission/report-access-service';
+import type { Env } from '../../../../types';
+import { ReportAccessService } from '../../../../modules/beauty-ai/permission/report-access-service';
 
 export async function onRequestGet(context: {
   env: Env;
