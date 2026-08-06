@@ -1,4 +1,4 @@
-// ============================================
+﻿// ============================================
 // ReportGenerator V2 – Rule-based beauty report generation
 // Migrated from cloudflare-worker/lib/reportGenerator.ts (TASK-Beauty-V8-Migrate-004)
 //

@@ -1,4 +1,4 @@
-// ============================================
+﻿// ============================================
 // FACE_SHAPE_RULES & FACE_INSIGHT_RULES
 // Migrated from cloudflare-worker/lib/reportGenerator.ts (TASK-Beauty-V8-Migrate-004)
 // ============================================

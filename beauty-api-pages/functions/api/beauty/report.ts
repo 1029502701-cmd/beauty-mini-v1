@@ -1,10 +1,11 @@
-import type { Env } from '../../types';
+Ôªøimport type { Env } from '../../types';
 import { ReportGenerator } from '../../../modules/beauty-ai/report-engine/generator';
 import { BeautyReportRepository } from '../../../modules/beauty-ai/report-repository/repository';
 import { ReportAccessService, DAILY_LIMITS } from '../../../modules/beauty-ai/permission/report-access-service';
 import { TokenService } from '../../../modules/token/token-service';
 import type { ReportLevel } from '../../../modules/beauty-ai/report-engine/types';
 import { extractSessionId } from '../../../lib/session';
+import type { BeautyFaceMetrics } from '../../../modules/beauty-ai/types/beauty';
 
 interface AnalyzeRequest {
   analysisId?: string;
@@ -45,13 +46,22 @@ export async function onRequestPost(context: {
 
   const reportLevel: ReportLevel = body.reportLevel ?? 'first-look';
 
-  const faceMetrics = body.faceMetrics
-    ? (body.faceMetrics as unknown as import('../../../modules/beauty-ai/face-types').FaceMetrics)
-    : null;
+  // Build complete BeautyFaceMetrics from analyze response (FaceMetrics)
+  const raw = (body.faceMetrics || {}) as Record<string, unknown>;
+  const faceMetrics: BeautyFaceMetrics = {
+    faceShape: String(raw.faceShape || raw.faceType || 'ÈπÖËõãËÑ∏'),
+    faceRatio: Number(raw.faceRatio ?? 0.8),
+    eyeType: String(raw.eyeType || 'ÊùèÁúº'),
+    eyeSize: Number(raw.eyeSize ?? 0),
+    noseRatio: Number(raw.noseRatio ?? 0.4),
+    lipRatio: Number(raw.lipRatio ?? 0.3),
+    jawType: String(raw.jawType || 'Ê†áÂáÜÈ¢åÂûã'),
+    skinTone: String(raw.skinTone || '‰∏≠ÊÄß'),
+  };
 
-  if (!faceMetrics) {
+  if (!faceMetrics.faceShape) {
     return new Response(
-      JSON.stringify({ error: 'faceMetrics is required and run /api/beauty/analyze first' }),
+      JSON.stringify({ error: 'faceMetrics.faceShape is required' }),
       { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
@@ -61,24 +71,15 @@ export async function onRequestPost(context: {
 
     if (!sessionId) {
       return new Response(
-        JSON.stringify({
-          success: false,
-          status: "AUTH_REQUIRED",
-          error: 'Authentication required'
-        }),
+        JSON.stringify({ success: false, status: "AUTH_REQUIRED", error: 'Authentication required' }),
         { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
 
     const sessionRaw = await env.USER_CACHE.get('session:' + sessionId);
-
     if (!sessionRaw) {
       return new Response(
-        JSON.stringify({
-          success: false,
-          status: "SESSION_EXPIRED",
-          error: 'Invalid or expired session'
-        }),
+        JSON.stringify({ success: false, status: "SESSION_EXPIRED", error: 'Invalid or expired session' }),
         { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
@@ -88,75 +89,42 @@ export async function onRequestPost(context: {
     const reportAccessService = new ReportAccessService(env.D1_DB);
     const tokenCost = reportLevel === 'beauty-pro' ? 1 : 0;
 
-    // »®œﬁºÏ≤È
     if (reportLevel === 'beauty-pro') {
       const balance = await tokenService.getBalance(resolvedUserId);
-
       if (balance < 1) {
         return new Response(
-          JSON.stringify({
-            success: false,
-            status: "INSUFFICIENT_TOKEN",
-            error: 'Token≤ª◊„£¨«ÎΩ‚À¯∫ÛºÃ–¯',
-            balance
-          }),
+          JSON.stringify({ success: false, status: "INSUFFICIENT_TOKEN", error: 'Token‰∏çË∂≥ÔºåËØ∑ÂÖàËß£ÈîÅ', balance }),
           { status: 403, headers: { "Content-Type": "application/json" } }
         );
       }
-
-      // beauty-pro£∫œ»ø€≥˝ Token£¨»∑±£ø€≥˝ ß∞‹ ±≤ª…˙≥…»®œﬁ
-      await tokenService.consume({
-        userId: resolvedUserId,
-        amount: 1,
-        description: 'beauty-pro report generation',
-      });
+      await tokenService.consume({ userId: resolvedUserId, amount: 1, description: 'beauty-pro report generation' });
       console.log('[beauty/report] Consumed 1 token:', resolvedUserId);
-
     } else {
-      const dailyLimit =
-        DAILY_LIMITS[reportLevel as keyof typeof DAILY_LIMITS];
-
-      const todayCount =
-        await reportAccessService.getDailyAccessCount(
-          resolvedUserId,
-          reportLevel
-        );
-
+      const dailyLimit = DAILY_LIMITS[reportLevel as keyof typeof DAILY_LIMITS];
+      const todayCount = await reportAccessService.getDailyAccessCount(resolvedUserId, reportLevel);
       if (todayCount >= dailyLimit) {
         return new Response(
-          JSON.stringify({
-            success: false,
-            status: "DAILY_LIMIT_REACHED",
-            error: 'ΩÒÃÏ¥Œ ˝“—”√ÕÍ£¨«Î√˜ÃÏ‘Ÿ ‘',
-            dailyLimit,
-            todayCount
-          }),
+          JSON.stringify({ success: false, status: "DAILY_LIMIT_REACHED", error: '‰ªäÊó•Ê¨°Êï∞Â∑≤Áî®ÂÆåÔºåËØ∑ÊòéÂ§©ÂÜçËØï', dailyLimit, todayCount }),
           { status: 403, headers: { "Content-Type": "application/json" } }
         );
       }
     }
 
-    // …˙≥…±®∏Ê
     const generator = new ReportGenerator();
-
     const report = await generator.generateV2(
       body.analysisId,
-      faceMetrics as unknown as import('../../../modules/beauty-ai/types/beauty').BeautyFaceMetrics,
+      faceMetrics,
       undefined,
       reportLevel,
-      body.decisions
-        ? {
-            style: body.decisions.style || "natural",
-            occasion: body.decisions.occasion || "daily",
-            tolerance: body.decisions.tolerance || "normal",
-            submittedAt: new Date().toISOString(),
-          }
-        : undefined,
+      body.decisions ? {
+        style: body.decisions.style || "natural",
+        occasion: body.decisions.occasion || "daily",
+        tolerance: body.decisions.tolerance || "normal",
+        submittedAt: new Date().toISOString(),
+      } : undefined,
     );
 
-    // ±£¥Ê±®∏Ê
     const repo = new BeautyReportRepository(env.D1_DB);
-
     const decisionAnswersJson = body.decisions
       ? JSON.stringify({
           style: body.decisions.style || "natural",
@@ -176,84 +144,30 @@ export async function onRequestPost(context: {
       decisionAnswersJson,
     });
 
-    // º«¬º report_access
-    const accessResult =
-      await (
-        reportLevel === 'beauty-pro'
-          ? reportAccessService.recordAccess(
-              resolvedUserId,
-              result.id,
-              reportLevel
-            )
-          : reportAccessService.grantReportAccess(
-              resolvedUserId,
-              result.id,
-              reportLevel
-            )
-      );
+    const accessResult = reportLevel === 'beauty-pro'
+      ? await reportAccessService.recordAccess(resolvedUserId, result.id, reportLevel)
+      : await reportAccessService.grantReportAccess(resolvedUserId, result.id, reportLevel);
 
     if (!accessResult.success) {
-      console.error(
-        '[beauty/report] Failed to record report_access:',
-        accessResult.error
-      );
+      console.error('[beauty/report] Failed to record report_access:', accessResult.error);
       return new Response(
-        JSON.stringify({
-          success: false,
-          status: "ACCESS_FAILED",
-          error: accessResult.error || 'Failed to record access'
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
+        JSON.stringify({ success: false, status: "ACCESS_FAILED", error: accessResult.error || 'Failed to record access' }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    console.log(
-      '[beauty/report] Persisted V2 report:',
-      result.id,
-      'level:',
-      reportLevel,
-      'access:',
-      accessResult.alreadyUnlocked
-        ? 'already unlocked'
-        : 'new'
-    );
+    console.log('[beauty/report] Saved report:', result.id, 'level:', reportLevel);
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        status: "REPORT_GENERATED",
-        report,
-        reportId: result.id,
-        level: reportLevel,
-        tokenCost
-      }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
+      JSON.stringify({ success: true, status: "REPORT_GENERATED", report, reportId: result.id, level: reportLevel, tokenCost }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
     );
-
   } catch (err) {
     console.error('[beauty/report] Error:', err);
+    console.error('[beauty/report] Stack:', err instanceof Error ? err.stack : String(err));
     return new Response(
-      JSON.stringify({
-        success: false,
-        status: "SERVER_ERROR",
-        error: '±®∏Ê…˙≥… ß∞‹£¨«Î÷ÿ ‘'
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
+      JSON.stringify({ success: false, status: "SERVER_ERROR", error: 'ÁîüÊàêÊä•ÂëäÂ§±Ë¥•ÔºåËØ∑Á®çÂêéÈáçËØï' }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }

@@ -1,8 +1,8 @@
-import type { FaceDetector, FaceMetrics } from './face-types';
+﻿import type { FaceDetector, FaceMetrics } from './face-types';
+import type { BeautyFaceMetrics } from './types/beauty';
 
 /**
  * Default detector that returns deterministic placeholder metrics.
- * Swap by injecting a real FaceDetector into FaceAnalysisEngine.
  */
 class PlaceholderDetector implements FaceDetector {
   async detect(_image: Uint8Array): Promise<FaceMetrics> {
@@ -15,16 +15,11 @@ class PlaceholderDetector implements FaceDetector {
       eyeWidthRight: 24,
       noseWidth: 18,
       lipWidth: 30,
-      faceType: 'oval',
+      faceType: '鹅蛋脸',
     };
   }
 }
 
-/**
- * Beauty face-analysis engine.
- * Accepts an image buffer and returns FaceMetrics.
- * Decouples from any specific AI service via the FaceDetector plugin.
- */
 export class FaceAnalysisEngine {
   private detector: FaceDetector;
 
@@ -32,10 +27,25 @@ export class FaceAnalysisEngine {
     this.detector = detector ?? new PlaceholderDetector();
   }
 
-  /**
-   * Analyze facial metrics from an image buffer.
-   */
   async analyze(image: Uint8Array): Promise<FaceMetrics> {
     return this.detector.detect(image);
+  }
+
+  /**
+   * Analyze and return full BeautyFaceMetrics with all required fields.
+   * Uses faceType from FaceMetrics and fills in defaults for missing fields.
+   */
+  async analyzeBeauty(image: Uint8Array): Promise<BeautyFaceMetrics> {
+    const metrics = await this.analyze(image);
+    return {
+      faceShape: metrics.faceType || '鹅蛋脸',
+      faceRatio: metrics.faceRatio,
+      eyeType: '杏眼',
+      eyeSize: 0,
+      noseRatio: 0.4,
+      lipRatio: 0.3,
+      jawType: '标准颌型',
+      skinTone: '中性',
+    };
   }
 }
