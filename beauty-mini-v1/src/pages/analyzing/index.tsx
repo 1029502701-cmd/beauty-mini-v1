@@ -65,20 +65,15 @@ if (!analyzeResult.success) {
 throw new Error(analyzeResult.error || "AI分析失败");
 }
 // Generate report
-const reportResult = await reportService.createAndQueryReport(
-uploadId,
-imageKey,
-"beauty-pro"
-);
+const reportResult = await reportService.createAndQueryReport(uploadId, imageKey, "first-look");
 if (!reportResult.success) {
 throw new Error(reportResult.error || "报告生成失败");
 }
 const generatedReportId = reportResult.reportId || uploadId;
 setReportId(generatedReportId);
-setIsComplete(true);
-setIsProcessing(false);
+setIsComplete(true); setIsProcessing(false);
 setTimeout(() => {
-navigate({ url: "/pages/decision?uploadId=" + encodeURIComponent(uploadId) + "&imageUrl=" + encodeURIComponent(imageKey) + "&reportLevel=beauty-pro" });
+const resultReportId = generatedReportId || uploadId; navigate({ url: "/pages/result?reportId=" + encodeURIComponent(resultReportId) });
 }, 800);
 } catch (error) {
 console.error("Analysis error:", error);
