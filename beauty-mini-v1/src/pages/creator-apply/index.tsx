@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import { navigate } from "@taro/router";
+import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
 import type { CreatorApplyRequest } from "@/types";
 import { creatorService } from "@/services/creator";
@@ -64,146 +65,146 @@ const CreatorApplyPage = () => {
   // Step 1: Face upload
   if (step === 1) {
     return (
-      <div className="creator-apply-page">
-        <div className="step-header">
-          <h2>达人申请</h2>
-          <p>步骤 1/4：上传素颜照片</p>
-        </div>
-        <div className="upload-section">
-          <div className="upload-area" onClick={() => handleImageUpload("face")}>
+      <View className="creator-apply-page">
+        <View className="step-header">
+          <Text>达人申请</Text>
+          <Text>步骤 1/4：上传素颜照片</Text>
+        </View>
+        <View className="upload-section">
+          <View className="upload-area" onClick={() => handleImageUpload("face")}>
             {faceImage ? (
-              <img src={faceImage} alt="素颜照" className="uploaded-image" />
+              <Image src={faceImage} alt="素颜照" className="uploaded-image" />
             ) : (
-              <div className="upload-placeholder">
-                <div className="upload-icon">📷</div>
-                <p>点击上传素颜照片（无化妆）</p>
-              </div>
+              <View className="upload-placeholder">
+                <View className="upload-icon">📷</View>
+                <Text>点击上传素颜照片（无化妆）</Text>
+              </View>
             )}
-          </div>
-          <button className="next-btn" onClick={handleNext}>
+          </View>
+          <Button className="next-btn" onClick={handleNext}>
             下一步
-          </button>
-        </div>
-      </div>
+          </Button>
+        </View>
+      </View>
     );
   }
 
   // Step 2: Work upload
   if (step === 2) {
     return (
-      <div className="creator-apply-page">
-        <div className="step-header">
-          <h2>达人申请</h2>
-          <p>步骤 2/4：上传作品照片</p>
-        </div>
-        <div className="upload-section">
-          <div className="works-list">
+      <View className="creator-apply-page">
+        <View className="step-header">
+          <Text>达人申请</Text>
+          <Text>步骤 2/4：上传作品照片</Text>
+        </View>
+        <View className="upload-section">
+          <View className="works-list">
             {workImages.map((img, idx) => (
-              <div key={idx} className="work-item">
-                <img src={img} alt={`作品${idx + 1}`} />
-              </div>
+              <View key={idx} className="work-item">
+                <Image src={img} alt={`作品${idx + 1}`} />
+              </View>
             ))}
-          </div>
-          <div className="upload-area" onClick={() => handleImageUpload("works")}>
-            <div className="upload-placeholder">
-              <div className="upload-icon">➕</div>
-              <p>添加作品照片</p>
-            </div>
-          </div>
-          <div className="button-group">
-            <button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</button>
-            <button className="next-btn" onClick={handleNext}>下一步</button>
-          </div>
-        </div>
-      </div>
+          </View>
+          <View className="upload-area" onClick={() => handleImageUpload("works")}>
+            <View className="upload-placeholder">
+              <View className="upload-icon">➕</View>
+              <Text>添加作品照片</Text>
+            </View>
+          </View>
+          <View className="button-group">
+            <Button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</Button>
+            <Button className="next-btn" onClick={handleNext}>下一步</Button>
+          </View>
+        </View>
+      </View>
     );
   }
 
   // Step 3: Form
   if (step === 3) {
     return (
-      <div className="creator-apply-page">
-        <div className="step-header">
-          <h2>达人申请</h2>
-          <p>步骤 3/4：填写达人资料</p>
-        </div>
-        <div className="form-section">
-          <div className="form-group">
-            <label>昵称</label>
-            <input
+      <View className="creator-apply-page">
+        <View className="step-header">
+          <Text>达人申请</Text>
+          <Text>步骤 3/4：填写达人资料</Text>
+        </View>
+        <View className="form-section">
+          <View className="form-group">
+            <Text>昵称</Text>
+            <Input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="请输入您的昵称"
             />
-          </div>
-          <div className="form-group">
-            <label>头像</label>
-            <input
+          </View>
+          <View className="form-group">
+            <Text>头像</Text>
+            <Input
               type="url"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
               placeholder="头像图片URL"
             />
-          </div>
-          <div className="form-group">
-            <label>平台</label>
+          </View>
+          <View className="form-group">
+            <Text>平台</Text>
             <select value={platform} onChange={(e) => setPlatform(e.target.value as any)}>
               <option value="xiaohongshu">小红书</option>
               <option value="douyin">抖音</option>
               <option value="weibo">微博</option>
               <option value="bilibili">B站</option>
             </select>
-          </div>
-          <div className="form-group">
-            <label>个人简介</label>
-            <textarea
+          </View>
+          <View className="form-group">
+            <Text>个人简介</Text>
+            <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="请简单介绍您自己"
             />
-          </div>
-          <div className="form-group">
-            <label>擅长风格（逗号分隔）</label>
-            <input
+          </View>
+          <View className="form-group">
+            <Text>擅长风格（逗号分隔）</Text>
+            <Input
               type="text"
               value={styleTags}
               onChange={(e) => setStyleTags(e.target.value)}
               placeholder="例如：清透自然,日系温柔,高级通勤"
             />
-          </div>
-          <div className="button-group">
-            <button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</button>
-            <button className="next-btn" onClick={handleNext}>下一步</button>
-          </div>
-        </div>
-      </div>
+          </View>
+          <View className="button-group">
+            <Button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</Button>
+            <Button className="next-btn" onClick={handleNext}>下一步</Button>
+          </View>
+        </View>
+      </View>
     );
   }
 
   // Step 4: Summary
   return (
-    <div className="creator-apply-page">
-      <div className="step-header">
-        <h2>达人申请</h2>
-        <p>步骤 4/4：确认提交</p>
-      </div>
-      <div className="summary-section">
-        <div className="summary-item"><strong>昵称：</strong>{name}</div>
-        <div className="summary-item"><strong>平台：</strong>{platform}</div>
-        <div className="summary-item"><strong>简介：</strong>{description}</div>
-        <div className="summary-item"><strong>风格：</strong>{styleTags}</div>
-        <div className="summary-item"><strong>素颜照：</strong>已上传</div>
-        <div className="summary-item"><strong>作品：</strong>{workImages.length} 张</div>
-      </div>
-      <div className="button-group">
-        <button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</button>
-        <button className="submit-btn" onClick={handleSubmit} disabled={loading}>
+    <View className="creator-apply-page">
+      <View className="step-header">
+        <Text>达人申请</Text>
+        <Text>步骤 4/4：确认提交</Text>
+      </View>
+      <View className="summary-section">
+        <View className="summary-item"><strong>昵称：</strong>{name}</View>
+        <View className="summary-item"><strong>平台：</strong>{platform}</View>
+        <View className="summary-item"><strong>简介：</strong>{description}</View>
+        <View className="summary-item"><strong>风格：</strong>{styleTags}</View>
+        <View className="summary-item"><strong>素颜照：</strong>已上传</View>
+        <View className="summary-item"><strong>作品：</strong>{workImages.length} 张</View>
+      </View>
+      <View className="button-group">
+        <Button className="prev-btn" onClick={() => setStep(step - 1)}>上一步</Button>
+        <Button className="submit-btn" onClick={handleSubmit} disabled={loading}>
           {loading ? "提交中..." : "提交审核"}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </View>
+    </View>
   );
 };
 

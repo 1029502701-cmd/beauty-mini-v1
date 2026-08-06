@@ -13,23 +13,11 @@
         "pages/reports/index",
         "pages/purchase/index"
     ],
-    "requiredPrivateInfos": [
-        "chooseImage",
-        "chooseMedia"
-    ],
     "style": "v2",
     "window": {
         "navigationBarTitleText": "AI 美妆分析",
         "navigationBarBackgroundColor": "#FFFAF7",
         "backgroundTextStyle": "dark",
         "navigationBarTextStyle": "black"
-    },
-    "permission": {
-        "scope.camera": {
-            "desc": "用于拍照上传进行AI分析"
-        },
-        "scope.writePhotosAlbum": {
-            "desc": "用于保存分析结果到相册"
-        }
     }
 }

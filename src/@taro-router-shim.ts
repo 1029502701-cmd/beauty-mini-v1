@@ -1,0 +1,3 @@
+export { createBrowserHistory, createHashHistory, createMpaHistory, createMultiRouter, createRouter, getCurrentPages, handleAppMount, handleAppMountWithTabbar, history, isDingTalk, isWeixin, navigateBack, navigateTo, prependBasename, reLaunch, redirectTo, routesAlias, setHistory, setHistoryMode, setMpaTitle, setNavigationBarLoading, setNavigationBarStyle, setTitle, switchTab } from '@tarojs/router';
+export const navigate = navigateTo;
+export function useQueryParams() { return history ? history.search : ''; }

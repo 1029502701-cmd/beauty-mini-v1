@@ -1,0 +1,31 @@
+.beauty-profile-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.beauty-profile-card .card-header { text-align: center; margin-bottom: 20px; }
+.beauty-profile-card .card-header h3 { color: #667eea; font-size: 20px; margin: 0 0 10px 0; }
+.beauty-profile-card .report-code { color: #999; font-size: 12px; }
+
+.beauty-profile-card .makeup-style-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.beauty-profile-card .makeup-style-section .style-label { font-size: 14px; opacity: 0.9; margin-bottom: 5px; }
+.beauty-profile-card .makeup-style-section .style-value { font-size: 22px; font-weight: bold; margin-bottom: 8px; }
+.beauty-profile-card .makeup-style-section .style-description { font-size: 13px; opacity: 0.95; }
+
+.beauty-profile-card .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
+
+.beauty-profile-card .advantage-section h4 { color: #667eea; font-size: 16px; margin: 0 0 15px 0; }
+.beauty-profile-card .advantages-list { list-style: none; padding: 0; margin: 0; }
+.beauty-profile-card .advantage-item { display: flex; align-items: center; padding: 8px 0; }
+.beauty-profile-card .advantage-icon { color: #667eea; font-size: 16px; margin-right: 8px; }
+.beauty-profile-card .advantage-text { color: #333; font-size: 14px; line-height: 1.5; }

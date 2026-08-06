@@ -201,3 +201,14 @@
   justify-content: center;
   line-height: normal;
 }
+
+/* Upgrade CTA Section */
+.upgrade-cta-section { background: white; border-radius: 20px; padding: 24px 20px; margin: 16px 20px; box-shadow: 0 2px 12px rgba(200,160,170,0.1); border: 1px solid rgba(248,220,225,0.6); }
+.upgrade-cta-title { font-size: 17px; font-weight: 700; color: #2D2D2D; margin: 0 0 6px; }
+.upgrade-cta-desc { font-size: 13px; color: #A08080; margin: 0 0 16px; }
+.upgrade-cta-btn { background: linear-gradient(135deg, #F4A0B8 0%, #E8899E 100%); color: white; border: none; border-radius: 30px; padding: 14px 32px; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(232,137,158,0.3); width: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; }
+.upgrade-cta-btn:active { transform: scale(0.97); }
+.upgrade-cta-btn:disabled { opacity: 0.6; }
+.upgrade-cta-btn--pro { background: linear-gradient(135deg, #D4A0E0 0%, #B070C0 100%); box-shadow: 0 4px 16px rgba(176,112,192,0.3); }
+.upgrade-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.upgrade-feature { font-size: 12px; padding: 4px 12px; border-radius: 12px; background: #F8F0FA; color: #8B5FBF; font-weight: 500; }

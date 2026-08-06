@@ -1,49 +1,38 @@
-﻿import { useEffect } from "react";
-import { navigate } from "@taro/router";
+import React from "react";
+import { useLaunch } from "@tarojs/taro";
 import userService from "./services/user-service";
-import { isWeChatMiniProgram } from "./utils/storage";
 
-const App = () => {
-  useEffect(() => {
-    async function initUser() {
-      try {
-        const user = await userService.initializeGuestUser();
-        // [debug removed]
-      } catch (err) {
-        console.error("[App] Failed to initialize user:", err);
-      }
-    }
-    initUser();
-  }, []);
+let initPromise: Promise<void> | null = null;
 
-  const componentDidShow = () => {
-    // [debug removed]
-  };
+const initGuestUser = async () => {
+  if (!initPromise) {
+    initPromise = userService
+      .initializeGuestUser()
+      .then(() => {
+        console.log("[App] guest user initialized");
+      })
+      .catch((err) => {
+        console.error("[App] init user failed:", err);
+        initPromise = null;
+        throw err;
+      });
+  }
 
-  const pageList = [
-    "/pages/home/index",
-    "/pages/upload/index",
-    "/pages/analyzing/index",
-    "/pages/result/index",
-    "/pages/profile/index",
-    "/pages/token/index"
-  ];
-
-  return (
-    <div className="app">
-      {isWeChatMiniProgram() ? (
-        <div style={{ padding: "20px", textAlign: "center" }}>
-          <h1>AI 美妆 V8</h1>
-          <p>正在初始化用户身份...</p>
-        </div>
-      ) : (
-        <div style={{ padding: "20px" }}>
-          <h1>AI 美妆 V8 (H5模式)</h1>
-          <button onClick={() => navigate("/pages/home")}>进入首页</button>
-        </div>
-      )}
-    </div>
-  );
+  return initPromise;
 };
+
+
+const App = ({ children }: { children?: React.ReactNode }) => {
+
+  useLaunch(() => {
+    initGuestUser().catch(() => {
+      // 防止启动阶段阻断小程序
+    });
+  });
+
+
+  return children;
+};
+
 
 export default App;

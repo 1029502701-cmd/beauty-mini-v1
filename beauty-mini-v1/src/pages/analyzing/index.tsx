@@ -1,5 +1,6 @@
-﻿import React, { useState, useCallback, useEffect } from "react";
-import { navigate, useQueryParams } from "@taro/router";
+﻿import Taro, { useLoad } from "@tarojs/taro";
+import React, { useState, useCallback, useEffect } from "react";
+import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
 import { analyzeService } from "@/services/analyze";
 import reportService from "@/services/report";
@@ -20,9 +21,20 @@ const STAGES: AnalysisStage[] = [
 { id: "stage6", title: "生成报告", subtitle: "正在为您整理专属美妆方案...", progress: 100, icon: "📊" },
 ];
 const Index = () => {
-const [queryParams] = useQueryParams();
-const [uploadId] = useState<string | null>(queryParams.uploadId || null);
-const [imageUrl] = useState<string | null>(queryParams.imageUrl || null);
+const [queryParams, setQueryParams] = useState<any>({});
+
+useLoad((options) => {
+  setQueryParams(options || {});
+});
+const [uploadId, setUploadId] = useState<string | null>(null);
+const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+useLoad((options) => {
+  const params = options || {};
+  console.log("[analyzing params]", params);
+  setUploadId(params.uploadId || null);
+  setImageUrl(params.imageUrl || null);
+});
 const [currentStage, setCurrentStage] = useState(0);
 const [progress, setProgress] = useState(0);
 const [isComplete, setIsComplete] = useState(false);
@@ -71,7 +83,14 @@ navigate({ url: "/pages/decision?uploadId=" + encodeURIComponent(uploadId) + "&i
 } catch (error) {
 console.error("Analysis error:", error);
 const errMsg = error instanceof Error ? error.message : "AI分析失败，请重新尝试";
-setAnalysisError(errMsg);
+// Handle business status codes
+    if (errMsg.includes('DAILY_LIMIT_REACHED') || errMsg.includes('今天次数已用完')) {
+      setAnalysisError('今天次数已用完，请明天再试');
+    } else if (errMsg.includes('INSUFFICIENT_TOKEN') || errMsg.includes('Token不足')) {
+      setAnalysisError('Token不足，请解锁后继续');
+    } else {
+      setAnalysisError(errMsg);
+    }
 setIsProcessing(false);
 setIsComplete(false);
 }
@@ -88,41 +107,41 @@ performFullAnalysis();
 const stage = STAGES[currentStage] || STAGES[0];
 if (analysisError && !isProcessing) {
 return (
-<div className="analyzing-page analyzing-error">
-<div className="error-content">
-<div className="error-icon">😔</div>
-<h2>分析失败</h2>
-<p className="error-message">{analysisError}</p>
-<div className="error-actions">
-<button className="retry-btn" onClick={handleRetry}>重新分析</button>
-<button className="back-btn" onClick={() => navigate("/pages/home")}>返回首页</button>
-</div>
-</div>
-</div>
+<View className="analyzing-page analyzing-error">
+<View className="error-content">
+<View className="error-icon">😔</View>
+<Text>分析失败</Text>
+<Text className="error-message">{analysisError}</Text>
+<View className="error-actions">
+<Button className="retry-btn" onClick={handleRetry}>重新分析</Button>
+<Button className="back-btn" onClick={() => navigate("/pages/home")}>返回首页</Button>
+</View>
+</View>
+</View>
 );
 }
 return (
-<div className="analyzing-page">
-<div className="analyzing-header">
-<h1 className="analyzing-title">AI 美妆分析</h1>
-<p className="analyzing-subtitle">正在为您生成专属美妆方案</p>
-</div>
-<div className="scanning-animation">
-<div className="face-mask">
-<span className="face-icon">{stage.icon}</span>
-</div>
-</div>
-<div className="stage-display">
-<h2 className="stage-title">{stage.title}</h2>
-<p className="stage-subtitle">{stage.subtitle}</p>
-</div>
-<div className="progress-container">
-<div className="progress-bar">
-<div className="progress-fill" style={{ width: progress + "%" }}></div>
-</div>
-<p className="progress-text">{Math.round(progress)}% · {stage.subtitle}</p>
-</div>
-</div>
+<View className="analyzing-page">
+<View className="analyzing-header">
+<Text className="analyzing-title">AI 美妆分析</Text>
+<Text className="analyzing-subtitle">正在为您生成专属美妆方案</Text>
+</View>
+<View className="scanning-animation">
+<View className="face-mask">
+<Text className="face-icon">{stage.icon}</Text>
+</View>
+</View>
+<View className="stage-display">
+<Text className="stage-title">{stage.title}</Text>
+<Text className="stage-subtitle">{stage.subtitle}</Text>
+</View>
+<View className="progress-container">
+<View className="progress-bar">
+<View className="progress-fill" style={{ width: progress + "%" }}></View>
+</View>
+<Text className="progress-text">{Math.round(progress)}% · {stage.subtitle}</Text>
+</View>
+</View>
 );
 };
 export default Index;

@@ -9,43 +9,43 @@ interface ProductCardProps {
 const ProductCard = ({ products }: ProductCardProps) => {
   const getCategoryName = (category: string): string => {
     switch (category) {
-      case "brow": return "Ã¼²¿";
-      case "eye": return "ÑÛ²¿";
-      case "lip": return "´½²¿";
-      case "skincare": return "»¤·ô";
+      case "brow": return "Ã¼ï¿½ï¿½";
+      case "eye": return "ï¿½Û²ï¿½";
+      case "lip": return "ï¿½ï¿½ï¿½ï¿½";
+      case "skincare": return "ï¿½ï¿½ï¿½ï¿½";
       default: return category;
     }
   };
 
   const formatPrice = (price: number): string => {
-    return "£¤" + price.toFixed(2);
+    return "ï¿½ï¿½" + price.toFixed(2);
   };
 
   return (
-    <div className="product-card">
-      <h3 className="card-title">¾«Ñ¡ÍÆ¼ö</h3>
-      <div className="products-grid">
+    <View className="product-card">
+      <Text className="card-title">ï¿½ï¿½Ñ¡ï¿½Æ¼ï¿½</Text>
+      <View className="products-grid">
         {products.map((product) => (
-          <div key={product.id} className="product-item">
+          <View key={product.id} className="product-item">
             {product.image && (
-              <div className="product-image">
+              <View className="product-image">
                 <img src={product.image} alt={product.name} />
-              </div>
+              </View>
             )}
-            <div className="product-info">
-              <div className="product-name">{product.name}</div>
-              <div className="product-brand">Æ·ÅÆ£º{product.brand}</div>
-              <div className="product-category">·ÖÀà£º{getCategoryName(product.category)}</div>
-              <div className="product-price">{formatPrice(product.price)}</div>
-              <div className="product-match-reason">
-                <span className="reason-label">Æ¥ÅäÔ­Òò£º</span>
-                <span className="reason-value">{product.reason}</span>
-              </div>
-            </div>
-          </div>
+            <View className="product-info">
+              <View className="product-name">{product.name}</View>
+              <View className="product-brand">Æ·ï¿½Æ£ï¿½{product.brand}</View>
+              <View className="product-category">ï¿½ï¿½ï¿½à£º{getCategoryName(product.category)}</View>
+              <View className="product-price">{formatPrice(product.price)}</View>
+              <View className="product-match-reason">
+                <Text className="reason-label">Æ¥ï¿½ï¿½Ô­ï¿½ï¿½</Text>
+                <Text className="reason-value">{product.reason}</Text>
+              </View>
+            </View>
+          </View>
         ))}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 };
 

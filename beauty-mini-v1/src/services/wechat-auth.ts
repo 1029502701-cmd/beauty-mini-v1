@@ -4,7 +4,7 @@
  *
  * Flow:
  * 1. wx.login() -> obtains temporary code
- * 2. POST /api/wechat-login with { code } -> server exchanges code2session
+ * 2. POST /api/wechat-login with { code, guestUserId, guestId, sessionId } -> server exchanges code2session
  * 3. Server returns sessionId (stored in userService)
  * 4. All subsequent API calls carry X-Session-Id header
  */
@@ -26,9 +26,10 @@ interface ServerLoginResult {
   isGuest: boolean;
   merged?: boolean;
   error?: string;
+  status?: string;
 }
 
-const SESSION_STORAGE_KEY = "beauty_session_id";
+const SESSION_STORAGE_KEY = "sessionId";
 const SERVER_LOGIN_CODE_TTL_MS = 5 * 60 * 1000;
 
 class WechatAuthService {
@@ -36,25 +37,58 @@ class WechatAuthService {
   private codeObtainedAt = 0;
   private serverSessionId: string | null = null;
 
-  async login(): Promise<WechatLoginResult> {
+    async login(): Promise<WechatLoginResult> {
     if (typeof wx === "undefined" || typeof wx.login !== "function") {
-      return { success: false, error: "当前环境不支持微信登录" };
+      return {
+        success: false,
+        error: "当前环境不支持微信登录"
+      };
     }
+
     return new Promise<WechatLoginResult>((resolve) => {
+
       wx.login({
+
         success: (res) => {
+
+          console.log("[wx.login success]", res);
+
           if (res.code && res.code.length > 0) {
+
             this.wechatCode = res.code;
             this.codeObtainedAt = Date.now();
-            resolve({ success: true, code: res.code });
+
+            resolve({
+              success: true,
+              code: res.code
+            });
+
           } else {
-            resolve({ success: false, error: "微信登录失败：未获取到 code" });
+
+            console.error("[wx.login no code]", res);
+
+            resolve({
+              success: false,
+              error: "微信没有返回code"
+            });
+
           }
+
         },
+
         fail: (err) => {
-          resolve({ success: false, error: this.convertWechatError(err.errMsg || "") });
+
+          console.error("[wx.login fail]", err);
+
+          resolve({
+            success: false,
+            error: err.errMsg
+          });
+
         }
+
       });
+
     });
   }
 
@@ -72,33 +106,56 @@ class WechatAuthService {
   async performServerLogin(guestUserId?: string, guestId?: string): Promise<ServerLoginResult> {
     console.log("[WechatAuth] performServerLogin START, guestUserId:", guestUserId, "guestId:", guestId);
     const codeResult = await this.getValidLoginCode();
+    console.log(
+  "[DEBUG] wx login code:",
+  codeResult.code
+);
     console.log("[WechatAuth] login code result:", codeResult.success, codeResult.code ? "code=" + codeResult.code.slice(0,8) + "..." : "no code", codeResult.error);
     if (!codeResult.success || !codeResult.code) {
       return { success: false, isGuest: true, error: codeResult.error };
     }
 
+    // Read existing sessionId from storage to enable server-side session merge
+    const existingSid = getStorage<string>(SESSION_STORAGE_KEY, null);
+    console.log("[WechatAuth] existing sessionId from storage:", existingSid ? existingSid.slice(0,8) + "..." : "null");
+
     try {
-      console.log("[WechatAuth] posting to /api/wechat-login with guestUserId:", guestUserId);
+      console.log("[WechatAuth] posting to /api/wechat-login with guestUserId:", guestUserId, "sessionId:", existingSid);
+      console.log("[wechat-login payload]", {
+  code: codeResult.code,
+  guestUserId,
+  guestId,
+  sessionId: existingSid
+});
       const response = await api.post("/api/wechat-login", {
         code: codeResult.code,
         guestUserId,
-        guestId
+        guestId,
+        sessionId: existingSid || undefined
       });
 
       if (response.success && response.data) {
         const data = response.data as {
+          status?: string;
           sessionId?: string;
           userId?: string;
           isGuest: boolean;
           merged?: boolean;
           message?: string;
         };
-        this.serverSessionId = data.sessionId || null;
-        console.log("[WechatAuth] serverSessionId:", this.serverSessionId ? this.serverSessionId.slice(0,8) + "..." : "null");
+
+        if (data.status !== "success" || !data.sessionId) {
+          console.error("[WechatAuth] login failed", response.data);
+          return { success: false, isGuest: true, error: data.message || "微信登录失败" };
+        }
+
+        this.serverSessionId = data.sessionId;
+        console.log("[WechatAuth] serverSessionId:", this.serverSessionId);
 
         if (this.serverSessionId) {
           setStorage(SESSION_STORAGE_KEY, this.serverSessionId);
           userService.setServerSessionId(this.serverSessionId);
+          console.log("[WechatAuth] session saved", this.serverSessionId);
         }
 
         return {
@@ -111,9 +168,10 @@ class WechatAuthService {
       }
 
       return { success: false, isGuest: true, error: response.error || "登录失败" };
-    } catch {
-      return { success: false, isGuest: true, error: "网络异常，请重试" };
-    }
+   } catch (e) {
+  console.error("[wechat-login catch]", e);
+  return { success: false, isGuest: true, error: "网络异常，请重试" };
+}
   }
 
   getServerSessionId(): string | null {

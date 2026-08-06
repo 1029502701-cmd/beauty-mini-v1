@@ -3,7 +3,7 @@ import { getStorage, setStorage, removeStorage, isWeChatMiniProgram } from "@/ut
 import wechatAuthService from "./wechat-auth";
 
 /** Session token stored in storage (set by wechat-login server response) */
-const SESSION_ID_KEY = "beauty_session_id";
+const SESSION_ID_KEY = "sessionId";
 
 class UserService {
   private readonly STORAGE_KEY = "beauty_user_session";
@@ -56,13 +56,10 @@ class UserService {
    */
   private async tryRestoreServerSession(session: GuestSession): Promise<void> {
     const existingSid = getStorage<string>(SESSION_ID_KEY, null);
-    console.log("[UserService] tryRestoreServerSession START, sessionId in storage:", existingSid ? "exists(" + existingSid.length + ")" : "null");
-    const sessionId = getStorage<string>(SESSION_ID_KEY, null);
-    if (sessionId) return;
+    if (existingSid) return;
     if (!isWeChatMiniProgram()) return;
     try {
-      const loginResult = await wechatAuthService.performServerLogin(session.userId, session.guestId);
-        console.log("[UserService] performServerLogin result:", loginResult.success, loginResult.sessionId ? "sid=" + loginResult.sessionId.slice(0,8) + "..." : "none", loginResult.error);
+      await wechatAuthService.performServerLogin(session.userId, session.guestId);
     } catch (e) {
       console.warn("[UserService] Server session restoration failed (non-fatal):", e);
     }

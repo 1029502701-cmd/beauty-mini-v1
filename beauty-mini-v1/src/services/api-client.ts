@@ -17,15 +17,15 @@ export const ENV = {
     if (typeof wx !== "undefined" && wx.getStorageSync) {
       return "production";
     }
-    return import.meta.env?.MODE === "production" ? "production" : "development";
+    return "production";
   }
 };
 
 // ==================== API Base URL Configuration ====================
 
 const API_BASE_CONFIG = {
-  development: "https://beauty-api-pages.pages.dev",
-  production: "https://beauty-api-pages.pages.dev"
+  development: "https://beauty-api-pages.pages.dev/",
+  production: "https://beauty-api-pages.pages.dev/"
 };
 
 export function getAPIBase(): string {
@@ -120,7 +120,13 @@ export class ApiClient {
    */
   private wxRequest<T>(method: "GET" | "POST", path: string, body?: any): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
     return new Promise((resolve) => {
-      const url = this._baseUrl + path;
+      const url = this._baseUrl.replace(/\/$/, "") + path;
+
+console.log("[API DEBUG]", {
+  baseUrl: this._baseUrl,
+  path,
+  url
+});
       const sessionHeader = getSessionHeader();
       const header: Record<string, string> = { "Content-Type": "application/json" };
       if (sessionHeader) {

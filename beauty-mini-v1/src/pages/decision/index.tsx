@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import { navigate } from "@taro/router";
+import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
 import reportService from "@/services/report";
 import { setStorage } from "@/utils/storage";
@@ -68,77 +69,77 @@ const Index = () => {
   };
 
   return (
-    <div className="decision-page">
-      <div className="decision-header">
-        <h1 className="decision-title">专属美学定制</h1>
-        <p className="decision-subtitle">回答3个问题，生成更懂你的美妆报告</p>
-      </div>
+    <View className="decision-page">
+      <View className="decision-header">
+        <Text className="decision-title">专属美学定制</Text>
+        <Text className="decision-subtitle">回答3个问题，生成更懂你的美妆报告</Text>
+      </View>
       {error && (
-        <div className="decision-error">
-          <p>{error}</p>
-        </div>
+        <View className="decision-error">
+          <Text>{error}</Text>
+        </View>
       )}
-      <div className="decision-section">
-        <h2 className="section-label">01 妆容风格偏好</h2>
-        <p className="section-desc">你平时更喜欢哪种妆容风格？</p>
-        <div className="option-grid">
+      <View className="decision-section">
+        <Text className="section-label">01 妆容风格偏好</Text>
+        <Text className="section-desc">你平时更喜欢哪种妆容风格？</Text>
+        <View className="option-grid">
           {STYLE_OPTIONS.map((opt) => (
-            <button
+            <Button
               key={opt.value}
               className={"option-card " + (style === opt.value ? "selected" : "")}
               onClick={() => setStyle(opt.value)}
             >
-              <span className="option-label">{opt.label}</span>
-              <span className="option-desc">{opt.desc}</span>
-            </button>
+              <Text className="option-label">{opt.label}</Text>
+              <Text className="option-desc">{opt.desc}</Text>
+            </Button>
           ))}
-        </div>
-      </div>
-      <div className="decision-section">
-        <h2 className="section-label">02 主要使用场景</h2>
-        <p className="section-desc">这份报告主要适用于什么场合？</p>
-        <div className="option-grid">
+        </View>
+      </View>
+      <View className="decision-section">
+        <Text className="section-label">02 主要使用场景</Text>
+        <Text className="section-desc">这份报告主要适用于什么场合？</Text>
+        <View className="option-grid">
           {OCCASION_OPTIONS.map((opt) => (
-            <button
+            <Button
               key={opt.value}
               className={"option-card " + (style === opt.value ? "selected" : "")}
               onClick={() => setOccasion(opt.value)}
             >
-              <span className="option-label">{opt.label}</span>
-              <span className="option-desc">{opt.desc}</span>
-            </button>
+              <Text className="option-label">{opt.label}</Text>
+              <Text className="option-desc">{opt.desc}</Text>
+            </Button>
           ))}
-        </div>
-      </div>
-      <div className="decision-section">
-        <h2 className="section-label">03 妆容改变接受度</h2>
-        <p className="section-desc">你希望妆容带来多大的改变？</p>
-        <div className="option-grid">
+        </View>
+      </View>
+      <View className="decision-section">
+        <Text className="section-label">03 妆容改变接受度</Text>
+        <Text className="section-desc">你希望妆容带来多大的改变？</Text>
+        <View className="option-grid">
           {TOLERANCE_OPTIONS.map((opt) => (
-            <button
+            <Button
               key={opt.value}
               className={"option-card " + (style === opt.value ? "selected" : "")}
               onClick={() => setTolerance(opt.value)}
             >
-              <span className="option-label">{opt.label}</span>
-              <span className="option-desc">{opt.desc}</span>
-            </button>
+              <Text className="option-label">{opt.label}</Text>
+              <Text className="option-desc">{opt.desc}</Text>
+            </Button>
           ))}
-        </div>
-      </div>
-      <div className="decision-footer">
-        <button
+        </View>
+      </View>
+      <View className="decision-footer">
+        <Button
           className={"generate-btn " + (canProceed ? "active" : "disabled")}
           onClick={handleGenerate}
           disabled={!canProceed || isGenerating}
         >
           {isGenerating ? "生成中..." : "生成专属报告"}
-        </button>
-        <p className="footer-hint">
+        </Button>
+        <Text className="footer-hint">
           {canProceed ? "将消耗 1 Token 生成专属美学报告" : "请选择以上所有选项以继续"}
-        </p>
-      </div>
-    </div>
+        </Text>
+      </View>
+    </View>
   );
 };
 

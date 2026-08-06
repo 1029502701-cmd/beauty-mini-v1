@@ -1,0 +1,134 @@
+﻿[
+  {
+    "id": "creator_001",
+    "creatorName": "晓美酱",
+    "style": "日系清透",
+    "faceTarget": ["oval", "heart", "round"],
+    "tags": ["日常", "清新", "伪素颜", "学生"],
+    "makeupStyles": ["daily", "natural", "fresh"],
+    "skinTones": ["fair", "medium", "warm"],
+    "avatar": "https://example.com/avatar1.jpg",
+    "description": "日系清透妆容达人，擅长自然伪素颜妆"
+  },
+  {
+    "id": "creator_002",
+    "creatorName": "林小妖",
+    "style": "韩系温柔",
+    "faceTarget": ["oval", "heart", "square"],
+    "tags": ["温柔", "甜美", "水光肌", "约会"],
+    "makeupStyles": ["daily", "natural", "formal"],
+    "skinTones": ["fair", "medium"],
+    "avatar": "https://example.com/avatar2.jpg",
+    "description": "韩系水光肌妆容，约会斩男必备"
+  },
+  {
+    "id": "creator_003",
+    "creatorName": "暮色玫瑰",
+    "style": "欧美浓妆",
+    "faceTarget": ["oval", "square", "heart"],
+    "tags": ["欧美", "浓妆", "气场", "派对"],
+    "makeupStyles": ["evening", "formal", "special"],
+    "skinTones": ["medium", "warm", "dark"],
+    "avatar": "https://example.com/avatar3.jpg",
+    "description": "欧美浓妆达人，气场全开的派对妆容"
+  },
+  {
+    "id": "creator_004",
+    "creatorName": "薄荷糖",
+    "style": "清新学院风",
+    "faceTarget": ["oval", "round", "heart"],
+    "tags": ["学院", "清新", "减龄", "青春"],
+    "makeupStyles": ["daily", "natural", "fresh"],
+    "skinTones": ["fair", "medium"],
+    "avatar": "https://example.com/avatar4.jpg",
+    "description": "学院风妆容，减龄清新校园感"
+  },
+  {
+    "id": "creator_005",
+    "creatorName": "紫苏",
+    "style": "新中式古典",
+    "faceTarget": ["oval", "heart", "square"],
+    "tags": ["中式", "古典", "国风", "气质"],
+    "makeupStyles": ["formal", "evening", "special"],
+    "skinTones": ["fair", "medium", "warm"],
+    "avatar": "https://example.com/avatar5.jpg",
+    "description": "新中式古典妆容，东方美学代言人"
+  },
+  {
+    "id": "creator_006",
+    "creatorName": "小樱桃",
+    "style": "甜酷辣妹",
+    "faceTarget": ["oval", "heart", "square"],
+    "tags": ["甜酷", "辣妹", "个性", "潮流"],
+    "makeupStyles": ["evening", "formal", "special"],
+    "skinTones": ["fair", "medium", "warm", "dark"],
+    "avatar": "https://example.com/avatar6.jpg",
+    "description": "甜酷辣妹妆，个性十足街头风格"
+  },
+  {
+    "id": "creator_007",
+    "creatorName": "暖阳",
+    "style": "日系盐系",
+    "faceTarget": ["oval", "round", "heart", "square"],
+    "tags": ["盐系", "中性", "清爽", "干净"],
+    "makeupStyles": ["daily", "natural", "fresh"],
+    "skinTones": ["fair", "medium"],
+    "avatar": "https://example.com/avatar7.jpg",
+    "description": "日系盐系妆容，清爽干净少年感"
+  },
+  {
+    "id": "creator_008",
+    "creatorName": "暮光之城",
+    "style": "复古港风",
+    "faceTarget": ["oval", "square", "heart"],
+    "tags": ["复古", "港风", "浓艳", "气质"],
+    "makeupStyles": ["evening", "formal", "special"],
+    "skinTones": ["medium", "warm", "dark"],
+    "avatar": "https://example.com/avatar8.jpg",
+    "description": "复古港风妆容，浓艳大气经典复古"
+  },
+  {
+    "id": "creator_009",
+    "creatorName": "樱花酱",
+    "style": "甜美水光",
+    "faceTarget": ["oval", "round", "heart"],
+    "tags": ["甜美", "水光", "少女", "软萌"],
+    "makeupStyles": ["daily", "natural", "fresh"],
+    "skinTones": ["fair", "medium"],
+    "avatar": "https://example.com/avatar9.jpg",
+    "description": "甜美水光妆，少女感满满的软萌风格"
+  },
+  {
+    "id": "creator_010",
+    "creatorName": "夜行者",
+    "style": "酷感烟熏",
+    "faceTarget": ["oval", "square", "heart"],
+    "tags": ["烟熏", "酷感", "暗黑", "个性"],
+    "makeupStyles": ["evening", "formal", "special"],
+    "skinTones": ["fair", "medium", "warm", "dark"],
+    "avatar": "https://example.com/avatar10.jpg",
+    "description": "酷感烟熏妆，暗黑个性派必备"
+  },
+  {
+    "id": "creator_011",
+    "creatorName": "青柠汽水",
+    "style": "清爽通勤风",
+    "faceTarget": ["oval", "round", "heart", "square"],
+    "tags": ["通勤", "职场", "干练", "优雅"],
+    "makeupStyles": ["daily", "formal", "natural"],
+    "skinTones": ["fair", "medium", "warm"],
+    "avatar": "https://example.com/avatar11.jpg",
+    "description": "清爽通勤妆，职场女性的优雅之选"
+  },
+  {
+    "id": "creator_012",
+    "creatorName": "桃花酿",
+    "style": "古风汉服妆",
+    "faceTarget": ["oval", "heart", "round"],
+    "tags": ["古风", "汉服", "仙气", "古典"],
+    "makeupStyles": ["formal", "special", "evening"],
+    "skinTones": ["fair", "medium"],
+    "avatar": "https://example.com/avatar12.jpg",
+    "description": "古风汉服妆容，仙气飘飘古典韵味"
+  }
+]

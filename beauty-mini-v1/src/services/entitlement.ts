@@ -34,11 +34,11 @@ class EntitlementService {
     const balanceResult = await fetchServerBalance(userId);
     if (balanceResult.success && balanceResult.balance !== undefined) {
       const balance = balanceResult.balance;
-      if (balance >= 3) return "beauty-pro";
+      if (balance >= 1) return "beauty-pro";
       if (balance >= 1) return "style-upgrade";
     }
     const quotas = tokenService.getAvailableCredits(userId);
-    if (quotas.tokenCount >= 3) return "beauty-pro";
+    if (quotas.tokenCount >= 1) return "beauty-pro";
     if (quotas.tokenCount >= 1 || quotas.freeCount > 0) return "style-upgrade";
     return "first-look";
   }
@@ -78,12 +78,12 @@ class EntitlementService {
     if (this.hasEntitlement(userId, "beauty_pro")) return { success: false, message: "已拥有美容 Pro 权益" };
     const balanceResult = await fetchServerBalance(userId);
     if (!balanceResult.success || balanceResult.balance === undefined) return { success: false, message: balanceResult.error || "获取余额失败" };
-    if (balanceResult.balance < 3) return { success: false, message: "需要至少 3 个 Token 才能兑换美容 Pro" };
+    if (balanceResult.balance < 1) return { success: false, message: "需要至少 1 个 Token 才能兑换美容 Pro" };
     const { consumeServerTokens } = await import("@/services/token");
-    const consumeResult = await consumeServerTokens(3, "Beauty Pro upgrade");
+    const consumeResult = await consumeServerTokens(1, "Beauty Pro upgrade");
     if (!consumeResult.success) return { success: false, message: consumeResult.error || "扣除Token失败" };
     const entitlement = this.createEntitlement({ userId, productType: "beauty_pro", source: "token" as EntitlementSource, amount: 300, tokenCount: 0, paidAt: new Date().toISOString() });
-    return { success: true, message: "成功使用 3 个 Token 兑换美容 Pro 权益", entitlementId: entitlement.id };
+    return { success: true, message: "成功使用 1 个 Token 兑换美容 Pro 权益", entitlementId: entitlement.id };
   }
 
   private getStoredEntitlements(): Entitlement[] { return getStorage<Entitlement[]>(ENTITLEMENT_KEY, []) ?? []; }

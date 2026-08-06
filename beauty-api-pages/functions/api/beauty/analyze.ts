@@ -52,6 +52,9 @@ export async function onRequestPost(context: {
     );
   }
   const { userId } = JSON.parse(sessionRaw);
+        body.imageKey = decodeURIComponent(body.imageKey);
+    console.log("analyze userId:", userId);
+    console.log("analyze imageKey:", body.imageKey);
 
   if (!body.imageKey.startsWith('beauty/uploads/' + userId + '/')) {
     return new Response(

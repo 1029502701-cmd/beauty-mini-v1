@@ -1,0 +1,12 @@
+﻿{
+  "usingComponents": {},
+  "navigationBarTitleText": "上传照片",
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍照上传进行AI分析"
+    },
+    "scope.writePhotosAlbum": {
+      "desc": "用于保存分析结果到相册"
+    }
+  }
+}

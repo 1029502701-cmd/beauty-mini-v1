@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect, useCallback } from "react";
 import { navigate } from "@taro/router";
+import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
 import { getReports } from "../../services/api";
 import { getStorage } from "../../utils/storage";
@@ -91,100 +92,100 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="reports-page reports-loading">
-        <div className="loading-content">
-          <div className="loading-icon">📋</div>
-          <h2>加载报告中...</h2>
-          <div className="loading-dots">
-            <span className="dot" /><span className="dot" /><span className="dot" />
-          </div>
-        </div>
-      </div>
+      <View className="reports-page reports-loading">
+        <View className="loading-content">
+          <View className="loading-icon">📋</View>
+          <Text>加载报告中...</Text>
+          <View className="loading-dots">
+            <Text className="dot" /><Text className="dot" /><Text className="dot" />
+          </View>
+        </View>
+      </View>
     );
   }
 
   return (
-    <div className="reports-page">
-      <header className="reports-header">
-        <h1 className="reports-title">我的报告</h1>
-        <p className="reports-subtitle">
+    <View className="reports-page">
+      <View className="reports-header">
+        <Text className="reports-title">我的报告</Text>
+        <Text className="reports-subtitle">
           {reports.length > 0 ? `${reports.length} 份分析报告` : "暂无分析报告"}
-        </p>
-      </header>
+        </Text>
+      </View>
 
       {/* Task 5: Level Filter */}
-      <div className="level-filter-bar">
+      <View className="level-filter-bar">
         {LEVEL_FILTERS.map((f) => (
-          <button
+          <Button
             key={f.key}
             className={"level-filter-btn" + (activeFilter === f.key ? " active" : "")}
             onClick={() => setActiveFilter(f.key)}
           >
             {f.label}
-          </button>
+          </Button>
         ))}
-      </div>
+      </View>
 
-      <div className="reports-body">
+      <View className="reports-body">
         {filteredReports.length === 0 && !error ? (
-          <div className="empty-state">
-            <div className="empty-icon">📝</div>
-            <h2>暂无分析报告</h2>
-            <p>上传照片进行 AI 美学分析，生成你的专属美妆报告</p>
-            <button className="start-btn btn-center" onClick={() => navigate("/pages/upload")}>
+          <View className="empty-state">
+            <View className="empty-icon">📝</View>
+            <Text>暂无分析报告</Text>
+            <Text>上传照片进行 AI 美学分析，生成你的专属美妆报告</Text>
+            <Button className="start-btn btn-center" onClick={() => navigate("/pages/upload")}>
               开始分析
-            </button>
-          </div>
+            </Button>
+          </View>
         ) : filteredReports.length === 0 && error ? (
-          <div className="empty-state">
-            <div className="empty-icon">⚠️</div>
-            <h2>加载失败</h2>
-            <p className="error-text">{error}</p>
-            <button className="retry-btn btn-center" onClick={fetchReports}>重新加载</button>
-            <button className="back-btn btn-center" onClick={() => navigate("/pages/home")}>返回首页</button>
-          </div>
+          <View className="empty-state">
+            <View className="empty-icon">⚠️</View>
+            <Text>加载失败</Text>
+            <Text className="error-text">{error}</Text>
+            <Button className="retry-btn btn-center" onClick={fetchReports}>重新加载</Button>
+            <Button className="back-btn btn-center" onClick={() => navigate("/pages/home")}>返回首页</Button>
+          </View>
         ) : (
-          <div className="reports-list">
+          <View className="reports-list">
             {filteredReports.map((report) => (
-              <div
+              <View
                 key={report.reportId}
                 className="report-card"
                 onClick={() => handleReportClick(report.reportId)}
               >
-                <div className="report-card-header">
-                  <span className="report-code">{report.reportCode || report.reportId}</span>
-                  <span className="report-time">{formatRelativeTime(report.createdAt)}</span>
-                </div>
-                <div className="report-card-meta">
-                  <span className="report-level">
+                <View className="report-card-header">
+                  <Text className="report-code">{report.reportCode || report.reportId}</Text>
+                  <Text className="report-time">{formatRelativeTime(report.createdAt)}</Text>
+                </View>
+                <View className="report-card-meta">
+                  <Text className="report-level">
                     {LEVEL_ICONS[report.level || "first-look"]}{" "}
                     {LEVEL_NAMES[report.level || "first-look"] || "初见妆容"}
-                  </span>
+                  </Text>
                   {report.styleName && (
-                    <span className="report-style">{report.styleName}</span>
+                    <Text className="report-style">{report.styleName}</Text>
                   )}
-                </div>
-              </div>
+                </View>
+              </View>
             ))}
-          </div>
+          </View>
         )}
-      </div>
+      </View>
 
-      <div className="reports-footer">
-        <button className="nav-btn btn-center" onClick={() => navigate("/pages/home")}>
-          <span className="nav-icon">🏠</span>
-          <span>首页</span>
-        </button>
-        <button className="nav-btn nav-btn--active" onClick={() => navigate("/pages/upload")}>
-          <span className="nav-icon">✨</span>
-          <span>新分析</span>
-        </button>
-        <button className="nav-btn btn-center" onClick={() => navigate("/pages/profile")}>
-          <span className="nav-icon">👤</span>
-          <span>我的</span>
-        </button>
-      </div>
-    </div>
+      <View className="reports-footer">
+        <Button className="nav-btn btn-center" onClick={() => navigate("/pages/home")}>
+          <Text className="nav-icon">🏠</Text>
+          <Text>首页</Text>
+        </Button>
+        <Button className="nav-btn nav-btn--active" onClick={() => navigate("/pages/upload")}>
+          <Text className="nav-icon">✨</Text>
+          <Text>新分析</Text>
+        </Button>
+        <Button className="nav-btn btn-center" onClick={() => navigate("/pages/profile")}>
+          <Text className="nav-icon">👤</Text>
+          <Text>我的</Text>
+        </Button>
+      </View>
+    </View>
   );
 };
 

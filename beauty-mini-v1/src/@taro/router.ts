@@ -1,3 +1,17 @@
-﻿export { createBrowserHistory, createHashHistory, createMpaHistory, createMultiRouter, createRouter, getCurrentPages, handleAppMount, handleAppMountWithTabbar, history, isDingTalk, isWeixin, navigateBack, navigateTo, prependBasename, reLaunch, redirectTo, routesAlias, setHistory, setHistoryMode, setMpaTitle, setNavigationBarLoading, setNavigationBarStyle, setTitle, switchTab } from '@tarojs/router';
-export const navigate = navigateTo;
-export function useQueryParams() { return require('@tarojs/router').history?.search || ''; }
+﻿import Taro from "@tarojs/taro";
+
+export const navigate = (options: any) => {
+  if (typeof options === "string") {
+    return Taro.navigateTo({
+      url: options,
+    });
+  }
+
+  return Taro.navigateTo(options);
+};
+
+export const navigateBack = () => {
+  return Taro.navigateBack();
+};
+
+export { useLoad } from "@tarojs/taro";

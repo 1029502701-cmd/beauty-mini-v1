@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { navigate } from '@taro/router';
+import { Button, Text, View } from '@tarojs/components';
 import './index.css';
 import type { BeautyProfile, ReportLevel, ReportAccess, BeautyUser } from '@/types';
 import { profileService } from '@/services/profile';
@@ -86,168 +87,168 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="profile-page profile-loading">
-        <div className="loading-content">
-          <div className="loading-icon">\u2728</div>
-          <h2>\u52a0\u8f7d\u4e2d...</h2>
-          <p>\u6b63\u5728\u83b7\u53d6\u60a8\u7684\u7f8e\u5986\u6863\u6848</p>
-          <div className="loading-dots">
-            <span className="dot" /><span className="dot" /><span className="dot" />
-          </div>
-        </div>
-      </div>
+      <View className="profile-page profile-loading">
+        <View className="loading-content">
+          <View className="loading-icon">\u2728</View>
+          <Text>\u52a0\u8f7d\u4e2d...</Text>
+          <Text>\u6b63\u5728\u83b7\u53d6\u60a8\u7684\u7f8e\u5986\u6863\u6848</Text>
+          <View className="loading-dots">
+            <Text className="dot" /><Text className="dot" /><Text className="dot" />
+          </View>
+        </View>
+      </View>
     );
   }
 
   if (error) {
     return (
-      <div className="profile-page profile-error">
-        <div className="error-content">
-          <div className="error-icon">\ud83d\udce1</div>
-          <h2>\u52a0\u8f7d\u5931\u8d25</h2>
-          <p className="error-message">{error}</p>
-          <div className="error-actions">
-            <button className="retry-btn btn-center" onClick={fetchData}>\u91cd\u65b0\u5c1d\u8bd5</button>
-            <button className="back-btn btn-center" onClick={() => navigate('/pages/home')}>\u8fd4\u56de\u9996\u9875</button>
-          </div>
-        </div>
-      </div>
+      <View className="profile-page profile-error">
+        <View className="error-content">
+          <View className="error-icon">\ud83d\udce1</View>
+          <Text>\u52a0\u8f7d\u5931\u8d25</Text>
+          <Text className="error-message">{error}</Text>
+          <View className="error-actions">
+            <Button className="retry-btn btn-center" onClick={fetchData}>\u91cd\u65b0\u5c1d\u8bd5</Button>
+            <Button className="back-btn btn-center" onClick={() => navigate('/pages/home')}>\u8fd4\u56de\u9996\u9875</Button>
+          </View>
+        </View>
+      </View>
     );
   }
 
   if (!profile) {
     return (
-      <div className="profile-page profile-empty">
-        <div className="empty-content">
-          <div className="empty-icon">\ud83e\ude9e</div>
-          <h2>\u6682\u65e0\u6863\u6848</h2>
-          <p>\u4e0a\u4f20\u7167\u7247\u8fdb\u884c AI \u7f8e\u5986\u5206\u6790\uff0c\u751f\u6210\u60a8\u7684\u4e13\u5c5e\u7f8e\u5986\u6863\u6848</p>
-          <button className="start-btn btn-center" onClick={() => navigate('/pages/upload')}>\u5f00\u59cb\u5206\u6790</button>
-        </div>
-      </div>
+      <View className="profile-page profile-empty">
+        <View className="empty-content">
+          <View className="empty-icon">\ud83e\ude9e</View>
+          <Text>\u6682\u65e0\u6863\u6848</Text>
+          <Text>\u4e0a\u4f20\u7167\u7247\u8fdb\u884c AI \u7f8e\u5986\u5206\u6790\uff0c\u751f\u6210\u60a8\u7684\u4e13\u5c5e\u7f8e\u5986\u6863\u6848</Text>
+          <Button className="start-btn btn-center" onClick={() => navigate('/pages/upload')}>\u5f00\u59cb\u5206\u6790</Button>
+        </View>
+      </View>
     );
   }
 
   return (
-    <div className="profile-page">
-      <div className="user-header">
-        <div className="avatar-circle">
-          <span className="avatar-initial">
+    <View className="profile-page">
+      <View className="user-header">
+        <View className="avatar-circle">
+          <Text className="avatar-initial">
             {profile.nickname ? profile.nickname[0] : currentUser?.nickname?.[0] || 'U'}
-          </span>
-        </div>
-        <div className="user-info">
-          <h2 className="nickname">
+          </Text>
+        </View>
+        <View className="user-info">
+          <Text className="nickname">
             {profile.nickname || currentUser?.nickname || '\u7f8e\u5986\u7231\u597d\u8005'}
-          </h2>
-          <p className="ai-style">
+          </Text>
+          <Text className="ai-style">
             {LEVEL_ICONS[currentUserLevel as ReportLevel]} {LEVEL_NAMES[currentUserLevel]}
-          </p>
-          <p className="level-description">
+          </Text>
+          <Text className="level-description">
             {LEVEL_DESCRIPTIONS[currentUserLevel]}
-          </p>
-        </div>
-        <div className="level-badge-current">
-          <span className="level-dot" style={{ background: currentUserLevel === 'beauty-pro' ? '#c8a2c8' : currentUserLevel === 'style-upgrade' ? '#7c4dff' : '#aaa' }} />
-          <span className="level-text">{LEVEL_NAMES[currentUserLevel]}</span>
-        </div>
-      </div>
+          </Text>
+        </View>
+        <View className="level-badge-current">
+          <Text className="level-dot" style={{ background: currentUserLevel === 'beauty-pro' ? '#c8a2c8' : currentUserLevel === 'style-upgrade' ? '#7c4dff' : '#aaa' }} />
+          <Text className="level-text">{LEVEL_NAMES[currentUserLevel]}</Text>
+        </View>
+      </View>
 
-      <div className="balance-card">
-        <div className="balance-header">
-          <span className="balance-label">Token \u4f59\u989d</span>
-          <span className="balance-value">{balance !== null ? balance : '\u2014'}</span>
-        </div>
-        <p className="balance-hint">Token \u7528\u4e8e\u89e3\u9501\u9ad8\u7ea7\u62a5\u544a\u7b49\u7ea7\uff0c\u6bcf\u65e5\u767b\u5f55\u53ef\u83b7\u53d6\u514d\u8d39 Token</p>
-        <button className="topup-btn btn-center" onClick={() => navigate('/pages/purchase')}>\u5145\u503c Token</button>
-      </div>
+      <View className="balance-card">
+        <View className="balance-header">
+          <Text className="balance-label">Token \u4f59\u989d</Text>
+          <Text className="balance-value">{balance !== null ? balance : '\u2014'}</Text>
+        </View>
+        <Text className="balance-hint">Token \u7528\u4e8e\u89e3\u9501\u9ad8\u7ea7\u62a5\u544a\u7b49\u7ea7\uff0c\u6bcf\u65e5\u767b\u5f55\u53ef\u83b7\u53d6\u514d\u8d39 Token</Text>
+        <Button className="topup-btn btn-center" onClick={() => navigate('/pages/purchase')}>\u5145\u503c Token</Button>
+      </View>
 
-      <div className="stats-card">
-        <div className="stat-item">
-          <span className="stat-value">{profile.reports?.length || 0}</span>
-          <span className="stat-label">\u5206\u6790\u62a5\u544a</span>
-        </div>
-        <div className="stat-divider" />
-        <div className="stat-item">
-          <span className="stat-value">{lastReportTime ? formatRelativeTime(lastReportTime) : '\u2014'}</span>
-          <span className="stat-label">\u6700\u8fd1\u5206\u6790</span>
-        </div>
-        <div className="stat-divider" />
-        <div className="stat-item">
-          <span className="stat-value">{LEVEL_ICONS[currentUserLevel as ReportLevel]}</span>
-          <span className="stat-label">\u5f53\u524d\u7b49\u7ea7</span>
-        </div>
-      </div>
+      <View className="stats-card">
+        <View className="stat-item">
+          <Text className="stat-value">{profile.reports?.length || 0}</Text>
+          <Text className="stat-label">\u5206\u6790\u62a5\u544a</Text>
+        </View>
+        <View className="stat-divider" />
+        <View className="stat-item">
+          <Text className="stat-value">{lastReportTime ? formatRelativeTime(lastReportTime) : '\u2014'}</Text>
+          <Text className="stat-label">\u6700\u8fd1\u5206\u6790</Text>
+        </View>
+        <View className="stat-divider" />
+        <View className="stat-item">
+          <Text className="stat-value">{LEVEL_ICONS[currentUserLevel as ReportLevel]}</Text>
+          <Text className="stat-label">\u5f53\u524d\u7b49\u7ea7</Text>
+        </View>
+      </View>
 
-      <div className="section">
-        <h3 className="section-title">\u89e3\u9501\u8bb0\u5f55</h3>
+      <View className="section">
+        <Text className="section-title">\u89e3\u9501\u8bb0\u5f55</Text>
         {unlockRecords.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">\U0001f513</div>
-            <p>\u6682\u65e0\u89e3\u9501\u8bb0\u5f55</p>
-          </div>
+          <View className="empty-state">
+            <View className="empty-state-icon">\U0001f513</View>
+            <Text>\u6682\u65e0\u89e3\u9501\u8bb0\u5f55</Text>
+          </View>
         ) : (
-          <div className="unlock-list">
+          <View className="unlock-list">
             {unlockRecords.map((record) => (
-              <div key={record.reportId + record.level} className="unlock-item">
-                <div className="unlock-icon">{LEVEL_ICONS[record.level as ReportLevel]}</div>
-                <div className="unlock-info">
-                  <span className="unlock-level">{LEVEL_NAMES[record.level as ReportLevel]}</span>
-                  <span className="unlock-meta">
+              <View key={record.reportId + record.level} className="unlock-item">
+                <View className="unlock-icon">{LEVEL_ICONS[record.level as ReportLevel]}</View>
+                <View className="unlock-info">
+                  <Text className="unlock-level">{LEVEL_NAMES[record.level as ReportLevel]}</Text>
+                  <Text className="unlock-meta">
                     {record.unlockType === 'free' ? '\u514d\u8d39\u89e3\u9501' : record.unlockType === 'token' ? 'Token \u89e3\u9501' : '\u652f\u4ed8\u89e3\u9501'} \u00b7 {formatRelativeTime(record.createdAt)}
-                  </span>
-                </div>
-                <span className="unlock-status">\u5df2\u89e3\u9501</span>
-              </div>
+                  </Text>
+                </View>
+                <Text className="unlock-status">\u5df2\u89e3\u9501</Text>
+              </View>
             ))}
-          </div>
+          </View>
         )}
-      </div>
+      </View>
 
-      <div className="section">
-        <h3 className="section-title">\u6211\u7684\u62a5\u544a</h3>
+      <View className="section">
+        <Text className="section-title">\u6211\u7684\u62a5\u544a</Text>
         {!profile.reports || profile.reports.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">\ud83d\udccb</div>
-            <p>\u6682\u65e0\u5206\u6790\u62a5\u544a</p>
-            <button className="empty-state-btn btn-center" onClick={() => navigate('/pages/upload')}>\u4e0a\u4f20\u7167\u7247\u5206\u6790</button>
-          </div>
+          <View className="empty-state">
+            <View className="empty-state-icon">\ud83d\udccb</View>
+            <Text>\u6682\u65e0\u5206\u6790\u62a5\u544a</Text>
+            <Button className="empty-state-btn btn-center" onClick={() => navigate('/pages/upload')}>\u4e0a\u4f20\u7167\u7247\u5206\u6790</Button>
+          </View>
         ) : (
-          <div className="reports-list">
+          <View className="reports-list">
             {profile.reports.map((report) => (
-              <div key={report.reportId} className="report-item" onClick={() => handleReportClick(report.reportId)}>
-                <div className="report-header">
-                  <span className="report-code">{report.reportCode}</span>
-                  <span className="report-time">{lastReportTime ? formatRelativeTime(report.createdAt) : report.createdAt}</span>
-                </div>
-                <div className="report-meta">
-                  <span className="report-style">
+              <View key={report.reportId} className="report-item" onClick={() => handleReportClick(report.reportId)}>
+                <View className="report-header">
+                  <Text className="report-code">{report.reportCode}</Text>
+                  <Text className="report-time">{lastReportTime ? formatRelativeTime(report.createdAt) : report.createdAt}</Text>
+                </View>
+                <View className="report-meta">
+                  <Text className="report-style">
                     {LEVEL_ICONS[currentUserLevel as ReportLevel]} {report.styleName || 'AI\u5b9a\u4f4d\u4e2d'}
-                  </span>
-                </div>
-              </div>
+                  </Text>
+                </View>
+              </View>
             ))}
-          </div>
+          </View>
         )}
-      </div>
+      </View>
 
       {currentUserLevel !== 'beauty-pro' && (
-        <div className="upgrade-card">
-          <div className="upgrade-content">
-            <span className="upgrade-icon">\U0001f451</span>
-            <div className="upgrade-text">
-              <span className="upgrade-title">\u89e3\u9501\u4e13\u5c5e\u7f8e\u5b66</span>
-              <span className="upgrade-desc">\u4fdd\u5b5830\u5929\u62a5\u544a\uff0c\u4eab\u53d7\u5b8c\u6574\u7f8e\u5986\u65b9\u6848</span>
-            </div>
-          </div>
-          <button className="upgrade-btn btn-center" onClick={() => navigate('/pages/purchase')}>\u53bb\u514c\u6362</button>
-        </div>
+        <View className="upgrade-card">
+          <View className="upgrade-content">
+            <Text className="upgrade-icon">\U0001f451</Text>
+            <View className="upgrade-text">
+              <Text className="upgrade-title">\u89e3\u9501\u4e13\u5c5e\u7f8e\u5b66</Text>
+              <Text className="upgrade-desc">\u4fdd\u5b5830\u5929\u62a5\u544a\uff0c\u4eab\u53d7\u5b8c\u6574\u7f8e\u5986\u65b9\u6848</Text>
+            </View>
+          </View>
+          <Button className="upgrade-btn btn-center" onClick={() => navigate('/pages/purchase')}>\u53bb\u514c\u6362</Button>
+        </View>
       )}
 
-      <div className="section explanation">
-        <p className="explanation-text">\u4e0a\u4f20\u6e05\u6670\u7684\u9762\u90e8\u7167\u7247\u8fdb\u884c AI \u7f8e\u5986\u5206\u6790\uff0c\u7cfb\u7edf\u5c06\u8bc6\u522b\u808c\u80a4\u3001\u4e94\u5b98\u7279\u5f81\uff0c\u5e76\u63d0\u4f9b\u4e2a\u6027\u5316\u7684\u5986\u5986\u5efa\u8bae\u548c\u5546\u54c1\u63a8\u8350\u3002\u6570\u636e\u4ec5\u4fdd\u5b58\u5728\u672c\u5730\uff0c\u4fdd\u62a4\u60a8\u7684\u9690\u79c1\u3002</p>
-      </div>
-    </div>
+      <View className="section explanation">
+        <Text className="explanation-text">\u4e0a\u4f20\u6e05\u6670\u7684\u9762\u90e8\u7167\u7247\u8fdb\u884c AI \u7f8e\u5986\u5206\u6790\uff0c\u7cfb\u7edf\u5c06\u8bc6\u522b\u808c\u80a4\u3001\u4e94\u5b98\u7279\u5f81\uff0c\u5e76\u63d0\u4f9b\u4e2a\u6027\u5316\u7684\u5986\u5986\u5efa\u8bae\u548c\u5546\u54c1\u63a8\u8350\u3002\u6570\u636e\u4ec5\u4fdd\u5b58\u5728\u672c\u5730\uff0c\u4fdd\u62a4\u60a8\u7684\u9690\u79c1\u3002</Text>
+      </View>
+    </View>
   );
 };
 

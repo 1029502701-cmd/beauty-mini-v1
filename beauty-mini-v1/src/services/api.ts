@@ -22,19 +22,30 @@ export interface ApiResponse<T = unknown> {
  * @param body POST body (optional)
  * @returns { success, data, error, message }
  */
+
 export async function request<T = unknown>(
-  method: "GET" | "POST",
   path: string,
+  method: "GET" | "POST",
   body?: unknown
 ): Promise<ApiResponse<T>> {
+  console.log("REQUEST ARGS:", {
+  method,
+  path,
+  body
+});
   const sessionHeaders: Record<string, string> = {};
   injectSessionHeader(sessionHeaders);
+  console.log("request headers:", sessionHeaders);
 
   if (method === "GET") {
-    return apiClient.get<T>(path);
+    return apiClient.get<T>(path, {
+      headers: sessionHeaders,
+    });
   }
 
-  return apiClient.post<T>(path, body);
+  return apiClient.post<T>(path, body, {
+    headers: sessionHeaders,
+  });
 }
 
 /**
@@ -54,7 +65,7 @@ export function uploadFile<T = unknown>(
       resolve({ success: false, error: "wx.uploadFile not available" });
       return;
     }
-    const url = getAPIBase() + serverPath;
+    const url = getAPIBase().replace(/\/$/, "") + "/" + serverPath.replace(/^\//, "");
     const sessionHeaders: Record<string, string> = {};
     injectSessionHeader(sessionHeaders);
 

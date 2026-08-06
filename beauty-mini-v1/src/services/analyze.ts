@@ -1,4 +1,4 @@
-﻿import type { BeautyReport } from "@/types";
+import type { BeautyReport } from "@/types";
 import { api, request } from "@/services/api";
 import userService from "./user-service";
 
@@ -50,10 +50,11 @@ class AnalyzeService {
    */
   async analyzeImage(uploadId: string, imageKey: string): Promise<AnalyzeResult> {
     try {
+      console.log("当前sessionId:", wx.getStorageSync("sessionId"));
       const response = await request<AnalyzeResult>("/api/beauty/analyze", "POST", {
-        uploadId,
-        imageKey
-      });
+  uploadId,
+  imageKey
+});
       if (response.success && response.data) {
         return { success: true, uploadId, imageKey, metrics: response.data.metrics };
       }
@@ -74,7 +75,7 @@ class AnalyzeService {
     reportLevel: string = "first-look"
   ): Promise<ReportResult> {
     try {
-      const response = await request<ReportResult>("/api/beauty/report", "POST", {
+      const response = await request<ReportResult>("/api/beauty/report", "POST",{
         analysisId,
         reportLevel,
         faceMetrics
@@ -95,9 +96,9 @@ class AnalyzeService {
   async queryReport(reportId: string): Promise<{ success: boolean; report?: any; error?: string }> {
     try {
       const response = await request<{ report: any; balance: number }>(
-        "/api/beauty/report/query?id=" + encodeURIComponent(reportId),
-        "GET"
-      );
+  "GET",
+  "/api/beauty/report/query?id=" + encodeURIComponent(reportId)
+);
       if (response.success && response.data) {
         return { success: true, report: response.data.report };
       }

@@ -1,4 +1,4 @@
-﻿import type { Env } from '../../types';
+import type { Env } from '../../types';
 import { PermissionService } from '../../../modules/beauty-ai/permission/permission-service';
 import { TokenService } from '../../../modules/token/token-service';
 import { extractSessionId } from '../../../lib/session';
@@ -15,16 +15,16 @@ export async function onRequestGet(context: {
 
   if (!reportLevel) {
     return new Response(
-      JSON.stringify({ success: false, error: "Query param 'reportLevel' is required" }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, status: "INVALID_PARAM", error: "Query param reportLevel is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
 
   const validLevels = ['first-look', 'style-upgrade', 'beauty-pro'];
   if (!validLevels.includes(reportLevel)) {
     return new Response(
-      JSON.stringify({ success: false, error: "Invalid reportLevel: " + reportLevel }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, status: "INVALID_PARAM", error: "Invalid reportLevel: " + reportLevel }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
 
@@ -35,15 +35,15 @@ export async function onRequestGet(context: {
     const sessionId = extractSessionId(request);
     if (!sessionId) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Authentication required' }),
-        { status: 401, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ success: false, status: "AUTH_REQUIRED", error: 'Authentication required' }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
     const sessionRaw = await env.USER_CACHE.get('session:' + sessionId);
     if (!sessionRaw) {
       return new Response(
-        JSON.stringify({ success: false, error: 'Invalid session' }),
-        { status: 401, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ success: false, status: "SESSION_EXPIRED", error: 'Invalid session' }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
     const userId = JSON.parse(sessionRaw).userId;
@@ -59,18 +59,19 @@ export async function onRequestGet(context: {
     return new Response(
       JSON.stringify({
         success: true,
+        status: result.allowed ? "ACCESS_GRANTED" : "ACCESS_DENIED",
         allowed: result.allowed,
         reason: result.reason,
         tokenRequired: result.tokenRequired ?? 0,
-        balance,
+        balance
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
     console.error('[beauty/access] Error:', err);
     return new Response(
-      JSON.stringify({ success: false, error: 'Internal server error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ success: false, status: "SERVER_ERROR", error: 'Internal server error' }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }

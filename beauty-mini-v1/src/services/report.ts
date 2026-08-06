@@ -99,6 +99,8 @@ class ReportService {
   }
 }
 
+export type ReportError = 'DAILY_LIMIT_REACHED' | 'INSUFFICIENT_TOKEN' | 'SERVER_ERROR';
+
 const reportService = new ReportService();
 export default reportService;
 export { reportService };

@@ -1,0 +1,29 @@
+﻿name = 'beauty-mini-api'
+main = 'functions/index.ts'
+compatibility_date = '2024-01-01'
+compatibility_flags = ['nodejs_compat']
+workers_dev = true
+
+# WeChat Login (生产环境通过 wrangler secret 配置，不要在此文件中写入真实值)
+# 配置命令：
+#   wrangler secret put WECHAT_APP_ID
+#   wrangler secret put WECHAT_APP_SECRET
+
+[vars]
+API_KEY = ''
+
+[[d1_databases]]
+binding = 'D1_DB'
+database_name = 'beauty-db'
+database_id = '6d132245-24fc-463d-afb5-7ddb4619ec18'
+
+[[r2_buckets]]
+binding = 'IMAGE_BUCKET'
+bucket_name = 'beauty-images'
+
+[[kv_namespaces]]
+binding = 'USER_CACHE'
+id = '3370d3a1db49404aa2615c706a5e15eb'
+
+[ai]
+binding = "AI"

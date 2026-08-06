@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Text, View } from '@tarojs/components';
 import "@/components/admin/styles.css";
 import ReportLevelManage from "@/components/admin/ReportLevelManage";
 import ContentPermissionManage from "@/components/admin/ContentPermissionManage";
@@ -15,47 +16,47 @@ const AdminPage: React.FC = () => {
   };
 
   return (
-    <div className="admin-page">
-      <header className="admin-header">
-        <button onClick={handleBack} style={{ cursor: "pointer", textDecoration: "underline", marginBottom: "10px" }}>¡û ·µ»Ø</button>
-        <h1>Admin ÅäÖÃÖÐÐÄ</h1>
-        <p>ÔËÓªÅäÖÃ¹ÜÀí</p>
-      </header>
+    <View className="admin-page">
+      <View className="admin-header">
+        <Button onClick={handleBack} style={{ cursor: "pointer", textDecoration: "underline", marginBottom: "10px" }}>ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</Button>
+        <Text>Admin ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</Text>
+        <Text>ï¿½ï¿½Óªï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½</Text>
+      </View>
 
-      <nav className="admin-nav">
-        <button
+      <View className="admin-nav">
+        <Button
           className={activeTab === "report" ? "active" : ""}
           onClick={() => setActiveTab("report")}
         >
-          ±¨¸æµÈ¼¶
-        </button>
-        <button
+          ï¿½ï¿½ï¿½ï¿½È¼ï¿½
+        </Button>
+        <Button
           className={activeTab === "permission" ? "active" : ""}
           onClick={() => setActiveTab("permission")}
         >
-          ÄÚÈÝÈ¨ÏÞ
-        </button>
-        <button
+          ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
+        </Button>
+        <Button
           className={activeTab === "token" ? "active" : ""}
           onClick={() => setActiveTab("token")}
         >
-          TokenÅäÖÃ
-        </button>
-        <button
+          Tokenï¿½ï¿½ï¿½ï¿½
+        </Button>
+        <Button
           className={activeTab === "recommendation" ? "active" : ""}
           onClick={() => setActiveTab("recommendation")}
         >
-          ÍÆ¼ö¿ª¹Ø
-        </button>
-      </nav>
+          ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        </Button>
+      </View>
 
-      <main className="admin-content">
+      <View className="admin-content">
         {activeTab === "report" && <ReportLevelManage />}
         {activeTab === "permission" && <ContentPermissionManage />}
         {activeTab === "token" && <TokenConfigManage />}
         {activeTab === "recommendation" && <RecommendationConfigManage />}
-      </main>
-    </div>
+      </View>
+    </View>
   );
 };
 

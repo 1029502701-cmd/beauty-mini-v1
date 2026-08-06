@@ -1,4 +1,4 @@
-﻿import { UploadResult, BeautyImage } from "@/types";
+import { UploadResult, BeautyImage } from "@/types";
 import userService from "./user-service";
 import { getAPIBase, injectSessionHeader } from "./api-client";
 
@@ -76,9 +76,9 @@ export class UploadService {
         const sessionHeaders: Record<string, string> = {};
         injectSessionHeader(sessionHeaders);
         console.log("[upload] sessionHeaders:", JSON.stringify(sessionHeaders));
-        _logUploadEvent("upload_start", { url: getAPIBase() + "/api/beauty/upload", filePath, fileName, fileSize });
+        _logUploadEvent("upload_start", { url: getAPIBase().replace(/\/$/, "") + "/api/beauty/upload", filePath, fileName, fileSize });
         wx.uploadFile({
-          url: getAPIBase() + "/api/beauty/upload",
+          url: getAPIBase().replace(/\/$/, "") + "/api/beauty/upload",
           filePath,
           name: "image",
           formData: { uploadId: "upload_" + Date.now() },
@@ -89,14 +89,29 @@ export class UploadService {
             if (wxRes.statusCode === 200) {
               try {
                 const data = JSON.parse(wxRes.data);
+                console.log("[upload parsed response]", data);
                 if (data.success) {
-                  const { uploadId, imageKey } = data;
-                  this.uploadQueue.push({
-                    id: uploadId, url: imageKey || filePath, filename: fileName,
-                    size: fileSize, mimeType: "image/jpeg", timestamp: new Date().toISOString(),
-                    status: "uploaded", });
-                  resolve({ success: true, message: "图片上传成功", uploadId, imageUrl: imageKey });
-                  return;
+                const { uploadId, imageKey } = data;
+                      this.uploadQueue.push({
+                        id: uploadId,
+                        url: imageKey || filePath,
+                        filename: fileName,
+                        size: fileSize,
+                        mimeType: "image/jpeg",
+                        timestamp: new Date().toISOString(),
+                        status: "uploaded",
+                     });
+                     console.log("[before resolve upload]", {
+  uploadId,
+  imageKey
+});
+                resolve({
+                  success: true,
+                  message: "图片上传成功",
+                  uploadId,
+                  imageUrl: imageKey,
+                   });
+                    return;
                 }
               } catch { /* ignore parse error */ }
             }
