@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * API Client Abstraction Layer
  *
  * WeChat Mini Program environment: uses wx.request
@@ -8,20 +8,11 @@
  * Session-based auth: X-Session-Id header injected from userService.
  */
 
-// ==================== Environment Configuration ====================
-
-import { setStorage } from "@/utils/storage";
-
-export const ENV = {
+const ENV = {
   get current(): "development" | "production" {
-    if (typeof wx !== "undefined" && wx.getStorageSync) {
-      return "production";
-    }
     return "production";
   }
 };
-
-// ==================== API Base URL Configuration ====================
 
 const API_BASE_CONFIG = {
   development: "https://beauty-api-pages.pages.dev/",
@@ -30,29 +21,21 @@ const API_BASE_CONFIG = {
 
 export function getAPIBase(): string {
   const env = ENV.current;
-  if (typeof wx !== "undefined" && wx.getStorageSync) {
-    const isDebug = typeof wx.getSystemInfoSync !== "undefined"
-      && wx.getSystemInfoSync().environment === "develop";
-    return isDebug ? API_BASE_CONFIG.development : API_BASE_CONFIG.production;
-  }
   return env === "production" ? API_BASE_CONFIG.production : API_BASE_CONFIG.development;
 }
 
-// ==================== Error Message Configuration ====================
-
 const ERROR_MESSAGES = {
-  NETWORK_ERROR: "ÍøÂçÒì³££¬ÇëÉÔºóÖØÊÔ",
-  SERVER_ERROR: "·şÎñÆ÷·±Ã¦£¬ÇëÉÔºóÖØÊÔ",
-  NOT_FOUND: "ÇëÇóµÄ×ÊÔ´²»´æÔÚ",
-  AUTH_ERROR: "ÇëÏÈµÇÂ¼»ò¼ì²éÕË»§È¨ÏŞ",
-  UPLOAD_ERROR: "Í¼Æ¬ÉÏ´«Ê§°Ü£¬ÇëÖØÊÔ",
-  ANALYZE_ERROR: "·ÖÎöÊ§°Ü£¬ÇëÖØÊÔ",
-  UNKNOWN_ERROR: "·¢ÉúÎ´Öª´íÎó£¬ÇëÁªÏµ¿Í·ş",
-  TIMEOUT_ERROR: "ÇëÇó³¬Ê±£¬Çë¼ì²éÍøÂçÁ¬½Ó",
-  CANCEL_ERROR: "ÒÑÈ¡Ïû²Ù×÷"
+  NETWORK_ERROR: "ç½‘ç»œå¼‚å¸¸ï¼Œè¯·ç¨åé‡è¯•",
+  SERVER_ERROR: "æœåŠ¡å™¨ç¹å¿™ï¼Œè¯·ç¨åé‡è¯•",
+  NOT_FOUND: "è¯·æ±‚çš„èµ„æºä¸å­˜åœ¨",
+  AUTH_ERROR: "è¯·å…ˆç™»å½•æˆ–æ£€æŸ¥è´¦æˆ·æƒé™",
+  UPLOAD_ERROR: "å›¾ç‰‡ä¸Šä¼ å¤±è´¥ï¼Œè¯·é‡è¯•",
+  ANALYZE_ERROR: "åˆ†æå¤±è´¥ï¼Œè¯·é‡è¯•",
+  UNKNOWN_ERROR: "å‘ç”ŸæœªçŸ¥é”™è¯¯ï¼Œè¯·è”ç³»å®¢æœ",
+  TIMEOUT_ERROR: "è¯·æ±‚è¶…æ—¶ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿æ¥",
+  CANCEL_ERROR: "å·²å–æ¶ˆæ“ä½œ"
 };
 
-// ==================== Security Response Filter ====================
 export function sanitizeResponse<T>(data: any): T {
   if (data?.analysis) {
     delete data.analysis.FaceMetrics;
@@ -66,43 +49,18 @@ export function sanitizeResponse<T>(data: any): T {
   return data as T;
 }
 
-// ==================== WeChat Upload Error Code Mapping ====================
-
-export function mapWechatUploadError(wxErrMsg: string): string {
-  if (!wxErrMsg) return ERROR_MESSAGES.UPLOAD_ERROR;
-  if (wxErrMsg.includes("cancel") || wxErrMsg.includes("Cancel")) {
-    return "ÒÑÈ¡ÏûÉÏ´«";
-  }
-  if (wxErrMsg.includes("timeout") || wxErrMsg.includes("Timeout")) {
-    return "ÉÏ´«³¬Ê±£¬Çë¼ì²éÍøÂçºóÖØÊÔ";
-  }
-  if (wxErrMsg.includes("fail")) {
-    return "ÍøÂçÒì³££¬ÇëÖØÊÔ";
-  }
-  return ERROR_MESSAGES.UPLOAD_ERROR;
-}
-
-// ==================== Session Header Helpers ====================
-
-/**
- * Read the current session ID from storage and return it as a header value.
- * Returns null if no session is present (guest mode).
- */
 function getSessionHeader(): { "X-Session-Id": string } | null {
   try {
-    // Lazy import to avoid circular dependency at module load time
     const userService = require("./user-service").default;
     const sessionId = userService.getServerSessionId();
     if (sessionId) {
       return { "X-Session-Id": sessionId };
     }
   } catch {
-    // userService not ready yet ¡ª session will be null
+    // userService not ready yet
   }
   return null;
 }
-
-// ==================== ApiClient Class ====================
 
 export class ApiClient {
   private readonly TIMEOUT = 15000;
@@ -115,20 +73,13 @@ export class ApiClient {
   get baseUrl(): string { return this._baseUrl; }
   set baseUrl(v: string) { this._baseUrl = v; }
 
-  /**
-   * WeChat mini program request wrapper
-   */
   private wxRequest<T>(method: "GET" | "POST", path: string, body?: any): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
     return new Promise((resolve) => {
       const url = this._baseUrl.replace(/\/$/, "") + path;
+      console.log("[API DEBUG]", { baseUrl: this._baseUrl, path, url });
 
-console.log("[API DEBUG]", {
-  baseUrl: this._baseUrl,
-  path,
-  url
-});
-      const sessionHeader = getSessionHeader();
       const header: Record<string, string> = { "Content-Type": "application/json" };
+      const sessionHeader = getSessionHeader();
       if (sessionHeader) {
         Object.assign(header, sessionHeader);
       }
@@ -149,7 +100,6 @@ console.log("[API DEBUG]", {
               resolve({ success: false, error: ERROR_MESSAGES.UNKNOWN_ERROR, message: ERROR_MESSAGES.UNKNOWN_ERROR });
             }
           } else if (res.statusCode === 401) {
-            // Session expired ¡ª clear it and retry without session
             try {
               const userService = require("./user-service").default;
               userService.logout();
@@ -157,9 +107,18 @@ console.log("[API DEBUG]", {
             resolve({ success: false, error: ERROR_MESSAGES.AUTH_ERROR, message: ERROR_MESSAGES.AUTH_ERROR });
           } else if (res.statusCode === 403) {
             try {
-              const errData = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
-              const backendStatus = errData?.status || errData?.error || ERROR_MESSAGES.AUTH_ERROR;
-              resolve({ success: false, error: backendStatus, message: errData?.error || backendStatus });
+              const data = res.data as { status?: string; error?: string; balance?: number };
+              if (data?.status === "DAILY_LIMIT_REACHED") {
+                resolve({ success: false, error: data.error || "ä»Šå¤©æ¬¡æ•°å·²ç”¨å®Œï¼Œè¯·æ˜å¤©å†è¯•", message: data.error || "DAILY_LIMIT_REACHED" });
+              } else if (data?.status === "INSUFFICIENT_TOKEN") {
+                resolve({ success: false, error: data.error || "Tokenä¸è¶³ï¼Œè¯·å…ˆè§£é”", message: data.error || "INSUFFICIENT_TOKEN" });
+              } else if (data?.status === "SHARE_REWARD_USED") {
+                resolve({ success: false, error: data.error || "ä»Šå¤©å·²é¢†å–åˆ†äº«å¥–åŠ±", message: "SHARE_REWARD_USED" });
+              } else if (data?.status === "SHARE_REWARD_GRANTED") {
+                resolve({ success: true, data: data as T, message: "SHARE_REWARD_GRANTED" });
+              } else {
+                resolve({ success: false, error: data?.error || ERROR_MESSAGES.AUTH_ERROR, message: data?.error || "403" });
+              }
             } catch {
               resolve({ success: false, error: ERROR_MESSAGES.AUTH_ERROR, message: ERROR_MESSAGES.AUTH_ERROR });
             }
@@ -182,16 +141,13 @@ console.log("[API DEBUG]", {
     });
   }
 
-  /**
-   * H5/fetch request wrapper
-   */
   private fetchRequest<T>(method: "GET" | "POST", path: string, body?: any): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
     return new Promise((resolve) => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.TIMEOUT);
 
-      const sessionHeader = getSessionHeader();
       const headers: Record<string, string> = { "Content-Type": "application/json" };
+      const sessionHeader = getSessionHeader();
       if (sessionHeader) {
         Object.assign(headers, sessionHeader);
       }
@@ -209,6 +165,8 @@ console.log("[API DEBUG]", {
         .then(async (res) => {
           clearTimeout(timeoutId);
           if (!res.ok) {
+            let text = "";
+            try { text = await res.text(); } catch {}
             if (res.status === 401) {
               try {
                 const userService = require("./user-service").default;
@@ -216,9 +174,9 @@ console.log("[API DEBUG]", {
               } catch {}
               throw new Error("401");
             }
-            if (res.status === 403) throw new Error("403");
+            if (res.status === 403) throw new Error("403:" + text);
             if (res.status === 404) throw new Error("404");
-            if (res.status >= 500) throw new Error("500");
+            if (res.status >= 500) throw new Error("500:" + text);
             throw new Error("HTTP " + res.status);
           }
           const data = await res.json();
@@ -232,11 +190,18 @@ console.log("[API DEBUG]", {
             message = ERROR_MESSAGES.TIMEOUT_ERROR;
           } else if (e.message === "401") {
             message = ERROR_MESSAGES.AUTH_ERROR;
-          } else if (e.message === "403") {
-            message = ERROR_MESSAGES.AUTH_ERROR;
-          } else if (e.message === "404") {
-            message = ERROR_MESSAGES.NOT_FOUND;
-          } else if (e.message === "500") {
+          } else if (e.message?.startsWith("403:")) {
+            try {
+              const data = JSON.parse(e.message.slice(4)) as { status?: string; error?: string };
+              if (data.status === "DAILY_LIMIT_REACHED") message = data.error || "ä»Šå¤©æ¬¡æ•°å·²ç”¨å®Œï¼Œè¯·æ˜å¤©å†è¯•";
+              else if (data.status === "INSUFFICIENT_TOKEN") message = data.error || "Tokenä¸è¶³ï¼Œè¯·å…ˆè§£é”";
+              else if (data.status === "SHARE_REWARD_USED") message = "ä»Šå¤©å·²é¢†å–åˆ†äº«å¥–åŠ±";
+              else if (data.status === "SHARE_REWARD_GRANTED") message = "å·²è·å¾—ä¸€æ¬¡è¿›é˜¶é£æ ¼åˆ†æ";
+              else message = data.error || ERROR_MESSAGES.AUTH_ERROR;
+            } catch {
+              message = ERROR_MESSAGES.AUTH_ERROR;
+            }
+          } else if (e.message?.startsWith("500:")) {
             message = ERROR_MESSAGES.SERVER_ERROR;
           } else if (e.message?.startsWith("HTTP")) {
             message = ERROR_MESSAGES.NETWORK_ERROR;
@@ -250,25 +215,19 @@ console.log("[API DEBUG]", {
 
   async get<T = unknown>(path: string): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
     const isWeChat = typeof wx !== "undefined" && wx.request;
-    if (isWeChat) {
-      return this.wxRequest<T>("GET", path);
-    }
+    if (isWeChat) return this.wxRequest<T>("GET", path);
     return this.fetchRequest<T>("GET", path);
   }
 
-  async post<T = unknown>(path: string, body: any): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
+  async post<T = unknown>(path: string, body?: any): Promise<{ success: boolean; data?: T; error?: string; message?: string }> {
     const isWeChat = typeof wx !== "undefined" && wx.request;
-    if (isWeChat) {
-      return this.wxRequest<T>("POST", path, body);
-    }
+    if (isWeChat) return this.wxRequest<T>("POST", path, body);
     return this.fetchRequest<T>("POST", path, body);
   }
 
   setEnvironment(type: "development" | "production"): void {
     if (typeof wx !== "undefined" && wx.setStorageSync) {
       wx.setStorageSync("apiEnvironment", type);
-    } else {
-      setStorage("apiEnvironment", type);
     }
     this._baseUrl = getAPIBase();
   }
@@ -283,17 +242,12 @@ export const apiClient = new ApiClient(getAPIBase());
 export const api = {
   get: (path: string) => apiClient.get(path),
   post: (path: string, body: any) => apiClient.post(path, body),
-  setEnvironment: (type: "development" | "production") => {
-    apiClient.setEnvironment(type);
-  },
-  getEndpoint(): string {
-    return apiClient.baseUrl;
-  }
+  setEnvironment: (type: "development" | "production") => { apiClient.setEnvironment(type); },
+  getEndpoint(): string { return apiClient.baseUrl; }
 };
 
 apiClient.baseUrl = getAPIBase();
-// debug removed
-// ==================== Session Header Injection ====================
+
 export function injectSessionHeader(headers: Record<string, string>): void {
   try {
     const sid = require("./user-service").default.getServerSessionId();
@@ -303,5 +257,3 @@ export function injectSessionHeader(headers: Record<string, string>): void {
     console.error("[api-client] injectSessionHeader error:", e);
   }
 }
-
-
