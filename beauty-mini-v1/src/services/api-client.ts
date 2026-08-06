@@ -1,4 +1,4 @@
-ï»¿/**
+/**
  * API Client Abstraction Layer
  *
  * WeChat Mini Program environment: uses wx.request
@@ -41,15 +41,15 @@ export function getAPIBase(): string {
 // ==================== Error Message Configuration ====================
 
 const ERROR_MESSAGES = {
-  NETWORK_ERROR: "ç½‘ç»œå¼‚å¸¸ï¼Œè¯·ç¨åŽé‡è¯•",
-  SERVER_ERROR: "æœåŠ¡å™¨ç¹å¿™ï¼Œè¯·ç¨åŽé‡è¯•",
-  NOT_FOUND: "è¯·æ±‚çš„èµ„æºä¸å­˜åœ¨",
-  AUTH_ERROR: "è¯·å…ˆç™»å½•æˆ–æ£€æŸ¥è´¦æˆ·æƒé™",
-  UPLOAD_ERROR: "å›¾ç‰‡ä¸Šä¼ å¤±è´¥ï¼Œè¯·é‡è¯•",
-  ANALYZE_ERROR: "åˆ†æžå¤±è´¥ï¼Œè¯·é‡è¯•",
-  UNKNOWN_ERROR: "å‘ç”ŸæœªçŸ¥é”™è¯¯ï¼Œè¯·è”ç³»å®¢æœ",
-  TIMEOUT_ERROR: "è¯·æ±‚è¶…æ—¶ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿žæŽ¥",
-  CANCEL_ERROR: "å·²å–æ¶ˆæ“ä½œ"
+  NETWORK_ERROR: "ÍøÂçÒì³££¬ÇëÉÔºóÖØÊÔ",
+  SERVER_ERROR: "·þÎñÆ÷·±Ã¦£¬ÇëÉÔºóÖØÊÔ",
+  NOT_FOUND: "ÇëÇóµÄ×ÊÔ´²»´æÔÚ",
+  AUTH_ERROR: "ÇëÏÈµÇÂ¼»ò¼ì²éÕË»§È¨ÏÞ",
+  UPLOAD_ERROR: "Í¼Æ¬ÉÏ´«Ê§°Ü£¬ÇëÖØÊÔ",
+  ANALYZE_ERROR: "·ÖÎöÊ§°Ü£¬ÇëÖØÊÔ",
+  UNKNOWN_ERROR: "·¢ÉúÎ´Öª´íÎó£¬ÇëÁªÏµ¿Í·þ",
+  TIMEOUT_ERROR: "ÇëÇó³¬Ê±£¬Çë¼ì²éÍøÂçÁ¬½Ó",
+  CANCEL_ERROR: "ÒÑÈ¡Ïû²Ù×÷"
 };
 
 // ==================== Security Response Filter ====================
@@ -71,13 +71,13 @@ export function sanitizeResponse<T>(data: any): T {
 export function mapWechatUploadError(wxErrMsg: string): string {
   if (!wxErrMsg) return ERROR_MESSAGES.UPLOAD_ERROR;
   if (wxErrMsg.includes("cancel") || wxErrMsg.includes("Cancel")) {
-    return "å·²å–æ¶ˆä¸Šä¼ ";
+    return "ÒÑÈ¡ÏûÉÏ´«";
   }
   if (wxErrMsg.includes("timeout") || wxErrMsg.includes("Timeout")) {
-    return "ä¸Šä¼ è¶…æ—¶ï¼Œè¯·æ£€æŸ¥ç½‘ç»œåŽé‡è¯•";
+    return "ÉÏ´«³¬Ê±£¬Çë¼ì²éÍøÂçºóÖØÊÔ";
   }
   if (wxErrMsg.includes("fail")) {
-    return "ç½‘ç»œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
+    return "ÍøÂçÒì³££¬ÇëÖØÊÔ";
   }
   return ERROR_MESSAGES.UPLOAD_ERROR;
 }
@@ -97,7 +97,7 @@ function getSessionHeader(): { "X-Session-Id": string } | null {
       return { "X-Session-Id": sessionId };
     }
   } catch {
-    // userService not ready yet â€” session will be null
+    // userService not ready yet ¡ª session will be null
   }
   return null;
 }
@@ -149,14 +149,20 @@ console.log("[API DEBUG]", {
               resolve({ success: false, error: ERROR_MESSAGES.UNKNOWN_ERROR, message: ERROR_MESSAGES.UNKNOWN_ERROR });
             }
           } else if (res.statusCode === 401) {
-            // Session expired â€” clear it and retry without session
+            // Session expired ¡ª clear it and retry without session
             try {
               const userService = require("./user-service").default;
               userService.logout();
             } catch {}
             resolve({ success: false, error: ERROR_MESSAGES.AUTH_ERROR, message: ERROR_MESSAGES.AUTH_ERROR });
           } else if (res.statusCode === 403) {
-            resolve({ success: false, error: ERROR_MESSAGES.AUTH_ERROR, message: ERROR_MESSAGES.AUTH_ERROR });
+            try {
+              const errData = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+              const backendStatus = errData?.status || errData?.error || ERROR_MESSAGES.AUTH_ERROR;
+              resolve({ success: false, error: backendStatus, message: errData?.error || backendStatus });
+            } catch {
+              resolve({ success: false, error: ERROR_MESSAGES.AUTH_ERROR, message: ERROR_MESSAGES.AUTH_ERROR });
+            }
           } else if (res.statusCode === 404) {
             resolve({ success: false, error: ERROR_MESSAGES.NOT_FOUND, message: ERROR_MESSAGES.NOT_FOUND });
           } else if (res.statusCode >= 500) {
