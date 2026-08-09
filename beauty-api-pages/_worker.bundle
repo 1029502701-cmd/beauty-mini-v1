@@ -1,0 +1,3010 @@
+------formdata-undici-008104442356
+Content-Disposition: form-data; name="metadata"
+
+{"main_module":"functionsWorker-0.36599933613735836.js"}
+------formdata-undici-008104442356
+Content-Disposition: form-data; name="functionsWorker-0.36599933613735836.js"; filename="functionsWorker-0.36599933613735836.js"
+Content-Type: application/javascript+module
+
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __commonJS = (cb, mod) => function __require() {
+  try {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  } catch (e) {
+    throw mod = 0, e;
+  }
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+
+// datasets/products.json
+var require_products = __commonJS({
+  "datasets/products.json"(exports, module) {
+    module.exports = [
+      {
+        id: "prod_001",
+        name: "\u6E05\u900F\u6C34\u5149\u7C89\u5E95\u6DB2",
+        brand: "\u5B8C\u7F8E\u65E5\u8BB0",
+        category: "foundation",
+        category_cn: "\u7C89\u5E95",
+        skin_types: ["dry", "normal"],
+        face_shapes: ["oval", "heart", "round"],
+        makeup_styles: ["daily", "natural", "fresh"],
+        tags: ["\u6C34\u6DA6", "\u8F7B\u8584", "\u906E\u7455"],
+        price: 129,
+        reason: "\u9002\u5408\u5E72\u76AE\u548C\u4E2D\u6027\u76AE\u7684\u6E05\u900F\u5E95\u5986"
+      },
+      {
+        id: "prod_002",
+        name: "\u4E1D\u7ED2\u54D1\u5149\u53E3\u7EA2 #301",
+        brand: "MAC",
+        category: "lip",
+        category_cn: "\u53E3\u7EA2",
+        skin_types: ["fair", "medium"],
+        face_shapes: ["oval", "square", "heart"],
+        makeup_styles: ["evening", "formal", "daily"],
+        tags: ["\u590D\u53E4", "\u663E\u767D", "\u54D1\u5149"],
+        price: 175,
+        reason: "\u7ECF\u5178\u590D\u53E4\u7EA2\uFF0C\u9002\u5408\u9EC4\u76AE\u663E\u767D"
+      },
+      {
+        id: "prod_003",
+        name: "\u5927\u5730\u8272\u54D1\u5149\u773C\u5F71\u76D8",
+        brand: "3CE",
+        category: "eye",
+        category_cn: "\u773C\u5F71",
+        skin_types: ["normal", "oily"],
+        face_shapes: ["oval", "round", "heart", "square"],
+        makeup_styles: ["daily", "formal", "evening"],
+        tags: ["\u767E\u642D", "\u6D88\u80BF", "\u65E5\u5E38"],
+        price: 168,
+        reason: "\u5927\u5730\u8272\u7CFB\u9002\u5408\u6240\u6709\u773C\u578B\uFF0C\u6D88\u80BF\u767E\u642D"
+      },
+      {
+        id: "prod_004",
+        name: "\u6C34\u871C\u6843\u955C\u9762\u5507\u91C9",
+        brand: "into you",
+        category: "lip",
+        category_cn: "\u5507\u91C9",
+        skin_types: ["fair", "medium", "warm"],
+        face_shapes: ["oval", "heart", "round"],
+        makeup_styles: ["daily", "fresh", "natural"],
+        tags: ["\u955C\u9762", "\u6C34\u5149", "\u5AE9\u8272"],
+        price: 59,
+        reason: "\u6C34\u5149\u611F\u5507\u91C9\uFF0C\u65E5\u5E38\u901A\u52E4\u767E\u642D"
+      },
+      {
+        id: "prod_005",
+        name: "\u5976\u6CB9\u5149\u611F\u816E\u7EA2",
+        brand: "NARS",
+        category: "blush",
+        category_cn: "\u816E\u7EA2",
+        skin_types: ["dry", "normal"],
+        face_shapes: ["oval", "square", "heart"],
+        makeup_styles: ["daily", "natural", "fresh"],
+        tags: ["\u871C\u6843", "\u6E29\u67D4", "\u81EA\u7136"],
+        price: 260,
+        reason: "\u5976\u6CB9\u8D28\u5730\uFF0C\u81EA\u7136\u63D0\u6C14\u8272"
+      },
+      {
+        id: "prod_006",
+        name: "\u6301\u4E45\u96FE\u9762\u5B9A\u5986\u55B7\u96FE",
+        brand: "Urban Decay",
+        category: "foundation",
+        category_cn: "\u5B9A\u5986",
+        skin_types: ["oily", "combination"],
+        face_shapes: ["oval", "round", "square", "heart"],
+        makeup_styles: ["daily", "formal", "evening"],
+        tags: ["\u6301\u4E45", "\u63A7\u6CB9", "\u5B9A\u5986"],
+        price: 220,
+        reason: "\u6CB9\u76AE\u6551\u661F\uFF0C\u5168\u5929\u6301\u5986\u4E0D\u8131"
+      },
+      {
+        id: "prod_007",
+        name: "\u81EA\u7136\u7EA4\u957F\u776B\u6BDB\u818F",
+        brand: "\u5170\u853B",
+        category: "eye",
+        category_cn: "\u776B\u6BDB\u818F",
+        skin_types: ["all"],
+        face_shapes: ["oval", "heart", "round", "square"],
+        makeup_styles: ["daily", "natural", "fresh"],
+        tags: ["\u7EA4\u957F", "\u5377\u7FD8", "\u6839\u6839\u5206\u660E"],
+        price: 320,
+        reason: "\u6839\u6839\u5206\u660E\u6548\u679C\uFF0C\u65E5\u5E38\u81EA\u7136\u653E\u5927\u53CC\u773C"
+      },
+      {
+        id: "prod_008",
+        name: "\u4E1D\u7F0E\u6DA6\u6CFD\u5507\u818F #99",
+        brand: "Tom Ford",
+        category: "lip",
+        category_cn: "\u53E3\u7EA2",
+        skin_types: ["fair", "medium", "warm"],
+        face_shapes: ["oval", "heart", "square"],
+        makeup_styles: ["formal", "evening", "special"],
+        tags: ["\u5962\u534E", "\u6ECB\u6DA6", "\u9AD8\u7EA7"],
+        price: 420,
+        reason: "\u5962\u534E\u6ECB\u6DA6\u8D28\u5730\uFF0C\u91CD\u8981\u573A\u5408\u5FC5\u5907"
+      },
+      {
+        id: "prod_009",
+        name: "\u4FEE\u5BB9\u9AD8\u5149\u4E00\u4F53\u76D8",
+        brand: "Charlotte Tilbury",
+        category: "blush",
+        category_cn: "\u4FEE\u5BB9",
+        skin_types: ["all"],
+        face_shapes: ["oval", "round", "square", "heart"],
+        makeup_styles: ["daily", "formal", "evening"],
+        tags: ["\u7ACB\u4F53", "\u8F6E\u5ED3", "\u4FEE\u5BB9"],
+        price: 380,
+        reason: "\u4E00\u952E\u5851\u9020\u7ACB\u4F53\u8F6E\u5ED3\uFF0C\u9002\u5408\u5404\u79CD\u8138\u578B"
+      },
+      {
+        id: "prod_010",
+        name: "\u88F8\u7C89\u8272\u773C\u7EBF\u80F6\u7B14",
+        brand: "\u6A58\u6735",
+        category: "eye",
+        category_cn: "\u773C\u7EBF",
+        skin_types: ["all"],
+        face_shapes: ["oval", "heart", "round"],
+        makeup_styles: ["daily", "natural", "fresh"],
+        tags: ["\u88F8\u8272", "\u81EA\u7136", "\u6E29\u67D4"],
+        price: 39,
+        reason: "\u88F8\u7C89\u8272\u773C\u7EBF\uFF0C\u6253\u9020\u6E29\u67D4\u65E0\u8F9C\u611F"
+      },
+      {
+        id: "prod_011",
+        name: "\u4FDD\u6E7F\u6C14\u57AB\u7C89\u5E95",
+        brand: "\u96C5\u8BD7\u5170\u9EDB",
+        category: "foundation",
+        category_cn: "\u6C14\u57AB",
+        skin_types: ["dry", "normal", "sensitive"],
+        face_shapes: ["oval", "heart", "round", "square"],
+        makeup_styles: ["daily", "natural", "fresh"],
+        tags: ["\u4FDD\u6E7F", "\u5FEB\u901F", "\u4FBF\u643A"],
+        price: 450,
+        reason: "\u5E72\u76AE\u4EB2\u5988\uFF0C\u5FEB\u901F\u4E0A\u5986\u4FDD\u6E7F\u906E\u7455"
+      },
+      {
+        id: "prod_012",
+        name: "\u73E0\u5149\u9999\u69DF\u8272\u773C\u5F71",
+        brand: "Canmake",
+        category: "eye",
+        category_cn: "\u773C\u5F71",
+        skin_types: ["fair", "medium"],
+        face_shapes: ["oval", "heart"],
+        makeup_styles: ["evening", "formal", "special"],
+        tags: ["\u73E0\u5149", "\u9999\u69DF", "\u6D3E\u5BF9"],
+        price: 89,
+        reason: "\u9999\u69DF\u73E0\u5149\uFF0C\u6D3E\u5BF9\u665A\u5BB4\u95EA\u4EAE\u767B\u573A"
+      }
+    ];
+  }
+});
+
+// datasets/creators.json
+var require_creators = __commonJS({
+  "datasets/creators.json"(exports, module) {
+    module.exports = [
+      {
+        id: "creator_001",
+        creatorName: "\u6653\u7F8E\u9171",
+        style: "\u65E5\u7CFB\u6E05\u900F",
+        faceTarget: ["oval", "heart", "round"],
+        tags: ["\u65E5\u5E38", "\u6E05\u65B0", "\u4F2A\u7D20\u989C", "\u5B66\u751F"],
+        makeupStyles: ["daily", "natural", "fresh"],
+        skinTones: ["fair", "medium", "warm"],
+        avatar: "https://example.com/avatar1.jpg",
+        description: "\u65E5\u7CFB\u6E05\u900F\u5986\u5BB9\u8FBE\u4EBA\uFF0C\u64C5\u957F\u81EA\u7136\u4F2A\u7D20\u989C\u5986"
+      },
+      {
+        id: "creator_002",
+        creatorName: "\u6797\u5C0F\u5996",
+        style: "\u97E9\u7CFB\u6E29\u67D4",
+        faceTarget: ["oval", "heart", "square"],
+        tags: ["\u6E29\u67D4", "\u751C\u7F8E", "\u6C34\u5149\u808C", "\u7EA6\u4F1A"],
+        makeupStyles: ["daily", "natural", "formal"],
+        skinTones: ["fair", "medium"],
+        avatar: "https://example.com/avatar2.jpg",
+        description: "\u97E9\u7CFB\u6C34\u5149\u808C\u5986\u5BB9\uFF0C\u7EA6\u4F1A\u65A9\u7537\u5FC5\u5907"
+      },
+      {
+        id: "creator_003",
+        creatorName: "\u66AE\u8272\u73AB\u7470",
+        style: "\u6B27\u7F8E\u6D53\u5986",
+        faceTarget: ["oval", "square", "heart"],
+        tags: ["\u6B27\u7F8E", "\u6D53\u5986", "\u6C14\u573A", "\u6D3E\u5BF9"],
+        makeupStyles: ["evening", "formal", "special"],
+        skinTones: ["medium", "warm", "dark"],
+        avatar: "https://example.com/avatar3.jpg",
+        description: "\u6B27\u7F8E\u6D53\u5986\u8FBE\u4EBA\uFF0C\u6C14\u573A\u5168\u5F00\u7684\u6D3E\u5BF9\u5986\u5BB9"
+      },
+      {
+        id: "creator_004",
+        creatorName: "\u8584\u8377\u7CD6",
+        style: "\u6E05\u65B0\u5B66\u9662\u98CE",
+        faceTarget: ["oval", "round", "heart"],
+        tags: ["\u5B66\u9662", "\u6E05\u65B0", "\u51CF\u9F84", "\u9752\u6625"],
+        makeupStyles: ["daily", "natural", "fresh"],
+        skinTones: ["fair", "medium"],
+        avatar: "https://example.com/avatar4.jpg",
+        description: "\u5B66\u9662\u98CE\u5986\u5BB9\uFF0C\u51CF\u9F84\u6E05\u65B0\u6821\u56ED\u611F"
+      },
+      {
+        id: "creator_005",
+        creatorName: "\u7D2B\u82CF",
+        style: "\u65B0\u4E2D\u5F0F\u53E4\u5178",
+        faceTarget: ["oval", "heart", "square"],
+        tags: ["\u4E2D\u5F0F", "\u53E4\u5178", "\u56FD\u98CE", "\u6C14\u8D28"],
+        makeupStyles: ["formal", "evening", "special"],
+        skinTones: ["fair", "medium", "warm"],
+        avatar: "https://example.com/avatar5.jpg",
+        description: "\u65B0\u4E2D\u5F0F\u53E4\u5178\u5986\u5BB9\uFF0C\u4E1C\u65B9\u7F8E\u5B66\u4EE3\u8A00\u4EBA"
+      },
+      {
+        id: "creator_006",
+        creatorName: "\u5C0F\u6A31\u6843",
+        style: "\u751C\u9177\u8FA3\u59B9",
+        faceTarget: ["oval", "heart", "square"],
+        tags: ["\u751C\u9177", "\u8FA3\u59B9", "\u4E2A\u6027", "\u6F6E\u6D41"],
+        makeupStyles: ["evening", "formal", "special"],
+        skinTones: ["fair", "medium", "warm", "dark"],
+        avatar: "https://example.com/avatar6.jpg",
+        description: "\u751C\u9177\u8FA3\u59B9\u5986\uFF0C\u4E2A\u6027\u5341\u8DB3\u8857\u5934\u98CE\u683C"
+      },
+      {
+        id: "creator_007",
+        creatorName: "\u6696\u9633",
+        style: "\u65E5\u7CFB\u76D0\u7CFB",
+        faceTarget: ["oval", "round", "heart", "square"],
+        tags: ["\u76D0\u7CFB", "\u4E2D\u6027", "\u6E05\u723D", "\u5E72\u51C0"],
+        makeupStyles: ["daily", "natural", "fresh"],
+        skinTones: ["fair", "medium"],
+        avatar: "https://example.com/avatar7.jpg",
+        description: "\u65E5\u7CFB\u76D0\u7CFB\u5986\u5BB9\uFF0C\u6E05\u723D\u5E72\u51C0\u5C11\u5E74\u611F"
+      },
+      {
+        id: "creator_008",
+        creatorName: "\u66AE\u5149\u4E4B\u57CE",
+        style: "\u590D\u53E4\u6E2F\u98CE",
+        faceTarget: ["oval", "square", "heart"],
+        tags: ["\u590D\u53E4", "\u6E2F\u98CE", "\u6D53\u8273", "\u6C14\u8D28"],
+        makeupStyles: ["evening", "formal", "special"],
+        skinTones: ["medium", "warm", "dark"],
+        avatar: "https://example.com/avatar8.jpg",
+        description: "\u590D\u53E4\u6E2F\u98CE\u5986\u5BB9\uFF0C\u6D53\u8273\u5927\u6C14\u7ECF\u5178\u590D\u53E4"
+      },
+      {
+        id: "creator_009",
+        creatorName: "\u6A31\u82B1\u9171",
+        style: "\u751C\u7F8E\u6C34\u5149",
+        faceTarget: ["oval", "round", "heart"],
+        tags: ["\u751C\u7F8E", "\u6C34\u5149", "\u5C11\u5973", "\u8F6F\u840C"],
+        makeupStyles: ["daily", "natural", "fresh"],
+        skinTones: ["fair", "medium"],
+        avatar: "https://example.com/avatar9.jpg",
+        description: "\u751C\u7F8E\u6C34\u5149\u5986\uFF0C\u5C11\u5973\u611F\u6EE1\u6EE1\u7684\u8F6F\u840C\u98CE\u683C"
+      },
+      {
+        id: "creator_010",
+        creatorName: "\u591C\u884C\u8005",
+        style: "\u9177\u611F\u70DF\u718F",
+        faceTarget: ["oval", "square", "heart"],
+        tags: ["\u70DF\u718F", "\u9177\u611F", "\u6697\u9ED1", "\u4E2A\u6027"],
+        makeupStyles: ["evening", "formal", "special"],
+        skinTones: ["fair", "medium", "warm", "dark"],
+        avatar: "https://example.com/avatar10.jpg",
+        description: "\u9177\u611F\u70DF\u718F\u5986\uFF0C\u6697\u9ED1\u4E2A\u6027\u6D3E\u5FC5\u5907"
+      },
+      {
+        id: "creator_011",
+        creatorName: "\u9752\u67E0\u6C7D\u6C34",
+        style: "\u6E05\u723D\u901A\u52E4\u98CE",
+        faceTarget: ["oval", "round", "heart", "square"],
+        tags: ["\u901A\u52E4", "\u804C\u573A", "\u5E72\u7EC3", "\u4F18\u96C5"],
+        makeupStyles: ["daily", "formal", "natural"],
+        skinTones: ["fair", "medium", "warm"],
+        avatar: "https://example.com/avatar11.jpg",
+        description: "\u6E05\u723D\u901A\u52E4\u5986\uFF0C\u804C\u573A\u5973\u6027\u7684\u4F18\u96C5\u4E4B\u9009"
+      },
+      {
+        id: "creator_012",
+        creatorName: "\u6843\u82B1\u917F",
+        style: "\u53E4\u98CE\u6C49\u670D\u5986",
+        faceTarget: ["oval", "heart", "round"],
+        tags: ["\u53E4\u98CE", "\u6C49\u670D", "\u4ED9\u6C14", "\u53E4\u5178"],
+        makeupStyles: ["formal", "special", "evening"],
+        skinTones: ["fair", "medium"],
+        avatar: "https://example.com/avatar12.jpg",
+        description: "\u53E4\u98CE\u6C49\u670D\u5986\u5BB9\uFF0C\u4ED9\u6C14\u98D8\u98D8\u53E4\u5178\u97F5\u5473"
+      }
+    ];
+  }
+});
+
+// modules/beauty-ai/permission/permission-service.ts
+var TOKEN_COST = {
+  "first-look": 0,
+  "style-upgrade": 0,
+  "beauty-pro": 1
+};
+var REPORT_TTL_DAYS = {
+  "first-look": 7,
+  "style-upgrade": 15,
+  "beauty-pro": 30
+};
+var PermissionService = class {
+  static {
+    __name(this, "PermissionService");
+  }
+  canAccessReport(input) {
+    const { userId, reportLevel, tokenBalance = 0 } = input;
+    const cost = TOKEN_COST[reportLevel];
+    if (cost === 0) {
+      return { allowed: true, reason: "The " + reportLevel + " report is free." };
+    }
+    if (tokenBalance < cost) {
+      return {
+        allowed: false,
+        reason: "Insufficient tokens. " + reportLevel + " requires " + cost + " token(s), balance: " + tokenBalance,
+        tokenRequired: cost,
+        balance: tokenBalance
+      };
+    }
+    return {
+      allowed: true,
+      reason: "Access granted. " + cost + " token(s) will be consumed.",
+      tokenRequired: cost,
+      balance: tokenBalance
+    };
+  }
+};
+
+// modules/beauty-ai/permission/report-access-service.ts
+var DAILY_LIMITS = {
+  "first-look": 2,
+  "style-upgrade": 1
+};
+var ReportAccessService = class {
+  constructor(db) {
+    this.db = db;
+    this.ensureTable();
+  }
+  db;
+  static {
+    __name(this, "ReportAccessService");
+  }
+  async ensureTable() {
+    try {
+      await this.db.prepare(
+        "CREATE TABLE IF NOT EXISTS report_access (  id TEXT PRIMARY KEY,  user_id TEXT NOT NULL,  report_id TEXT NOT NULL,  level TEXT NOT NULL CHECK(level IN ('first-look', 'style-upgrade', 'beauty-pro')),  unlock_type TEXT NOT NULL CHECK(unlock_type IN ('free', 'token')),  token_cost INTEGER NOT NULL DEFAULT 0,  unlocked_at TEXT NOT NULL DEFAULT (datetime('now')),  expire_at TEXT NOT NULL)"
+      ).run();
+      await this.db.prepare("CREATE INDEX IF NOT EXISTS idx_ra_user_id ON report_access(user_id)").run();
+      await this.db.prepare("CREATE INDEX IF NOT EXISTS idx_ra_report_id ON report_access(report_id)").run();
+      await this.db.prepare(
+        "CREATE UNIQUE INDEX IF NOT EXISTS uq_ra_user_report_level ON report_access(user_id, report_id, level)"
+      ).run();
+    } catch (e) {
+      console.error("[ReportAccessService.ensureTable] Error:", e);
+    }
+  }
+  async checkReportAccess(userId, reportId, level) {
+    const row = await this.db.prepare(
+      "SELECT id, user_id, report_id, level, unlock_type, token_cost, unlocked_at, expire_at FROM report_access WHERE user_id = ? AND report_id = ? AND level = ? LIMIT 1"
+    ).first(userId, reportId, level);
+    if (!row) return null;
+    return {
+      unlocked: true,
+      level: row.level,
+      tokenCost: row.token_cost,
+      unlockType: row.unlock_type,
+      unlockedAt: row.unlocked_at,
+      expireAt: row.expire_at
+    };
+  }
+  /**
+   * 查询用户今天（UTC 日期）对指定 level 已使用的次数。
+   */
+  async getDailyAccessCount(userId, level) {
+    const startOfDay = /* @__PURE__ */ new Date();
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    const startISO = startOfDay.toISOString();
+    const endISO = new Date(Date.now() + 24 * 60 * 60 * 1e3).toISOString();
+    const row = await this.db.prepare(
+      "SELECT COUNT(*) AS cnt FROM report_access WHERE user_id = ? AND level = ? AND unlocked_at >= ? AND unlocked_at < ?"
+    ).first(userId, level, startISO, endISO);
+    return row?.cnt ?? 0;
+  }
+  async grantReportAccess(userId, reportId, level) {
+    const existing = await this.checkReportAccess(userId, reportId, level);
+    if (existing) {
+      return { success: true, alreadyUnlocked: true, accessRecord: existing };
+    }
+    const cost = TOKEN_COST[level];
+    if (cost === 0) {
+      const dailyLimit = DAILY_LIMITS[level];
+      const todayCount = await this.getDailyAccessCount(userId, level);
+      if (todayCount >= dailyLimit) {
+        return {
+          success: false,
+          alreadyUnlocked: false,
+          error: `\u6BCF\u65E5 ${level} \u6B21\u6570\u5DF2\u8FBE\u4E0A\u9650\uFF08${dailyLimit} \u6B21\uFF09`
+        };
+      }
+    }
+    const unlockType = cost === 0 ? "free" : "token";
+    const ttlDays = REPORT_TTL_DAYS[level];
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const expireAt = new Date(Date.now() + ttlDays * 24 * 60 * 60 * 1e3).toISOString();
+    try {
+      await this.db.prepare(
+        "INSERT INTO report_access (id, user_id, report_id, level, unlock_type, token_cost, unlocked_at, expire_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+      ).bind(
+        crypto.randomUUID(),
+        userId,
+        reportId,
+        level,
+        unlockType,
+        cost,
+        now,
+        expireAt
+      ).run();
+      return {
+        success: true,
+        alreadyUnlocked: false,
+        accessRecord: { unlocked: true, level, tokenCost: cost, unlockType, unlockedAt: now, expireAt }
+      };
+    } catch (e) {
+      const err = e;
+      if (err.code === "SQLITE_CONSTRAINT" || err.message?.includes("uq_ra_user_report_level")) {
+        const retry = await this.checkReportAccess(userId, reportId, level);
+        if (retry) return { success: true, alreadyUnlocked: true, accessRecord: retry };
+      }
+      console.error("[ReportAccessService.grantReportAccess] Error:", err);
+      return { success: false, alreadyUnlocked: false, error: err.message || "Failed to grant access" };
+    }
+  }
+  /**
+   * 仅记录 report_access（不检查每日次数限制），用于 beauty-pro 付费报告。
+   */
+  async recordAccess(userId, reportId, level) {
+    const existing = await this.checkReportAccess(userId, reportId, level);
+    if (existing) {
+      return { success: true, alreadyUnlocked: true, accessRecord: existing };
+    }
+    const cost = TOKEN_COST[level];
+    const unlockType = cost === 0 ? "free" : "token";
+    const ttlDays = REPORT_TTL_DAYS[level];
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const expireAt = new Date(Date.now() + ttlDays * 24 * 60 * 60 * 1e3).toISOString();
+    try {
+      await this.db.prepare(
+        "INSERT INTO report_access (id, user_id, report_id, level, unlock_type, token_cost, unlocked_at, expire_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+      ).bind(
+        crypto.randomUUID(),
+        userId,
+        reportId,
+        level,
+        unlockType,
+        cost,
+        now,
+        expireAt
+      ).run();
+      return {
+        success: true,
+        alreadyUnlocked: false,
+        accessRecord: { unlocked: true, level, tokenCost: cost, unlockType, unlockedAt: now, expireAt }
+      };
+    } catch (e) {
+      const err = e;
+      if (err.code === "SQLITE_CONSTRAINT" || err.message?.includes("uq_ra_user_report_level")) {
+        const retry = await this.checkReportAccess(userId, reportId, level);
+        if (retry) return { success: true, alreadyUnlocked: true, accessRecord: retry };
+      }
+      console.error("[ReportAccessService.recordAccess] Error:", err);
+      return { success: false, alreadyUnlocked: false, error: err.message || "Failed to record access" };
+    }
+  }
+  async getUnlockedLevels(userId, reportId) {
+    const rows = await this.db.prepare(
+      "SELECT level, unlock_type, token_cost, unlocked_at, expire_at FROM report_access WHERE user_id = ? AND report_id = ? ORDER BY level"
+    ).all(userId, reportId);
+    return (rows.results ?? []).map((r) => ({
+      unlocked: true,
+      level: r.level,
+      tokenCost: r.token_cost,
+      unlockType: r.unlock_type,
+      unlockedAt: r.unlocked_at,
+      expireAt: r.expire_at
+    }));
+  }
+};
+
+// functions/api/beauty/report/query.ts
+async function onRequestGet(context) {
+  const { env, request } = context;
+  const url = new URL(request.url);
+  const reportId = url.searchParams.get("id");
+  if (!reportId) {
+    return new Response(
+      JSON.stringify({ success: false, error: "Query param 'id' is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const row = await env.D1_DB.prepare(
+      "SELECT id, user_id, image_id, image_url, thumbnail_url, level, status, analysis_json, created_at FROM beauty_reports WHERE id = ? LIMIT 1"
+    ).first(reportId);
+    if (!row) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Report not found" }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    let reportJson;
+    try {
+      reportJson = JSON.parse(row.analysis_json);
+    } catch {
+      reportJson = { raw: row.analysis_json };
+    }
+    const sessionId = request.headers.get("X-Session-Id") || "";
+    const userId = sessionId || "anonymous";
+    if (!sessionId) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Session ID required" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+    if (!sessionRaw) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid or expired session" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const resolvedUserId = JSON.parse(sessionRaw).userId;
+    if (row.user_id !== resolvedUserId) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Forbidden: you can only query your own reports" }),
+        { status: 403, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const reportAccessService = new ReportAccessService(env.D1_DB);
+    const accessRecord = await reportAccessService.checkReportAccess(resolvedUserId, reportId, row.level);
+    const level = row.level;
+    if (!accessRecord) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Report not unlocked for this level",
+          reportLevel: level,
+          unlocked: false
+        }),
+        { status: 403, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    return new Response(
+      JSON.stringify({
+        success: true,
+        report: {
+          id: row.id,
+          userId: row.user_id,
+          uploadId: row.image_id,
+          imageUrl: row.image_url,
+          thumbnailUrl: row.thumbnail_url,
+          reportLevel: row.level,
+          status: row.status,
+          reportJson,
+          createdAt: row.created_at
+        },
+        access: {
+          unlocked: true,
+          level,
+          tokenCost: accessRecord.tokenCost,
+          unlockType: accessRecord.unlockType
+        }
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/report/query] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, error: "Internal server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestGet, "onRequestGet");
+
+// lib/session.ts
+var SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1e3;
+var SESSION_KEY_PREFIX = "session:";
+function generateSessionToken() {
+  return crypto.randomUUID();
+}
+__name(generateSessionToken, "generateSessionToken");
+function sessionKey(sessionId) {
+  return SESSION_KEY_PREFIX + sessionId;
+}
+__name(sessionKey, "sessionKey");
+var SessionService = class {
+  constructor(kv) {
+    this.kv = kv;
+  }
+  kv;
+  static {
+    __name(this, "SessionService");
+  }
+  async createGuestSession(guestId, userId) {
+    const sessionId = generateSessionToken();
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const expiresAt = new Date(Date.now() + SESSION_TTL_MS).toISOString();
+    const record = {
+      sessionId,
+      userId,
+      guestId,
+      wechatOpenId: null,
+      isGuest: true,
+      createdAt: now,
+      expiresAt,
+      lastActiveAt: now
+    };
+    await this.kv.put(sessionKey(sessionId), JSON.stringify(record), {
+      expirationTtl: Math.floor(SESSION_TTL_MS / 1e3) + 60
+    });
+    return record;
+  }
+  async validate(sessionId) {
+    if (!sessionId) return null;
+    const raw = await this.kv.get(sessionKey(sessionId));
+    if (!raw) return null;
+    try {
+      const record = JSON.parse(raw);
+      if (new Date(record.expiresAt) < /* @__PURE__ */ new Date()) {
+        await this.kv.delete(sessionKey(sessionId));
+        return null;
+      }
+      record.lastActiveAt = (/* @__PURE__ */ new Date()).toISOString();
+      record.expiresAt = new Date(Date.now() + SESSION_TTL_MS).toISOString();
+      await this.kv.put(sessionKey(sessionId), JSON.stringify(record), {
+        expirationTtl: Math.floor(SESSION_TTL_MS / 1e3) + 60
+      });
+      return record;
+    } catch {
+      return null;
+    }
+  }
+};
+function extractSessionId(request) {
+  return request.headers.get("X-Session-Id") || "";
+}
+__name(extractSessionId, "extractSessionId");
+
+// functions/api/beauty/share/reward.ts
+var REWARD_TYPE = "share_style_upgrade";
+var DAILY_LIMIT = 1;
+async function onRequestPost(context) {
+  const { env, request } = context;
+  try {
+    const sessionId = extractSessionId(request);
+    if (!sessionId) {
+      return new Response(
+        JSON.stringify({ success: false, status: "AUTH_REQUIRED", error: "Authentication required" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+    if (!sessionRaw) {
+      return new Response(
+        JSON.stringify({ success: false, status: "SESSION_EXPIRED", error: "Invalid or expired session" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const userId = JSON.parse(sessionRaw).userId;
+    const reportAccessService = new ReportAccessService(env.D1_DB);
+    const startOfDay = /* @__PURE__ */ new Date();
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    const startISO = startOfDay.toISOString();
+    const endISO = new Date(Date.now() + 24 * 60 * 60 * 1e3).toISOString();
+    const todayCount = await env.D1_DB.prepare(
+      "SELECT COUNT(*) AS cnt FROM share_rewards WHERE user_id = ? AND reward_type = ? AND claimed_at >= ? AND claimed_at < ?"
+    ).first(userId, REWARD_TYPE, startISO, endISO);
+    if ((todayCount?.cnt ?? 0) >= DAILY_LIMIT) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          status: "SHARE_REWARD_USED",
+          error: "\u4ECA\u5929\u5DF2\u9886\u53D6\u5206\u4EAB\u5956\u52B1\uFF0C\u660E\u5929\u518D\u6765\u5427"
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const reportId = "share_" + Date.now() + "_" + userId;
+    const result = await reportAccessService.grantReportAccess(userId, reportId, "style-upgrade");
+    if (!result.success) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          status: "GRANT_FAILED",
+          error: result.error || "Failed to grant access"
+        }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    try {
+      await env.D1_DB.prepare(
+        "INSERT INTO share_rewards (id, user_id, reward_type, claimed_at, expire_at) VALUES (?, ?, ?, ?, ?)"
+      ).bind(
+        crypto.randomUUID(),
+        userId,
+        REWARD_TYPE,
+        (/* @__PURE__ */ new Date()).toISOString(),
+        new Date(Date.now() + 7 * 24 * 60 * 60 * 1e3).toISOString()
+      ).run();
+    } catch (e) {
+      console.error("[share/reward] Failed to record:", e);
+    }
+    return new Response(
+      JSON.stringify({
+        success: true,
+        status: "SHARE_REWARD_GRANTED",
+        message: "\u5DF2\u83B7\u5F97\u4E00\u6B21\u8FDB\u9636\u98CE\u683C\u5206\u6790",
+        reportId
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/share/reward] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, status: "SERVER_ERROR", error: "Internal server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestPost, "onRequestPost");
+
+// modules/token/token-service.ts
+var INITIAL_BALANCE = 0;
+var TokenService = class {
+  constructor(db) {
+    this.db = db;
+    this.ensureTables();
+  }
+  db;
+  static {
+    __name(this, "TokenService");
+  }
+  async ensureTables() {
+    try {
+      await this.db.prepare(
+        "CREATE TABLE IF NOT EXISTS user_tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT NOT NULL UNIQUE, balance INTEGER NOT NULL DEFAULT 0, updated_at TEXT NOT NULL)"
+      ).run();
+      await this.db.prepare(
+        "CREATE TABLE IF NOT EXISTS token_transactions (id TEXT PRIMARY KEY, user_id TEXT NOT NULL, amount INTEGER NOT NULL, type TEXT NOT NULL CHECK(type IN ('add', 'consume')), description TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL)"
+      ).run();
+      await this.db.prepare("CREATE INDEX IF NOT EXISTS idx_user_tokens_user_id ON user_tokens(user_id)").run();
+      await this.db.prepare("CREATE INDEX IF NOT EXISTS idx_token_transactions_user_id ON token_transactions(user_id)").run();
+      await this.db.prepare("CREATE INDEX IF NOT EXISTS idx_token_transactions_created_at ON token_transactions(created_at DESC)").run();
+    } catch (e) {
+      console.error("[TokenService.ensureTables] Error:", e);
+    }
+  }
+  async getBalance(userId) {
+    const row = await this.db.prepare("SELECT balance FROM user_tokens WHERE user_id = ?").bind(userId).first();
+    if (row) return row.balance;
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    await this.db.prepare("INSERT INTO user_tokens (user_id, balance, updated_at) VALUES (?, ?, ?)").bind(userId, INITIAL_BALANCE, now).run();
+    return INITIAL_BALANCE;
+  }
+  async consume(input) {
+    const { userId, amount, description } = input;
+    const currentBalance = await this.getBalance(userId);
+    if (currentBalance < amount) {
+      throw new Error("Insufficient tokens. Required: " + amount + ", balance: " + currentBalance);
+    }
+    const newBalance = currentBalance - amount;
+    await this.db.prepare("UPDATE user_tokens SET balance = balance - ?, updated_at = ? WHERE user_id = ?").bind(amount, (/* @__PURE__ */ new Date()).toISOString(), userId).run();
+    await this.createTransaction(userId, -amount, "consume", description);
+    return newBalance;
+  }
+  async add(userId, amount, description = "Token added") {
+    const newBalance = await this.getBalance(userId);
+    const updatedBalance = newBalance + amount;
+    await this.db.prepare("UPDATE user_tokens SET balance = balance + ?, updated_at = ? WHERE user_id = ?").bind(amount, (/* @__PURE__ */ new Date()).toISOString(), userId).run();
+    await this.createTransaction(userId, amount, "add", description);
+    return updatedBalance;
+  }
+  async getTransactions(userId, limit = 20) {
+    const rows = await this.db.prepare("SELECT id, user_id, amount, type, description, created_at FROM token_transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT ?").bind(userId, limit).all();
+    return rows.results ?? [];
+  }
+  async createTransaction(userId, amount, type, description) {
+    const id = crypto.randomUUID();
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    await this.db.prepare("INSERT INTO token_transactions (id, user_id, amount, type, description, created_at) VALUES (?, ?, ?, ?, ?, ?)").bind(id, userId, amount, type, description, now).run();
+  }
+};
+
+// functions/api/beauty/access.ts
+async function onRequestGet2(context) {
+  const { env, request } = context;
+  const url = new URL(request.url);
+  const reportLevel = url.searchParams.get("reportLevel");
+  if (!reportLevel) {
+    return new Response(
+      JSON.stringify({ success: false, status: "INVALID_PARAM", error: "Query param reportLevel is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const validLevels = ["first-look", "style-upgrade", "beauty-pro"];
+  if (!validLevels.includes(reportLevel)) {
+    return new Response(
+      JSON.stringify({ success: false, status: "INVALID_PARAM", error: "Invalid reportLevel: " + reportLevel }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const tokenService = new TokenService(env.D1_DB);
+    const permissionService = new PermissionService();
+    const sessionId = extractSessionId(request);
+    if (!sessionId) {
+      return new Response(
+        JSON.stringify({ success: false, status: "AUTH_REQUIRED", error: "Authentication required" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+    if (!sessionRaw) {
+      return new Response(
+        JSON.stringify({ success: false, status: "SESSION_EXPIRED", error: "Invalid session" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const userId = JSON.parse(sessionRaw).userId;
+    const balance = await tokenService.getBalance(userId);
+    const result = permissionService.canAccessReport({
+      userId,
+      reportLevel,
+      tokenBalance: balance
+    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        status: result.allowed ? "ACCESS_GRANTED" : "ACCESS_DENIED",
+        allowed: result.allowed,
+        reason: result.reason,
+        tokenRequired: result.tokenRequired ?? 0,
+        balance
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/access] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, status: "SERVER_ERROR", error: "Internal server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestGet2, "onRequestGet");
+
+// modules/beauty-ai/face-analysis.ts
+var PlaceholderDetector = class {
+  static {
+    __name(this, "PlaceholderDetector");
+  }
+  async detect(_image) {
+    return {
+      faceWidth: 128,
+      faceHeight: 160,
+      faceRatio: 0.8,
+      eyeDistance: 32,
+      eyeWidthLeft: 24,
+      eyeWidthRight: 24,
+      noseWidth: 18,
+      lipWidth: 30,
+      faceType: "\u9E45\u86CB\u8138"
+    };
+  }
+};
+var FaceAnalysisEngine = class {
+  static {
+    __name(this, "FaceAnalysisEngine");
+  }
+  detector;
+  constructor(detector) {
+    this.detector = detector ?? new PlaceholderDetector();
+  }
+  async analyze(image) {
+    return this.detector.detect(image);
+  }
+  /**
+   * Analyze and return full BeautyFaceMetrics with all required fields.
+   * Uses faceType from FaceMetrics and fills in defaults for missing fields.
+   */
+  async analyzeBeauty(image) {
+    const metrics = await this.analyze(image);
+    return {
+      faceShape: metrics.faceType || "\u9E45\u86CB\u8138",
+      faceRatio: metrics.faceRatio,
+      eyeType: "\u674F\u773C",
+      eyeSize: 0,
+      noseRatio: 0.4,
+      lipRatio: 0.3,
+      jawType: "\u6807\u51C6\u988C\u578B",
+      skinTone: "\u4E2D\u6027"
+    };
+  }
+};
+
+// functions/api/beauty/analyze.ts
+async function onRequestPost2(context) {
+  const { env, request } = context;
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Request body must be valid JSON" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  if (!body.imageKey) {
+    return new Response(
+      JSON.stringify({ error: "Field 'imageKey' is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const sessionId = extractSessionId(request);
+  if (!sessionId) {
+    return new Response(
+      JSON.stringify({ error: "Authentication required" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+  if (!sessionRaw) {
+    return new Response(
+      JSON.stringify({ error: "Invalid session" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const { userId } = JSON.parse(sessionRaw);
+  body.imageKey = decodeURIComponent(body.imageKey);
+  console.log("analyze userId:", userId);
+  console.log("analyze imageKey:", body.imageKey);
+  if (!body.imageKey.startsWith("beauty/uploads/" + userId + "/")) {
+    return new Response(
+      JSON.stringify({ error: "Forbidden: image does not belong to you" }),
+      { status: 403, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  if (!env.IMAGE_BUCKET) {
+    return new Response(
+      JSON.stringify({ error: "IMAGE_BUCKET R2 binding is not configured" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const engine = new FaceAnalysisEngine();
+  const object = await env.IMAGE_BUCKET.get(body.imageKey);
+  if (!object) {
+    return new Response(
+      JSON.stringify({ error: "Image not found in storage" }),
+      { status: 404, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const imageBuffer = Buffer.from(await object.arrayBuffer());
+    const metrics = await engine.analyze(imageBuffer);
+    return new Response(
+      JSON.stringify({
+        success: true,
+        uploadId: body.uploadId ?? null,
+        imageKey: body.imageKey,
+        metrics
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/analyze] Error:", err);
+    return new Response(
+      JSON.stringify({ error: "Analysis failed" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestPost2, "onRequestPost");
+
+// modules/beauty-ai/recommendation/product-matcher.ts
+async function loadProductsFromJson() {
+  try {
+    const mod = await Promise.resolve().then(() => __toESM(require_products()));
+    return mod.default;
+  } catch {
+    return [];
+  }
+}
+__name(loadProductsFromJson, "loadProductsFromJson");
+async function loadProductsFromD1(env) {
+  try {
+    const result = await env.D1_DB.prepare(
+      "SELECT id, name, brand, category, price, original_price, image_url, description, platform, affiliate_link, stock, status, featured, recommended_tags FROM admin_products WHERE status = ? ORDER BY featured DESC, created_at DESC LIMIT 50"
+    ).bind("active").all();
+    if (result.success && result.results) {
+      return result.results.map((row) => ({
+        id: row.id,
+        name: row.name,
+        brand: row.brand,
+        category: row.category,
+        category_cn: row.category,
+        price: row.price,
+        original_price: row.original_price,
+        image_url: row.image_url,
+        description: row.description || "",
+        platform: row.platform || "",
+        affiliate_link: row.affiliate_link || "",
+        stock: row.stock || 0,
+        status: row.status,
+        featured: row.featured || 0,
+        reason: row.description || "",
+        // Map D1 fields to product-matcher expected fields
+        skin_types: [],
+        face_shapes: [],
+        makeup_styles: [],
+        tags: [],
+        recommended_tags: row.recommended_tags || "[]"
+      }));
+    }
+    return [];
+  } catch (err) {
+    console.warn("[product-matcher] D1 query failed, falling back to JSON:", err);
+    return [];
+  }
+}
+__name(loadProductsFromD1, "loadProductsFromD1");
+function scoreProduct(product, input) {
+  let score = 0;
+  const categories = product["category"];
+  if (categories) {
+    const catSet = Array.isArray(categories) ? categories : [categories];
+    const styleMap = {
+      daily: ["foundation", "lip", "eye", "blush"],
+      natural: ["foundation", "lip", "eye", "blush"],
+      fresh: ["foundation", "lip", "eye", "blush"],
+      formal: ["foundation", "lip", "eye", "blush"],
+      evening: ["lip", "eye", "foundation"],
+      special: ["lip", "eye", "foundation"]
+    };
+    const compatible = styleMap[input.makeupStyle] ?? [];
+    const overlap = catSet.filter((c) => compatible.includes(c)).length;
+    if (overlap > 0) score += overlap * 10;
+  }
+  const skinTypes = product["skin_types"];
+  if (skinTypes && (skinTypes.includes("all") || skinTypes.includes(input.skinType))) {
+    score += 30;
+  }
+  const faceShapes = product["face_shapes"];
+  if (faceShapes && faceShapes.includes(input.faceType)) {
+    score += 20;
+  }
+  const makeupStyles = product["makeup_styles"];
+  if (makeupStyles && makeupStyles.includes(input.makeupStyle)) {
+    score += 15;
+  }
+  const reason = product["reason"];
+  if (reason) score += 10;
+  return Math.min(score, 100);
+}
+__name(scoreProduct, "scoreProduct");
+var ProductMatcher = class {
+  constructor(env) {
+    this.env = env;
+  }
+  env;
+  static {
+    __name(this, "ProductMatcher");
+  }
+  async match(input) {
+    let products = this.env ? await loadProductsFromD1(this.env) : [];
+    if (products.length === 0) {
+      products = await loadProductsFromJson();
+    }
+    const scored = products.map((p) => ({
+      product: p,
+      score: scoreProduct(p, input)
+    }));
+    const ranked = scored.filter((r) => r.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+    return ranked.map((r) => ({
+      id: String(r.product["id"]),
+      name: String(r.product["name"]),
+      brand: String(r.product["brand"] ?? ""),
+      category: String(r.product["category"] ?? ""),
+      category_cn: String(r.product["category_cn"] ?? r.product["category"] ?? ""),
+      reason: String(r.product["reason"] ?? r.product["description"] ?? ""),
+      matchScore: r.score
+    }));
+  }
+};
+
+// modules/beauty-ai/recommendation/creator-matcher.ts
+async function loadCreatorsFromJson() {
+  try {
+    const mod = await Promise.resolve().then(() => __toESM(require_creators()));
+    return mod.default;
+  } catch {
+    return [];
+  }
+}
+__name(loadCreatorsFromJson, "loadCreatorsFromJson");
+async function loadCreatorsFromD1(env) {
+  try {
+    const result = await env.D1_DB.prepare(
+      "SELECT id, name, avatar, platform, description, style_tags, status FROM beauty_creators WHERE status = ? ORDER BY created_at DESC LIMIT 20"
+    ).bind("approved").all();
+    if (result.success && result.results) {
+      return result.results.map((row) => ({
+        id: row.id,
+        creatorName: row.name,
+        avatar: row.avatar,
+        platform: row.platform,
+        description: row.description || "",
+        style: row.style_tags || "",
+        faceTarget: [],
+        makeupStyles: [],
+        skinTones: [],
+        tags: [],
+        style_tag: row.style_tags
+      }));
+    }
+    return [];
+  } catch (err) {
+    console.warn("[creator-matcher] D1 query failed, falling back to JSON:", err);
+    return [];
+  }
+}
+__name(loadCreatorsFromD1, "loadCreatorsFromD1");
+function scoreCreator(creator, input) {
+  let score = 0;
+  const faceTarget = creator["faceTarget"];
+  if (faceTarget && faceTarget.includes(input.faceType)) {
+    score += 30;
+  }
+  const makeupStyles = creator["makeupStyles"];
+  if (makeupStyles && makeupStyles.includes(input.makeupStyle)) {
+    score += 25;
+  }
+  const skinTones = creator["skinTones"];
+  if (skinTones && (skinTones.includes("all") || skinTones.includes(input.skinType) || skinTones.includes("fair") || skinTones.includes("medium"))) {
+    score += 20;
+  }
+  const tags = creator["tags"];
+  if (tags) {
+    const prefTagCount = tags.filter(
+      (t) => input.userPreference ? t.includes(input.userPreference) : false
+    ).length;
+    score += Math.min(prefTagCount * 5, 15);
+  }
+  const style = String(creator["style"] ?? creator["style_tag"] ?? "");
+  if (input.userPreference && style.includes(input.userPreference)) {
+    score += 10;
+  }
+  return Math.min(score, 100);
+}
+__name(scoreCreator, "scoreCreator");
+var CreatorMatcher = class {
+  constructor(env) {
+    this.env = env;
+  }
+  env;
+  static {
+    __name(this, "CreatorMatcher");
+  }
+  async match(input) {
+    let creators = this.env ? await loadCreatorsFromD1(this.env) : [];
+    if (creators.length === 0) {
+      creators = await loadCreatorsFromJson();
+    }
+    const scored = creators.map((c) => ({
+      creator: c,
+      score: scoreCreator(c, input)
+    }));
+    const ranked = scored.filter((r) => r.score > 0).sort((a, b) => b.score - a.score).slice(0, 6);
+    return ranked.map((r) => ({
+      id: String(r.creator["id"]),
+      creatorName: String(r.creator["creatorName"] || r.creator["name"] || ""),
+      style: String(r.creator["style"] || r.creator["style_tag"] || ""),
+      description: String(r.creator["description"] ?? ""),
+      reason: `\u98CE\u683C\u300C${String(r.creator["style"] || r.creator["style_tag"] || "")}\u300D\u9002\u5408${input.faceType}\u8138\u578B\uFF0C\u9002\u914D${input.makeupStyle}\u5986\u5BB9`,
+      matchScore: r.score
+    }));
+  }
+};
+
+// modules/beauty-ai/recommendation/ranking.ts
+var RankingService = class {
+  static {
+    __name(this, "RankingService");
+  }
+  productMatcher;
+  creatorMatcher;
+  constructor() {
+    this.productMatcher = new ProductMatcher();
+    this.creatorMatcher = new CreatorMatcher();
+  }
+  /**
+   * Run full recommendation pipeline.
+   *
+   * @param input  Face type, skin type, makeup style, optional user preference
+   * @returns      Sorted products and creators
+   */
+  async recommend(input) {
+    const [products, creators] = await Promise.all([
+      this.productMatcher.match(input),
+      this.creatorMatcher.match(input)
+    ]);
+    return {
+      products: this.rankProducts(products),
+      creators: this.rankCreators(creators)
+    };
+  }
+  /**
+   * Post-rank products: high score first, limit to 8.
+   */
+  rankProducts(products) {
+    return products.sort((a, b) => b.matchScore - a.matchScore).slice(0, 8);
+  }
+  /**
+   * Post-rank creators: high score first, limit to 6.
+   */
+  rankCreators(creators) {
+    return creators.sort((a, b) => b.matchScore - a.matchScore).slice(0, 6);
+  }
+};
+
+// functions/api/beauty/recommend.ts
+async function onRequestGet3(context) {
+  const { request } = context;
+  const url = new URL(request.url);
+  const faceType = url.searchParams.get("faceType");
+  const skinType = url.searchParams.get("skinType");
+  const makeupStyle = url.searchParams.get("makeupStyle");
+  const userPreference = url.searchParams.get("userPreference") || void 0;
+  if (!faceType || !skinType || !makeupStyle) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Missing required params: faceType, skinType, makeupStyle"
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const input = {
+    faceType: faceType.toLowerCase(),
+    skinType: skinType.toLowerCase(),
+    makeupStyle: makeupStyle.toLowerCase(),
+    userPreference
+  };
+  try {
+    const service = new RankingService();
+    const result = await service.recommend(input);
+    return new Response(
+      JSON.stringify({ success: true, products: result.products, creators: result.creators }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/recommend] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, error: "Internal server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestGet3, "onRequestGet");
+
+// modules/beauty-ai/report-engine/face-rules/index.ts
+var FACE_SHAPE_TARGETS = {
+  "\u9E45\u86CB\u8138": { fhr: 0.67, jr: 0.72, cr: 0.3 },
+  "\u5706\u8138": { fhr: 0.9, jr: 0.88, cr: 0.25 },
+  "\u65B9\u8138": { fhr: 0.8, jr: 0.92, cr: 0.3 },
+  "\u5FC3\u5F62\u8138": { fhr: 0.75, jr: 0.6, cr: 0.22 },
+  "\u957F\u8138": { fhr: 0.55, jr: 0.68, cr: 0.4 }
+};
+var FACE_SHAPE_RULES = {
+  "\u5706\u8138": {
+    style: "\u663E\u7626\u7ACB\u4F53\u578B",
+    styles: ["\u7ACB\u4F53\u4FEE\u5BB9\u5986", "\u6E05\u900F\u81EA\u7136\u578B", "\u97E9\u7CFB\u6C34\u5149\u808C"],
+    palette: ["\u5976\u8336\u8272", "\u5927\u5730\u8272", "\u73AB\u7470\u68D5", "\u8C46\u6C99\u8272"],
+    avoidColors: ["\u8367\u5149\u7C89", "\u4EAE\u6A59\u8272"],
+    direction: "\u901A\u8FC7\u4FEE\u5BB9\u62C9\u957F\u8138\u90E8\u8F6E\u5ED3\uFF0C\u7A81\u51FA\u4E94\u5B98\u7ACB\u4F53\u611F",
+    elements: ["\u4FEE\u5BB9\u9AD8\u5149\u76D8", "\u7AD6\u5F62\u773C\u7EBF", "\u81EA\u7136\u7709\u5CF0"],
+    avoidPatterns: ["\u6A2A\u5411\u816E\u7EA2", "\u5E73\u7709", "\u5927volume\u773C\u5F71"],
+    description: "\u9002\u5408\u4FA7\u5149\u548C\u7EB5\u5411\u7EBF\u6761\u5986\u5BB9\uFF0C\u907F\u514D\u6A2A\u5411\u62C9\u5BBD\u8138\u90E8",
+    makeupStyleName: "\u7ACB\u4F53\u4FEE\u5BB9\u5986",
+    reason: "\u5706\u8138\u8F6E\u5ED3\u67D4\u548C\uFF0C\u901A\u8FC7\u7EB5\u5411\u4FEE\u5BB9\u548C\u7ACB\u4F53\u9634\u5F71\u62C9\u957F\u8138\u578B\uFF0C\u7A81\u51FA\u4E94\u5B98\u7ACB\u4F53\u611F",
+    suitableOccasion: "\u65E5\u5E38\u901A\u52E4\u3001\u7EA6\u4F1A\u3001\u5BB4\u4F1A"
+  },
+  "\u957F\u8138": {
+    style: "\u67D4\u548C\u7F29\u77ED\u578B",
+    styles: ["\u97E9\u7CFB\u751C\u7F8E\u578B", "\u65E5\u7CFB\u6E05\u65B0\u578B", "\u6E29\u67D4\u65E0\u8F9C\u773C\u5986"],
+    palette: ["\u871C\u6843\u7C89", "\u73CA\u745A\u6A58", "\u6D45\u674F\u8272", "\u6D45\u68D5\u8272"],
+    avoidColors: ["\u6DF1\u68D5\u8272", "\u70DF\u718F\u9ED1"],
+    direction: "\u901A\u8FC7\u6A2A\u5411\u6269\u5BBD\u89C6\u89C9\uFF0C\u7F29\u77ED\u4E2D\u5EAD\u6BD4\u4F8B",
+    elements: ["\u6A2A\u5411\u816E\u7EA2", "\u5367\u8695", "\u5F27\u5EA6\u7709\u5F62"],
+    avoidPatterns: ["\u9AD8\u989D\u5934\u9732\u53D1", "\u957F\u76F4\u7709", "\u6DF1\u8272\u773C\u5F71"],
+    description: "\u9002\u5408\u589E\u52A0\u9762\u90E8\u5BBD\u5EA6\u611F\u7684\u5986\u5BB9\uFF0C\u907F\u514D\u7EB5\u5411\u62C9\u957F",
+    makeupStyleName: "\u97E9\u7CFB\u751C\u7F8E\u5986",
+    reason: "\u957F\u8138\u4E2D\u5EAD\u504F\u957F\uFF0C\u901A\u8FC7\u6A2A\u5411\u816E\u7EA2\u548C\u5367\u8695\u7F29\u77ED\u89C6\u89C9\u6BD4\u4F8B\uFF0C\u589E\u52A0\u751C\u7F8E\u67D4\u548C\u611F",
+    suitableOccasion: "\u65E5\u5E38\u901A\u52E4\u3001\u4F11\u95F2\u3001\u7EA6\u4F1A"
+  },
+  "\u65B9\u8138": {
+    style: "\u67D4\u7F8E\u8C03\u548C\u578B",
+    styles: ["\u6210\u719F\u5FA1\u59D0\u578B", "\u6E2F\u98CE\u590D\u53E4\u578B", "\u67D4\u96FE\u54D1\u5149\u5986"],
+    palette: ["\u7816\u7EA2\u8272", "\u9152\u7EA2\u8272", "\u7425\u73C0\u8272", "\u6696\u9A7C\u8272"],
+    avoidColors: ["\u51B7\u7D2B\u8272", "\u8367\u5149\u8272"],
+    direction: "\u67D4\u5316\u4E0B\u988C\u7EBF\u6761\uFF0C\u7A81\u51FA\u7709\u773C\u4F18\u52BF",
+    elements: ["\u67D4\u548C\u7709\u5F62", "\u73E0\u5149\u9AD8\u5149", "\u9971\u6EE1\u5507\u5986"],
+    avoidPatterns: ["\u76F4\u89D2\u7709\u5CF0", "\u65B9\u6B63\u4E0B\u988C\u7EBF\u5F3A\u8C03", "\u54D1\u5149\u5E95\u5986"],
+    description: "\u9002\u5408\u67D4\u548C\u66F2\u7EBF\u548C\u6696\u8C03\u8272\u5F69\uFF0C\u5F31\u5316\u9AA8\u9ABC\u611F",
+    makeupStyleName: "\u67D4\u96FE\u54D1\u5149\u5986",
+    reason: "\u65B9\u8138\u9AA8\u9ABC\u611F\u5F3A\uFF0C\u901A\u8FC7\u67D4\u548C\u7709\u5F62\u548C\u54D1\u5149\u5E95\u5986\u5F31\u5316\u4E0B\u988C\u7EBF\u6761\uFF0C\u7A81\u51FA\u7709\u773C\u4F18\u52BF",
+    suitableOccasion: "\u6B63\u5F0F\u573A\u5408\u3001\u665A\u5BB4\u3001\u5546\u52A1"
+  },
+  "\u5FC3\u5F62\u8138": {
+    style: "\u751C\u7F8E\u5E73\u8861\u578B",
+    styles: ["\u97E9\u7CFB\u6C34\u5149\u808C", "\u65E5\u7CFB\u900F\u660E\u611F", "\u5143\u6C14\u5C11\u5973\u5986"],
+    palette: ["\u871C\u6843\u7C89", "\u73CA\u745A\u7EA2", "\u9999\u69DF\u91D1", "\u88F8\u7C89\u8272"],
+    avoidColors: ["\u6DF1\u9152\u7EA2", "\u59E8\u5988\u8272"],
+    direction: "\u5E73\u8861\u4E0A\u5BBD\u4E0B\u7A84\uFF0C\u7A81\u51FA\u82F9\u679C\u808C",
+    elements: ["\u9971\u6EE1\u82F9\u679C\u808C", "\u5706\u6DA6\u773C\u7EBF", "\u561F\u561F\u5507\u6548"],
+    avoidPatterns: ["\u6D53\u91CD\u7709\u5CF0", "V\u578B\u4FEE\u5BB9", "\u4E0A\u91CD\u4E0B\u8F7B\u5986\u5BB9"],
+    description: "\u9002\u5408\u9971\u6EE1\u67D4\u548C\u7684\u5143\u6C14\u5986\u5BB9\uFF0C\u7A81\u51FA\u751C\u7F8E\u6C14\u8D28",
+    makeupStyleName: "\u5143\u6C14\u5C11\u5973\u5986",
+    reason: "\u5FC3\u5F62\u8138\u4E0A\u5BBD\u4E0B\u7A84\uFF0C\u901A\u8FC7\u9971\u6EE1\u82F9\u679C\u808C\u548C\u5706\u6DA6\u773C\u7EBF\u4E0B\u79FB\u89C6\u89C9\u91CD\u5FC3\uFF0C\u5E73\u8861\u8138\u578B",
+    suitableOccasion: "\u65E5\u5E38\u3001\u7EA6\u4F1A\u3001\u805A\u4F1A"
+  },
+  "\u9E45\u86CB\u8138": {
+    style: "\u6E05\u900F\u81EA\u7136\u578B",
+    styles: ["\u6E05\u900F\u81EA\u7136\u578B", "\u77E5\u6027\u901A\u52E4\u5986", "\u65E5\u6742\u900F\u660E\u611F"],
+    palette: ["\u5976\u8336\u8272", "\u73AB\u7470\u7C89", "\u9999\u69DF\u91D1", "\u73CA\u745A\u6A58"],
+    avoidColors: [],
+    direction: "\u6807\u51C6\u8138\u578B\u9002\u914D\u591A\u79CD\u98CE\u683C\uFF0C\u7A81\u51FA\u76AE\u80A4\u8D28\u611F",
+    elements: ["\u6E05\u900F\u5E95\u5986", "\u81EA\u7136\u7709\u773C", "\u6ECB\u6DA6\u5507\u90E8"],
+    avoidPatterns: ["\u539A\u91CD\u5047\u9762\u611F", "\u5938\u5F20\u8F6E\u5ED3"],
+    description: "\u6807\u51C6\u8138\u578B\uFF0C\u51E0\u4E4E\u9002\u5408\u6240\u6709\u5986\u5BB9\u98CE\u683C",
+    makeupStyleName: "\u6E05\u900F\u81EA\u7136\u5986",
+    reason: "\u9E45\u86CB\u8138\u6BD4\u4F8B\u6807\u51C6\uFF0C\u7A81\u51FA\u76AE\u80A4\u539F\u751F\u8D28\u611F\u5373\u53EF\uFF0C\u65E0\u9700\u8FC7\u591A\u4FEE\u5BB9\u8C03\u6574",
+    suitableOccasion: "\u65E5\u5E38\u901A\u52E4\u3001\u4F11\u95F2\u3001\u7EA6\u4F1A"
+  }
+};
+var FACE_INSIGHT_RULES = {
+  "\u5706\u8138": {
+    faceShape: "\u5706\u8138",
+    strengths: ["\u8138\u988A\u9971\u6EE1\u6709\u5C11\u5973\u611F", "\u8F6E\u5ED3\u67D4\u548C\u663E\u5E74\u8F7B", "\u7B11\u5BB9\u65F6\u82F9\u679C\u808C\u9971\u6EE1"],
+    concerns: ["\u9762\u90E8\u8F6E\u5ED3\u504F\u77ED\uFF0C\u53EF\u901A\u8FC7\u4FEE\u5BB9\u62C9\u957F", "\u4E0B\u988C\u7EBF\u6761\u4E0D\u660E\u663E"],
+    summaryTemplate: "\u9762\u90E8\u8F6E\u5ED3\u67D4\u548C\u9971\u6EE1\uFF0C\u82F9\u679C\u808C\u53D1\u80B2\u826F\u597D\uFF0C\u6574\u4F53\u6C14\u8D28\u504F\u5411\u751C\u7F8E\u53EF\u7231\u3002\u9762\u90E8\u6BD4\u4F8B\u5747\u8861\uFF0C\u901A\u8FC7\u7EB5\u5411\u4FEE\u5BB9\u53EF\u8FDB\u4E00\u6B65\u4F18\u5316\u8138\u578B\u3002",
+    eyeStrengths: { "\u674F\u773C": ["\u773C\u775B\u5706\u6DA6\u53EF\u7231\uFF0C\u5929\u7136\u589E\u52A0\u4EB2\u548C\u529B"], "\u5355\u773C\u76AE": ["\u773C\u578B\u7EBF\u6761\u5E72\u51C0\uFF0C\u9002\u5408\u6253\u9020\u6E05\u900F\u5986\u6548"], "\u4E0D\u5BF9\u79F0\u773C": ["\u773C\u90E8\u57FA\u7840\u6761\u4EF6\u826F\u597D\uFF0C\u53EF\u901A\u8FC7\u773C\u7EBF\u5FAE\u8C03\u5E73\u8861"] },
+    eyeConcerns: { "\u674F\u773C": [], "\u5355\u773C\u76AE": ["\u53EF\u901A\u8FC7\u773C\u5F71\u6D88\u80BF\u589E\u5F3A\u773C\u90E8\u7ACB\u4F53\u611F"], "\u4E0D\u5BF9\u79F0\u773C": ["\u5EFA\u8BAE\u901A\u8FC7\u4E0D\u5BF9\u79F0\u773C\u7EBF\u7684\u6280\u5DE7\u8FDB\u884C\u89C6\u89C9\u4FEE\u6B63"] }
+  },
+  "\u957F\u8138": {
+    faceShape: "\u957F\u8138",
+    strengths: ["\u4E94\u5B98\u7EB5\u5411\u6BD4\u4F8B\u8212\u5C55", "\u4E2D\u5EAD\u7ACB\u4F53\u6709\u7EB5\u5411\u4F18\u52BF", "\u9002\u5408\u6210\u719F\u4F18\u96C5\u98CE\u683C"],
+    concerns: ["\u4E2D\u5EAD\u504F\u957F\u53EF\u901A\u8FC7\u6A2A\u5411\u5986\u5BB9\u7F29\u77ED", "\u989D\u5934\u8F83\u9AD8\u65F6\u9700\u901A\u8FC7\u53D1\u578B\u4FEE\u9970"],
+    summaryTemplate: "\u9762\u90E8\u7EB5\u5411\u7EBF\u6761\u4F18\u7F8E\uFF0C\u4E94\u5B98\u6BD4\u4F8B\u8212\u5C55\uFF0C\u6C14\u8D28\u504F\u5411\u77E5\u6027\u4F18\u96C5\u3002\u901A\u8FC7\u6A2A\u5411\u816E\u7EA2\u548C\u5367\u8695\u5986\u5BB9\u53EF\u5728\u89C6\u89C9\u4E0A\u7F29\u77ED\u4E2D\u5EAD\u6BD4\u4F8B\u3002",
+    eyeStrengths: { "\u674F\u773C": ["\u773C\u578B\u5706\u6DA6\u5E73\u8861\u4E86\u8138\u578B\u957F\u5EA6", "\u9002\u5408\u6253\u9020\u6E29\u67D4\u65E0\u8F9C\u773C\u5986"], "\u5355\u773C\u76AE": ["\u5E72\u51C0\u7684\u5355\u773C\u76AE\u914D\u5408\u5367\u8695\u53EF\u7F29\u77ED\u4E2D\u5EAD"], "\u4E0D\u5BF9\u79F0\u773C": ["\u773C\u90E8\u7279\u70B9\u53EF\u4E0E\u8138\u578B\u5F62\u6210\u6709\u8DA3\u7684\u89C6\u89C9\u5C42\u6B21"] },
+    eyeConcerns: { "\u674F\u773C": [], "\u5355\u773C\u76AE": ["\u5EFA\u8BAE\u91CD\u70B9\u7A81\u51FA\u5367\u8695\u6765\u7F29\u77ED\u4E2D\u5EAD\u89C6\u89C9"], "\u4E0D\u5BF9\u79F0\u773C": ["\u53EF\u901A\u8FC7\u5367\u8695\u5E73\u8861\u4E2D\u5EAD\u6BD4\u4F8B"] }
+  },
+  "\u65B9\u8138": {
+    faceShape: "\u65B9\u8138",
+    strengths: ["\u4E0B\u988C\u7EBF\u6761\u6E05\u6670\u6709\u6C14\u573A", "\u9AA8\u9ABC\u7ACB\u4F53\u9002\u5408\u9AD8\u7EA7\u5986\u611F", "\u8F6E\u5ED3\u5206\u660E\u6709\u8FA8\u8BC6\u5EA6"],
+    concerns: ["\u4E0B\u988C\u89D2\u504F\u5BBD\uFF0C\u53EF\u901A\u8FC7\u67D4\u96FE\u5986\u5BB9\u5F31\u5316", "\u9700\u907F\u514D\u786C\u6717\u7709\u5F62\u52A0\u91CD\u9AA8\u9ABC\u611F"],
+    summaryTemplate: "\u9762\u90E8\u9AA8\u9ABC\u611F\u5F3A\uFF0C\u4E0B\u988C\u7EBF\u6761\u6E05\u6670\u6709\u529B\uFF0C\u6C14\u8D28\u504F\u5411\u6210\u719F\u5927\u6C14\u3002\u901A\u8FC7\u67D4\u548C\u7709\u5F62\u548C\u54D1\u5149\u5E95\u5986\u53EF\u5F31\u5316\u4E0B\u988C\u7EBF\u6761\uFF0C\u7A81\u51FA\u7709\u773C\u4F18\u52BF\u3002",
+    eyeStrengths: { "\u674F\u773C": ["\u5706\u6DA6\u773C\u578B\u67D4\u5316\u4E86\u9762\u90E8\u9AA8\u9ABC\u611F", "\u4E0E\u65B9\u8138\u5F62\u6210\u521A\u67D4\u5E76\u6D4E\u7684\u89C6\u89C9\u6548\u679C"], "\u5355\u773C\u76AE": ["\u5E72\u7EC3\u7684\u5355\u773C\u76AE\u5951\u5408\u65B9\u8138\u7684\u6C14\u8D28", "\u9002\u5408\u6253\u9020\u6C14\u573A\u578B\u5986\u5BB9"], "\u4E0D\u5BF9\u79F0\u773C": ["\u4E0D\u5BF9\u79F0\u7279\u70B9\u53EF\u589E\u52A0\u65B9\u8138\u7684\u4E2A\u4EBA\u8FA8\u8BC6\u5EA6"] },
+    eyeConcerns: { "\u674F\u773C": [], "\u5355\u773C\u76AE": [], "\u4E0D\u5BF9\u79F0\u773C": [] }
+  },
+  "\u5FC3\u5F62\u8138": {
+    faceShape: "\u5FC3\u5F62\u8138",
+    strengths: ["\u989D\u5934\u9971\u6EE1\u6709\u8FA8\u8BC6\u5EA6", "\u4E0B\u5DF4\u5C16\u4FCF\u7CBE\u81F4", "\u82F9\u679C\u808C\u4F4D\u7F6E\u4F18\u8D8A"],
+    concerns: ["\u4E0A\u5BBD\u4E0B\u7A84\u9700\u5E73\u8861\u89C6\u89C9\u91CD\u5FC3", "\u9700\u907F\u514D\u4E0A\u91CD\u4E0B\u8F7B\u7684\u5986\u5BB9"],
+    summaryTemplate: "\u9762\u90E8\u4E0A\u5BBD\u4E0B\u7A84\uFF0C\u989D\u5934\u9971\u6EE1\u4E0B\u5DF4\u5C16\u4FCF\uFF0C\u6C14\u8D28\u504F\u5411\u751C\u7F8E\u7075\u52A8\u3002\u901A\u8FC7\u9971\u6EE1\u82F9\u679C\u808C\u548C\u5706\u6DA6\u773C\u7EBF\u4E0B\u79FB\u89C6\u89C9\u91CD\u5FC3\uFF0C\u53EF\u5B8C\u7F8E\u5E73\u8861\u8138\u578B\u6BD4\u4F8B\u3002",
+    eyeStrengths: { "\u674F\u773C": ["\u5706\u6DA6\u773C\u578B\u4E0E\u5FC3\u5F62\u8138\u5929\u751F\u5951\u5408", "\u589E\u52A0\u751C\u7F8E\u53EF\u7231\u7684\u89C6\u89C9\u6548\u679C"], "\u5355\u773C\u76AE": ["\u5E72\u51C0\u7684\u5355\u773C\u76AE\u6253\u9020\u900F\u660E\u611F\u5986\u5BB9", "\u9002\u5408\u5FC3\u5F62\u8138\u7684\u5143\u6C14\u98CE\u683C"], "\u4E0D\u5BF9\u79F0\u773C": ["\u53EF\u901A\u8FC7\u5706\u6DA6\u773C\u7EBF\u8C03\u6574\u89C6\u89C9\u91CD\u5FC3\u5E73\u8861\u8138\u578B"] },
+    eyeConcerns: { "\u674F\u773C": [], "\u5355\u773C\u76AE": [], "\u4E0D\u5BF9\u79F0\u773C": ["\u5EFA\u8BAE\u91CD\u70B9\u4FEE\u9970\u773C\u7EBF\u548C\u5367\u8695\u6765\u5E73\u8861\u9762\u90E8\u6BD4\u4F8B"] }
+  },
+  "\u9E45\u86CB\u8138": {
+    faceShape: "\u9E45\u86CB\u8138",
+    strengths: ["\u9762\u90E8\u6BD4\u4F8B\u6807\u51C6\u5747\u8861", "\u51E0\u4E4E\u9002\u5408\u6240\u6709\u5986\u5BB9\u98CE\u683C", "\u4E94\u5BAB\u5206\u5E03\u534F\u8C03"],
+    concerns: ["\u65E0\u9700\u4FEE\u5BB9\u8C03\u6574\uFF0C\u4FDD\u6301\u539F\u751F\u8D28\u611F\u5373\u53EF"],
+    summaryTemplate: "\u6807\u51C6\u9E45\u86CB\u8138\uFF0C\u9762\u90E8\u6BD4\u4F8B\u534F\u8C03\uFF0C\u4E94\u5B98\u5206\u5E03\u5747\u8861\uFF0C\u662F\u6700\u767E\u642D\u7684\u8138\u578B\u3002\u901A\u8FC7\u6E05\u900F\u5E95\u5986\u7A81\u51FA\u76AE\u80A4\u539F\u751F\u8D28\u611F\uFF0C\u51E0\u4E4E\u9002\u914D\u6240\u6709\u5986\u5BB9\u98CE\u683C\u3002",
+    eyeStrengths: { "\u674F\u773C": ["\u5706\u773C\u775B\u914D\u5408\u6807\u51C6\u8138\u578B\u662F\u7EDD\u4F73\u7EC4\u5408", "\u53EF\u6253\u9020\u591A\u79CD\u98CE\u683C\u7684\u773C\u5986"], "\u5355\u773C\u76AE": ["\u5355\u773C\u76AE\u5728\u6807\u51C6\u8138\u578B\u4E0A\u66F4\u663E\u6C14\u8D28", "\u9002\u5408\u77E5\u6027\u901A\u52E4\u98CE\u683C"], "\u4E0D\u5BF9\u79F0\u773C": ["\u6807\u51C6\u8138\u578B\u80FD\u5F88\u597D\u5730\u5E73\u8861\u773C\u578B\u7279\u70B9"] },
+    eyeConcerns: { "\u674F\u773C": [], "\u5355\u773C\u76AE": [], "\u4E0D\u5BF9\u79F0\u773C": [] }
+  }
+};
+function buildFaceInsight(shape, eyeType) {
+  const rule = FACE_INSIGHT_RULES[shape] || FACE_INSIGHT_RULES["\u9E45\u86CB\u8138"];
+  const eyeStrengths = rule.eyeStrengths[eyeType] || [];
+  const eyeConcerns = rule.eyeConcerns[eyeType] || [];
+  return {
+    summary: rule.summaryTemplate,
+    strengths: [...rule.strengths, ...eyeStrengths],
+    concerns: [...rule.concerns, ...eyeConcerns]
+  };
+}
+__name(buildFaceInsight, "buildFaceInsight");
+
+// modules/beauty-ai/report-engine/color-rules/index.ts
+var SEASON_COLOR_RULES = {
+  "\u6625\u5B63\u578B": {
+    seasonType: "spring",
+    dailyColors: ["\u73CA\u745A\u6A58", "\u871C\u6843\u7C89", "\u5976\u6CB9\u9EC4", "\u6D45\u91D1\u6A59"],
+    specialColors: ["\u73AB\u7470\u91D1", "\u6A59\u7EA2\u8272", "\u6696\u91D1\u8272"],
+    seasonDescription: "\u6696\u8C03\u660E\u4EAE\u7684\u6625\u5B63\u8272\u5F69\uFF0C\u9002\u5408\u6696\u9EC4\u76AE\uFF0C\u5E26\u6765\u5143\u6C14\u6D3B\u529B\u611F",
+    skinToneKeywords: ["\u6696", "\u9EC4"]
+  },
+  "\u590F\u5B63\u578B": {
+    seasonType: "summer",
+    dailyColors: ["\u85B0\u8863\u8349\u7D2B", "\u67D4\u7C89\u8272", "\u51B0\u84DD\u8272", "\u73AB\u7470\u7C89"],
+    specialColors: ["\u6885\u5B50\u8272", "\u85B0\u8863\u8349\u7D2B\u7EA2", "\u51B0\u73AB\u7470"],
+    seasonDescription: "\u67D4\u548C\u51B7\u8C03\u7684\u590F\u5B63\u8272\u5F69\uFF0C\u9002\u5408\u51B7\u767D\u76AE\uFF0C\u5E26\u6765\u6E05\u65B0\u6E29\u67D4\u6C14\u8D28",
+    skinToneKeywords: ["\u51B7", "\u767D"]
+  },
+  "\u79CB\u5B63\u578B": {
+    seasonType: "autumn",
+    dailyColors: ["\u7126\u7CD6\u68D5", "\u7816\u7EA2", "\u6A44\u6984\u7EFF", "\u9A7C\u8272"],
+    specialColors: ["\u9152\u7EA2", "\u91D1\u94DC\u8272", "\u6DF1\u7425\u73C0"],
+    seasonDescription: "\u6E29\u6696\u6D53\u90C1\u7684\u79CB\u5B63\u8272\u5F69\uFF0C\u9002\u5408\u4E2D\u6027\u53CA\u6A44\u6984\u76AE\uFF0C\u5E26\u6765\u590D\u53E4\u4F18\u96C5\u611F",
+    skinToneKeywords: ["\u6A44\u6984", "\u4E2D\u6027"]
+  },
+  "\u51AC\u5B63\u578B": {
+    seasonType: "winter",
+    dailyColors: ["\u6B63\u7EA2\u8272", "\u5B9D\u84DD\u8272", "\u7EAF\u767D\u8272", "\u9ED1\u8272"],
+    specialColors: ["\u7956\u6BCD\u7EFF", "\u6DF1\u7D2B\u7EA2", "\u91D1\u5C5E\u94F6"],
+    seasonDescription: "\u5BF9\u6BD4\u9C9C\u660E\u7684\u51AC\u5B63\u8272\u5F69\uFF0C\u9002\u5408\u51B7\u8C03\u80A4\u8272\uFF0C\u5E26\u6765\u9AD8\u7EA7\u51B7\u8273\u611F",
+    skinToneKeywords: ["\u51B7", "\u767D", "\u6A44\u6984"]
+  }
+};
+function getSeasonColorAnalysis(seasonType) {
+  const rule = Object.values(SEASON_COLOR_RULES).find((r) => r.seasonType === seasonType) || SEASON_COLOR_RULES["\u6625\u5B63\u578B"];
+  return {
+    seasonType: rule.seasonType,
+    dailyColors: rule.dailyColors,
+    specialColors: rule.specialColors,
+    seasonDescription: rule.seasonDescription
+  };
+}
+__name(getSeasonColorAnalysis, "getSeasonColorAnalysis");
+
+// modules/beauty-ai/report-engine/style-rules/index.ts
+var EYE_TYPE_RULES = {
+  "\u674F\u773C": { recommendation: "\u7A81\u51FA\u5706\u6DA6\u53EF\u7231\u7684\u773C\u775B\u7279\u70B9", techniques: ["\u4E0B\u5782\u773C\u7EBF", "\u5367\u8695\u63D0\u4EAE", "\u81EA\u7136\u5377\u7FD8\u776B\u6BDB"] },
+  "\u5355\u773C\u76AE": { recommendation: "\u5F3A\u8C03\u773C\u578B\u7EBF\u6761\u611F", techniques: ["\u6D88\u80BF\u54D1\u5149\u773C\u5F71", "\u5185\u773C\u7EBF", "\u5939\u7FD8\u776B\u6BDB"] },
+  "\u4E0D\u5BF9\u79F0\u773C": { recommendation: "\u901A\u8FC7\u5986\u5BB9\u5E73\u8861\u53CC\u773C", techniques: ["\u8C03\u6574\u773C\u8DDD", "\u5355\u8FB9\u77EB\u6B63\u773C\u5F71"] },
+  "\u4E39\u51E4\u773C": { recommendation: "\u7A81\u51FA\u773C\u68A2\u4E0A\u626C\u7684\u7ECF\u5178\u7F8E\u611F", techniques: ["\u4E0A\u626C\u773C\u7EBF", "\u5927\u5730\u8272\u773C\u5F71", "\u6D53\u5BC6\u776B\u6BDB"] },
+  "\u6843\u82B1\u773C": { recommendation: "\u5F3A\u8C03\u773C\u90E8\u7684\u6C34\u7075\u611F\u548C\u8FF7\u79BB\u611F", techniques: ["\u7C89\u8272\u7CFB\u773C\u5F71", "\u4E0B\u773C\u7751\u6655\u67D3", "\u5377\u7FD8\u776B\u6BDB"] },
+  "\u4E0B\u5782\u773C": { recommendation: "\u63D0\u5347\u773C\u68A2\uFF0C\u6253\u9020\u4E0A\u626C\u7CBE\u795E\u611F", techniques: ["\u4E0A\u6311\u773C\u7EBF", "\u773C\u5F71\u5411\u4E0A\u6655\u67D3", "\u6D53\u5BC6\u7EA4\u957F\u776B\u6BDB"] },
+  "\u5185\u53CC": { recommendation: "\u653E\u5927\u53CC\u773C\u8F6E\u5ED3\uFF0C\u7A81\u51FA\u53CC\u773C\u76AE\u7EBF\u6761", techniques: ["\u53CC\u773C\u76AE\u8D34", "\u73E0\u5149\u773C\u5F71", "\u6D53\u5BC6\u776B\u6BDB"] },
+  "\u80BF\u773C\u6CE1": { recommendation: "\u6D88\u80BF\u54D1\u5149\uFF0C\u5851\u9020\u773C\u90E8\u7ACB\u4F53\u611F", techniques: ["\u54D1\u5149\u5927\u5730\u8272", "\u773C\u7A9D\u6655\u67D3", "\u5185\u773C\u7EBF"] }
+};
+function inferSkinToneCategory(skinTone) {
+  if (skinTone.includes("\u6696") || skinTone.includes("\u9EC4")) return "warm";
+  if (skinTone.includes("\u51B7") || skinTone.includes("\u767D")) return "cool";
+  if (skinTone.includes("\u6A44\u6984")) return "olive";
+  return "neutral";
+}
+__name(inferSkinToneCategory, "inferSkinToneCategory");
+function getFoundationTip(skinTone) {
+  if (skinTone.includes("\u6696") || skinTone.includes("\u9EC4")) {
+    return "\u9009\u62E9\u5E26\u6696\u8C03\u7684\u8C61\u7259\u8272\u6216\u81EA\u7136\u8272\u7C89\u5E95\uFF0C\u907F\u514D\u8FC7\u767D\u7684\u51B7\u8272\u8C03";
+  }
+  if (skinTone.includes("\u51B7") || skinTone.includes("\u767D")) {
+    return "\u9009\u62E9\u5E26\u7C89\u8C03\u7684\u74F7\u767D\u8272\u6216\u73AB\u7470\u8272\u7C89\u5E95\uFF0C\u907F\u514D\u504F\u9EC4\u7684\u6696\u8272\u8C03";
+  }
+  if (skinTone.includes("\u6A44\u6984")) {
+    return "\u9009\u62E9\u4E2D\u6027\u504F\u7EFF\u7684\u6A44\u6984\u8272\u7C89\u5E95\uFF0C\u907F\u514D\u8FC7\u7C89\u6216\u8FC7\u9EC4\u7684\u8272\u8C03";
+  }
+  return "\u9009\u62E9\u4E2D\u6027\u8272\u8C03\u7684\u81EA\u7136\u80A4\u8272\u7C89\u5E95\uFF0C\u6839\u636E\u73AF\u5883\u5149\u8C03\u6574\u6DF1\u6D45";
+}
+__name(getFoundationTip, "getFoundationTip");
+function inferSeasonColorType(skinTone, skinToneCategory) {
+  const isWarm = skinToneCategory === "warm" || skinTone.includes("\u6696") || skinTone.includes("\u9EC4");
+  const isCool = skinToneCategory === "cool" || skinTone.includes("\u51B7") || skinTone.includes("\u767D");
+  const isOlive = skinToneCategory === "olive" || skinTone.includes("\u6A44\u6984");
+  if (isOlive) return "\u79CB\u5B63\u578B";
+  if (isWarm) return Math.random() > 0.5 ? "\u6625\u5B63\u578B" : "\u79CB\u5B63\u578B";
+  if (isCool) return Math.random() > 0.5 ? "\u590F\u5B63\u578B" : "\u51AC\u5B63\u578B";
+  return "\u6625\u5B63\u578B";
+}
+__name(inferSeasonColorType, "inferSeasonColorType");
+
+// modules/beauty-ai/report-engine/generator.ts
+var ReportGenerator = class {
+  static {
+    __name(this, "ReportGenerator");
+  }
+  /**
+   * Classify face shape from extended metrics using distance-based scoring.
+   */
+  classifyFaceShape(metrics) {
+    const { faceWidth, faceHeight, jawWidth } = metrics;
+    const faceHWRatio = faceHeight > 0 ? faceWidth / faceHeight : 0.75;
+    const jawRatio = faceWidth > 0 ? jawWidth / faceWidth : 0.75;
+    const chinRatio = faceHeight > 0 ? (metrics.chinLength ?? faceHeight * 0.3) / faceHeight : 0.32;
+    const scores = {};
+    for (const [shape, t] of Object.entries(FACE_SHAPE_TARGETS)) {
+      scores[shape] = Math.pow(faceHWRatio - t.fhr, 2) * 4 + Math.pow(jawRatio - t.jr, 2) * 5 + Math.pow(chinRatio - t.cr, 2) * 4;
+    }
+    const maxDist = Math.max(...Object.values(scores));
+    const inverted = {};
+    for (const [shape, dist] of Object.entries(scores)) {
+      inverted[shape] = maxDist > 0 ? (maxDist - dist) / maxDist : 0.2;
+    }
+    let bestShape = "\u9E45\u86CB\u8138";
+    let bestScore = 0;
+    for (const [shape, score] of Object.entries(inverted)) {
+      if (score > bestScore) {
+        bestScore = score;
+        bestShape = shape;
+      }
+    }
+    return {
+      faceShape: bestShape,
+      confidence: parseFloat(bestScore.toFixed(2))
+    };
+  }
+  /**
+   * Generate full V2 beauty report content.
+   *
+   * @param analysisId – unique analysis/report ID
+   * @param metrics    – BeautyFaceMetrics (may include extended fields)
+   * @param userProfile – optional user profile hint
+   * @param level      – "first-look" | "style-upgrade" | "beauty-pro"
+   */
+  async generateV2(analysisId, metrics, userProfile, level = "first-look", decisions) {
+    const extendedMetrics = metrics;
+    const isExtended = "faceWidth" in extendedMetrics;
+    const faceShapeResult = isExtended ? this.classifyFaceShape(extendedMetrics) : { faceShape: metrics.faceShape, confidence: 0.75 };
+    const shape = faceShapeResult.faceShape;
+    const faceRule = FACE_SHAPE_RULES[shape] || FACE_SHAPE_RULES["\u9E45\u86CB\u8138"];
+    const skinToneCat = inferSkinToneCategory(metrics.skinTone);
+    const skinTone = metrics.skinTone;
+    const faceInsight = buildFaceInsight(shape, metrics.eyeType);
+    const features = this.buildFeatureHighlights(extendedMetrics, metrics);
+    const seasonType = inferSeasonColorType(skinTone, skinToneCat);
+    const seasonAnalysis = getSeasonColorAnalysis(seasonType);
+    const colorAnalysis = {
+      skinTone,
+      skinToneCategory: skinToneCat,
+      recommendedColors: faceRule.palette,
+      avoidColors: faceRule.avoidColors,
+      foundationTip: getFoundationTip(skinTone),
+      seasonType: seasonAnalysis.seasonType,
+      dailyColors: seasonAnalysis.dailyColors,
+      specialColors: seasonAnalysis.specialColors
+    };
+    const makeupStyle = {
+      primaryStyle: faceRule.style,
+      secondaryStyles: faceRule.styles.slice(1, 3),
+      occasion: this.mapOccasion(level),
+      confidence: faceShapeResult.confidence
+    };
+    const makeupStyleDetail = {
+      styleName: faceRule.makeupStyleName,
+      reason: faceRule.reason,
+      suitableOccasion: faceRule.suitableOccasion,
+      keyPoints: faceRule.elements,
+      avoidTips: faceRule.avoidPatterns
+    };
+    const styleDirection = {
+      overallDirection: faceRule.direction,
+      keyElements: faceRule.elements,
+      avoidPatterns: faceRule.avoidPatterns,
+      vibeDescription: faceRule.description
+    };
+    const faceAnalysis = {
+      faceShape: shape,
+      faceRatio: metrics.faceRatio,
+      symmetryScore: this.calculateEyeSymmetry(metrics),
+      description: `${shape}\u6BD4\u4F8B${metrics.faceRatio.toFixed(2)}\uFF0C${faceRule.description}\uFF0C\u5206\u6790\u7F6E\u4FE1\u5EA6 ${(faceShapeResult.confidence * 100).toFixed(0)}%`,
+      highlightPoints: [
+        `\u8138\u578B\u7279\u5F81\uFF1A${shape}\uFF0C\u6BD4\u4F8B\u534F\u8C03\uFF0C\u7F6E\u4FE1\u5EA6 ${(faceShapeResult.confidence * 100).toFixed(0)}%`,
+        `\u773C\u578B\u7279\u70B9\uFF1A${metrics.eyeType}`
+      ].concat(
+        isExtended ? [
+          `\u9762\u90E8\u5BBD\u9AD8\u6BD4\uFF1A${extendedMetrics.faceWidth.toFixed(1)}:${extendedMetrics.faceHeight.toFixed(1)}`,
+          `\u4E0B\u988C\u5BBD\u5EA6\u6BD4\uFF1A${(extendedMetrics.jawWidth / extendedMetrics.faceWidth * 100).toFixed(0)}%`,
+          `\u773C\u5BBD\u6BD4\u4F8B\uFF1A${extendedMetrics.eyeWidth > 0 ? (extendedMetrics.eyeWidth / extendedMetrics.faceWidth * 100).toFixed(0) : "N/A"}%`,
+          `\u9F3B\u7FFC\u6BD4\u4F8B\uFF1A${extendedMetrics.noseWidth > 0 ? (extendedMetrics.noseWidth / extendedMetrics.faceWidth * 100).toFixed(0) : "N/A"}%`,
+          `\u5507\u5BBD\u6BD4\u4F8B\uFF1A${extendedMetrics.lipWidth > 0 ? (extendedMetrics.lipWidth / extendedMetrics.noseWidth * 100).toFixed(0) : "N/A"}%`
+        ] : []
+      ).filter((v) => v !== void 0)
+    };
+    const colorRecommendation = {
+      skinToneCategory: skinToneCat,
+      recommendedPalette: faceRule.palette,
+      avoidColors: faceRule.avoidColors,
+      foundationTip: getFoundationTip(skinTone)
+    };
+    const baseResult = {
+      faceAnalysis,
+      faceShapeResult,
+      featureHighlights: features,
+      makeupStyle,
+      makeupStyleDetail,
+      colorRecommendation,
+      colorAnalysis,
+      styleDirection,
+      productRecommendation: [],
+      generatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      version: "v2",
+      faceInsight
+    };
+    if (level === "style-upgrade" || level === "beauty-pro") {
+      const seasonRule = Object.values(SEASON_COLOR_RULES).find((r) => r.seasonType === seasonType) || SEASON_COLOR_RULES["\u6625\u5B63\u578B"];
+      const seasonColorAnalysis = {
+        seasonType: seasonRule.seasonType,
+        dailyColors: seasonRule.dailyColors,
+        specialColors: seasonRule.specialColors,
+        seasonDescription: seasonRule.seasonDescription
+      };
+      const eyeStrengths = faceInsight.strengths[0] || "\u7A81\u51FA\u773C\u578B\u7279\u70B9";
+      const styleUpgradeContent = {
+        styleRecommendations: [
+          `\u4E3B\u6253${faceRule.makeupStyleName}\u98CE\u683C\uFF0C\u6838\u5FC3\u662F${faceRule.direction}`,
+          ...faceRule.styles.slice(1, 3).map((s) => `\u5907\u9009\u98CE\u683C\uFF1A${s}`)
+        ],
+        eyeMakeupDirection: `\u773C\u5986\u4EE5${eyeStrengths}\u4E3A\u4E3B\uFF0C\u914D\u5408${faceRule.elements[2] || "\u81EA\u7136\u7709\u5F62"}`,
+        contourDirection: `\u4FEE\u5BB9\u65B9\u5411\uFF1A${faceRule.direction}`,
+        lipColorDirection: `\u5507\u8272\u63A8\u8350\uFF1A${faceRule.palette.slice(0, 2).join("\u3001")}`
+      };
+      if (level === "beauty-pro") {
+        const personalPlan = this.buildPersonalPlan(shape, faceRule, faceInsight, seasonType, metrics, decisions);
+        return { ...baseResult, seasonColorAnalysis, styleUpgradeContent, personalPlan };
+      }
+      return { ...baseResult, seasonColorAnalysis, styleUpgradeContent };
+    }
+    return baseResult;
+  }
+  /**
+   * Legacy generate() – delegates to generateV2 and returns v1-compatible wrapper.
+   * Kept for backward compatibility with existing callers.
+   */
+  async generate(analysisId, metrics, userProfile, reportLevel = "first-look") {
+    const beautyMetrics = {
+      faceShape: metrics.faceType || "\u9E45\u86CB\u8138",
+      faceRatio: metrics.faceRatio,
+      eyeType: "\u674F\u773C",
+      eyeSize: 0,
+      noseRatio: 0.4,
+      lipRatio: 0.3,
+      jawType: "\u6807\u51C6\u988C\u578B",
+      skinTone: "\u4E2D\u6027"
+    };
+    const v2 = await this.generateV2(analysisId, beautyMetrics, userProfile, reportLevel);
+    return {
+      analysisId,
+      reportLevel,
+      title: this.getTitle(reportLevel, beautyMetrics.faceShape),
+      faceSummary: {
+        title: "\u8138\u578B\u5206\u6790",
+        content: [v2.faceAnalysis?.description ?? ""]
+      },
+      makeupStyle: {
+        title: "\u5986\u5BB9\u98CE\u683C",
+        content: [v2.makeupStyleDetail?.styleName ?? "", v2.makeupStyleDetail?.reason ?? ""]
+      },
+      colorAdvice: {
+        title: "\u8272\u5F69\u5EFA\u8BAE",
+        content: [
+          `\u63A8\u8350\u8272\u7CFB\uFF1A${(v2.colorAnalysis?.recommendedColors ?? []).join("\u3001")}`,
+          `\u907F\u514D\u8272\u5F69\uFF1A${(v2.colorAnalysis?.avoidColors ?? []).join("\u3001")}`
+        ]
+      },
+      productAdvice: { title: "\u4EA7\u54C1\u5EFA\u8BAE", content: [] },
+      beautyPlan: { title: "\u7F8E\u5BB9\u8BA1\u5212", content: [] },
+      createdAt: v2.generatedAt
+    };
+  }
+  getTitle(level, shape) {
+    const prefixes = {
+      "first-look": "\u4F60\u7684\u7F8E\u4E3D\u7B2C\u4E00\u5370\u8C61",
+      "style-upgrade": "\u4E2A\u4EBA\u98CE\u683C\u5347\u7EA7\u6307\u5357",
+      "beauty-pro": "\u4E13\u4E1A\u7F8E\u5986\u62A5\u544A"
+    };
+    return `${prefixes[level]} \u2014 ${shape}\u8138\u578B profile`;
+  }
+  calculateEyeSymmetry(metrics) {
+    if (metrics.eyeSize > 0) {
+      return Math.min(0.95, 0.7 + metrics.eyeSize / 100);
+    }
+    return 0.85;
+  }
+  mapOccasion(level) {
+    switch (level) {
+      case "style-upgrade":
+        return "formal";
+      case "beauty-pro":
+        return "special";
+      default:
+        return "daily";
+    }
+  }
+  buildPersonalPlan(shape, faceRule, faceInsight, seasonType, metrics, decisions) {
+    const style = decisions?.style || "natural";
+    const occasion = decisions?.occasion || "daily";
+    const tolerance = decisions?.tolerance || "normal";
+    const routineDepth = tolerance === "conservative" ? 3 : tolerance === "bold" ? 6 : 4;
+    const routineSteps = this.buildMakeupRoutine(shape, metrics, style, occasion, routineDepth);
+    const actionItems = this.buildActionItems(shape, faceInsight, seasonType, style, occasion, tolerance);
+    const beautyTips = this.buildBeautyTips(shape, faceRule, seasonType, tolerance);
+    const signatureLook = this.buildSignatureLook(shape, faceRule, seasonType, style, occasion);
+    return { actionItems, makeupRoutine: routineSteps, beautyTips, signatureLook };
+  }
+  buildActionItems(shape, faceInsight, seasonType, style, occasion, tolerance) {
+    const focusArea = faceInsight.concerns[0] || "\u9762\u90E8\u6BD4\u4F8B";
+    const strengthArea = faceInsight.strengths[0] || "\u4E94\u5B98\u534F\u8C03";
+    return [
+      `\u91CD\u70B9\u4F18\u5316\uFF1A${focusArea}`,
+      `\u53D1\u6325\u4F18\u52BF\uFF1A${strengthArea}`,
+      `\u8272\u5F69\u9009\u62E9\uFF1A\u9075\u5FAA${seasonType}\u56DB\u5B63\u8272\u5F69\u4F53\u7CFB`,
+      `\u98CE\u683C\u5B9A\u4F4D\uFF1A${style}\u98CE\u683C\uFF0C\u9002\u5408${occasion}\u573A\u666F`
+    ];
+  }
+  buildMakeupRoutine(shape, metrics, style, occasion, depth) {
+    const steps = [];
+    steps.push("Step 1: \u6E05\u900F\u5E95\u5986 - \u6839\u636E\u80A4\u8272\u9009\u62E9\u7C89\u5E95");
+    steps.push("Step 2: \u4FEE\u5BB9\u5B9A\u8C03 - \u6309\u7167\u8138\u578B\u8F6E\u5ED3\u8FDB\u884C\u4FEE\u5BB9");
+    if (depth >= 3) steps.push("Step 3: \u773C\u5986\u91CD\u70B9 - \u7A81\u51FA" + metrics.eyeType + "\u7279\u70B9");
+    if (depth >= 4) steps.push("Step 4: \u5507\u5986\u70B9\u775B - \u9009\u62E9" + (style === "charismatic" ? "\u6B63\u7EA2\u8272\u7CFB" : style === "individual" ? "\u4E2A\u6027\u649E\u8272" : "\u8C46\u6C99\u8272\u7CFB") + "\u5507\u8272");
+    if (depth >= 5) steps.push("Step 5: \u5B9A\u5986\u9501\u5986 - \u6839\u636E\u573A\u5408\u9009\u62E9\u5B9A\u5986\u65B9\u5F0F");
+    if (depth >= 6) steps.push("Step 6: \u7EC6\u8282\u5B8C\u5584 - \u7709\u5F62\u4E0E\u9AD8\u5149\u6700\u540E\u8C03\u6574");
+    return steps;
+  }
+  buildBeautyTips(shape, faceRule, seasonType, tolerance) {
+    const tips = [];
+    tips.push("\u4F60\u7684" + shape + "\u8138\u578B\u642D\u914D" + seasonType + "\u56DB\u5B63\u8272\u5F69\u4F53\u7CFB\u6548\u679C\u6700\u4F73");
+    tips.push("\u5EFA\u8BAE\u91CD\u70B9\u7A81\u51FA" + faceRule.makeupStyleName + "\u98CE\u683C\u7279\u70B9");
+    if (tolerance === "conservative") {
+      tips.push("\u5C0F\u8303\u56F4\u8C03\u6574\u5373\u53EF\u63D0\u5347\u6574\u4F53\u5986\u5BB9\u8D28\u611F");
+    } else if (tolerance === "bold") {
+      tips.push("\u53EF\u4EE5\u5C1D\u8BD5\u66F4\u5927\u80C6\u7684\u5986\u5BB9\u914D\u8272\u548C\u9020\u578B");
+    } else {
+      tips.push("\u53EF\u6839\u636E\u573A\u5408\u7075\u6D3B\u8C03\u6574\u5986\u5BB9\u5F3A\u5EA6");
+    }
+    return tips;
+  }
+  buildSignatureLook(shape, faceRule, seasonType, style, occasion) {
+    const styleModifiers = {
+      natural: "\u81EA\u7136\u88F8\u5986",
+      refined: "\u7CBE\u81F4\u5986\u5BB9",
+      charismatic: "\u6C14\u573A\u5986\u5BB9",
+      individual: "\u4E2A\u6027\u5986\u5BB9"
+    };
+    return faceRule.makeupStyleName + " + " + seasonType + "\u8272\u5F69\u4F53\u7CFB + " + (styleModifiers[style] || "\u7CBE\u81F4\u5986\u5BB9") + " = \u4F60\u7684" + occasion + "\u4E13\u5C5E\u98CE\u683C";
+  }
+  buildFeatureHighlights(metrics, base) {
+    const eyeTypeData = EYE_TYPE_RULES[base.eyeType] || EYE_TYPE_RULES["\u674F\u773C"];
+    return [
+      {
+        feature: "eyes",
+        shape: base.eyeType,
+        measurement: metrics.eyeWidth > 0 ? `\u773C\u5BBD${metrics.eyeWidth.toFixed(1)}\uFF0C\u773C\u578B${base.eyeType}\uFF0C\u5360\u6BD4${(metrics.eyeWidth / metrics.faceWidth * 100).toFixed(0)}%` : `\u773C\u8DDD\u9002\u4E2D\uFF0C\u773C\u578B${base.eyeType}`,
+        recommendation: eyeTypeData.recommendation
+      },
+      {
+        feature: "nose",
+        shape: base.noseRatio < 0.4 ? "\u7CBE\u81F4\u5C0F\u9F3B" : base.noseRatio < 0.5 ? "\u6807\u51C6\u9F3B\u578B" : "\u633A\u76F4\u9F3B\u6881",
+        measurement: metrics.noseWidth > 0 ? `\u9F3B\u7FFC\u5BBD${metrics.noseWidth.toFixed(1)}\uFF0C\u6BD4\u4F8B${base.noseRatio.toFixed(2)}` : `\u9F3B\u7FFC\u6BD4\u4F8B${base.noseRatio.toFixed(2)}`,
+        recommendation: "\u4FDD\u6301\u9F3B\u6881\u81EA\u7136\u7ACB\u4F53\u611F"
+      },
+      {
+        feature: "lips",
+        shape: base.lipRatio < 0.25 ? "\u5C0F\u5DE7\u5634\u5507" : base.lipRatio < 0.35 ? "\u6807\u51C6\u5507\u5F62" : "\u9971\u6EE1\u53CC\u5507",
+        measurement: metrics.lipWidth > 0 ? `\u5507\u5BBD${metrics.lipWidth.toFixed(1)}\uFF0C\u6BD4\u4F8B${base.lipRatio.toFixed(2)}` : `\u5507\u5BBD\u6BD4\u4F8B${base.lipRatio.toFixed(2)}`,
+        recommendation: "\u9009\u62E9\u4E0E\u8272\u7CFB\u642D\u914D\u7684\u5507\u5986\u4EA7\u54C1"
+      },
+      {
+        feature: "brows",
+        shape: base.jawType === "\u5BBD\u5927\u988C\u578B" ? "\u4E0A\u626C\u7709" : "\u81EA\u7136\u7709",
+        measurement: metrics.jawWidth > 0 ? `\u988C\u578B${base.jawType}\uFF0C\u4E0B\u988C\u5BBD${metrics.jawWidth.toFixed(1)}` : `\u988C\u578B${base.jawType}`,
+        recommendation: "\u6839\u636E\u8138\u578B\u9009\u62E9\u7709\u5F62"
+      }
+    ];
+  }
+};
+
+// modules/beauty-ai/report-repository/repository.ts
+var BeautyReportRepository = class {
+  constructor(db) {
+    this.db = db;
+  }
+  db;
+  static {
+    __name(this, "BeautyReportRepository");
+  }
+  async createReport(input) {
+    const id = crypto.randomUUID();
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const expireAt = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3).toISOString();
+    const sql = "INSERT INTO beauty_reports (id, user_id, image_id, image_url, thumbnail_url, level, status, face_metrics_json, analysis_json, analysis_version, created_at, expire_at, decision_answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    await this.db.prepare(sql).bind(id, input.userId, input.uploadId, input.imageUrl ?? null, input.thumbnailUrl ?? null, input.reportLevel, "completed", "{}", JSON.stringify(input.reportJson), "v2", now, expireAt, input.decisionAnswersJson ?? null).run();
+    return { id, createdAt: now };
+  }
+  safeParse(str) {
+    try {
+      return JSON.parse(str);
+    } catch {
+      return { raw: str };
+    }
+  }
+};
+
+// functions/api/beauty/report.ts
+async function onRequestPost3(context) {
+  const { env, request } = context;
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Request body must be valid JSON" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  if (!body.analysisId) {
+    return new Response(
+      JSON.stringify({ error: "Field analysisId is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const reportLevel = body.reportLevel ?? "first-look";
+  const raw = body.faceMetrics || {};
+  const faceMetrics = {
+    faceShape: String(raw.faceShape || raw.faceType || "\u9E45\u86CB\u8138"),
+    faceRatio: Number(raw.faceRatio ?? 0.8),
+    eyeType: String(raw.eyeType || "\u674F\u773C"),
+    eyeSize: Number(raw.eyeSize ?? 0),
+    noseRatio: Number(raw.noseRatio ?? 0.4),
+    lipRatio: Number(raw.lipRatio ?? 0.3),
+    jawType: String(raw.jawType || "\u6807\u51C6\u988C\u578B"),
+    skinTone: String(raw.skinTone || "\u4E2D\u6027"),
+    // Extended metrics from PlaceholderDetector
+    faceWidth: Number(raw.faceWidth ?? 128),
+    faceHeight: Number(raw.faceHeight ?? 160),
+    jawWidth: Number(raw.jawWidth ?? 96),
+    chinLength: Number(raw.chinLength ?? 48),
+    eyeWidth: Number(raw.eyeWidth ?? 24),
+    noseWidth: Number(raw.noseWidth ?? 18),
+    lipWidth: Number(raw.lipWidth ?? 30)
+  };
+  if (!faceMetrics.faceShape) {
+    return new Response(
+      JSON.stringify({ error: "faceMetrics.faceShape is required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const sessionId = extractSessionId(request);
+    console.log("[beauty/report] sessionId:", sessionId ? sessionId.slice(0, 8) + "..." : "NULL");
+    if (!sessionId) {
+      return new Response(
+        JSON.stringify({ success: false, status: "AUTH_REQUIRED", error: "Authentication required" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+    console.log("[beauty/report] sessionRaw:", sessionRaw ? "found" : "NOT FOUND");
+    if (!sessionRaw) {
+      return new Response(
+        JSON.stringify({ success: false, status: "SESSION_EXPIRED", error: "Invalid or expired session" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const resolvedUserId = JSON.parse(sessionRaw).userId;
+    console.log("[beauty/report] userId:", resolvedUserId, "level:", reportLevel);
+    const tokenService = new TokenService(env.D1_DB);
+    const reportAccessService = new ReportAccessService(env.D1_DB);
+    const tokenCost = reportLevel === "beauty-pro" ? 1 : 0;
+    if (reportLevel === "beauty-pro") {
+      const balance = await tokenService.getBalance(resolvedUserId);
+      console.log("[beauty/report] token balance:", balance);
+      if (balance < 1) {
+        return new Response(
+          JSON.stringify({ success: false, status: "INSUFFICIENT_TOKEN", error: "Token\u4E0D\u8DB3\uFF0C\u8BF7\u5148\u89E3\u9501", balance }),
+          { status: 403, headers: { "Content-Type": "application/json" } }
+        );
+      }
+      await tokenService.consume({ userId: resolvedUserId, amount: 1, description: "beauty-pro report generation" });
+      console.log("[beauty/report] Consumed 1 token:", resolvedUserId);
+    } else {
+      const dailyLimit = DAILY_LIMITS[reportLevel];
+      console.log("[beauty/report] dailyLimit:", dailyLimit);
+      const todayCount = await reportAccessService.getDailyAccessCount(resolvedUserId, reportLevel);
+      console.log("[beauty/report] todayCount:", todayCount, "limit:", dailyLimit);
+      if (todayCount >= dailyLimit) {
+        return new Response(
+          JSON.stringify({ success: false, status: "DAILY_LIMIT_REACHED", error: "\u4ECA\u65E5\u6B21\u6570\u5DF2\u7528\u5B8C\uFF0C\u8BF7\u660E\u5929\u518D\u8BD5", dailyLimit, todayCount }),
+          { status: 403, headers: { "Content-Type": "application/json" } }
+        );
+      }
+    }
+    console.log("[beauty/report] Generating V2 report...");
+    const generator = new ReportGenerator();
+    const report = await generator.generateV2(
+      body.analysisId,
+      faceMetrics,
+      void 0,
+      reportLevel,
+      body.decisions ? {
+        style: body.decisions.style || "natural",
+        occasion: body.decisions.occasion || "daily",
+        tolerance: body.decisions.tolerance || "normal",
+        submittedAt: (/* @__PURE__ */ new Date()).toISOString()
+      } : void 0
+    );
+    console.log("[beauty/report] generateV2 OK, keys:", Object.keys(report));
+    console.log("[beauty/report] Saving to D1...");
+    const repo = new BeautyReportRepository(env.D1_DB);
+    const decisionAnswersJson = body.decisions ? JSON.stringify({
+      style: body.decisions.style || "natural",
+      occasion: body.decisions.occasion || "daily",
+      tolerance: body.decisions.tolerance || "normal",
+      submittedAt: (/* @__PURE__ */ new Date()).toISOString()
+    }) : null;
+    const result = await repo.createReport({
+      userId: resolvedUserId,
+      uploadId: body.analysisId,
+      imageUrl: body.imageUrl ?? null,
+      thumbnailUrl: body.thumbnailUrl ?? null,
+      reportLevel,
+      reportJson: report,
+      decisionAnswersJson
+    });
+    console.log("[beauty/report] createReport OK, id:", result.id);
+    console.log("[beauty/report] Granting access...");
+    const accessResult = reportLevel === "beauty-pro" ? await reportAccessService.recordAccess(resolvedUserId, result.id, reportLevel) : await reportAccessService.grantReportAccess(resolvedUserId, result.id, reportLevel);
+    console.log("[beauty/report] accessResult:", accessResult.success, accessResult.alreadyUnlocked);
+    if (!accessResult.success) {
+      console.error("[beauty/report] Failed to record report_access:", accessResult.error);
+      return new Response(
+        JSON.stringify({ success: false, status: "ACCESS_FAILED", error: accessResult.error || "Failed to record access" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    console.log("[beauty/report] Complete! reportId:", result.id, "level:", reportLevel);
+    return new Response(
+      JSON.stringify({ success: true, status: "REPORT_GENERATED", report, reportId: result.id, level: reportLevel, tokenCost }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[beauty/report] ERROR:", err);
+    console.error("[beauty/report] STACK:", err instanceof Error ? err.stack : String(err));
+    console.error("[beauty/report] ERR TYPE:", err instanceof Error ? err.constructor.name : typeof err);
+    return new Response(
+      JSON.stringify({ success: false, status: "SERVER_ERROR", error: "\u751F\u6210\u62A5\u544A\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestPost3, "onRequestPost");
+
+// modules/beauty-ai/upload-service.ts
+async function uploadImage(env, imageBuffer, userId, contentType = "image/jpeg") {
+  const timestamp = Date.now();
+  const imageKey = `beauty/uploads/${userId}/${timestamp}.jpg`;
+  if (!env.IMAGE_BUCKET) {
+    throw new Error("IMAGE_BUCKET R2 binding is not configured");
+  }
+  await env.IMAGE_BUCKET.put(imageKey, imageBuffer, {
+    httpMetadata: {
+      contentType
+    }
+  });
+  const uploadId = `upload_${timestamp}_${userId.slice(-6)}`;
+  return { uploadId, imageKey };
+}
+__name(uploadImage, "uploadImage");
+function parseFormData(request) {
+  const contentType = request.headers.get("content-type") || "";
+  if (!contentType.includes("multipart/form-data")) {
+    return Promise.resolve(null);
+  }
+  return request.formData();
+}
+__name(parseFormData, "parseFormData");
+
+// functions/api/beauty/upload.ts
+var ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"];
+function jsonResponse(data, status) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json" }
+  });
+}
+__name(jsonResponse, "jsonResponse");
+async function onRequestPost4(context) {
+  const { env, request } = context;
+  console.log("[beauty/upload] request headers:", Object.fromEntries(request.headers.entries()));
+  const formData = await parseFormData(request);
+  if (!formData) {
+    return jsonResponse({ success: false, error: "Content-Type must be multipart/form-data" }, 400);
+  }
+  const imageFile = formData.get("image");
+  if (!imageFile) {
+    return jsonResponse({ success: false, error: "Field 'image' is required" }, 400);
+  }
+  const sessionId = extractSessionId(request);
+  console.log("[beauty/upload] sessionId from header:", sessionId, "length:", sessionId.length);
+  if (!sessionId) {
+    return jsonResponse({ success: false, error: "Authentication required" }, 401);
+  }
+  const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+  console.log("[beauty/upload] KV lookup:", sessionRaw ? "found(" + sessionRaw.length + ")" : "null");
+  if (!sessionRaw) {
+    return jsonResponse({ success: false, error: "Invalid session" }, 401);
+  }
+  const { userId } = JSON.parse(sessionRaw);
+  if (!ALLOWED_MIME_TYPES.includes(imageFile.type)) {
+    return jsonResponse(
+      { success: false, error: "Invalid image type. Only jpeg/png/webp are allowed" },
+      400
+    );
+  }
+  let imageBuffer;
+  try {
+    imageBuffer = await imageFile.arrayBuffer();
+  } catch (err) {
+    console.error("[beauty/upload] Error reading file:", err);
+    return jsonResponse({ success: false, error: "Failed to read image file" }, 500);
+  }
+  const buffer = Buffer.from(imageBuffer);
+  try {
+    const result = await uploadImage(env, buffer, userId, imageFile.type);
+    return jsonResponse({
+      success: true,
+      uploadId: result.uploadId,
+      imageUrl: result.imageKey,
+      imageKey: result.imageKey
+    }, 200);
+  } catch (err) {
+    console.error("[beauty/upload] Error:", err);
+    return jsonResponse({ success: false, error: "Upload failed" }, 500);
+  }
+}
+__name(onRequestPost4, "onRequestPost");
+
+// functions/api/token/balance.ts
+async function onRequestGet4(context) {
+  const { env, request } = context;
+  try {
+    const tokenService = new TokenService(env.D1_DB);
+    const sessionId = extractSessionId(request);
+    const userId = sessionId || "anonymous";
+    const balance = await tokenService.getBalance(userId);
+    return new Response(
+      JSON.stringify({ success: true, userId, balance }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    console.error("[token/balance] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, error: "Internal server error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestGet4, "onRequestGet");
+
+// functions/api/token/consume.ts
+async function onRequestPost5(context) {
+  const { env, request } = context;
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ success: false, error: "Request body must be valid JSON" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const amount = body.amount ?? 3;
+  const reason = body.reason ?? "Token consumed";
+  if (amount <= 0) {
+    return new Response(
+      JSON.stringify({ success: false, error: "amount must be positive" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const tokenService = new TokenService(env.D1_DB);
+    const sessionId = extractSessionId(request);
+    const userId = sessionId || "anonymous";
+    const newBalance = await tokenService.consume({
+      userId,
+      amount,
+      description: reason
+    });
+    return new Response(
+      JSON.stringify({ success: true, userId, balance: newBalance }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return new Response(
+      JSON.stringify({ success: false, error: message }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestPost5, "onRequestPost");
+
+// functions/api/token/seed.ts
+async function onRequestPost6(context) {
+  const { env, request } = context;
+  const authHeader = request.headers.get("Authorization") || "";
+  if (!env.TOKEN_ADMIN_SECRET || !authHeader.startsWith("Bearer ") || authHeader.slice(7) !== env.TOKEN_ADMIN_SECRET) {
+    return new Response(JSON.stringify({ success: false, error: "Unauthorized" }), {
+      status: 403,
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ success: false, error: "Request body must be valid JSON" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  if (!body.userId || !body.amount) {
+    return new Response(
+      JSON.stringify({ success: false, error: "userId and amount are required" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  if (body.amount <= 0) {
+    return new Response(
+      JSON.stringify({ success: false, error: "amount must be positive" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  try {
+    const tokenService = new TokenService(env.D1_DB);
+    const newBalance = await tokenService.add(
+      body.userId,
+      body.amount,
+      body.reason || "Admin seed"
+    );
+    return new Response(
+      JSON.stringify({ success: true, userId: body.userId, balance: newBalance }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[token/seed] Error:", err);
+    return new Response(
+      JSON.stringify({ success: false, error: message }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestPost6, "onRequestPost");
+
+// functions/api/profile.ts
+async function onRequestGet5(context) {
+  const { env, request } = context;
+  const sessionService = new SessionService(env.USER_CACHE);
+  const sessionId = extractSessionId(request);
+  const session = await sessionService.validate(sessionId);
+  let userId = null;
+  if (session) {
+    userId = session.userId;
+  }
+  try {
+    if (userId) {
+      const [profileRow, reportRows] = await Promise.all([
+        env.D1_DB.prepare(
+          "SELECT id, nickname, avatar_url, style_name FROM users WHERE id = ?"
+        ).first(userId),
+        env.D1_DB.prepare(
+          "SELECT id as report_id, code as report_code, created_at, style_name FROM beauty_reports WHERE user_id = ? ORDER BY created_at DESC LIMIT 10"
+        ).all(userId)
+      ]);
+      const response2 = {
+        userId,
+        nickname: profileRow?.nickname || `\u7528\u6237${userId}`,
+        avatar: profileRow?.avatar_url || "",
+        styleName: profileRow?.style_name || "",
+        reports: (reportRows?.results ?? []).map((r) => ({
+          reportId: String(r.report_id),
+          reportCode: r.report_code || "",
+          createdAt: r.created_at || "",
+          styleName: r.style_name || ""
+        }))
+      };
+      return new Response(JSON.stringify(response2), {
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    const response = {
+      userId: "current_user_id",
+      nickname: "\u5F20\u4E09",
+      avatar: "https://example.com/avatar.jpg",
+      styleName: "\u6E05\u900F\u81EA\u7136\u578B",
+      reports: [
+        {
+          reportId: "report_001",
+          reportCode: "BM202607300001",
+          createdAt: "2026-07-25T10:30:00Z",
+          styleName: "\u6E05\u900F\u81EA\u7136\u578B"
+        },
+        {
+          reportId: "report_002",
+          reportCode: "BM202607200002",
+          createdAt: "2026-07-20T14:15:00Z",
+          styleName: "\u65E5\u7CFB\u6E05\u65B0\u578B"
+        },
+        {
+          reportId: "report_003",
+          reportCode: "BM202607100003",
+          createdAt: "2026-07-10T09:45:00Z",
+          styleName: "\u6B27\u7F8E\u6D53\u5986\u578B"
+        }
+      ]
+    };
+    return new Response(JSON.stringify(response), {
+      headers: { "Content-Type": "application/json" }
+    });
+  } catch (err) {
+    console.error("[profile] Error:", err);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch profile" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+__name(onRequestGet5, "onRequestGet");
+
+// functions/api/wechat-bind.ts
+async function onRequestPost7(context) {
+  const { env, request } = context;
+  const sessionService = new SessionService(env.USER_CACHE);
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(
+      JSON.stringify({ success: false, userId: "", merged: false, message: "\u8BF7\u6C42\u4F53\u89E3\u6790\u5931\u8D25" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const { wechatOpenId, nickname, avatarUrl } = body;
+  if (!wechatOpenId) {
+    return new Response(
+      JSON.stringify({ success: false, userId: "", merged: false, message: "\u7F3A\u5C11 wechatOpenId" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const sessionId = extractSessionId(request);
+  if (!sessionId) {
+    return new Response(
+      JSON.stringify({ success: false, userId: "", merged: false, message: "\u672A\u767B\u5F55" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const session = await sessionService.validate(sessionId);
+  if (!session) {
+    return new Response(
+      JSON.stringify({ success: false, userId: "", merged: false, message: "\u4F1A\u8BDD\u5DF2\u8FC7\u671F" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  let userId = session.userId;
+  let merged = false;
+  try {
+    const existing = await env.D1_DB.prepare(
+      "SELECT id FROM users WHERE open_id = ?"
+    ).first(wechatOpenId);
+    if (existing) {
+      userId = String(existing.id);
+      if (userId !== session.userId) {
+        return new Response(
+          JSON.stringify({ success: false, userId, merged: false, message: "\u8BE5\u5FAE\u4FE1\u8D26\u53F7\u5DF2\u7ED1\u5B9A\u5176\u4ED6\u7528\u6237" }),
+          { status: 409, headers: { "Content-Type": "application/json" } }
+        );
+      }
+    } else {
+      const insertResult = await env.D1_DB.prepare(
+        "INSERT INTO users (open_id, nickname, avatar_url, created_at) VALUES (?, ?, ?, ?) RETURNING id"
+      ).bind(wechatOpenId, nickname || null, avatarUrl || null, (/* @__PURE__ */ new Date()).toISOString()).first();
+      if (insertResult) {
+        userId = String(insertResult.id);
+      }
+    }
+  } catch (err) {
+    console.error("[wechat-bind] D1 error:", err);
+    return new Response(
+      JSON.stringify({ success: false, userId: session.userId, merged: false, message: "\u7ED1\u5B9A\u5931\u8D25" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+  const updatedSession = await sessionService.updateToWechatSession(sessionId, userId, wechatOpenId);
+  if (updatedSession) {
+    merged = false;
+  }
+  return new Response(
+    JSON.stringify({
+      success: true,
+      userId,
+      sessionId,
+      merged,
+      message: "\u5FAE\u4FE1\u7ED1\u5B9A\u6210\u529F"
+    }),
+    { status: 200, headers: { "Content-Type": "application/json" } }
+  );
+}
+__name(onRequestPost7, "onRequestPost");
+
+// functions/api/wechat-login.ts
+async function onRequestPost8(context) {
+  const { env, request } = context;
+  const sessionService = new SessionService(env.USER_CACHE);
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ status: "error", isGuest: true, message: "\u8BF7\u6C42\u4F53\u89E3\u6790\u5931\u8D25" }), { status: 400, headers: { "Content-Type": "application/json" } });
+  }
+  const { code, guestUserId, guestId, sessionId } = body;
+  const fallbackUserId = guestUserId || "guest_" + Date.now();
+  if (!code) {
+    let userId2 = fallbackUserId;
+    try {
+      await env.D1_DB.prepare(
+        "INSERT OR IGNORE INTO users (id, open_id, created_at) VALUES ((SELECT COALESCE(MAX(id),0)+1 FROM users), ?, ?)"
+      ).bind(userId2, (/* @__PURE__ */ new Date()).toISOString()).run();
+    } catch (e) {
+      console.error("[wechat-login] D1 insert error:", e);
+    }
+    const sid = sessionId || null;
+    if (sid) {
+      const existing = await sessionService.validate(sid);
+      if (existing) {
+        return new Response(JSON.stringify({ status: "success", sessionId: sid, userId: userId2, isGuest: true, merged: false }), { status: 200, headers: { "Content-Type": "application/json" } });
+      }
+    }
+    const record = await sessionService.createGuestSession(guestId || "guest", userId2);
+    return new Response(JSON.stringify({ status: "success", sessionId: record.sessionId, userId: record.userId, isGuest: true, merged: false }), { status: 200, headers: { "Content-Type": "application/json" } });
+  }
+  const appid = env.WECHAT_APP_ID;
+  const secret = env.WECHAT_APP_SECRET;
+  let openid = null;
+  if (appid && secret) {
+    try {
+      const wechatUrl = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorization_code";
+      const tokenRes = await fetch(wechatUrl);
+      const tokenData = await tokenRes.json();
+      if (tokenData.errcode) {
+        console.error("[wechat-login] code2session error:", tokenData);
+      } else {
+        openid = tokenData.openid;
+      }
+    } catch (err) {
+      console.error("[wechat-login] code2session failed:", err);
+    }
+  } else {
+    console.log("[wechat-login] WECHAT_APP_ID/SECRET not configured, using guest fallback");
+  }
+  let userId;
+  if (openid) {
+    try {
+      const existing = await env.D1_DB.prepare("SELECT id FROM users WHERE open_id = ?").first(openid);
+      if (existing) {
+        userId = String(existing.id);
+      } else {
+        const insertResult = await env.D1_DB.prepare(
+          "INSERT INTO users (open_id, created_at) VALUES (?, ?) RETURNING id"
+        ).bind(openid, (/* @__PURE__ */ new Date()).toISOString()).first();
+        userId = insertResult ? String(insertResult.id) : fallbackUserId;
+        try {
+          const tokenService = new TokenService(env.D1_DB);
+          await tokenService.add(userId, 1, "New user welcome gift");
+        } catch (e) {
+          console.error("[wechat-login] Failed to grant welcome token:", e);
+        }
+      }
+    } catch (err) {
+      console.error("[wechat-login] D1 user error:", err);
+      userId = fallbackUserId;
+    }
+  } else {
+    userId = fallbackUserId;
+    try {
+      await env.D1_DB.prepare(
+        "INSERT OR IGNORE INTO users (id, open_id, created_at) VALUES ((SELECT COALESCE(MAX(id),0)+1 FROM users), ?, ?)"
+      ).bind(userId, (/* @__PURE__ */ new Date()).toISOString()).run();
+    } catch (e) {
+      console.error("[wechat-login] D1 insert error:", e);
+    }
+  }
+  let sessionRecord;
+  if (guestUserId && guestId && sessionId) {
+    sessionRecord = await sessionService.updateToWechatSession(sessionId, userId, openid || "");
+    if (!sessionRecord) {
+      sessionRecord = await sessionService.createGuestSession(guestId, userId);
+    }
+  } else {
+    sessionRecord = await sessionService.createGuestSession(guestId || "guest", userId);
+  }
+  console.log("[wechat-login] session created:", sessionRecord.sessionId, "userId:", sessionRecord.userId, "isGuest:", sessionRecord.isGuest);
+  return new Response(JSON.stringify({
+    status: "success",
+    sessionId: sessionRecord.sessionId,
+    userId: sessionRecord.userId,
+    isGuest: sessionRecord.isGuest
+  }), { status: 200, headers: { "Content-Type": "application/json" } });
+}
+__name(onRequestPost8, "onRequestPost");
+
+// .wrangler/tmp/pages-a7BkSb/functionsRoutes-0.38384911713128234.mjs
+var routes = [
+  {
+    routePath: "/functions/api/beauty/report/query",
+    mountPath: "/functions/api/beauty/report",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet]
+  },
+  {
+    routePath: "/functions/api/beauty/share/reward",
+    mountPath: "/functions/api/beauty/share",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost]
+  },
+  {
+    routePath: "/functions/api/beauty/access",
+    mountPath: "/functions/api/beauty",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet2]
+  },
+  {
+    routePath: "/functions/api/beauty/analyze",
+    mountPath: "/functions/api/beauty",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost2]
+  },
+  {
+    routePath: "/functions/api/beauty/recommend",
+    mountPath: "/functions/api/beauty",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet3]
+  },
+  {
+    routePath: "/functions/api/beauty/report",
+    mountPath: "/functions/api/beauty",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost3]
+  },
+  {
+    routePath: "/functions/api/beauty/upload",
+    mountPath: "/functions/api/beauty",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost4]
+  },
+  {
+    routePath: "/functions/api/token/balance",
+    mountPath: "/functions/api/token",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet4]
+  },
+  {
+    routePath: "/functions/api/token/consume",
+    mountPath: "/functions/api/token",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost5]
+  },
+  {
+    routePath: "/functions/api/token/seed",
+    mountPath: "/functions/api/token",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost6]
+  },
+  {
+    routePath: "/functions/api/profile",
+    mountPath: "/functions/api",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet5]
+  },
+  {
+    routePath: "/functions/api/wechat-bind",
+    mountPath: "/functions/api",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost7]
+  },
+  {
+    routePath: "/functions/api/wechat-login",
+    mountPath: "/functions/api",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost8]
+  }
+];
+
+// ../../../AppData/Local/nvm/v22.20.0/node_modules/wrangler/node_modules/path-to-regexp/dist.es2015/index.js
+function lexer(str) {
+  var tokens = [];
+  var i = 0;
+  while (i < str.length) {
+    var char = str[i];
+    if (char === "*" || char === "+" || char === "?") {
+      tokens.push({ type: "MODIFIER", index: i, value: str[i++] });
+      continue;
+    }
+    if (char === "\\") {
+      tokens.push({ type: "ESCAPED_CHAR", index: i++, value: str[i++] });
+      continue;
+    }
+    if (char === "{") {
+      tokens.push({ type: "OPEN", index: i, value: str[i++] });
+      continue;
+    }
+    if (char === "}") {
+      tokens.push({ type: "CLOSE", index: i, value: str[i++] });
+      continue;
+    }
+    if (char === ":") {
+      var name = "";
+      var j = i + 1;
+      while (j < str.length) {
+        var code = str.charCodeAt(j);
+        if (
+          // `0-9`
+          code >= 48 && code <= 57 || // `A-Z`
+          code >= 65 && code <= 90 || // `a-z`
+          code >= 97 && code <= 122 || // `_`
+          code === 95
+        ) {
+          name += str[j++];
+          continue;
+        }
+        break;
+      }
+      if (!name)
+        throw new TypeError("Missing parameter name at ".concat(i));
+      tokens.push({ type: "NAME", index: i, value: name });
+      i = j;
+      continue;
+    }
+    if (char === "(") {
+      var count = 1;
+      var pattern = "";
+      var j = i + 1;
+      if (str[j] === "?") {
+        throw new TypeError('Pattern cannot start with "?" at '.concat(j));
+      }
+      while (j < str.length) {
+        if (str[j] === "\\") {
+          pattern += str[j++] + str[j++];
+          continue;
+        }
+        if (str[j] === ")") {
+          count--;
+          if (count === 0) {
+            j++;
+            break;
+          }
+        } else if (str[j] === "(") {
+          count++;
+          if (str[j + 1] !== "?") {
+            throw new TypeError("Capturing groups are not allowed at ".concat(j));
+          }
+        }
+        pattern += str[j++];
+      }
+      if (count)
+        throw new TypeError("Unbalanced pattern at ".concat(i));
+      if (!pattern)
+        throw new TypeError("Missing pattern at ".concat(i));
+      tokens.push({ type: "PATTERN", index: i, value: pattern });
+      i = j;
+      continue;
+    }
+    tokens.push({ type: "CHAR", index: i, value: str[i++] });
+  }
+  tokens.push({ type: "END", index: i, value: "" });
+  return tokens;
+}
+__name(lexer, "lexer");
+function parse(str, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var tokens = lexer(str);
+  var _a = options.prefixes, prefixes = _a === void 0 ? "./" : _a, _b = options.delimiter, delimiter = _b === void 0 ? "/#?" : _b;
+  var result = [];
+  var key = 0;
+  var i = 0;
+  var path = "";
+  var tryConsume = /* @__PURE__ */ __name(function(type) {
+    if (i < tokens.length && tokens[i].type === type)
+      return tokens[i++].value;
+  }, "tryConsume");
+  var mustConsume = /* @__PURE__ */ __name(function(type) {
+    var value2 = tryConsume(type);
+    if (value2 !== void 0)
+      return value2;
+    var _a2 = tokens[i], nextType = _a2.type, index = _a2.index;
+    throw new TypeError("Unexpected ".concat(nextType, " at ").concat(index, ", expected ").concat(type));
+  }, "mustConsume");
+  var consumeText = /* @__PURE__ */ __name(function() {
+    var result2 = "";
+    var value2;
+    while (value2 = tryConsume("CHAR") || tryConsume("ESCAPED_CHAR")) {
+      result2 += value2;
+    }
+    return result2;
+  }, "consumeText");
+  var isSafe = /* @__PURE__ */ __name(function(value2) {
+    for (var _i = 0, delimiter_1 = delimiter; _i < delimiter_1.length; _i++) {
+      var char2 = delimiter_1[_i];
+      if (value2.indexOf(char2) > -1)
+        return true;
+    }
+    return false;
+  }, "isSafe");
+  var safePattern = /* @__PURE__ */ __name(function(prefix2) {
+    var prev = result[result.length - 1];
+    var prevText = prefix2 || (prev && typeof prev === "string" ? prev : "");
+    if (prev && !prevText) {
+      throw new TypeError('Must have text between two parameters, missing text after "'.concat(prev.name, '"'));
+    }
+    if (!prevText || isSafe(prevText))
+      return "[^".concat(escapeString(delimiter), "]+?");
+    return "(?:(?!".concat(escapeString(prevText), ")[^").concat(escapeString(delimiter), "])+?");
+  }, "safePattern");
+  while (i < tokens.length) {
+    var char = tryConsume("CHAR");
+    var name = tryConsume("NAME");
+    var pattern = tryConsume("PATTERN");
+    if (name || pattern) {
+      var prefix = char || "";
+      if (prefixes.indexOf(prefix) === -1) {
+        path += prefix;
+        prefix = "";
+      }
+      if (path) {
+        result.push(path);
+        path = "";
+      }
+      result.push({
+        name: name || key++,
+        prefix,
+        suffix: "",
+        pattern: pattern || safePattern(prefix),
+        modifier: tryConsume("MODIFIER") || ""
+      });
+      continue;
+    }
+    var value = char || tryConsume("ESCAPED_CHAR");
+    if (value) {
+      path += value;
+      continue;
+    }
+    if (path) {
+      result.push(path);
+      path = "";
+    }
+    var open = tryConsume("OPEN");
+    if (open) {
+      var prefix = consumeText();
+      var name_1 = tryConsume("NAME") || "";
+      var pattern_1 = tryConsume("PATTERN") || "";
+      var suffix = consumeText();
+      mustConsume("CLOSE");
+      result.push({
+        name: name_1 || (pattern_1 ? key++ : ""),
+        pattern: name_1 && !pattern_1 ? safePattern(prefix) : pattern_1,
+        prefix,
+        suffix,
+        modifier: tryConsume("MODIFIER") || ""
+      });
+      continue;
+    }
+    mustConsume("END");
+  }
+  return result;
+}
+__name(parse, "parse");
+function match(str, options) {
+  var keys = [];
+  var re = pathToRegexp(str, keys, options);
+  return regexpToFunction(re, keys, options);
+}
+__name(match, "match");
+function regexpToFunction(re, keys, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _a = options.decode, decode = _a === void 0 ? function(x) {
+    return x;
+  } : _a;
+  return function(pathname) {
+    var m = re.exec(pathname);
+    if (!m)
+      return false;
+    var path = m[0], index = m.index;
+    var params = /* @__PURE__ */ Object.create(null);
+    var _loop_1 = /* @__PURE__ */ __name(function(i2) {
+      if (m[i2] === void 0)
+        return "continue";
+      var key = keys[i2 - 1];
+      if (key.modifier === "*" || key.modifier === "+") {
+        params[key.name] = m[i2].split(key.prefix + key.suffix).map(function(value) {
+          return decode(value, key);
+        });
+      } else {
+        params[key.name] = decode(m[i2], key);
+      }
+    }, "_loop_1");
+    for (var i = 1; i < m.length; i++) {
+      _loop_1(i);
+    }
+    return { path, index, params };
+  };
+}
+__name(regexpToFunction, "regexpToFunction");
+function escapeString(str) {
+  return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
+}
+__name(escapeString, "escapeString");
+function flags(options) {
+  return options && options.sensitive ? "" : "i";
+}
+__name(flags, "flags");
+function regexpToRegexp(path, keys) {
+  if (!keys)
+    return path;
+  var groupsRegex = /\((?:\?<(.*?)>)?(?!\?)/g;
+  var index = 0;
+  var execResult = groupsRegex.exec(path.source);
+  while (execResult) {
+    keys.push({
+      // Use parenthesized substring match if available, index otherwise
+      name: execResult[1] || index++,
+      prefix: "",
+      suffix: "",
+      modifier: "",
+      pattern: ""
+    });
+    execResult = groupsRegex.exec(path.source);
+  }
+  return path;
+}
+__name(regexpToRegexp, "regexpToRegexp");
+function arrayToRegexp(paths, keys, options) {
+  var parts = paths.map(function(path) {
+    return pathToRegexp(path, keys, options).source;
+  });
+  return new RegExp("(?:".concat(parts.join("|"), ")"), flags(options));
+}
+__name(arrayToRegexp, "arrayToRegexp");
+function stringToRegexp(path, keys, options) {
+  return tokensToRegexp(parse(path, options), keys, options);
+}
+__name(stringToRegexp, "stringToRegexp");
+function tokensToRegexp(tokens, keys, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode = _d === void 0 ? function(x) {
+    return x;
+  } : _d, _e = options.delimiter, delimiter = _e === void 0 ? "/#?" : _e, _f = options.endsWith, endsWith = _f === void 0 ? "" : _f;
+  var endsWithRe = "[".concat(escapeString(endsWith), "]|$");
+  var delimiterRe = "[".concat(escapeString(delimiter), "]");
+  var route = start ? "^" : "";
+  for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
+    var token = tokens_1[_i];
+    if (typeof token === "string") {
+      route += escapeString(encode(token));
+    } else {
+      var prefix = escapeString(encode(token.prefix));
+      var suffix = escapeString(encode(token.suffix));
+      if (token.pattern) {
+        if (keys)
+          keys.push(token);
+        if (prefix || suffix) {
+          if (token.modifier === "+" || token.modifier === "*") {
+            var mod = token.modifier === "*" ? "?" : "";
+            route += "(?:".concat(prefix, "((?:").concat(token.pattern, ")(?:").concat(suffix).concat(prefix, "(?:").concat(token.pattern, "))*)").concat(suffix, ")").concat(mod);
+          } else {
+            route += "(?:".concat(prefix, "(").concat(token.pattern, ")").concat(suffix, ")").concat(token.modifier);
+          }
+        } else {
+          if (token.modifier === "+" || token.modifier === "*") {
+            throw new TypeError('Can not repeat "'.concat(token.name, '" without a prefix and suffix'));
+          }
+          route += "(".concat(token.pattern, ")").concat(token.modifier);
+        }
+      } else {
+        route += "(?:".concat(prefix).concat(suffix, ")").concat(token.modifier);
+      }
+    }
+  }
+  if (end) {
+    if (!strict)
+      route += "".concat(delimiterRe, "?");
+    route += !options.endsWith ? "$" : "(?=".concat(endsWithRe, ")");
+  } else {
+    var endToken = tokens[tokens.length - 1];
+    var isEndDelimited = typeof endToken === "string" ? delimiterRe.indexOf(endToken[endToken.length - 1]) > -1 : endToken === void 0;
+    if (!strict) {
+      route += "(?:".concat(delimiterRe, "(?=").concat(endsWithRe, "))?");
+    }
+    if (!isEndDelimited) {
+      route += "(?=".concat(delimiterRe, "|").concat(endsWithRe, ")");
+    }
+  }
+  return new RegExp(route, flags(options));
+}
+__name(tokensToRegexp, "tokensToRegexp");
+function pathToRegexp(path, keys, options) {
+  if (path instanceof RegExp)
+    return regexpToRegexp(path, keys);
+  if (Array.isArray(path))
+    return arrayToRegexp(path, keys, options);
+  return stringToRegexp(path, keys, options);
+}
+__name(pathToRegexp, "pathToRegexp");
+
+// ../../../AppData/Local/nvm/v22.20.0/node_modules/wrangler/templates/pages-template-worker.ts
+var escapeRegex = /[.+?^${}()|[\]\\]/g;
+function* executeRequest(request) {
+  const requestPath = new URL(request.url).pathname;
+  for (const route of [...routes].reverse()) {
+    if (route.method && route.method !== request.method) {
+      continue;
+    }
+    const routeMatcher = match(route.routePath.replace(escapeRegex, "\\$&"), {
+      end: false
+    });
+    const mountMatcher = match(route.mountPath.replace(escapeRegex, "\\$&"), {
+      end: false
+    });
+    const matchResult = routeMatcher(requestPath);
+    const mountMatchResult = mountMatcher(requestPath);
+    if (matchResult && mountMatchResult) {
+      for (const handler of route.middlewares.flat()) {
+        yield {
+          handler,
+          params: matchResult.params,
+          path: mountMatchResult.path
+        };
+      }
+    }
+  }
+  for (const route of routes) {
+    if (route.method && route.method !== request.method) {
+      continue;
+    }
+    const routeMatcher = match(route.routePath.replace(escapeRegex, "\\$&"), {
+      end: true
+    });
+    const mountMatcher = match(route.mountPath.replace(escapeRegex, "\\$&"), {
+      end: false
+    });
+    const matchResult = routeMatcher(requestPath);
+    const mountMatchResult = mountMatcher(requestPath);
+    if (matchResult && mountMatchResult && route.modules.length) {
+      for (const handler of route.modules.flat()) {
+        yield {
+          handler,
+          params: matchResult.params,
+          path: matchResult.path
+        };
+      }
+      break;
+    }
+  }
+}
+__name(executeRequest, "executeRequest");
+var pages_template_worker_default = {
+  async fetch(originalRequest, env, workerContext) {
+    let request = originalRequest;
+    const handlerIterator = executeRequest(request);
+    let data = {};
+    let isFailOpen = false;
+    const next = /* @__PURE__ */ __name(async (input, init) => {
+      if (input !== void 0) {
+        let url = input;
+        if (typeof input === "string") {
+          url = new URL(input, request.url).toString();
+        }
+        request = new Request(url, init);
+      }
+      const result = handlerIterator.next();
+      if (result.done === false) {
+        const { handler, params, path } = result.value;
+        const context = {
+          request: new Request(request.clone()),
+          functionPath: path,
+          next,
+          params,
+          get data() {
+            return data;
+          },
+          set data(value) {
+            if (typeof value !== "object" || value === null) {
+              throw new Error("context.data must be an object");
+            }
+            data = value;
+          },
+          env,
+          waitUntil: workerContext.waitUntil.bind(workerContext),
+          passThroughOnException: /* @__PURE__ */ __name(() => {
+            isFailOpen = true;
+          }, "passThroughOnException")
+        };
+        const response = await handler(context);
+        if (!(response instanceof Response)) {
+          throw new Error("Your Pages function should return a Response");
+        }
+        return cloneResponse(response);
+      } else if ("ASSETS") {
+        const response = await env["ASSETS"].fetch(request);
+        return cloneResponse(response);
+      } else {
+        const response = await fetch(request);
+        return cloneResponse(response);
+      }
+    }, "next");
+    try {
+      return await next();
+    } catch (error) {
+      if (isFailOpen) {
+        const response = await env["ASSETS"].fetch(request);
+        return cloneResponse(response);
+      }
+      throw error;
+    }
+  }
+};
+var cloneResponse = /* @__PURE__ */ __name((response) => (
+  // https://fetch.spec.whatwg.org/#null-body-status
+  new Response(
+    [101, 204, 205, 304].includes(response.status) ? null : response.body,
+    response
+  )
+), "cloneResponse");
+export {
+  pages_template_worker_default as default
+};
+
+------formdata-undici-008104442356--
