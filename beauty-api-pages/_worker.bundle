@@ -1,9 +1,9 @@
-------formdata-undici-009731077493
+------formdata-undici-034588191131
 Content-Disposition: form-data; name="metadata"
 
-{"main_module":"functionsWorker-0.03787155390795749.js"}
-------formdata-undici-009731077493
-Content-Disposition: form-data; name="functionsWorker-0.03787155390795749.js"; filename="functionsWorker-0.03787155390795749.js"
+{"main_module":"functionsWorker-0.30114175809364196.js"}
+------formdata-undici-034588191131
+Content-Disposition: form-data; name="functionsWorker-0.30114175809364196.js"; filename="functionsWorker-0.30114175809364196.js"
 Content-Type: application/javascript+module
 
 var __create = Object.create;
@@ -13,7 +13,13 @@ var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __commonJS = (cb, mod) => function __require() {
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+var __commonJS = (cb, mod) => function __require2() {
   try {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   } catch (e) {
@@ -2004,11 +2010,53 @@ async function onRequestPost3(context) {
 }
 __name(onRequestPost3, "onRequestPost");
 
+// functions/api/beauty/test-d1-query.ts
+async function onRequestGet4(context) {
+  const { env } = context;
+  try {
+    const result = await env.D1_DB.prepare("SELECT 1").first();
+    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: String(err) }), { status: 500 });
+  }
+}
+__name(onRequestGet4, "onRequestGet");
+
 // functions/api/beauty/test-debug.ts
 async function onRequestPost4(context) {
   return new Response(JSON.stringify({ success: true, message: "Debug endpoint working", timestamp: Date.now() }), { status: 200, headers: { "Content-Type": "application/json" } });
 }
 __name(onRequestPost4, "onRequestPost");
+
+// functions/api/beauty/test-full.ts
+async function onRequestPost5(context) {
+  const { env } = context;
+  try {
+    const reportLevel = "first-look";
+    const sessionId = "fa4a3a58-54d6-484a-a402-32dad7750c01";
+    const sessionRaw = await env.USER_CACHE.get("session:" + sessionId);
+    if (!sessionRaw) return new Response(JSON.stringify({ step: "session", error: "NOT FOUND" }), { status: 401 });
+    const userId = JSON.parse(sessionRaw).userId;
+    const startOfDay = /* @__PURE__ */ new Date();
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    const startISO = startOfDay.toISOString();
+    const endISO = new Date(Date.now() + 24 * 60 * 60 * 1e3).toISOString();
+    const todayCount = await env.D1_DB.prepare(
+      "SELECT COUNT(*) as cnt FROM report_access WHERE user_id = ? AND level = ? AND unlocked_at >= ? AND unlocked_at < ?"
+    ).first(userId, reportLevel, startISO, endISO);
+    const report = { success: true, level: reportLevel };
+    const id = __require("crypto").randomUUID();
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const expireAt = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3).toISOString();
+    await env.D1_DB.prepare(
+      "INSERT INTO beauty_reports (id, user_id, image_id, level, status, face_metrics_json, analysis_json, analysis_version, created_at, expire_at, image_url, thumbnail_url, decision_answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    ).bind(id, userId, "test_" + Date.now(), reportLevel, "completed", "{}", JSON.stringify(report), "v2", now, expireAt, null, null, null).run();
+    return new Response(JSON.stringify({ step: "success", reportId: id, userId, todayCount }), { status: 200 });
+  } catch (err) {
+    return new Response(JSON.stringify({ step: "error", error: err.message, stack: err.stack }), { status: 500 });
+  }
+}
+__name(onRequestPost5, "onRequestPost");
 
 // modules/beauty-ai/upload-service.ts
 async function uploadImage(env, imageBuffer, userId, contentType = "image/jpeg") {
@@ -2044,7 +2092,7 @@ function jsonResponse(data, status) {
   });
 }
 __name(jsonResponse, "jsonResponse");
-async function onRequestPost5(context) {
+async function onRequestPost6(context) {
   const { env, request } = context;
   console.log("[beauty/upload] request headers:", Object.fromEntries(request.headers.entries()));
   const formData = await parseFormData(request);
@@ -2093,10 +2141,10 @@ async function onRequestPost5(context) {
     return jsonResponse({ success: false, error: "Upload failed" }, 500);
   }
 }
-__name(onRequestPost5, "onRequestPost");
+__name(onRequestPost6, "onRequestPost");
 
 // functions/api/token/balance.ts
-async function onRequestGet4(context) {
+async function onRequestGet5(context) {
   const { env, request } = context;
   try {
     const tokenService = new TokenService(env.D1_DB);
@@ -2115,10 +2163,10 @@ async function onRequestGet4(context) {
     );
   }
 }
-__name(onRequestGet4, "onRequestGet");
+__name(onRequestGet5, "onRequestGet");
 
 // functions/api/token/consume.ts
-async function onRequestPost6(context) {
+async function onRequestPost7(context) {
   const { env, request } = context;
   let body;
   try {
@@ -2158,10 +2206,10 @@ async function onRequestPost6(context) {
     );
   }
 }
-__name(onRequestPost6, "onRequestPost");
+__name(onRequestPost7, "onRequestPost");
 
 // functions/api/token/seed.ts
-async function onRequestPost7(context) {
+async function onRequestPost8(context) {
   const { env, request } = context;
   const authHeader = request.headers.get("Authorization") || "";
   if (!env.TOKEN_ADMIN_SECRET || !authHeader.startsWith("Bearer ") || authHeader.slice(7) !== env.TOKEN_ADMIN_SECRET) {
@@ -2211,10 +2259,10 @@ async function onRequestPost7(context) {
     );
   }
 }
-__name(onRequestPost7, "onRequestPost");
+__name(onRequestPost8, "onRequestPost");
 
 // functions/api/profile.ts
-async function onRequestGet5(context) {
+async function onRequestGet6(context) {
   const { env, request } = context;
   const sessionService = new SessionService(env.USER_CACHE);
   const sessionId = extractSessionId(request);
@@ -2286,10 +2334,10 @@ async function onRequestGet5(context) {
     );
   }
 }
-__name(onRequestGet5, "onRequestGet");
+__name(onRequestGet6, "onRequestGet");
 
 // functions/api/wechat-bind.ts
-async function onRequestPost8(context) {
+async function onRequestPost9(context) {
   const { env, request } = context;
   const sessionService = new SessionService(env.USER_CACHE);
   let body;
@@ -2366,10 +2414,10 @@ async function onRequestPost8(context) {
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }
-__name(onRequestPost8, "onRequestPost");
+__name(onRequestPost9, "onRequestPost");
 
 // functions/api/wechat-login.ts
-async function onRequestPost9(context) {
+async function onRequestPost10(context) {
   const { env, request } = context;
   const sessionService = new SessionService(env.USER_CACHE);
   let body;
@@ -2467,9 +2515,9 @@ async function onRequestPost9(context) {
     isGuest: sessionRecord.isGuest
   }), { status: 200, headers: { "Content-Type": "application/json" } });
 }
-__name(onRequestPost9, "onRequestPost");
+__name(onRequestPost10, "onRequestPost");
 
-// .wrangler/tmp/pages-ZoPCXE/functionsRoutes-0.3743222077145949.mjs
+// .wrangler/tmp/pages-2a6Iwc/functionsRoutes-0.36496856179282644.mjs
 var routes = [
   {
     routePath: "/functions/api/beauty/report/query",
@@ -2514,6 +2562,13 @@ var routes = [
     modules: [onRequestPost3]
   },
   {
+    routePath: "/functions/api/beauty/test-d1-query",
+    mountPath: "/functions/api/beauty",
+    method: "GET",
+    middlewares: [],
+    modules: [onRequestGet4]
+  },
+  {
     routePath: "/functions/api/beauty/test-debug",
     mountPath: "/functions/api/beauty",
     method: "POST",
@@ -2521,53 +2576,60 @@ var routes = [
     modules: [onRequestPost4]
   },
   {
-    routePath: "/functions/api/beauty/upload",
+    routePath: "/functions/api/beauty/test-full",
     mountPath: "/functions/api/beauty",
     method: "POST",
     middlewares: [],
     modules: [onRequestPost5]
   },
   {
+    routePath: "/functions/api/beauty/upload",
+    mountPath: "/functions/api/beauty",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost6]
+  },
+  {
     routePath: "/functions/api/token/balance",
     mountPath: "/functions/api/token",
     method: "GET",
     middlewares: [],
-    modules: [onRequestGet4]
+    modules: [onRequestGet5]
   },
   {
     routePath: "/functions/api/token/consume",
     mountPath: "/functions/api/token",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost6]
+    modules: [onRequestPost7]
   },
   {
     routePath: "/functions/api/token/seed",
     mountPath: "/functions/api/token",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost7]
+    modules: [onRequestPost8]
   },
   {
     routePath: "/functions/api/profile",
     mountPath: "/functions/api",
     method: "GET",
     middlewares: [],
-    modules: [onRequestGet5]
+    modules: [onRequestGet6]
   },
   {
     routePath: "/functions/api/wechat-bind",
     mountPath: "/functions/api",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost8]
+    modules: [onRequestPost9]
   },
   {
     routePath: "/functions/api/wechat-login",
     mountPath: "/functions/api",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost9]
+    modules: [onRequestPost10]
   }
 ];
 
@@ -3020,4 +3082,4 @@ export {
   pages_template_worker_default as default
 };
 
-------formdata-undici-009731077493--
+------formdata-undici-034588191131--

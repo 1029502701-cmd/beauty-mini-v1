@@ -1,0 +1,1 @@
+﻿export async function onRequestGet(context) { const { env } = context; try { const result = await env.D1_DB.prepare("SELECT 1").first(); return new Response(JSON.stringify({ok: true}), {status: 200}); } catch (err) { return new Response(JSON.stringify({error: String(err)}), {status: 500}); } }
