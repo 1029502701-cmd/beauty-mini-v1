@@ -28,9 +28,7 @@ export const DAILY_LIMITS: Record<Exclude<ReportLevel, 'beauty-pro'>, number> = 
 };
 
 export class ReportAccessService {
-  constructor(private db: Env['D1_DB']) {
-    this.init();
-  }
+  constructor(private db: Env['D1_DB']) {}
 
   private async ensureTable(): Promise<void> {
     try {
@@ -59,7 +57,7 @@ export class ReportAccessService {
   async checkReportAccess(userId: string, reportId: string, level: ReportLevel): Promise<ReportAccessResult | null> {
     const row = await this.db.prepare(
       "SELECT id, user_id, report_id, level, unlock_type, token_cost, unlocked_at, expire_at FROM report_access WHERE user_id = ? AND report_id = ? AND level = ? LIMIT 1"
-    ).first<any>(userId, reportId, level);
+    ).bind(userId, reportId, level).first();
     if (!row) return null;
     return {
       unlocked: true,
@@ -81,7 +79,7 @@ export class ReportAccessService {
     const endISO = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
     const row = await this.db.prepare(
       "SELECT COUNT(*) AS cnt FROM report_access WHERE user_id = ? AND level = ? AND unlocked_at >= ? AND unlocked_at < ?"
-    ).first<{ cnt: number }>(userId, level, startISO, endISO);
+    ).bind(userId, level, startISO, endISO).first();
     return row?.cnt ?? 0;
   }
 
@@ -175,7 +173,7 @@ export class ReportAccessService {
   async getUnlockedLevels(userId: string, reportId: string): Promise<ReportAccessResult[]> {
     const rows = await this.db.prepare(
       "SELECT level, unlock_type, token_cost, unlocked_at, expire_at FROM report_access WHERE user_id = ? AND report_id = ? ORDER BY level"
-    ).all<any>(userId, reportId);
+    ).bind(userId, reportId).all();
     return (rows.results ?? []).map((r: any) => ({
       unlocked: true,
       level: r.level as ReportLevel,
@@ -186,3 +184,9 @@ export class ReportAccessService {
     }));
   }
 }
+
+
+
+
+
+

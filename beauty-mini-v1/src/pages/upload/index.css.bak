@@ -1,0 +1,11 @@
+﻿/* V8 Upload Page */
+.scanning-overlay { width: 100%; min-height: 100vh; background: linear-gradient(180deg, #FFF5F0, #FFFAF7); display: flex; flex-direction: column; align-items: center; padding: 40px 24px; }
+.scanning-image-wrapper { position: relative; width: 280px; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 32px rgba(200,160,170,0.2); }
+.scan-line { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #F4A0B8, transparent); animation: scan 2s ease-in-out infinite; }
+@keyframes scan { 0% { top: 0%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.preview-blur-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background: rgba(255,250,247,0.3); }
+.video-guide { width: calc(100% - 48px); margin: 20px 24px; background: white; border-radius: 16px; padding: 16px 18px; box-shadow: 0 2px 8px rgba(200,160,170,0.08); border: 1px solid rgba(248,220,225,0.5); }
+.video-guide-title { font-size: 13px; font-weight: 600; color: #888; display: block; margin-bottom: 10px; }
+.video-guide-content { display: flex; align-items: center; gap: 12px; padding: 12px; background: #FFF8FA; border-radius: 12px; }
+.video-guide-icon { font-size: 24px; color: #F4A0B8; }
+.video-guide-hint { font-size: 13px; color: #A08080; }

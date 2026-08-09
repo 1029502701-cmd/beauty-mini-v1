@@ -38,7 +38,6 @@ import {
 
 import type { ReportLevel } from "./types";
 import type { BeautyDecisionAnswers } from "../types/beauty";
-import type { BeautyDecisionAnswers } from "../types/beauty";
 
 /**
  * ReportGenerator – orchestrates V2 rule-based report generation.
@@ -426,4 +425,5 @@ export class ReportGenerator {
 }
 
 export default ReportGenerator;
+
 

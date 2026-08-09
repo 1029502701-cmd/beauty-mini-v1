@@ -185,6 +185,8 @@ export async function onRequestPost(context: {
     );
   } catch (err) {
     console.error('[beauty/report] ERROR:', err);
+    console.error(`[beauty/report] FULL ERROR:`, JSON.stringify(err));
+    console.error(`[beauty/report] ERR CAUSE:`, (err as any).cause);
     console.error('[beauty/report] STACK:', err instanceof Error ? err.stack : String(err));
     console.error('[beauty/report] ERR TYPE:', err instanceof Error ? err.constructor.name : typeof err);
     return new Response(

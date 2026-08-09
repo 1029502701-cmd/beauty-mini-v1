@@ -1,4 +1,4 @@
-import type { Env } from '../../../../types';
+﻿import type { Env } from '../../../../types';
 import { ReportAccessService } from '../../../../modules/beauty-ai/permission/report-access-service';
 
 export async function onRequestGet(context: {
@@ -21,7 +21,7 @@ export async function onRequestGet(context: {
   try {
     const row = await env.D1_DB.prepare(
       "SELECT id, user_id, image_id, image_url, thumbnail_url, level, status, analysis_json, created_at FROM beauty_reports WHERE id = ? LIMIT 1"
-    ).first<{ id: string; user_id: string; image_id: string; image_url: string; thumbnail_url: string; level: string; status: string; analysis_json: string; created_at: string }>(reportId);
+    ).bind(reportId).first();
 
     if (!row) {
       return new Response(

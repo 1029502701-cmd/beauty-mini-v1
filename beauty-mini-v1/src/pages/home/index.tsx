@@ -116,21 +116,6 @@ const Index = () => {
         </Button>
       </View>
 
-      {/* Bottom Nav */}
-      <View className="bottom-nav">
-        <Button className="nav-btn btn-center" onClick={handleTokenClick}>
-          <Text className="nav-icon">🎫</Text>
-          <Text>Token</Text>
-        </Button>
-        <Button className="nav-btn nav-btn--active" onClick={handleStartClick}>
-          <Text className="nav-icon">✓</Text>
-          <Text>开始分析</Text>
-        </Button>
-        <Button className="nav-btn btn-center" onClick={handleProfileClick}>
-          <Text className="nav-icon">👤</Text>
-          <Text>我的</Text>
-        </Button>
-      </View>
 
       {/* Legal */}
       <View className="legal">
@@ -142,3 +127,4 @@ const Index = () => {
 };
 
 export default Index;
+
