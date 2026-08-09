@@ -1,4 +1,4 @@
-﻿import { View, Text, Image } from "@tarojs/components";
+﻿import { View, Text } from "@tarojs/components";
 import React, { useState, useCallback, useEffect } from "react";
 import { navigate } from "@taro/router";
 import { uploadService } from "@/services/upload";
@@ -164,7 +164,7 @@ const UploadPage = () => {
       <View className="upload-page">
         <View className="preview-section">
           <View className="preview-thumbnail-wrapper">
-            <Image src={previewUrl!} mode="widthFix" className="preview-thumbnail" />
+            <image src=``{previewUrl!} mode="widthFix" className="preview-thumbnail" ` /`>
             <View className="preview-blur-overlay" />
           </View>
           {error && <Text className="error-text">{error}</Text>}
@@ -183,7 +183,7 @@ const UploadPage = () => {
     return (
       <View className="upload-page uploading-phase">
         <View className="small-preview">
-          <Image src={previewUrl!} mode="aspectFill" className="small-preview-img" />
+          <image src=``{previewUrl!} mode="aspectFill" className="small-preview-img" ` /`>
         </View>
         <View className="uploading-content">
           <Text className="uploading-title">上传照片中</Text>
@@ -203,7 +203,7 @@ const UploadPage = () => {
     return (
       <View className="upload-page analyzing-phase">
         <View className="small-preview">
-          <Image src={previewUrl!} mode="aspectFill" className="small-preview-img" />
+          <image src=``{previewUrl!} mode="aspectFill" className="small-preview-img" ` /`>
           <View className="scan-line"></View>
         </View>
         <View className="analysis-stages">
@@ -227,4 +227,6 @@ const UploadPage = () => {
 };
 
 export default UploadPage;
+
+
 
