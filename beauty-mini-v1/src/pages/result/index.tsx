@@ -436,7 +436,7 @@ const Index = () => {
                   : '升级至 ' + LEVEL_LABELS[unlockTarget as ReportLevel] + '，解锁更多内容'}
               </Text>
               <View className='token-balance-preview'>
-                <Text>当前余额：<strong>{currentBalance} Token</strong></Text>
+                <Text>当前余额：{currentBalance} Token</Text>
                 {unlockTarget && (
                   <Text className='token-required'>需要 {REPORT_LEVELS[unlockTarget].tokenCost} Token</Text>
                 )}
