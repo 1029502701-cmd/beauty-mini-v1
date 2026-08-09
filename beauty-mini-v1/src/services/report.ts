@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Report Service
  * Uses the beauty-api-pages backend for analysis and report generation.
  */
@@ -15,7 +15,7 @@ class ReportService {
       occasion?: "daily" | "date" | "workplace" | "photo";
       tolerance?: "conservative" | "normal" | "bold";
     }
-  ): Promise<{ success: boolean; reportId?: string; report?: BeautyReport; error?: string }> {
+  ): Promise<{ success: boolean; reportId?: string; report?: BeautyReport; error?: string; status?: string }> {
     try {
       const analyzeRes = await request<Record<string, unknown>>(
         "/api/beauty/analyze",
@@ -40,7 +40,7 @@ class ReportService {
         return { success: false, error: reportRes.error || "鎶ュ憡鐢熸垚澶辫触", status: reportRes.message };
       }
 
-      const reportId = (reportRes.data.report as Record<string, unknown>)?.analysisId as string || uploadId;
+      const reportId = (reportRes.data.reportId as string) || uploadId;
       const queryRes = await this.queryReport(reportId);
       if (queryRes.success) {
         return { success: true, reportId, report: queryRes.report as BeautyReport };

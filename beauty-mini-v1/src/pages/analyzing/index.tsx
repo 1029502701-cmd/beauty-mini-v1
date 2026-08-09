@@ -1,4 +1,5 @@
-﻿import Taro, { useLoad } from "@tarojs/taro";
+import Taro, { useLoad } from "@tarojs/taro";
+import { navigate } from "@taro/router";
 import React, { useState, useCallback, useEffect } from "react";
 import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
@@ -73,7 +74,7 @@ const generatedReportId = reportResult.reportId || uploadId;
 setReportId(generatedReportId);
 setIsComplete(true); setIsProcessing(false);
 setTimeout(() => {
-const resultReportId = generatedReportId || uploadId; navigate({ url: "/pages/result?reportId=" + encodeURIComponent(resultReportId) });
+const resultReportId = generatedReportId || uploadId; navigate("/pages/result?reportId=" + encodeURIComponent(resultReportId));
 }, 800);
 } catch (error) {
 console.error("Analysis error:", error);
