@@ -9,12 +9,12 @@ import "./index.css";
 type UploadPhase = "idle" | "preview" | "uploading" | "analyzing";
 
 const STAGES = [
-  { icon: "📷", title: "确认照片", subtitle: "正在验证上传的图片..." },
-  { icon: "👁️", title: "面部检测", subtitle: "正在识别面部特征点..." },
-  { icon: "✨", title: "脸型分析", subtitle: "正在分析脸型轮廓比例..." },
-  { icon: "💄", title: "五官解读", subtitle: "正在解读眼、眉、唇特征..." },
-  { icon: "🎨", title: "妆容匹配", subtitle: "正在匹配最适合您的妆容..." },
-  { icon: "📊", title: "生成报告", subtitle: "正在为您整理专属美妆方案..." },
+  { id: "s1", icon: "📷", title: "确认照片", subtitle: "正在验证上传的图片..." },
+  { id: "s2", icon: "👁️", title: "面部检测", subtitle: "正在识别面部特征点..." },
+  { id: "s3", icon: "✨", title: "脸型分析", subtitle: "正在分析脸型轮廓比例..." },
+  { id: "s4", icon: "💄", title: "五官解读", subtitle: "正在解读眼、眉、唇特征..." },
+  { id: "s5", icon: "🎨", title: "妆容匹配", subtitle: "正在匹配最适合您的妆容..." },
+  { id: "s6", icon: "📊", title: "生成报告", subtitle: "正在为您整理专属美妆方案..." },
 ];
 
 const UploadPage = () => {
@@ -227,3 +227,4 @@ const UploadPage = () => {
 };
 
 export default UploadPage;
+
