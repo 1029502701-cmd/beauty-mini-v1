@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Report Service
  * Uses the beauty-api-pages backend for analysis and report generation.
  */
@@ -23,7 +23,7 @@ class ReportService {
         { uploadId, imageKey }
       );
       if (!analyzeRes.success || !analyzeRes.data) {
-        return { success: false, error: analyzeRes.error || "分析失败" };
+        return { success: false, error: analyzeRes.error || "鍒嗘瀽澶辫触", status: analyzeRes.message };
       }
       const { metrics } = analyzeRes.data as { metrics?: unknown };
 
@@ -37,7 +37,7 @@ class ReportService {
         reportBody
       );
       if (!reportRes.success || !reportRes.data) {
-        return { success: false, error: reportRes.error || "报告生成失败" };
+        return { success: false, error: reportRes.error || "鎶ュ憡鐢熸垚澶辫触", status: reportRes.message };
       }
 
       const reportId = (reportRes.data.report as Record<string, unknown>)?.analysisId as string || uploadId;
@@ -104,3 +104,4 @@ export type ReportError = 'DAILY_LIMIT_REACHED' | 'INSUFFICIENT_TOKEN' | 'SERVER
 const reportService = new ReportService();
 export default reportService;
 export { reportService };
+
