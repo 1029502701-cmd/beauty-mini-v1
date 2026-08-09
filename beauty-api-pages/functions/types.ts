@@ -6,4 +6,5 @@ export interface Env {
   IMAGE_BUCKET?: R2Bucket;
   ENVIRONMENT?: string;
   TOKEN_ADMIN_SECRET?: string;
+  DEV_MODE?: string;
 }
