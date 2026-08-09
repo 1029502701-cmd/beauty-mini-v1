@@ -1,4 +1,4 @@
-ï»¿import { View, Text, Image } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import React, { useState, useCallback, useEffect } from "react";
 import { navigate } from "@taro/router";
 import { uploadService } from "@/services/upload";
@@ -9,12 +9,12 @@ import "./index.css";
 type UploadPhase = "idle" | "preview" | "uploading" | "analyzing";
 
 const STAGES = [
-  { id: "s1", icon: "ðŸ“·", title: "ç¡®è®¤ç…§ç‰‡", subtitle: "æ­£åœ¨éªŒè¯ä¸Šä¼ çš„å›¾ç‰‡..." },
-  { id: "s2", icon: "ðŸ‘ï¸", title: "é¢éƒ¨æ£€æµ‹", subtitle: "æ­£åœ¨è¯†åˆ«é¢éƒ¨ç‰¹å¾ç‚¹..." },
-  { id: "s3", icon: "âœ¨", title: "è„¸åž‹åˆ†æž", subtitle: "æ­£åœ¨åˆ†æžè„¸åž‹è½®å»“æ¯”ä¾‹..." },
-  { id: "s4", icon: "ðŸ’„", title: "äº”å®˜è§£è¯»", subtitle: "æ­£åœ¨è§£è¯»çœ¼ã€çœ‰ã€å”‡ç‰¹å¾..." },
-  { id: "s5", icon: "ðŸŽ¨", title: "å¦†å®¹åŒ¹é…", subtitle: "æ­£åœ¨åŒ¹é…æœ€é€‚åˆæ‚¨çš„å¦†å®¹..." },
-  { id: "s6", icon: "ðŸ“Š", title: "ç”ŸæˆæŠ¥å‘Š", subtitle: "æ­£åœ¨ä¸ºæ‚¨æ•´ç†ä¸“å±žç¾Žå¦†æ–¹æ¡ˆ..." },
+  { id: "s1", icon: "??", title: "È·ÈÏÕÕÆ¬", subtitle: "ÕýÔÚÑéÖ¤ÉÏ´«µÄÍ¼Æ¬..." },
+  { id: "s2", icon: "???", title: "Ãæ²¿¼ì²â", subtitle: "ÕýÔÚÊ¶±ðÃæ²¿ÌØÕ÷µã..." },
+  { id: "s3", icon: "?", title: "Á³ÐÍ·ÖÎö", subtitle: "ÕýÔÚ·ÖÎöÁ³ÐÍÂÖÀª±ÈÀý..." },
+  { id: "s4", icon: "??", title: "Îå¹Ù½â¶Á", subtitle: "ÕýÔÚ½â¶ÁÑÛ¡¢Ã¼¡¢´½ÌØÕ÷..." },
+  { id: "s5", icon: "??", title: "×±ÈÝÆ¥Åä", subtitle: "ÕýÔÚÆ¥Åä×îÊÊºÏÄúµÄ×±ÈÝ..." },
+  { id: "s6", icon: "??", title: "Éú³É±¨¸æ", subtitle: "ÕýÔÚÎªÄúÕûÀí×¨ÊôÃÀ×±·½°¸..." },
 ];
 
 const UploadPage = () => {
@@ -44,7 +44,7 @@ const UploadPage = () => {
       }
     } catch (err) {
       console.error("[Upload] pickImage error:", err);
-      setError(sourceType === "camera" ? "æ‹ç…§å¤±è´¥ï¼Œè¯·é‡è¯•" : "ç›¸å†Œé€‰æ‹©å¤±è´¥ï¼Œè¯·é‡è¯•");
+      setError(sourceType === "camera" ? "ÅÄÕÕÊ§°Ü£¬ÇëÖØÊÔ" : "Ïà²áÑ¡ÔñÊ§°Ü£¬ÇëÖØÊÔ");
     }
   }, []);
 
@@ -56,14 +56,14 @@ const UploadPage = () => {
     const validation = await imageValidator.validateImage(selectedImage);
     if (!validation.valid) {
       setPhase("preview");
-      setError(validation.message || "å›¾ç‰‡éªŒè¯å¤±è´¥ï¼Œè¯·é‡æ–°é€‰æ‹©");
+      setError(validation.message || "Í¼Æ¬ÑéÖ¤Ê§°Ü£¬ÇëÖØÐÂÑ¡Ôñ");
       return;
     }
 
     const faceResult = await imageValidator.detectFace(selectedImage);
     if (!faceResult.hasFace) {
       setPhase("preview");
-      setError("æœªæ£€æµ‹åˆ°äººè„¸ï¼Œè¯·ä¸Šä¼ æ­£é¢æ¸…æ™°äººåƒç…§ç‰‡");
+      setError("Î´¼ì²âµ½ÈËÁ³£¬ÇëÉÏ´«ÕýÃæÇåÎúÈËÏñÕÕÆ¬");
       return;
     }
 
@@ -76,17 +76,17 @@ const UploadPage = () => {
         setCurrentStage(0);
       } else {
         setPhase("preview");
-        setError(result.message || "ä¸Šä¼ å¤±è´¥ï¼Œè¯·é‡è¯•");
+        setError(result.message || "ÉÏ´«Ê§°Ü£¬ÇëÖØÊÔ");
       }
     } catch (err) {
       console.error("[Upload] confirm error:", err);
       setPhase("preview");
-      setError("ä¸Šä¼ è¿‡ç¨‹ä¸­å‘ç”Ÿé”™è¯¯ï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿žæŽ¥åŽé‡è¯•");
+      setError("ÉÏ´«¹ý³ÌÖÐ·¢Éú´íÎó£¬Çë¼ì²éÍøÂçÁ¬½ÓºóÖØÊÔ");
     }
   }, [selectedImage, imageInfo]);
 
   const handleCancel = () => {
-    navigate({ url: "/pages/home" });
+    navigate("/pages/home");
   };
 
   const handleReselect = () => {
@@ -108,17 +108,17 @@ const UploadPage = () => {
       try {
         const imageKey = imageUrl || uploadId;
         const analyzeResult = await (await import("@/services/analyze")).analyzeService.analyzeImage(uploadId, imageKey);
-        if (!analyzeResult.success) throw new Error(analyzeResult.error || "AIåˆ†æžå¤±è´¥");
+        if (!analyzeResult.success) throw new Error(analyzeResult.error || "AI·ÖÎöÊ§°Ü");
         const reportResult = await (await import("@/services/report")).default.createAndQueryReport(uploadId, imageKey, "first-look");
-        if (!reportResult.success) throw new Error(reportResult.error || "æŠ¥å‘Šç”Ÿæˆå¤±è´¥");
+        if (!reportResult.success) throw new Error(reportResult.error || "±¨¸æÉú³ÉÊ§°Ü");
         const reportId = reportResult.reportId || uploadId;
-        navigate({ url: "/pages/result?reportId=" + encodeURIComponent(reportId) });
+        navigate("/pages/result?reportId=" + encodeURIComponent(reportId));
       } catch (err) {
         console.error("[Upload] analysis error:", err);
         setPhase("preview");
-        const msg = err instanceof Error ? err.message : "AIåˆ†æžå¤±è´¥ï¼Œè¯·é‡è¯•";
-        if (msg.includes("DAILY_LIMIT")) setError("ä»Šå¤©æ¬¡æ•°å·²ç”¨å®Œï¼Œè¯·æ˜Žå¤©å†è¯•");
-        else if (msg.includes("INSUFFICIENT_TOKEN")) setError("Tokenä¸è¶³ï¼Œè¯·è§£é”åŽç»§ç»­");
+        const msg = err instanceof Error ? err.message : "AI·ÖÎöÊ§°Ü£¬ÇëÖØÊÔ";
+        if (msg.includes("DAILY_LIMIT")) setError("½ñÌì´ÎÊýÒÑÓÃÍê£¬ÇëÃ÷ÌìÔÙÊÔ");
+        else if (msg.includes("INSUFFICIENT_TOKEN")) setError("Token²»×ã£¬Çë½âËøºó¼ÌÐø");
         else setError(msg);
       }
     }, STAGES.length * 800 + 1000);
@@ -129,30 +129,30 @@ const UploadPage = () => {
     return (
       <View className="upload-page">
         <View className="upload-header">
-          <Text className="upload-title">å¼€å§‹ä½ çš„ç¾Žå­¦åˆ†æž</Text>
-          <Text className="upload-desc">ä¸Šä¼ ä¸€å¼ æ¸…æ™°æ­£é¢ç…§ï¼ŒAI å°†ç”Ÿæˆä½ çš„ä¸“å±žæŠ¥å‘Š</Text>
+          <Text className="upload-title">¿ªÊ¼ÄãµÄÃÀÑ§·ÖÎö</Text>
+          <Text className="upload-desc">ÉÏ´«Ò»ÕÅÇåÎúÕýÃæÕÕ£¬AI ½«Éú³ÉÄãµÄ×¨Êô±¨¸æ</Text>
         </View>
         <View className="upload-guide">
           <View className="guide-tip">
-            <Text className="guide-tip-icon">ðŸ’¡</Text>
-            <Text className="guide-tip-text">æœ€ä½³ç…§ç‰‡ï¼šæ­£é¢ Â· è‡ªç„¶å…‰ Â· äº”å®˜æ— é®æŒ¡</Text>
+            <Text className="guide-tip-icon">??</Text>
+            <Text className="guide-tip-text">×î¼ÑÕÕÆ¬£ºÕýÃæ ¡¤ ×ÔÈ»¹â ¡¤ Îå¹ÙÎÞÕÚµ²</Text>
           </View>
           <View className="guide-avoid">
-            <Text className="avoid-text">é¿å…ï¼šä¾§è„¸ Â· å¤šäºº Â· å¼ºå…‰æ»¤é•œ</Text>
+            <Text className="avoid-text">±ÜÃâ£º²àÁ³ ¡¤ ¶àÈË ¡¤ Ç¿¹âÂË¾µ</Text>
           </View>
           <View className="privacy-line">
-            <Text className="privacy-check">âœ“</Text>
-            <Text className="privacy-text">ä»…ç”¨äºŽ AI åˆ†æž Â· ä¸å…¬å¼€ Â· å¯éšæ—¶åˆ é™¤</Text>
+            <Text className="privacy-check">?</Text>
+            <Text className="privacy-text">½öÓÃÓÚ AI ·ÖÎö ¡¤ ²»¹«¿ª ¡¤ ¿ÉËæÊ±É¾³ý</Text>
           </View>
         </View>
         <View className="upload-actions">
           <button className="upload-btn" onClick={() => pickImage("album")}>
-            <Text className="upload-btn-icon">ðŸ–¼ï¸</Text>
-            <Text className="upload-btn-text">ä»Žç›¸å†Œé€‰æ‹©</Text>
+            <Text className="upload-btn-icon">???</Text>
+            <Text className="upload-btn-text">´ÓÏà²áÑ¡Ôñ</Text>
           </button>
           <button className="upload-btn" onClick={() => pickImage("camera")}>
-            <Text className="upload-btn-icon">ðŸ“·</Text>
-            <Text className="upload-btn-text">æ‹æ‘„ç…§ç‰‡</Text>
+            <Text className="upload-btn-icon">??</Text>
+            <Text className="upload-btn-text">ÅÄÉãÕÕÆ¬</Text>
           </button>
         </View>
       </View>
@@ -171,9 +171,9 @@ const UploadPage = () => {
         </View>
         <View className="preview-actions">
           <button className="analyze-btn" onClick={handleStartAnalysis}>
-            <Text>å¼€å§‹ AI åˆ†æž</Text>
+            <Text>¿ªÊ¼ AI ·ÖÎö</Text>
           </button>
-          <button className="cancel-btn" onClick={handleCancel}>å–æ¶ˆ</button>
+          <button className="cancel-btn" onClick={handleCancel}>È¡Ïû</button>
         </View>
       </View>
     );
@@ -186,8 +186,8 @@ const UploadPage = () => {
           <image src={previewUrl!} mode="aspectFill" className="small-preview-img" />
         </View>
         <View className="uploading-content">
-          <Text className="uploading-title">ä¸Šä¼ ç…§ç‰‡ä¸­</Text>
-          <Text className="uploading-sub">æ­£åœ¨å°†ç…§ç‰‡ä¸Šä¼ è‡³æœåŠ¡å™¨...</Text>
+          <Text className="uploading-title">ÉÏ´«ÕÕÆ¬ÖÐ</Text>
+          <Text className="uploading-sub">ÕýÔÚ½«ÕÕÆ¬ÉÏ´«ÖÁ·þÎñÆ÷...</Text>
           <View className="loading-dots">
             <Text className="dot"></Text>
             <Text className="dot"></Text>
@@ -214,7 +214,7 @@ const UploadPage = () => {
                 <Text className="stage-title">{s.title}</Text>
                 <Text className="stage-sub">{s.subtitle}</Text>
               </View>
-              {i < currentStage && <Text className="stage-check">âœ“</Text>}
+              {i < currentStage && <Text className="stage-check">?</Text>}
               {i === currentStage && <View className="stage-spinner"></View>}
             </View>
           ))}
