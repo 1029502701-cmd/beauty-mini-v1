@@ -29,7 +29,7 @@ export const DAILY_LIMITS: Record<Exclude<ReportLevel, 'beauty-pro'>, number> = 
 
 export class ReportAccessService {
   constructor(private db: Env['D1_DB']) {
-    this.ensureTable();
+    this.init();
   }
 
   private async ensureTable(): Promise<void> {

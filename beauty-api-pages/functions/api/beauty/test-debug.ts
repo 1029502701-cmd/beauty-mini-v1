@@ -1,0 +1,1 @@
+export async function onRequestPost(context: {env: any; request: Request; params: any}): Promise<Response> { return new Response(JSON.stringify({success: true, message: "Debug endpoint working", timestamp: Date.now()}), {status: 200, headers: {"Content-Type": "application/json"}}); }

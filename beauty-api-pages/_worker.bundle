@@ -1,9 +1,9 @@
-------formdata-undici-055945741648
+------formdata-undici-021846137650
 Content-Disposition: form-data; name="metadata"
 
-{"main_module":"functionsWorker-0.6623608891653499.js"}
-------formdata-undici-055945741648
-Content-Disposition: form-data; name="functionsWorker-0.6623608891653499.js"; filename="functionsWorker-0.6623608891653499.js"
+{"main_module":"functionsWorker-0.82861227245359.js"}
+------formdata-undici-021846137650
+Content-Disposition: form-data; name="functionsWorker-0.82861227245359.js"; filename="functionsWorker-0.82861227245359.js"
 Content-Type: application/javascript+module
 
 var __create = Object.create;
@@ -1842,7 +1842,7 @@ var BeautyReportRepository = class {
     const id = crypto.randomUUID();
     const now = (/* @__PURE__ */ new Date()).toISOString();
     const expireAt = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3).toISOString();
-    const sql = "INSERT INTO beauty_reports (id, user_id, image_id, level, status, face_metrics_json, analysis_json, analysis_version, created_at, expire_at, decision_answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO beauty_reports (id, user_id, image_id, level, status, face_metrics_json, analysis_json, analysis_version, created_at, expire_at, image_url, thumbnail_url, decision_answers_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     await this.db.prepare(sql).bind(id, input.userId, input.uploadId, input.reportLevel, "completed", "{}", JSON.stringify(input.reportJson), "v2", now, expireAt, input.imageUrl ?? null, input.thumbnailUrl ?? null, input.decisionAnswersJson ?? null).run();
     return { id, createdAt: now };
   }
@@ -2004,6 +2004,12 @@ async function onRequestPost3(context) {
 }
 __name(onRequestPost3, "onRequestPost");
 
+// functions/api/beauty/test-debug.ts
+async function onRequestPost4(context) {
+  return new Response(JSON.stringify({ success: true, message: "Debug endpoint working", timestamp: Date.now() }), { status: 200, headers: { "Content-Type": "application/json" } });
+}
+__name(onRequestPost4, "onRequestPost");
+
 // modules/beauty-ai/upload-service.ts
 async function uploadImage(env, imageBuffer, userId, contentType = "image/jpeg") {
   const timestamp = Date.now();
@@ -2038,7 +2044,7 @@ function jsonResponse(data, status) {
   });
 }
 __name(jsonResponse, "jsonResponse");
-async function onRequestPost4(context) {
+async function onRequestPost5(context) {
   const { env, request } = context;
   console.log("[beauty/upload] request headers:", Object.fromEntries(request.headers.entries()));
   const formData = await parseFormData(request);
@@ -2087,7 +2093,7 @@ async function onRequestPost4(context) {
     return jsonResponse({ success: false, error: "Upload failed" }, 500);
   }
 }
-__name(onRequestPost4, "onRequestPost");
+__name(onRequestPost5, "onRequestPost");
 
 // functions/api/token/balance.ts
 async function onRequestGet4(context) {
@@ -2112,7 +2118,7 @@ async function onRequestGet4(context) {
 __name(onRequestGet4, "onRequestGet");
 
 // functions/api/token/consume.ts
-async function onRequestPost5(context) {
+async function onRequestPost6(context) {
   const { env, request } = context;
   let body;
   try {
@@ -2152,10 +2158,10 @@ async function onRequestPost5(context) {
     );
   }
 }
-__name(onRequestPost5, "onRequestPost");
+__name(onRequestPost6, "onRequestPost");
 
 // functions/api/token/seed.ts
-async function onRequestPost6(context) {
+async function onRequestPost7(context) {
   const { env, request } = context;
   const authHeader = request.headers.get("Authorization") || "";
   if (!env.TOKEN_ADMIN_SECRET || !authHeader.startsWith("Bearer ") || authHeader.slice(7) !== env.TOKEN_ADMIN_SECRET) {
@@ -2205,7 +2211,7 @@ async function onRequestPost6(context) {
     );
   }
 }
-__name(onRequestPost6, "onRequestPost");
+__name(onRequestPost7, "onRequestPost");
 
 // functions/api/profile.ts
 async function onRequestGet5(context) {
@@ -2283,7 +2289,7 @@ async function onRequestGet5(context) {
 __name(onRequestGet5, "onRequestGet");
 
 // functions/api/wechat-bind.ts
-async function onRequestPost7(context) {
+async function onRequestPost8(context) {
   const { env, request } = context;
   const sessionService = new SessionService(env.USER_CACHE);
   let body;
@@ -2360,10 +2366,10 @@ async function onRequestPost7(context) {
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }
-__name(onRequestPost7, "onRequestPost");
+__name(onRequestPost8, "onRequestPost");
 
 // functions/api/wechat-login.ts
-async function onRequestPost8(context) {
+async function onRequestPost9(context) {
   const { env, request } = context;
   const sessionService = new SessionService(env.USER_CACHE);
   let body;
@@ -2461,9 +2467,9 @@ async function onRequestPost8(context) {
     isGuest: sessionRecord.isGuest
   }), { status: 200, headers: { "Content-Type": "application/json" } });
 }
-__name(onRequestPost8, "onRequestPost");
+__name(onRequestPost9, "onRequestPost");
 
-// .wrangler/tmp/pages-FReDm2/functionsRoutes-0.053785091995998346.mjs
+// .wrangler/tmp/pages-qSX1WQ/functionsRoutes-0.7692446249047367.mjs
 var routes = [
   {
     routePath: "/functions/api/beauty/report/query",
@@ -2508,11 +2514,18 @@ var routes = [
     modules: [onRequestPost3]
   },
   {
-    routePath: "/functions/api/beauty/upload",
+    routePath: "/functions/api/beauty/test-debug",
     mountPath: "/functions/api/beauty",
     method: "POST",
     middlewares: [],
     modules: [onRequestPost4]
+  },
+  {
+    routePath: "/functions/api/beauty/upload",
+    mountPath: "/functions/api/beauty",
+    method: "POST",
+    middlewares: [],
+    modules: [onRequestPost5]
   },
   {
     routePath: "/functions/api/token/balance",
@@ -2526,14 +2539,14 @@ var routes = [
     mountPath: "/functions/api/token",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost5]
+    modules: [onRequestPost6]
   },
   {
     routePath: "/functions/api/token/seed",
     mountPath: "/functions/api/token",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost6]
+    modules: [onRequestPost7]
   },
   {
     routePath: "/functions/api/profile",
@@ -2547,14 +2560,14 @@ var routes = [
     mountPath: "/functions/api",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost7]
+    modules: [onRequestPost8]
   },
   {
     routePath: "/functions/api/wechat-login",
     mountPath: "/functions/api",
     method: "POST",
     middlewares: [],
-    modules: [onRequestPost8]
+    modules: [onRequestPost9]
   }
 ];
 
@@ -3007,4 +3020,4 @@ export {
   pages_template_worker_default as default
 };
 
-------formdata-undici-055945741648--
+------formdata-undici-021846137650--
