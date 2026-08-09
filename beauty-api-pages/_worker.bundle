@@ -1,9 +1,9 @@
-------formdata-undici-021846137650
+------formdata-undici-009731077493
 Content-Disposition: form-data; name="metadata"
 
-{"main_module":"functionsWorker-0.82861227245359.js"}
-------formdata-undici-021846137650
-Content-Disposition: form-data; name="functionsWorker-0.82861227245359.js"; filename="functionsWorker-0.82861227245359.js"
+{"main_module":"functionsWorker-0.03787155390795749.js"}
+------formdata-undici-009731077493
+Content-Disposition: form-data; name="functionsWorker-0.03787155390795749.js"; filename="functionsWorker-0.03787155390795749.js"
 Content-Type: application/javascript+module
 
 var __create = Object.create;
@@ -387,7 +387,7 @@ var DAILY_LIMITS = {
 var ReportAccessService = class {
   constructor(db) {
     this.db = db;
-    this.ensureTable();
+    this.init();
   }
   db;
   static {
@@ -2469,7 +2469,7 @@ async function onRequestPost9(context) {
 }
 __name(onRequestPost9, "onRequestPost");
 
-// .wrangler/tmp/pages-qSX1WQ/functionsRoutes-0.7692446249047367.mjs
+// .wrangler/tmp/pages-ZoPCXE/functionsRoutes-0.3743222077145949.mjs
 var routes = [
   {
     routePath: "/functions/api/beauty/report/query",
@@ -3020,4 +3020,4 @@ export {
   pages_template_worker_default as default
 };
 
-------formdata-undici-021846137650--
+------formdata-undici-009731077493--
