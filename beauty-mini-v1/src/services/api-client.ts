@@ -1,4 +1,4 @@
-﻿/**
+/**
  * API Client Abstraction Layer
  *
  * WeChat Mini Program environment: uses wx.request

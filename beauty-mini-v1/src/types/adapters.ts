@@ -1,4 +1,4 @@
-﻿import type { BeautyAnalysisRequest, BeautyAnalysisResult } from "./beauty-analysis";
+import type { BeautyAnalysisRequest, BeautyAnalysisResult } from "./beauty-analysis";
 
 export interface FaceDetectorAdapter {
   detectFaces(imageUrl: string): Promise<{

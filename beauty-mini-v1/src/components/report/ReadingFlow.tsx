@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import "./ReadingFlow.css";
 import { ReportLevel } from "@/types/report-level";
 

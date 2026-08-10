@@ -1,4 +1,4 @@
-﻿import type { FaceDetectorAdapter } from "./adapters";
+import type { FaceDetectorAdapter } from "./adapters";
 
 /**
  * MockFaceDetector - 模拟人脸检测器，用于单元测试和离线调试

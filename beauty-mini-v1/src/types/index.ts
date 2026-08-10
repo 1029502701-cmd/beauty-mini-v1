@@ -1,4 +1,4 @@
-﻿// Upload-related types
+// Upload-related types
 export interface UploadResult {
   success: boolean;
   message: string;

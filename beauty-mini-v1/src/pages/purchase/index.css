@@ -1,4 +1,4 @@
-﻿.purchase-page {
+.purchase-page {
   min-height: 100vh;
   background: #FFFAF7;
   padding-bottom: 40px;
@@ -163,7 +163,7 @@
   color: #A09090;
   line-height: 1.6;
 }
-/* ─── 按钮居中修复 ─────────────────────────────────── */
+/*  按钮居中修复  */
 .back-btn {
   background: none;
   border: none;

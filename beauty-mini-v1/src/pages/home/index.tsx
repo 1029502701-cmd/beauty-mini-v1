@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
 import { navigate } from "@taro/router";

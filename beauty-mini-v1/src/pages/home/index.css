@@ -1,4 +1,4 @@
-﻿/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════
    V8 首页 - 极简引导风格
    ═══════════════════════════════════════════ */
 
@@ -9,7 +9,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
 }
 
-/* ─── Hero Section ────────────────────────── */
+/*  Hero Section  */
 .hero {
   position: relative;
   padding: 56px 24px 48px;
@@ -70,7 +70,7 @@
   font-weight: 500;
 }
 
-/* ─── Cards Section ───────────────────────── */
+/*  Cards Section  */
 .cards-section {
   padding: 28px 20px;
 }
@@ -109,7 +109,7 @@
   line-height: 1.5;
 }
 
-/* ─── Quick Access Card ───────────────────── */
+/*  Quick Access Card  */
 .section {
   padding: 0 20px;
   margin-bottom: 12px;
@@ -162,7 +162,7 @@
   font-weight: 300;
 }
 
-/* ─── Today Count Card ────────────────────── */
+/*  Today Count Card  */
 .today-count-card {
   background: white;
   border-radius: 16px;
@@ -198,7 +198,7 @@
   letter-spacing: -0.5px;
 }
 
-/* ─── CTA Section ─────────────────────────── */
+/*  CTA Section  */
 .cta-section {
   padding: 28px 20px;
   text-align: center;
@@ -233,7 +233,7 @@
   transform: translateY(0);
 }
 
-/* ─── Bottom Nav ─────────────────────────── */
+/*  Bottom Nav  */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -274,7 +274,7 @@
   line-height: 1;
 }
 
-/* ─── Legal ──────────────────────────────── */
+/*  Legal  */
 .legal {
   text-align: center;
   padding: 20px 20px 16px;

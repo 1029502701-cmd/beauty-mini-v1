@@ -14,7 +14,7 @@ const MakeupRecommendationCard = ({ makeupStyle, description, onStyleClick }: Ma
 
   return (
     <div className="makeup-recommendation-card" onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <div className="card-header"><h3>ÍÆ¼ö×±Èİ</h3></div>
+      <div className="card-header"><h3>æ¨èå¦†å®¹</h3></div>
       <div className="makeup-card-content">
         <div className="makeup-style-name">{makeupStyle}</div>
         <div className="makeup-description">{description}</div>

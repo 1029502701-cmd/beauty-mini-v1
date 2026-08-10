@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { navigate } from "@taro/router";
 import { Button, Text, View } from '@tarojs/components';
 import "./index.css";

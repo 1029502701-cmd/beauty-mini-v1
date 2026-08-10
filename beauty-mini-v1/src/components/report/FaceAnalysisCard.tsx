@@ -23,27 +23,27 @@ const FaceAnalysisCard: React.FC<FaceAnalysisCardProps> = ({
   oilLevel,
   hydrationLevel
 }) => {
-  const faceShapeDisplay = faceShape || content.faceShape || "¶ìµ°Á³";
+  const faceShapeDisplay = faceShape || content.faceShape || "é¹…è›‹è„¸";
   const symmetryPercent = Math.round(content.symmetryScore * 100);
 
   return (
     <div className="face-analysis-card section-block">
       <div className="section-anchor">
         <span className="anchor-num">01</span>
-        <span className="anchor-label">Á³ĞÍ·ÖÎö</span>
+        <span className="anchor-label">è„¸å‹åˆ†æ</span>
       </div>
 
       <div className="face-main-stats">
         <div className="face-stat-item">
-          <div className="face-stat-label">Á³ĞÍ</div>
+          <div className="face-stat-label">è„¸å‹</div>
           <div className="face-stat-value">{faceShapeDisplay}</div>
         </div>
         <div className="face-stat-item">
-          <div className="face-stat-label">¶Ô³Æ¶È</div>
+          <div className="face-stat-label">å¯¹ç§°åº¦</div>
           <div className="face-stat-value">{symmetryPercent}%</div>
         </div>
         <div className="face-stat-item">
-          <div className="face-stat-label">±ÈÀı</div>
+          <div className="face-stat-label">æ¯”ä¾‹</div>
           <div className="face-stat-value">{content.faceRatio.toFixed(2)}</div>
         </div>
       </div>
@@ -54,17 +54,17 @@ const FaceAnalysisCard: React.FC<FaceAnalysisCardProps> = ({
         <div className="face-skin-info">
           <span className="skin-tag">{skinType}</span>
           {oilLevel !== undefined && (
-            <span className="skin-tag oil-tag">ÓÍĞÔ {oilLevel}%</span>
+            <span className="skin-tag oil-tag">æ²¹æ€§ {oilLevel}%</span>
           )}
           {hydrationLevel !== undefined && (
-            <span className="skin-tag hydrate-tag">±£Êª {hydrationLevel}%</span>
+            <span className="skin-tag hydrate-tag">ä¿æ¹¿ {hydrationLevel}%</span>
           )}
         </div>
       )}
 
       {content.highlightPoints.length > 0 && (
         <div className="face-highlights">
-          <span className="highlights-label">Îå¹ÙÁÁµã</span>
+          <span className="highlights-label">äº”å®˜äº®ç‚¹</span>
           <div className="highlights-list">
             {content.highlightPoints.map((point, i) => (
               <span key={i} className="highlight-tag">

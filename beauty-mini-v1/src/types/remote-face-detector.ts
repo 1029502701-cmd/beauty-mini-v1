@@ -1,4 +1,4 @@
-﻿import type { FaceDetectorAdapter } from "./adapters";
+import type { FaceDetectorAdapter } from "./adapters";
 import { api } from "@/services/api";
 
 /**

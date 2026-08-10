@@ -1,8 +1,7 @@
-import { UploadResult, BeautyImage } from "@/types";
+﻿import { UploadResult, BeautyImage } from "@/types";
 import userService from "./user-service";
 import { getAPIBase, injectSessionHeader } from "./api-client";
 
-// ─── Dev-only logging ────────────────────────────────────────────────────────────
 function _logUploadEvent(event: string, detail?: unknown): void {
   if (typeof wx !== "undefined" && wx.getSystemInfoSync && wx.getSystemInfoSync().environment !== "develop" && wx.getSystemInfoSync().environment !== "test") return;
   if (typeof console === "undefined") return;
@@ -75,7 +74,6 @@ export class UploadService {
       return new Promise((resolve) => {
         const sessionHeaders: Record<string, string> = {};
         injectSessionHeader(sessionHeaders);
-        console.log("[upload] sessionHeaders:", JSON.stringify(sessionHeaders));
         _logUploadEvent("upload_start", { url: getAPIBase().replace(/\/$/, "") + "/api/beauty/upload", filePath, fileName, fileSize });
         wx.uploadFile({
           url: getAPIBase().replace(/\/$/, "") + "/api/beauty/upload",
@@ -89,29 +87,24 @@ export class UploadService {
             if (wxRes.statusCode === 200) {
               try {
                 const data = JSON.parse(wxRes.data);
-                console.log("[upload parsed response]", data);
                 if (data.success) {
-                const { uploadId, imageKey } = data;
-                      this.uploadQueue.push({
-                        id: uploadId,
-                        url: imageKey || filePath,
-                        filename: fileName,
-                        size: fileSize,
-                        mimeType: "image/jpeg",
-                        timestamp: new Date().toISOString(),
-                        status: "uploaded",
-                     });
-                     console.log("[before resolve upload]", {
-  uploadId,
-  imageKey
-});
-                resolve({
-                  success: true,
-                  message: "图片上传成功",
-                  uploadId,
-                  imageUrl: imageKey,
-                   });
-                    return;
+                  const { uploadId, imageKey } = data;
+                  this.uploadQueue.push({
+                    id: uploadId,
+                    url: imageKey || filePath,
+                    filename: fileName,
+                    size: fileSize,
+                    mimeType: "image/jpeg",
+                    timestamp: new Date().toISOString(),
+                    status: "uploaded",
+                  });
+                  resolve({
+                    success: true,
+                    message: "图片上传成功",
+                    uploadId,
+                    imageUrl: imageKey,
+                  });
+                  return;
                 }
               } catch { /* ignore parse error */ }
             }
@@ -128,9 +121,27 @@ export class UploadService {
     return { success: false, message: "当前环境不支持图片上传" };
   }
 
+  /**
+   * Delete the original photo from R2 after analysis is complete.
+   * Face metrics are preserved; only the raw selfie is removed.
+   */
+  async deleteOriginalPhoto(imageKey: string): Promise<{ success: boolean; error?: string }> {
+    try {
+      const { request } = await import("./api");
+      const result = await request(`/api/beauty/image?imageKey=${encodeURIComponent(imageKey)}`, "DELETE");
+      if (result.success) {
+        _logUploadEvent("photo_deleted", { imageKey });
+        return { success: true };
+      }
+      _logUploadEvent("photo_delete_failed", { imageKey, error: result.error });
+      return { success: false, error: result.error };
+    } catch (err) {
+      console.error("[upload] deleteOriginalPhoto error:", err);
+      return { success: false, error: "删除照片失败" };
+    }
+  }
+
   getUploadQueue() { return [...this.uploadQueue]; }
 }
 
 export const uploadService = new UploadService();
-
-

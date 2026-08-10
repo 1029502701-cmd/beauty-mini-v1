@@ -6,10 +6,6 @@
   ColorTag
 } from "@/types/beauty";
 
-/**
- * User aesthetic profile for creator matching (Task-BeautyMini-060)
- * Uses only aesthetic tags — no commercial metrics.
- */
 export interface UserAestheticProfile {
   faceShape: FaceShapeTag;
   skinTone: string;
@@ -17,22 +13,13 @@ export interface UserAestheticProfile {
   stylePreference: string;
 }
 
-/**
- * BloggerMatcher — V2 with aesthetic-tag matching for Task-BeautyMini-060
- *
- * matchBloggers() — existing V2 path (FaceMetrics-based)
- * matchCreators() — new aesthetic-tag-only path (no fan counts, no commercial data)
- */
 export class BloggerMatcher {
-  private weights: { style: number; face: number; color: number };
+  // 权重: 脸型五官 50%, 妆容 30%, 标签体系 20%
+  private weights: { style: number; face: number; tags: number };
 
   constructor() {
-    this.weights = { style: 40, face: 35, color: 25 };
+    this.weights = { style: 30, face: 50, tags: 20 };
   }
-
-  // ──────────────────────────────────────────────────────────
-  // Existing V2 method (FaceMetrics-based) — unchanged
-  // ──────────────────────────────────────────────────────────
 
   async matchBloggers(
     userReport: { faceShape: string; eyeShape: string; lipShape: string; makeupStyle: string; colorRecommendation: string[]; skinTone: string; faceMetrics: Record<string, number> },
@@ -52,30 +39,23 @@ export class BloggerMatcher {
   ): { bloggerId: string; score: number; matchReasons: string[]; matchDetails?: Record<string, number> } {
     const faceMetricsScore = this._calcFaceMetricsScore(userReport.faceMetrics, blogger.faceMetricsRange as number[]);
     const makeupStyleScore = this._calcMakeupStyleScore(userReport.makeupStyle, blogger.styleTags as string[]);
-    const colorScore = this._calcColorScore(userReport.colorRecommendation, blogger.colorSupports as string[]);
-    const facialFeaturesScore = this._calcFacialFeaturesScore(userReport.eyeShape, userReport.lipShape, blogger.eyeShapeSupports as string[], blogger.lipShapeSupports as string[]);
-    const scenarioScore = this._calcScenarioScore(userReport.makeupStyle, blogger.targetAudience as string);
+    const tagsScore = this._calcTagsScore(userReport.colorRecommendation, userReport.skinTone, userReport.makeupStyle, blogger.colorSupports as string[], blogger.targetAudience as string);
 
     const detailedScores = {
       faceMetrics: faceMetricsScore,
       makeupStyle: makeupStyleScore,
-      color: colorScore,
-      facialFeatures: facialFeaturesScore,
-      scenario: scenarioScore
+      tags: tagsScore
     };
 
     const totalScore =
-      (detailedScores.faceMetrics * 0.40) +
+      (detailedScores.faceMetrics * 0.50) +
       (detailedScores.makeupStyle * 0.30) +
-      (detailedScores.color * 0.10) +
-      (detailedScores.facialFeatures * 0.10) +
-      (detailedScores.scenario * 0.10);
+      (detailedScores.tags * 0.20);
 
     const matchReasons: string[] = [];
-    if (makeupStyleScore === 100) matchReasons.push(`适合${userReport.makeupStyle}风格`);
-    if (colorScore > 70) matchReasons.push("推荐色系与你肤色一致");
-    if (facialFeaturesScore >= 75) matchReasons.push("五官特征搭配协调");
-    if (scenarioScore >= 80) matchReasons.push("场景适配度佳");
+    if (makeupStyleScore >= 80) matchReasons.push(`适合${userReport.makeupStyle}风格`);
+    if (faceMetricsScore >= 75) matchReasons.push("脸型五官适配度高");
+    if (tagsScore >= 70) matchReasons.push("色彩与场景标签匹配");
     if (matchReasons.length === 0) matchReasons.push("达人风格与您的要求匹配");
 
     return {
@@ -86,88 +66,98 @@ export class BloggerMatcher {
     };
   }
 
-  // ──────────────────────────────────────────────────────────
-  // Task-BeautyMini-060: Aesthetic-tag matching (no commercial data)
-  // ──────────────────────────────────────────────────────────
-
-  /**
-   * Match creators against a user aesthetic profile.
-   * Returns all matches sorted by totalScore descending.
-   * Scoring: styleScore (40%) + faceScore (35%) + colorScore (25%)
-   * No fan counts, likes, or any commercial metric is used.
-   */
   matchCreators(user: UserAestheticProfile, creators: CreatorProfile[]): CreatorMatchResult[] {
     const results: CreatorMatchResult[] = [];
-
     for (const creator of creators) {
-      const styleScore = this._calcStyleScore(user.stylePreference, creator.styleTags);
-      const faceScore = this._calcFaceScore(user.faceShape, creator.faceShapeTags);
+      const styleScore = this._calcStyleScoreFromProfile(user.stylePreference, creator.styleTags);
+      const faceScore = this._calcFaceScoreFromProfile(user.faceShape, creator.faceShapeTags);
       const colorScore = this._calcColorScoreFromProfile(user.skinTone, user.makeupPreference, creator.colorTags);
-      const totalScore = Math.round(
-        styleScore * 0.40 +
-        faceScore * 0.35 +
-        colorScore * 0.25
-      );
+      const totalScore = styleScore * 0.30 + faceScore * 0.50 + colorScore * 0.20;
 
-      const matchReasons = this._generateMatchReasons(user, creator, { styleScore, faceScore, colorScore, totalScore });
+      const scores: CreatorMatchScore = { styleScore, faceScore, colorScore, totalScore: Math.min(100, Math.round(totalScore)) };
+      const matchReasons = this._generateMatchReasons(user, creator, scores);
 
       results.push({
         ...creator,
-        matchScore: { styleScore, faceScore, colorScore, totalScore },
+        matchScore: scores,
         matchReasons
       });
     }
-
     return results.sort((a, b) => b.matchScore.totalScore - a.matchScore.totalScore);
   }
 
-  /**
-   * Return the Top-3 best-matching creators.
-   */
-  getTop3Creators(user: UserAestheticProfile, creators: CreatorProfile[]): CreatorMatchResult[] {
-    return this.matchCreators(user, creators).slice(0, 3);
+  getWeightConfig(): { style: number; face: number; tags: number } {
+    return this.weights;
   }
 
-  // ──────────────────────────────────────────────────────────
-  // Scoring helpers
-  // ──────────────────────────────────────────────────────────
-
-  /**
-   * Style match: checks if user's stylePreference appears in creator's styleTags.
-   * Supports partial string matching for Chinese style names.
-   */
-  private _calcStyleScore(userStyle: string, creatorStyles: string[]): number {
-    if (creatorStyles.length === 0) return 30;
-    // Direct match
-    if (creatorStyles.some(s => s === userStyle)) return 100;
-    // Partial match (e.g. "自然" in "清透自然型")
-    const match = creatorStyles.some(s => s.includes(userStyle) || userStyle.includes(s));
-    if (match) return 75;
-    return 30;
+  private _calcFaceMetricsScore(userMetrics: Record<string, number>, _bloggerRange?: unknown): number {
+    return 60;
   }
 
-  /**
-   * Face shape match: exact tag match or "所有脸型" wildcard.
-   */
-  private _calcFaceScore(userFaceShape: FaceShapeTag, creatorFaceShapes: FaceShapeTag[]): number {
+  private _calcMakeupStyleScore(userStyle: string, bloggerStyles?: string[]): number {
+    if (!bloggerStyles || bloggerStyles.length === 0) return 50;
+    return bloggerStyles.some(s => s === userStyle || s.includes(userStyle) || userStyle.includes(s)) ? 100 : 30;
+  }
+
+  private _calcTagsScore(
+    userColors: string[],
+    userSkinTone: string,
+    userMakeupStyle: string,
+    bloggerColors?: string[],
+    bloggerScenario?: string
+  ): number {
+    let score = 0;
+    let factors = 0;
+
+    // Color match (part of tags, 10% of total)
+    if (bloggerColors && bloggerColors.length > 0 && userColors.length > 0) {
+      const overlap = userColors.filter(c => bloggerColors.some(bc => bc.includes(c) || c.includes(bc))).length;
+      score += (overlap / userColors.length) * 100 * 0.5;
+      factors += 0.5;
+    } else {
+      score += 50 * 0.5;
+      factors += 0.5;
+    }
+
+    // Scenario match (part of tags, 10% of total)
+    const map: Record<string, string> = {
+      "清透自然型": "日常通勤",
+      "欧美浓妆型": "派对晚宴",
+      "韩系甜妹型": "甜美约会",
+      "成熟御姐型": "商务职场",
+      "日系清新型": "清新校园"
+    };
+    const expected = map[userMakeupStyle] || "";
+    if (bloggerScenario && expected.includes(bloggerScenario)) {
+      score += 100 * 0.5;
+    } else if (bloggerScenario) {
+      score += 50 * 0.5;
+    } else {
+      score += 50 * 0.5;
+    }
+    factors += 0.5;
+
+    return factors > 0 ? Math.round(score / factors) : 50;
+  }
+
+  private _calcStyleScoreFromProfile(userStyle: string, creatorTags: string[]): number {
+    if (creatorTags.length === 0) return 30;
+    return creatorTags.some(t => t === userStyle || userStyle.includes(t) || t.includes(userStyle)) ? 100 : 40;
+  }
+
+  private _calcFaceScoreFromProfile(userFaceShape: FaceShapeTag, creatorFaceShapes: FaceShapeTag[]): number {
+    if (creatorFaceShapes.length === 0) return 30;
     if (creatorFaceShapes.includes("所有脸型")) return 100;
-    if (creatorFaceShapes.includes(userFaceShape)) return 100;
-    return 30;
+    return creatorFaceShapes.includes(userFaceShape) ? 100 : 30;
   }
 
-  /**
-   * Color match: checks skinTone and makeup preference against creator's colorTags.
-   * Skin tone match = strong signal; makeup color preference = complementary signal.
-   */
   private _calcColorScoreFromProfile(userSkinTone: string, userMakeupPref: string, creatorColorTags: ColorTag[]): number {
     if (creatorColorTags.length === 0) return 30;
-
     const toneMatch = creatorColorTags.some(
       t => t === userSkinTone ||
            (userSkinTone === "中性皮" && (t === "暖皮" || t === "冷皮" || t === "中性皮")) ||
            (t === "中性皮" && (userSkinTone === "暖皮" || userSkinTone === "冷皮"))
     );
-
     const makeupColorKeywords: Record<string, string[]> = {
       "奶茶色": ["奶茶色"],
       "豆沙色": ["豆沙色"],
@@ -177,7 +167,6 @@ export class BloggerMatcher {
       "珊瑚红": ["珊瑚红"],
       "香槟金": ["香槟金"]
     };
-
     const prefColors = makeupColorKeywords[userMakeupPref as keyof typeof makeupColorKeywords] || [];
     const colorTag = creatorColorTags.filter(t => t !== "暖皮" && t !== "冷皮" && t !== "中性皮");
     const colorMatch = prefColors.length > 0
@@ -189,81 +178,29 @@ export class BloggerMatcher {
     return 30;
   }
 
-  // ──────────────────────────────────────────────────────────
-  // Reason generation
-  // ──────────────────────────────────────────────────────────
-
   private _generateMatchReasons(
     user: UserAestheticProfile,
     creator: CreatorProfile,
     scores: CreatorMatchScore
   ): string[] {
     const reasons: string[] = [];
-
-    if (scores.styleScore >= 90) {
-      const matchedStyle = creator.styleTags.find(s => s === user.stylePreference);
-      if (matchedStyle) reasons.push(`与您的${matchedStyle}风格高度契合`);
-    } else if (scores.styleScore >= 70) {
-      reasons.push(`风格与您的审美偏好一致`);
-    }
-
-    if (scores.faceScore >= 90) {
+    if (scores.faceScore >= 80) {
       reasons.push(`脸型适配，${user.faceShape}脸能很好地驾驭该达人风格`);
     }
-
-    if (scores.colorScore >= 80) {
+    if (scores.styleScore >= 80) {
+      reasons.push(`与您的${user.stylePreference}风格高度契合`);
+    }
+    if (scores.colorScore >= 70) {
       reasons.push(`色彩推荐与您的肤色和偏好匹配`);
-    } else if (scores.colorScore >= 50) {
-      reasons.push("色彩方向基本吻合");
     }
-
     if (scores.totalScore >= 85) {
-      reasons.push("综合审美匹配度很高，推荐参考");
+      reasons.push("综合匹配度高，强烈推荐");
     } else if (scores.totalScore >= 65) {
-      reasons.push("审美风格较为匹配，值得参考");
+      reasons.push("风格较为匹配，值得参考");
     }
-
     if (reasons.length === 0) {
       reasons.push("达人风格与您有一定重合度");
     }
-
     return reasons;
   }
-
-  // ──────────────────────────────────────────────────────────
-  // Legacy V2 helpers (for matchBloggers)
-  // ──────────────────────────────────────────────────────────
-
-  private _calcFaceMetricsScore(userMetrics: Record<string, number>, _bloggerRange?: unknown): number {
-    return 60; // placeholder; full FaceMetrics implementation in MatchingScore.ts
-  }
-
-  private _calcMakeupStyleScore(userStyle: string, bloggerStyles?: string[]): number {
-    if (!bloggerStyles || bloggerStyles.length === 0) return 50;
-    return bloggerStyles.some(s => s === userStyle || s.includes(userStyle) || userStyle.includes(s)) ? 100 : 30;
-  }
-
-  private _calcColorScore(userColors: string[], bloggerColors?: string[]): number {
-    if (!bloggerColors || bloggerColors.length === 0 || userColors.length === 0) return 50;
-    const overlap = userColors.filter(c => bloggerColors.some(bc => bc.includes(c) || c.includes(bc))).length;
-    return Math.round((overlap / userColors.length) * 100);
-  }
-
-  private _calcFacialFeaturesScore(userEye: string, userLip: string, _bloggerEyes?: string[], _bloggerLips?: string[]): number {
-    return 50; // placeholder
-  }
-
-  private _calcScenarioScore(userStyle: string, _bloggerScenario?: string): number {
-    const map: Record<string, string> = {
-      "清透自然型": "日常通勤",
-      "欧美浓妆型": "派对晚宴",
-      "韩系甜妹型": "甜美约会",
-      "成熟御姐型": "商务职场",
-      "日系清新型": "清新校园"
-    };
-    return map[userStyle] ? 80 : 50;
-  }
 }
-
-
-

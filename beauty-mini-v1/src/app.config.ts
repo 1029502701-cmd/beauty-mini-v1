@@ -1,4 +1,4 @@
-﻿export default {
+export default {
   pages: [
     'pages/home/index',
     'pages/upload/index',
@@ -10,7 +10,9 @@
     'pages/privacy/index',
     'pages/agreement/index',
     'pages/reports/index',
-    'pages/purchase/index'
+    'pages/purchase/index',
+    'pages/influencer-apply/index',
+    'pages/influencer-status/index'
   ],
   window: {
     backgroundTextStyle: 'dark',

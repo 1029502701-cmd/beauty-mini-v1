@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import RecommendationCard from "./RecommendationCard";
 import "./ProductRecommendation.css";
 

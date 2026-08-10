@@ -30,12 +30,12 @@ const BeautyProfileCard = ({
   return (
     <div className="beauty-profile-card">
       <div className="card-header">
-        <h3>? AIÃÀ×±·ÖÎö±¨¸æ</h3>
+        <h3>? AIç¾å¦†åˆ†ææŠ¥å‘Š</h3>
         {reportCode && <span className="report-code">{reportCode}</span>}
       </div>
 
       <div className="makeup-style-section">
-        <div className="style-label">ÄúµÄÃÀ×±¶¨Î»</div>
+        <div className="style-label">æ‚¨çš„ç¾å¦†å®šä½</div>
         <div className="style-value" onClick={() => handleFeatureClick(styleName)} style={{ cursor: 'pointer' }}>
           {styleName}
         </div>
@@ -45,7 +45,7 @@ const BeautyProfileCard = ({
       <div className="divider"></div>
 
       <div className="advantage-section">
-        <h4>Îå¹ÙÓÅÊÆ</h4>
+        <h4>äº”å®˜ä¼˜åŠ¿</h4>
         <div className="advantages-list">
           <div 
             className="advantage-item clickable"
@@ -53,7 +53,7 @@ const BeautyProfileCard = ({
             style={{ cursor: 'pointer' }}
           >
             <span className="advantage-icon">?</span>
-            <span className="advantage-text">Ã¼ÑÛÈáºÍ - {facialFeatures.eyeShape}</span>
+            <span className="advantage-text">çœ‰çœ¼æŸ”å’Œ - {facialFeatures.eyeShape}</span>
           </div>
           <div 
             className="advantage-item clickable"
@@ -61,7 +61,7 @@ const BeautyProfileCard = ({
             style={{ cursor: 'pointer' }}
           >
             <span className="advantage-icon">?</span>
-            <span className="advantage-text">Ã¼ĞÎ×ÔÈ» - {facialFeatures.browShape}</span>
+            <span className="advantage-text">çœ‰å½¢è‡ªç„¶ - {facialFeatures.browShape}</span>
           </div>
           <div 
             className="advantage-item clickable"
@@ -69,7 +69,7 @@ const BeautyProfileCard = ({
             style={{ cursor: 'pointer' }}
           >
             <span className="advantage-icon">?</span>
-            <span className="advantage-text">´½²¿ÇåÎú - {facialFeatures.lipShape}</span>
+            <span className="advantage-text">å”‡éƒ¨æ¸…æ™° - {facialFeatures.lipShape}</span>
           </div>
           <div 
             className="advantage-item clickable"
@@ -77,7 +77,7 @@ const BeautyProfileCard = ({
             style={{ cursor: 'pointer' }}
           >
             <span className="advantage-icon">?</span>
-            <span className="advantage-text">Á³ĞÍÔÈ³Æ - {facialFeatures.faceShape}</span>
+            <span className="advantage-text">è„¸å‹åŒ€ç§° - {facialFeatures.faceShape}</span>
           </div>
         </div>
       </div>

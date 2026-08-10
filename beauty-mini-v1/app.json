@@ -11,7 +11,9 @@
         "pages/privacy/index",
         "pages/agreement/index",
         "pages/reports/index",
-        "pages/purchase/index"
+        "pages/purchase/index",
+    "pages/influencer-apply/index",
+    "pages/influencer-status/index"
     ],
     "style": "v2",
     "window": {

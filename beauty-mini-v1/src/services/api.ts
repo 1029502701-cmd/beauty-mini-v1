@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Unified API Request Wrapper
  *
  * Provides request() supporting GET/POST with automatic API_BASE prefix,

@@ -1,4 +1,4 @@
-﻿.creator-card {
+.creator-card {
   display: flex;
   align-items: flex-start;
   gap: 14px;
@@ -143,4 +143,29 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateX(-8px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+
+.creator-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.creator-card:hover {
+  box-shadow: 0 4px 16px rgba(200, 160, 170, 0.15);
+  transform: translateY(-1px);
+}
+.creator-card:active {
+  transform: scale(0.98);
+}
+.creator-hint {
+  font-size: 11px;
+  color: #ccc;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  align-self: center;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.creator-card:hover .creator-hint {
+  color: #D8BFD8;
 }

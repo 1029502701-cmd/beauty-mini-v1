@@ -109,7 +109,7 @@ const UploadPage = () => {
         const reportResult = await (await import("@/services/report")).default.createAndQueryReport(uploadId, imageKey, "first-look");
         if (!reportResult.success) throw new Error(reportResult.error || "报告生成失败");
         const reportId = reportResult.reportId || uploadId;
-        navigate("/pages/result?reportId=" + encodeURIComponent(reportId));
+        navigate("/pages/result/index?reportId=" + encodeURIComponent(reportId));
       } catch (err) {
         console.error("[Upload] analysis error:", err);
         setPhase("preview");

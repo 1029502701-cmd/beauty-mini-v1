@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { navigate } from "@taro/router";
 import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
@@ -57,7 +57,7 @@ const Index = () => {
         decisions,
       );
       if (result.success && result.reportId) {
-        navigate({ url: `/pages/result?reportId=${encodeURIComponent(result.reportId)}` });
+        navigate({ url: `/pages/result/index?reportId=${encodeURIComponent(result.reportId)}` });
       } else {
         setError(result.error || "报告生成失败，请重试");
       }

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Universal Storage Abstraction Layer
  * Provides a consistent API across WeChat Mini Program and H5 environments.
  * 

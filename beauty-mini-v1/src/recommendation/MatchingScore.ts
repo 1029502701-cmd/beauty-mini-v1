@@ -1,130 +1,130 @@
-import type { FaceMetrics, FaceShapeType, EyeShapeType, LipShapeType, MakeupStyleType, ColorType, SkinToneType } from "./types";
-import { DEFAULT_WEIGHTS, supportsFeature, hasOverlap } from "./types";
-import { FaceMetricMatcher } from "./FaceMetricMatcher";
-/**
- * Face Metrics Real Data Matching Score (V2 - 40% weight)
- * Uses numerical comparison of facial measurements against preferred ranges
- */
-export function calculateFaceMetricsScore(
-  userFaceMetrics: FaceMetrics,
-  bloggerFaceRange?: FaceMetricsRange
-): number {
-  return FaceMetricMatcher.match(userFaceMetrics, bloggerFaceRange);
-} ;
-
-/**
- * Makeup Style Matching Score (30% weight)
- */
-export function calculateMakeupStyleScore(
-  userMakeupStyle: MakeupStyleType,
-  bloggerStyles: MakeupStyleType[]
-): number {
-  return supportsFeature(userMakeupStyle, bloggerStyles) ? 100 : 0;
-} ;
-
-/**
- * Color Matching Score (10% weight)
- */
-export function calculateColorScore(
-  userColors: ColorType[],
-  bloggerColors: ColorType[]
-): number {
-  if (userColors.length === 0 || bloggerColors.length === 0) return 0;
-  const overlap = userColors.filter(c => bloggerColors.includes(c)).length;
-  return Math.round((overlap / userColors.length) * 100);
-} ;
-
-/**
- * Facial Features Matching Score (10% weight)
- * Includes eye shape and lip shape compatibility
- */
-export function calculateFacialFeaturesScore(
-  userEyeShape: EyeShapeType,
-  userLipShape: LipShapeType,
-  bloggerEyeShapes?: EyeShapeType[],
-  bloggerLipShapes?: LipShapeType[]
-): number {
-  let score = 0;
-  if (bloggerEyeShapes && supportsFeature(userEyeShape, bloggerEyeShapes)) score += 50; else if (!bloggerEyeShapes) score += 25;
-  if (bloggerLipShapes && supportsFeature(userLipShape, bloggerLipShapes)) score += 50; else if (!bloggerLipShapes) score += 25;
-  return score;
-} ;
-
-/**
- * Scenario/Target Audience Matching Score (10% weight)
- */
-export function calculateScenarioScore(
-  userMakeupStyle: MakeupStyleType,
-  bloggerTargetAudience: string
-): number {
-  const styleToScenario: Record<MakeupStyleType, string> = {
-    "ÇåÍ¸×ÔÈ»ĞÍ": "ÈÕ³£Í¨ÇÚ",
-    "Å·ÃÀÅ¨×±ĞÍ": "ÅÉ¶ÔÍíÑç",
-    "º«ÏµÌğÃÃĞÍ": "ÌğÃÀÔ¼»á",
-    "³ÉÊìÓù½ãĞÍ": "³ÉÊìÉÌÎñ",
-    "ÈÕÏµÇåĞÂĞÍ": "ÇåĞÂĞ£Ô°"
-  };
-  const expectedScenario = styleToScenario[userMakeupStyle] || "";
-  return expectedScenario.includes(bloggerTargetAudience) ? 100 : 50;
-} ;
-
-/**
- * Overall weighted score calculation (V2: FaceMetrics 40%, Style 30%, Features 10%, Color 10%, Scenario 10%)
- */
-export function calculateTotalScore(
-  weights: Record<string, number> = DEFAULT_WEIGHTS,
-  scores: { faceMetrics: number; makeupStyle: number; color: number; facialFeatures: number; scenario: number }
-): number {
-  const total = 
-    (scores.faceMetrics * weights.faceMetrics / 100) +
-    (scores.makeupStyle * weights.makeupStyle / 100) +
-    (scores.color * weights.color / 100) +
-    (scores.facialFeatures * weights.facialFeatures / 100) +
-    (scores.scenario * weights.scenario / 100);
-  return Math.min(100, Math.round(total * 100) / 100);
-} ;
-
-/**
- * Generate match reasons based on scoring details (V2 updated)
- */
-export function generateMatchReasons(
-  userReport: any,
-  blogger: any,
-  scores: any,
-  userFaceMetrics?: any,  // New for V2 face metrics
-  bloggerFaceRange?: any
-): string[] {
-  const reasons: string[] = [];
-
-  // Face Metrics reason (NEW - V2 priority)
-  if (scores.faceMetrics >= 80 && userFaceMetrics && bloggerFaceRange) {
-    const faceReasons = FaceMetricMatcher.generateFaceReasons(userFaceMetrics, bloggerFaceRange);
-    reasons.push(...faceReasons);
-  } else if (scores.faceMetrics === 100) {
-    reasons.push("Ãæ²¿Êı¾İ±ÈÀıÓë´ïÈË·ç¸ñ¸ß¶ÈÆõºÏ");
-  }
-
-  // Makeup style reason
-  if (scores.makeupStyle === 100) {
-    reasons.push(`ÊÊºÏ${userReport.makeupStyle}·ç¸ñ`);
-  }
-
-  // Color reason
-  if (scores.color > 70) {
-    reasons.push("ÍÆ¼öÉ«ÏµÓëÄã·ôÉ«Ò»ÖÂ");
-  } else if (scores.color > 40) {
-    reasons.push("ÍÆ¼öÉ«Ïµ²¿·ÖÆ¥Åä");
-  }
-
-  // Facial features reason
-  if (scores.facialFeatures >= 75) {
-    reasons.push("Îå¹ÙÌØÕ÷´îÅäĞ­µ÷");
-  }
-
-  // Scenario reason
-  if (scores.scenario >= 80) {
-    reasons.push("³¡¾°ÊÊÅä¶È¼Ñ");
-  }
-
-  return reasons.length > 0 ? reasons : ["´ïÈË·ç¸ñÓëÄúµÄÒªÇóÆ¥Åä"];
-} ;
+import type { FaceMetrics, FaceShapeType, EyeShapeType, LipShapeType, MakeupStyleType, ColorType, SkinToneType } from "./types";
+import { DEFAULT_WEIGHTS, supportsFeature, hasOverlap } from "./types";
+import { FaceMetricMatcher } from "./FaceMetricMatcher";
+/**
+ * Face Metrics Real Data Matching Score (V2 - 50% weight)
+ * Uses numerical comparison of facial measurements against preferred ranges
+ */
+export function calculateFaceMetricsScore(
+  userFaceMetrics: FaceMetrics,
+  bloggerFaceRange?: FaceMetricsRange
+): number {
+  return FaceMetricMatcher.match(userFaceMetrics, bloggerFaceRange);
+} ;
+
+/**
+ * Makeup Style Matching Score (30% weight)
+ */
+export function calculateMakeupStyleScore(
+  userMakeupStyle: MakeupStyleType,
+  bloggerStyles: MakeupStyleType[]
+): number {
+  return supportsFeature(userMakeupStyle, bloggerStyles) ? 100 : 0;
+} ;
+
+/**
+ * Color Matching Score (part of 20% tags)
+ */
+export function calculateColorScore(
+  userColors: ColorType[],
+  bloggerColors: ColorType[]
+): number {
+  if (userColors.length === 0 || bloggerColors.length === 0) return 0;
+  const overlap = userColors.filter(c => bloggerColors.includes(c)).length;
+  return Math.round((overlap / userColors.length) * 100);
+} ;
+
+/**
+ * Facial Features Matching Score (part of 20% tags)
+ * Includes eye shape and lip shape compatibility
+ */
+export function calculateFacialFeaturesScore(
+  userEyeShape: EyeShapeType,
+  userLipShape: LipShapeType,
+  bloggerEyeShapes?: EyeShapeType[],
+  bloggerLipShapes?: LipShapeType[]
+): number {
+  let score = 0;
+  if (bloggerEyeShapes && supportsFeature(userEyeShape, bloggerEyeShapes)) score += 50; else if (!bloggerEyeShapes) score += 25;
+  if (bloggerLipShapes && supportsFeature(userLipShape, bloggerLipShapes)) score += 50; else if (!bloggerLipShapes) score += 25;
+  return score;
+} ;
+
+/**
+ * Scenario Matching Score (part of 20% tags)
+ */
+export function calculateScenarioScore(
+  userMakeupStyle: MakeupStyleType,
+  bloggerTargetAudience: string
+): number {
+  const styleToScenario: Record<MakeupStyleType, string> = {
+    "æ¸…é€è‡ªç„¶å‹": "æ—¥å¸¸é€šå‹¤",
+    "æ¬§ç¾æµ“å¦†å‹": "æ´¾å¯¹æ™šå®´",
+    "éŸ©ç³»ç”œå¦¹å‹": "ç”œç¾çº¦ä¼š",
+    "æˆç†Ÿå¾¡å§å‹": "æˆç†Ÿå•†åŠ¡",
+    "æ—¥ç³»æ¸…æ–°å‹": "æ¸…æ–°æ ¡å›­"
+  };
+  const expectedScenario = styleToScenario[userMakeupStyle] || "";
+  return expectedScenario.includes(bloggerTargetAudience) ? 100 : 50;
+} ;
+
+/**
+ * Overall weighted score calculation (V2: FaceMetrics 40%, Style 30%, Features 10%, Color 10%, Scenario 10%)
+ */
+export function calculateTotalScore(
+  weights: Record<string, number> = DEFAULT_WEIGHTS,
+  scores: { faceMetrics: number; makeupStyle: number; color: number; facialFeatures: number; scenario: number }
+): number {
+  const total = 
+    (scores.faceMetrics * weights.faceMetrics / 100) +
+    (scores.makeupStyle * weights.makeupStyle / 100) +
+    (scores.color * weights.color / 100) +
+    (scores.facialFeatures * weights.facialFeatures / 100) +
+    (scores.scenario * weights.scenario / 100);
+  return Math.min(100, Math.round(total * 100) / 100);
+} ;
+
+/**
+ * Generate match reasons based on scoring details (V2 updated)
+ */
+export function generateMatchReasons(
+  userReport: any,
+  blogger: any,
+  scores: any,
+  userFaceMetrics?: any,  // New for V2 face metrics
+  bloggerFaceRange?: any
+): string[] {
+  const reasons: string[] = [];
+
+  // Face Metrics reason (NEW - V2 priority)
+  if (scores.faceMetrics >= 80 && userFaceMetrics && bloggerFaceRange) {
+    const faceReasons = FaceMetricMatcher.generateFaceReasons(userFaceMetrics, bloggerFaceRange);
+    reasons.push(...faceReasons);
+  } else if (scores.faceMetrics === 100) {
+    reasons.push("é¢éƒ¨æ•°æ®æ¯”ä¾‹ä¸è¾¾äººé£æ ¼é«˜åº¦å¥‘åˆ");
+  }
+
+  // Makeup style reason
+  if (scores.makeupStyle === 100) {
+    reasons.push(`é€‚åˆ${userReport.makeupStyle}é£æ ¼`);
+  }
+
+  // Color reason
+  if (scores.color > 70) {
+    reasons.push("æ¨èè‰²ç³»ä¸ä½ è‚¤è‰²ä¸€è‡´");
+  } else if (scores.color > 40) {
+    reasons.push("æ¨èè‰²ç³»éƒ¨åˆ†åŒ¹é…");
+  }
+
+  // Facial features reason
+  if (scores.facialFeatures >= 75) {
+    reasons.push("äº”å®˜ç‰¹å¾æ­é…åè°ƒ");
+  }
+
+  // Scenario reason
+  if (scores.scenario >= 80) {
+    reasons.push("åœºæ™¯é€‚é…åº¦ä½³");
+  }
+
+  return reasons.length > 0 ? reasons : ["è¾¾äººé£æ ¼ä¸æ‚¨çš„è¦æ±‚åŒ¹é…"];
+} ;

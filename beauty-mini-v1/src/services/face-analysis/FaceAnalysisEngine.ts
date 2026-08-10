@@ -1,4 +1,4 @@
-﻿import type { BeautyFaceMetrics } from "@/types/beauty";
+import type { BeautyFaceMetrics } from "@/types/beauty";
 import { type FaceDetectorAdapter } from "@/types/adapters";
 import { MediaPipeFaceDetector } from "@/types/mediapipe-face-detector";
 import { RemoteFaceDetector } from "@/types/remote-face-detector";

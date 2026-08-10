@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Report Access Service
  * Checks whether a user has access to each report level and manages unlock state.
  */

@@ -1,11 +1,11 @@
 export type Platform = "xiaohongshu" | "douyin" | "weibo" | "bilibili";
 
-export type FaceShapeType = "¶ìµ°Á³" | "Ô²Á³" | "³¤Á³" | "·½Á³" | "ĞÄĞÎÁ³";
-export type EyeShapeType = "ĞÓÑÛ" | "µ¤·ïÑÛ" | "Ô²ÑÛ" | "Å·Ê½ÑÛ" | "µ¥ÑÛÆ¤";
-export type LipShapeType = "±¥Âú´½" | "±¡´½" | "à½à½´½";
-export type MakeupStyleType = "ÇåÍ¸×ÔÈ»ĞÍ" | "Å·ÃÀÅ¨×±ĞÍ" | "º«ÏµÌğÃÃĞÍ" | "³ÉÊìÓù½ãĞÍ" | "ÈÕÏµÇåĞÂĞÍ";
-export type ColorType = "ÄÌ²èÉ«" | "Ãµ¹åÉ«" | "Âã·ÛÉ«" | "ÏãéÄ½ğ" | "éÙ×ØÉ«" | "¶¹É³É«" | "Éºº÷ºì";
-export type SkinToneType = "ÀäÆ¤" | "Å¯Æ¤" | "ÖĞĞÔÆ¤";
+export type FaceShapeType = "é¹…è›‹è„¸" | "åœ†è„¸" | "é•¿è„¸" | "æ–¹è„¸" | "å¿ƒå½¢è„¸";
+export type EyeShapeType = "æçœ¼" | "ä¸¹å‡¤çœ¼" | "åœ†çœ¼" | "æ¬§å¼çœ¼" | "å•çœ¼çš®";
+export type LipShapeType = "é¥±æ»¡å”‡" | "è–„å”‡" | "å˜Ÿå˜Ÿå”‡";
+export type MakeupStyleType = "æ¸…é€è‡ªç„¶å‹" | "æ¬§ç¾æµ“å¦†å‹" | "éŸ©ç³»ç”œå¦¹å‹" | "æˆç†Ÿå¾¡å§å‹" | "æ—¥ç³»æ¸…æ–°å‹";
+export type ColorType = "å¥¶èŒ¶è‰²" | "ç«ç‘°è‰²" | "è£¸ç²‰è‰²" | "é¦™æ§Ÿé‡‘" | "æ©˜æ£•è‰²" | "è±†æ²™è‰²" | "çŠç‘šçº¢";
+export type SkinToneType = "å†·çš®" | "æš–çš®" | "ä¸­æ€§çš®";
 
 /**
  * User's beauty analysis result from report (V2 includes FaceMetrics)
@@ -78,11 +78,11 @@ export interface KOLMatcherService {
 } ;
 
 export const DEFAULT_WEIGHTS: MatchWeights = {
-  faceMetrics: 40,
+  faceMetrics: 50,
   makeupStyle: 30,
-  color: 10,
-  facialFeatures: 10,
-  scenario: 10,
+  color: 0,
+  facialFeatures: 0,
+  scenario: 0,
 } ;
 
 export function supportsFeature(

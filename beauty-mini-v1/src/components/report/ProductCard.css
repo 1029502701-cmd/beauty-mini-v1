@@ -1,10 +1,21 @@
-﻿.product-card {
+.product-card {
   background: #fff;
   border-radius: 12px;
   padding: 14px 16px;
   border-left: 3px solid #e0e0e0;
   margin-bottom: 10px;
   animation: fadeIn 0.4s ease-out both;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 16px rgba(200, 160, 170, 0.15);
+  transform: translateY(-1px);
+}
+
+.product-card:active {
+  transform: scale(0.98);
 }
 
 .product-card:nth-child(1) { animation-delay: 0.3s; }
@@ -82,6 +93,18 @@
   padding: 2px 6px;
   border-radius: 6px;
   border: 1px solid rgba(156, 100, 168, 0.15);
+}
+
+.product-hint {
+  font-size: 11px;
+  color: #ccc;
+  text-align: right;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+
+.product-card:hover .product-hint {
+  color: #D8BFD8;
 }
 
 @keyframes fadeIn {

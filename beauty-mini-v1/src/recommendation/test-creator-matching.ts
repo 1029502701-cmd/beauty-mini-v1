@@ -1,4 +1,4 @@
-﻿import { BloggerMatcher } from "./BloggerMatcher";
+import { BloggerMatcher } from "./BloggerMatcher";
 import creatorsData from "../datasets/creators.json";
 import type { CreatorProfile, UserAestheticProfile } from "@/types/beauty";
 

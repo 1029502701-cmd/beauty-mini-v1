@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Order Service - Manages beauty orders and commerce operations
  * Uses universal storage layer (wx.storage / localStorage)
  */

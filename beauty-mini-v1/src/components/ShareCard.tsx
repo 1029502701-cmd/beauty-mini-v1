@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import "./ShareCard.css";
 
 interface ShareCardProps {

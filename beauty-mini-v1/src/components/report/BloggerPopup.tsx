@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import "./BloggerPopup.css";
 
 interface BloggerPopupData {

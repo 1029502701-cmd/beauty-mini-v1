@@ -1,9 +1,10 @@
-﻿import React from "react";
+import React from "react";
 import "./CreatorCard.css";
 import type { CreatorRecommendation } from "@/types/beauty";
 
 interface CreatorCardProps {
   creator: CreatorRecommendation;
+  onClick?: () => void;
 }
 
 interface ScoreBadgeProps {
@@ -27,16 +28,16 @@ const ScoreBadge: React.FC<ScoreBadgeProps> = ({ score }) => {
   );
 };
 
-const CreatorCard: React.FC<CreatorCardProps> = ({ creator }) => {
+const CreatorCard: React.FC<CreatorCardProps> = ({ creator, onClick }) => {
   const platformLabel = creator.platform ? PLATFORM_LABELS[creator.platform] : "";
 
   return (
-    <div className="creator-card">
+    <div className="creator-card" onClick={onClick}>
       <div className="creator-avatar">
         {creator.avatar ? (
           <img src={creator.avatar} alt={creator.name} className="avatar-img" />
         ) : (
-          <div className="avatar-placeholder">??</div>
+          <div className="avatar-placeholder">👤</div>
         )}
       </div>
       <div className="creator-info">
@@ -72,6 +73,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ creator }) => {
           </div>
         )}
       </div>
+      <div className="creator-hint">点击查看 ›</div>
     </div>
   );
 };

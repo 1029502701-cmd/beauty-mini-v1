@@ -1,4 +1,4 @@
-﻿/**
+/**
  * WeChat Authentication Service
  * Connects to beauty-api-pages backend via POST /api/wechat-login.
  *

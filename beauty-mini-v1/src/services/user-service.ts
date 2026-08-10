@@ -1,4 +1,4 @@
-﻿import type { BeautyUserProfile, GuestSession } from "@/types/beauty";
+import type { BeautyUserProfile, GuestSession } from "@/types/beauty";
 import { getStorage, setStorage, removeStorage, isWeChatMiniProgram } from "@/utils/storage";
 import wechatAuthService from "./wechat-auth";
 

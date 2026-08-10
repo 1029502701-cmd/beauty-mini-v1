@@ -4,6 +4,7 @@ import type { ProductRecommendation } from "@/types/beauty";
 
 interface ProductCardProps {
   product: ProductRecommendation;
+  onClick?: () => void;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -19,13 +20,13 @@ const PRIORITY_LABELS: Record<string, string> = {
   low: "补充"
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   const categoryLabel = CATEGORY_LABELS[product.category] || product.productType;
   const priorityLabel = PRIORITY_LABELS[product.priority] || "可选";
   const priorityColor = product.priority === "high" ? "#e91e63" : product.priority === "medium" ? "#ff9800" : "#9e9e9e";
 
   return (
-    <div className="product-card" style={{ borderLeftColor: priorityColor }}>
+    <div className="product-card" style={{ borderLeftColor: priorityColor }} onClick={onClick}>
       <div className="product-header">
         <div className="product-meta">
           <span className="product-category">{categoryLabel}</span>
@@ -45,6 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           ))}
         </div>
       )}
+      <div className="product-hint">点击查看详情 ›</div>
     </div>
   );
 };

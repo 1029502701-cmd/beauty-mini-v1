@@ -1,4 +1,4 @@
-﻿import type { Blogger, FaceShapeType, EyeShapeType, LipShapeType, MakeupStyleType, ColorType, SkinToneType, Platform, FaceMetricsRange } from "./types";
+import type { Blogger, FaceShapeType, EyeShapeType, LipShapeType, MakeupStyleType, ColorType, SkinToneType, Platform, FaceMetricsRange } from "./types";
 
 /** Sample KOL database with full tagging and face metrics ranges (V2) */
 export const SAMPLE_BLOGGERS: Blogger[] = [

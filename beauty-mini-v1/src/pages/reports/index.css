@@ -1,4 +1,4 @@
-﻿/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════
    报告列表页 - My Reports
    风格与 home / profile 一致
    ═══════════════════════════════════════════ */
@@ -10,7 +10,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
 }
 
-/* ─── Header ────────────────────────────── */
+/*  Header  */
 .reports-header {
   padding: 48px 20px 24px;
   text-align: center;
@@ -31,7 +31,7 @@
   margin: 0;
 }
 
-/* ─── Loading State ─────────────────────── */
+/*  Loading State  */
 .reports-page.reports-loading {
   display: flex;
   align-items: center;
@@ -79,12 +79,12 @@
   40% { transform: scale(1.2); opacity: 1; }
 }
 
-/* ─── Body ──────────────────────────────── */
+/*  Body  */
 .reports-body {
   padding: 0 16px;
 }
 
-/* ─── Empty State ───────────────────────── */
+/*  Empty State  */
 .empty-state {
   text-align: center;
   padding: 64px 24px;
@@ -159,7 +159,7 @@
   transition: all 0.25s ease;
 }
 
-/* ─── Report List ───────────────────────── */
+/*  Report List  */
 .reports-list {
   display: flex;
   flex-direction: column;
@@ -221,7 +221,7 @@
   border-radius: 10px;
 }
 
-/* ─── Footer Nav ────────────────────────── */
+/*  Footer Nav  */
 .reports-footer {
   position: fixed;
   bottom: 0;
@@ -261,18 +261,18 @@
   line-height: 1;
 }
 
-/* ─── Animation ─────────────────────────── */
+/*  Animation  */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Responsive ────────────────────────── */
+/*  Responsive  */
 @media (max-width: 360px) {
   .reports-title { font-size: 22px; }
   .report-card { padding: 14px 14px; }
 }
-/* ─── Level Filter Bar (Task 5) ─────────────────────────────── */
+/*  Level Filter Bar (Task 5)  */
 .level-filter-bar {
   display: flex;
   gap: 8px;
@@ -305,7 +305,7 @@
 .level-filter-btn:active {
   transform: scale(0.95);
 }
-/* ─── 按钮居中修复 ─────────────────────────────────── */
+/*  按钮居中修复  */
 /* 修复：level-filter-btn 居中 */
 .level-filter-btn {
   flex-shrink: 0;

@@ -10,15 +10,15 @@ interface ReportHeaderProps {
 }
 
 const LEVEL_NAME: Record<ReportLevel, string> = {
-  "first-look": "³õ¼û×±Èİ",
-  "style-upgrade": "·ç¸ñ½ø½×",
-  "beauty-pro": "×¨ÊôÃÀÑ§"
+  "first-look": "åˆè§å¦†å®¹",
+  "style-upgrade": "é£æ ¼è¿›é˜¶",
+  "beauty-pro": "ä¸“å±ç¾å­¦"
 };
 
 const LEVEL_DESC: Record<ReportLevel, string> = {
-  "first-look": "»ù´¡Á³ĞÍ·ÖÎöÓë×±Èİ½¨Òé",
-  "style-upgrade": "É«²ÊÓë·ç¸ñ·½ÏòÉî¶È½â¶Á",
-  "beauty-pro": "×¨ÊôÃÀÑ§·½°¸Óë²úÆ·´ïÈËÍÆ¼ö"
+  "first-look": "åŸºç¡€è„¸å‹åˆ†æä¸å¦†å®¹å»ºè®®",
+  "style-upgrade": "è‰²å½©ä¸é£æ ¼æ–¹å‘æ·±åº¦è§£è¯»",
+  "beauty-pro": "ä¸“å±ç¾å­¦æ–¹æ¡ˆä¸äº§å“è¾¾äººæ¨è"
 };
 
 const ReportHeader: React.FC<ReportHeaderProps> = ({ level, reportCode, createdAt }) => {
@@ -35,13 +35,13 @@ const ReportHeader: React.FC<ReportHeaderProps> = ({ level, reportCode, createdA
     <div className="report-header">
       <div className="report-header-top">
         <div className="report-header-brand">
-          <span className="brand-icon">?</span>
-          <span className="brand-text">AI ÃÀ×±±¨¸æ</span>
+          <span className="brand-icon">ğŸ’„</span>
+          <span className="brand-text">AI ç¾å¦†æŠ¥å‘Š</span>
         </div>
         <LevelBadge level={level} levelName={LEVEL_NAME[level]} />
       </div>
       <div className="report-header-meta">
-        <span className="report-code">±àºÅ #{reportCode}</span>
+        <span className="report-code">ç¼–å· #{reportCode}</span>
         <span className="report-date">{formatDate(createdAt)}</span>
       </div>
       <p className="report-header-desc">{LEVEL_DESC[level]}</p>

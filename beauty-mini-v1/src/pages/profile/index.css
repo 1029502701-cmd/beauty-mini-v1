@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-/* ─── Loading State ───────────────────────────────────────────────────────── */
+/*  Loading State  */
 .profile-page.profile-loading {
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@
   to { opacity: 1; }
 }
 
-/* ─── Error State ─────────────────────────────────────────────────────────── */
+/*  Error State  */
 .profile-page.profile-error {
   display: flex;
   align-items: center;
@@ -139,7 +139,7 @@
   background: rgba(216, 191, 216, 0.1);
 }
 
-/* ─── Empty State ─────────────────────────────────────────────────────────── */
+/*  Empty State  */
 .profile-page.profile-empty {
   display: flex;
   align-items: center;
@@ -191,7 +191,7 @@
   box-shadow: 0 6px 16px rgba(216, 191, 216, 0.4);
 }
 
-/* ─── User Header ─────────────────────────────────────────────────────────── */
+/*  User Header  */
 .user-header {
   background: white;
   padding: 24px 20px;
@@ -263,7 +263,7 @@
   font-weight: 500;
 }
 
-/* ─── Balance Card ────────────────────────────────────────────────────────── */
+/*  Balance Card  */
 .balance-card {
   background: linear-gradient(135deg, #fdf4ff 0%, #fce4ec 100%);
   border: 1.5px solid rgba(200, 162, 200, 0.3);
@@ -315,7 +315,7 @@
   box-shadow: 0 4px 12px rgba(124, 77, 255, 0.3);
 }
 
-/* ─── Stats Card ──────────────────────────────────────────────────────────── */
+/*  Stats Card  */
 .stats-card {
   background: white;
   border-radius: 16px;
@@ -351,7 +351,7 @@
   background: #f0ebe8;
 }
 
-/* ─── Section ─────────────────────────────────────────────────────────────── */
+/*  Section  */
 .section {
   background: white;
   border-radius: 16px;
@@ -367,7 +367,7 @@
   font-weight: 600;
 }
 
-/* ─── Unlock List ─────────────────────────────────────────────────────────── */
+/*  Unlock List  */
 .unlock-list {
   display: flex;
   flex-direction: column;
@@ -416,7 +416,7 @@
   border-radius: 12px;
 }
 
-/* ─── Reports List ────────────────────────────────────────────────────────── */
+/*  Reports List  */
 .reports-list {
   display: flex;
   flex-direction: column;
@@ -466,7 +466,7 @@
   font-weight: 500;
 }
 
-/* ─── Empty State (in-section) ────────────────────────────────────────────── */
+/*  Empty State (in-section)  */
 .empty-state {
   text-align: center;
   padding: 32px 20px;
@@ -502,7 +502,7 @@
   box-shadow: 0 6px 16px rgba(216, 191, 216, 0.4);
 }
 
-/* ─── Upgrade Card ────────────────────────────────────────────────────────── */
+/*  Upgrade Card  */
 .upgrade-card {
   margin: 0 16px 16px;
   background: linear-gradient(135deg, #fdf4ff 0%, #fce4ec 100%);
@@ -560,7 +560,7 @@
   box-shadow: 0 4px 12px rgba(124, 77, 255, 0.3);
 }
 
-/* ─── Explanation ─────────────────────────────────────────────────────────── */
+/*  Explanation  */
 .explanation {
   background: #fff9f0 !important;
   border: 1px solid #ffe5b3;
@@ -571,7 +571,7 @@
   font-size: 12px;
   color: #999;
   line-height: 1.6;
-}/* ─── 按钮居中修复 ─────────────────────────────────── */
+}/*  按钮居中修复  */
 /* 修复：retry-btn 居中 */
 .profile-error .retry-btn {
   background: linear-gradient(135deg, #D8BFD8, #C8A2C8);

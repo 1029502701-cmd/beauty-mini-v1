@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Beauty Commerce Configuration Service
  * Manages beauty-related configuration settings for commerce features
  * Uses universal storage layer (wx.storage / localStorage)

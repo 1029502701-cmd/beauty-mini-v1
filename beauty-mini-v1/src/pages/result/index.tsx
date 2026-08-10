@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { navigate } from '@taro/router';
 import { useLoad } from '@tarojs/taro';
 import { Button, Text, View } from '@tarojs/components';
@@ -16,7 +16,9 @@ import FaceAnalysisCard from '../../components/report/FaceAnalysisCard';
 import MakeupSuggestionCard from '../../components/report/MakeupSuggestionCard';
 import ColorAnalysisCard from '../../components/report/ColorAnalysisCard';
 import ProductCard from '../../components/report/ProductCard';
-import CreatorCard from '../../components/report/CreatorCard';
+import CreatorCard from '../../components/report/CreatorCard';import ProductPopup from '../../components/report/ProductPopup';
+import CreatorPopup from '../../components/report/BloggerPopup';
+
 
 const LEVEL_ORDER: ReportLevel[] = ['first-look', 'style-upgrade', 'beauty-pro'];
 const LEVEL_LABELS: Record<ReportLevel, string> = {
@@ -52,6 +54,10 @@ const Index = () => {
 
   const [shareLoading, setShareLoading] = useState(false);
   const [shareRewardGranted, setShareRewardGranted] = useState(false);
+
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedCreator, setSelectedCreator] = useState<any>(null);
+
 
   const handleShareReward = useCallback(async () => {
     setShareLoading(true);
@@ -250,7 +256,8 @@ const Index = () => {
 
   return (
     <View className='result-page'>
-      {/* Token Balance Bar - Task 2 */}
+      {/*
+ Token Balance Bar - Task 2 */}
       <View className='token-balance-bar'>
         <View className='token-balance-left'>
           <Text className='token-icon'>🎫</Text>
@@ -258,6 +265,7 @@ const Index = () => {
         </View>
         <Button className='token-topup-btn' onClick={() => navigate('/pages/token')}>充值</Button>
       </View>
+*/
 
       {/* Report Level Badge - Task 1 */}
       <View className='report-level-badge'>
@@ -356,7 +364,7 @@ const Index = () => {
           {levelContent?.productRecommendation && levelContent.productRecommendation.length > 0 ? (
             <View className='product-list'>
               {levelContent.productRecommendation.map((p) => (
-                <ProductCard key={p.id} product={p as any} />
+                <ProductCard key={p.id} product={p as any} onClick={() => setSelectedProduct(p as any)} />
               ))}
             </View>
           ) : (
@@ -379,7 +387,7 @@ const Index = () => {
           ) : (levelContent?.creators && levelContent.creators.length > 0) || recommendedCreators.length > 0 ? (
             <View className='bloggers-grid'>
               {(levelContent?.creators || recommendedCreators).map((c) => (
-                <CreatorCard key={c.id} creator={c as CreatorRecommendation} />
+                <CreatorCard key={c.id} creator={c as CreatorRecommendation} onClick={() => setSelectedCreator(c as CreatorRecommendation)} />
               ))}
             </View>
           ) : (
@@ -498,7 +506,36 @@ const Index = () => {
           </Button>
         </View>
       ) : null}
-      <Button className='back-btn-large btn-center' onClick={() => navigate('/pages/home')}>返回首页</Button>
+      
+      {/* Product Detail Popup */}
+      <ProductPopup
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        product={selectedProduct ? {
+          id: selectedProduct.id,
+          name: selectedProduct.name,
+          brand: selectedProduct.brand,
+          image: '',
+          matchScore: selectedProduct.priority === 'high' ? 92 : selectedProduct.priority === 'medium' ? 78 : 65,
+          reason: selectedProduct.reason,
+        } : null}
+      />
+      {/* Creator Detail Popup */}
+      <CreatorPopup
+        isOpen={!!selectedCreator}
+        onClose={() => setSelectedCreator(null)}
+        blogger={selectedCreator ? {
+          id: selectedCreator.id,
+          name: selectedCreator.name,
+          avatar: selectedCreator.avatar || '',
+          platform: selectedCreator.platform || 'xiaohongshu',
+          style: selectedCreator.suitableStyle || '',
+          matchScore: selectedCreator.matchScore || 0,
+          reason: selectedCreator.matchReasons?.join('；') || '',
+          representativeStyle: selectedCreator.styleTags?.[0] || '',
+        } : null}
+      />
+<Button className='back-btn-large btn-center' onClick={() => navigate('/pages/home')}>返回首页</Button>
     </View>
   );
 };

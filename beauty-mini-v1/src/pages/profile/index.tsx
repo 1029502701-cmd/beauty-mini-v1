@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { navigate } from '@taro/router';
 import { Button, Text, View } from '@tarojs/components';
 import './index.css';
@@ -64,7 +64,7 @@ const Index = () => {
   useEffect(() => { fetchData(); }, []);
 
   const handleReportClick = (reportId: string) => {
-    navigate('/pages/result?reportId=' + reportId);
+    navigate('/pages/result/index?reportId=' + reportId);
   };
 
   const formatRelativeTime = (isoStr: string): string => {

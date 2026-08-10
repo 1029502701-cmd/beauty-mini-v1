@@ -18,17 +18,17 @@ interface KOLCardProps {
 const KOLCard = ({ kols }: KOLCardProps) => {
   const getPlatformName = (platform?: string): string => {
     const names: Record<string, string> = {
-      "xiaohongshu": "Ğ¡ºìÊé",
-      "douyin": "¶¶Òô",
-      "weibo": "Î¢²©",
-      "bilibili": "BÕ¾"
+      "xiaohongshu": "å°çº¢ä¹¦",
+      "douyin": "æŠ–éŸ³",
+      "weibo": "å¾®åš",
+      "bilibili": "Bç«™"
     };
-    return names[platform || ""] || "´ïÈË";
+    return names[platform || ""] || "è¾¾äºº";
   };
 
   return (
     <div className="kol-card">
-      <h3 className="card-title">´ïÈËÍÆ¼ö</h3>
+      <h3 className="card-title">è¾¾äººæ¨è</h3>
       <div className="kol-top2">
         {kols.slice(0, 2).map((kol, index) => (
           <div key={kol.id} className="kol-item">
@@ -42,7 +42,7 @@ const KOLCard = ({ kols }: KOLCardProps) => {
               <div className="kol-name">
                 {kol.name}
                 {kol.recommendCount && (
-                  <span className="recommend-count">({kol.recommendCount}´ÎÍÆ¼ö)</span>
+                  <span className="recommend-count">({kol.recommendCount}æ¬¡æ¨è)</span>
                 )}
               </div>
               <div className="kol-platform">{getPlatformName(kol.platform)}</div>

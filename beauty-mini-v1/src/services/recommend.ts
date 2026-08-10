@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Beauty Recommendation Service
  * Calls GET /api/beauty/recommend with faceType, skinType, makeupStyle.
  */

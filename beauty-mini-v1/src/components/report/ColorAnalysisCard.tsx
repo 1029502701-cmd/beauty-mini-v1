@@ -7,10 +7,10 @@ interface ColorAnalysisCardProps {
 }
 
 const SKIN_TONE_LABELS: Record<string, string> = {
-  warm: "Å¯É«µ÷",
-  cool: "ÀäÉ«µ÷",
-  neutral: "ÖĞĞÔÉ«µ÷",
-  olive: "éÏé­É«µ÷"
+  warm: "æš–è‰²è°ƒ",
+  cool: "å†·è‰²è°ƒ",
+  neutral: "ä¸­æ€§è‰²è°ƒ",
+  olive: "æ©„æ¦„è‰²è°ƒ"
 };
 
 const SKIN_TONE_EMOJI: Record<string, string> = {
@@ -28,7 +28,7 @@ const ColorAnalysisCard: React.FC<ColorAnalysisCardProps> = ({ content }) => {
     <div className="color-analysis-card section-block">
       <div className="section-anchor">
         <span className="anchor-num">03</span>
-        <span className="anchor-label">É«²Ê·ÖÎö</span>
+        <span className="anchor-label">è‰²å½©åˆ†æ</span>
       </div>
 
       <div className="color-main">
@@ -36,13 +36,13 @@ const ColorAnalysisCard: React.FC<ColorAnalysisCardProps> = ({ content }) => {
           <span className="tone-emoji">{toneEmoji}</span>
           <div className="tone-info">
             <div className="tone-category">{toneLabel}</div>
-            <div className="tone-desc">ÄúµÄ×¨ÊôÉ«²Ê¼¾ĞÍ</div>
+            <div className="tone-desc">æ‚¨çš„ä¸“å±è‰²å½©å­£å‹</div>
           </div>
         </div>
       </div>
 
       <div className="color-palette-section">
-        <span className="palette-label">ÍÆ¼öÉ«Ïµ</span>
+        <span className="palette-label">æ¨èè‰²ç³»</span>
         <div className="color-palette">
           {content.recommendedPalette.map((color, i) => (
             <span key={i} className="color-swatch">{color}</span>
@@ -52,7 +52,7 @@ const ColorAnalysisCard: React.FC<ColorAnalysisCardProps> = ({ content }) => {
 
       {content.avoidColors.length > 0 && (
         <div className="color-avoid-section">
-          <span className="avoid-label">½¨Òé±Ü¿ª</span>
+          <span className="avoid-label">å»ºè®®é¿å¼€</span>
           <div className="color-avoid">
             {content.avoidColors.map((color, i) => (
               <span key={i} className="avoid-swatch">{color}</span>

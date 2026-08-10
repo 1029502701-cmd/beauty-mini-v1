@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { navigate } from "@taro/router";
 import { Button, Text, View } from '@tarojs/components';
 import "./index.css";
@@ -9,8 +9,8 @@ import type { ReportSummary } from "../../types";
 const LOCAL_REPORTS_KEY = "beauty_reports_list";
 
 const LEVEL_ICONS: Record<string, string> = {
-  "first-look": "🌸",
-  "style-upgrade": "🌿",
+  "first-look": "💄",
+  "style-upgrade": "🎨",
   "beauty-pro": "👑",
 };
 
@@ -68,7 +68,7 @@ const Index = () => {
   }, [fetchReports]);
 
   const handleReportClick = (reportId: string) => {
-    navigate("/pages/result?reportId=" + reportId);
+    navigate("/pages/result/index?reportId=" + reportId);
   };
 
   const formatRelativeTime = (isoStr: string): string => {
@@ -94,7 +94,7 @@ const Index = () => {
     return (
       <View className="reports-page reports-loading">
         <View className="loading-content">
-          <View className="loading-icon">📋</View>
+          <View className="loading-icon">🔍</View>
           <Text>加载报告中...</Text>
           <View className="loading-dots">
             <Text className="dot" /><Text className="dot" /><Text className="dot" />
@@ -129,7 +129,7 @@ const Index = () => {
       <View className="reports-body">
         {filteredReports.length === 0 && !error ? (
           <View className="empty-state">
-            <View className="empty-icon">📝</View>
+            <View className="empty-icon">??</View>
             <Text>暂无分析报告</Text>
             <Text>上传照片进行 AI 美学分析，生成你的专属美妆报告</Text>
             <Button className="start-btn btn-center" onClick={() => navigate("/pages/upload")}>
@@ -138,7 +138,7 @@ const Index = () => {
           </View>
         ) : filteredReports.length === 0 && error ? (
           <View className="empty-state">
-            <View className="empty-icon">⚠️</View>
+            <View className="empty-icon">??</View>
             <Text>加载失败</Text>
             <Text className="error-text">{error}</Text>
             <Button className="retry-btn btn-center" onClick={fetchReports}>重新加载</Button>
@@ -173,15 +173,15 @@ const Index = () => {
 
       <View className="reports-footer">
         <Button className="nav-btn btn-center" onClick={() => navigate("/pages/home")}>
-          <Text className="nav-icon">🏠</Text>
+          <Text className="nav-icon">??</Text>
           <Text>首页</Text>
         </Button>
         <Button className="nav-btn nav-btn--active" onClick={() => navigate("/pages/upload")}>
-          <Text className="nav-icon">✨</Text>
+          <Text className="nav-icon">?</Text>
           <Text>新分析</Text>
         </Button>
         <Button className="nav-btn btn-center" onClick={() => navigate("/pages/profile")}>
-          <Text className="nav-icon">👤</Text>
+          <Text className="nav-icon">??</Text>
           <Text>我的</Text>
         </Button>
       </View>

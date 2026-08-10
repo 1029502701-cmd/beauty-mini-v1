@@ -1,4 +1,4 @@
-﻿.token-page {
+.token-page {
   min-height: 100vh;
   background: #FFFAF7;
   padding: 20px;
@@ -122,7 +122,7 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-/* ─── 按钮居中修复 ─────────────────────────────────── */
+/*  按钮居中修复  */
 .exchange-btn {
   width: 100%;
   padding: 14px;

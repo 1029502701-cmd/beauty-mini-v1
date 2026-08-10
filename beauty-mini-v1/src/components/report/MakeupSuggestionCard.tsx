@@ -15,10 +15,10 @@ const MAKEUP_ICONS: Record<string, string> = {
 };
 
 const OCCASION_LABELS: Record<string, string> = {
-  daily: "日常",
-  formal: "正式",
-  evening: "晚宴",
-  special: "特别"
+  daily: "鏃ュ父",
+  formal: "姝ｅ紡",
+  evening: "鏅氬",
+  special: "鐗瑰埆"
 };
 
 const MakeupSuggestionCard: React.FC<MakeupSuggestionCardProps> = ({ content, suggestions }) => {
@@ -30,7 +30,7 @@ const MakeupSuggestionCard: React.FC<MakeupSuggestionCardProps> = ({ content, su
     <div className="makeup-suggestion-card section-block">
       <div className="section-anchor">
         <span className="anchor-num">02</span>
-        <span className="anchor-label">妆容建议</span>
+        <span className="anchor-label">濡嗗寤鸿</span>
       </div>
 
       <div className="makeup-primary">
@@ -39,14 +39,14 @@ const MakeupSuggestionCard: React.FC<MakeupSuggestionCardProps> = ({ content, su
           <div className="makeup-primary-style">{content.primaryStyle}</div>
           <div className="makeup-occasion">
             <span className="occasion-badge">{occasionLabel}</span>
-            <span className="confidence-badge">置信 {confidencePercent}%</span>
+            <span className="confidence-badge">缃俊 {confidencePercent}%</span>
           </div>
         </div>
       </div>
 
       {content.secondaryStyles.length > 0 && (
         <div className="makeup-secondary">
-          <span className="secondary-label">适配风格</span>
+          <span className="secondary-label">閫傞厤椋庢牸</span>
           <div className="secondary-tags">
             {content.secondaryStyles.map((style, i) => (
               <span key={i} className="secondary-tag">{style}</span>
@@ -57,7 +57,7 @@ const MakeupSuggestionCard: React.FC<MakeupSuggestionCardProps> = ({ content, su
 
       {suggestions && suggestions.length > 0 && (
         <div className="makeup-tips">
-          <span className="tips-label">核心建议</span>
+          <span className="tips-label">鏍稿績寤鸿</span>
           <ul className="tips-list">
             {suggestions.map((tip, i) => (
               <li key={i} className="tip-item">
